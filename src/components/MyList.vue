@@ -1,11 +1,11 @@
 <template>
   <scroller
-    :on-infinite="infinite">
+    :on-infinite="infinite" ref="myscroller">
     <!-- content goes here -->
-    <div v-for="(item, index) in items" class="row">
-      <div class="image"><img src="http://via.placeholder.com/350x350"></div>
+    <div v-for="item in items" class="row">
+      <div class="image"><img :src="item.thumb"></div>
       <div class="text">
-        <div class="title">民革中央和最高检在上海开展联合调研</div>
+        <div class="title">{{item.title}}</div>
         <div class="content">5月12日至14日，万鄂湘率民革中央、最高人民检察院联合调研组赴上海开展调研。高小玫、张伯军参加调研。</div>
       </div>
     </div>
@@ -17,29 +17,63 @@
     name: "MyList",
     data() {
       return {
-        items: []
+        items: [],
+        cateId: "",
+        curPage: 1,
+        isLast: false,
       }
     },
     props: {
-      listType: String
+      listType: Number
     },
     mounted() {
-      for (var i = 1; i <= 20; i++) {
-        this.items.push(i + ' - keep walking, be 2 with you.')
-      }
-      this.top = 1
-      this.bottom = 20
+      this.getListByCateId(null);
     },
     methods: {
-      infinite(done) {
-        setTimeout(() => {
-          var start = this.bottom + 1
-          for (var i = start; i < start + 10; i++) {
-            this.items.push(i + ' - keep walking, be 2 with you.')
+      getListByCateId(done) {
+        let vm = this;
+        this.axios('http://192.168.0.5/app/', {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "article",
+            do: "shop",
+            m: "ewei_shop",
+            pcate: vm.listType,//分类
+            page: vm.curPage
           }
-          this.bottom = this.bottom + 10
-          done()
-        }, 1500)
+        })
+          .then(function (response) {
+            console.log(vm.curPage);
+            if (response.data.result.list) {
+              for (var i = 1; i <= response.data.result.list.length; i++) {
+                vm.items.push(response.data.result.list[i - 1])
+              }
+            }
+            if (response.data.result.list.length == 10) {
+              vm.isLast = false;
+              vm.curPage++;
+            }
+            else {
+              vm.isLast = true;
+            }
+            vm.$refs.myscroller.resize();
+            if (done) {
+              done();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      infinite(done) {
+        let vm = this;
+        if (!vm.isLast) {
+          vm.getListByCateId(done);
+        }
+        else {
+          vm.$refs.myscroller.finishInfinite(true);
+        }
       }
     }
   }

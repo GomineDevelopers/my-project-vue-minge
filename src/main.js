@@ -4,13 +4,16 @@ import Vue from 'vue'
 import { Carousel,CarouselItem,Tabs,TabPane,Switch,Table,TableColumn} from 'element-ui';
 import vueHeadful from 'vue-headful';
 import VueScroller from 'vue-scroller';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import App from './App'
 import router from './router'
 
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
-Vue.use(VueScroller)
+Vue.use(VueScroller);
+Vue.use(VueAxios, axios);
 Vue.use(Carousel);
 Vue.use(CarouselItem);
 Vue.use(Tabs);

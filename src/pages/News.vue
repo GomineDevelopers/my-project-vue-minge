@@ -15,11 +15,11 @@
       </el-tab-pane>
       <el-tab-pane name="second">
         <span slot="label"> 喜讯</span>
-        <my-list :listType="type"></my-list>
+
       </el-tab-pane>
       <el-tab-pane name="third">
         <span slot="label"> 专题报告</span>
-        <my-list :listType="type"></my-list>
+
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -33,13 +33,17 @@
     data() {
       return {
         activeName: 'first',
-        type: '市委会动态'
+        type: 34
       }
     },
     methods: {
       handleClick(tab, event) {
-        this.type = event.target.innerText;
-        console.log(tab, event.target.innerText);
+        if (event.target.innerText=='市委会动态') {
+          this.type = 34;
+        }
+        else{
+          this.type = 35;
+        }
       }
     },
     components: {
@@ -137,6 +141,7 @@
 
   .el-tabs__content {
     height: 64vh;
+    overflow-y:auto ;
   }
 
 </style>
