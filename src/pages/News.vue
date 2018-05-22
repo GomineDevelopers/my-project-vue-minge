@@ -73,6 +73,7 @@
   .el-tabs__item {
     width: 33.33%;
     color: #A4C3E4;
+    height: 100%;
   }
 
   .el-tabs__item.is-active {
@@ -83,12 +84,12 @@
   .el-tabs__item.is-active::after {
     content: "";
     background: white;
-    height: 4px;
-    width: 4px;
+    height: 5px;
+    width: 5px;
     position: absolute;
-    bottom: 3px;
+    bottom: 13%;
     left: 50%;
-    margin-left: -2px;
+    margin-left: -2.5px;
   }
 
   .el-tabs__active-bar {
