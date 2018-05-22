@@ -9,15 +9,15 @@
       </el-carousel-item>
     </el-carousel>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane  name="first">
+      <el-tab-pane name="first">
         <span slot="label"> 市委会动态</span>
         <my-list :listType="type"></my-list>
       </el-tab-pane>
-      <el-tab-pane  name="second">
+      <el-tab-pane name="second">
         <span slot="label"> 喜讯</span>
         <my-list :listType="type"></my-list>
       </el-tab-pane>
-      <el-tab-pane  name="third">
+      <el-tab-pane name="third">
         <span slot="label"> 专题报告</span>
         <my-list :listType="type"></my-list>
       </el-tab-pane>
@@ -33,7 +33,7 @@
     data() {
       return {
         activeName: 'first',
-        type:'市委会动态'
+        type: '市委会动态'
       }
     },
     methods: {
@@ -42,7 +42,7 @@
         console.log(tab, event.target.innerText);
       }
     },
-    components:{
+    components: {
       'my-list': MyList
     }
   }
@@ -91,7 +91,7 @@
     vertical-align: top;
   }
 
-  .el-tabs__item span{
+  .el-tabs__item span {
     position: absolute;
     line-height: 4vh;
     width: 100%;
@@ -100,6 +100,7 @@
     height: 4vh;
     margin-top: -2vh;
   }
+
   .el-tabs__item.is-active {
     color: white;
     font-weight: bold;
@@ -134,5 +135,8 @@
     margin: 0;
   }
 
+  .el-tabs__content {
+    height: 64vh;
+  }
 
 </style>

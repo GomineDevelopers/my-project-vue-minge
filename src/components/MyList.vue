@@ -1,28 +1,44 @@
 <template>
-  <!--<el-table :data="tableData"style="width: 100%">
-    <el-table-column prop="date" label="日期" width="180"></el-table-column>
-    <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-    <el-table-column prop="address" label="地址"></el-table-column>
-  </el-table>-->
-  <div>{{listType}}</div>
+  <scroller
+    :on-infinite="infinite">
+    <!-- content goes here -->
+    <div v-for="(item, index) in items" class="row" :class="{'grey-bg': index % 2 == 0}">
+      {{ item }}
+    </div>
+  </scroller>
 </template>
 
 <script>
-    export default {
-      name: "MyList",
-      data() {
-        return {
-          /*tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }]*/
-        }
-      },
-      props: {
-        listType: String
+  export default {
+    name: "MyList",
+    data() {
+      return {
+        items: []
+      }
+    },
+    props: {
+      listType: String
+    },
+    mounted() {
+      for (var i = 1; i <= 20; i++) {
+        this.items.push(i + ' - keep walking, be 2 with you.')
+      }
+      this.top = 1
+      this.bottom = 20
+    },
+    methods: {
+      infinite (done) {
+        setTimeout(() => {
+          var start = this.bottom + 1
+          for (var i = start; i < start + 10; i++) {
+            this.items.push(i + ' - keep walking, be 2 with you.')
+          }
+          this.bottom = this.bottom + 10
+          done()
+        }, 1500)
       }
     }
+  }
 </script>
 
 <style scoped>
