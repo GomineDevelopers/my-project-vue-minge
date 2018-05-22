@@ -11,15 +11,12 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane  name="first">
         <span slot="label"> 市委会动态</span>
-        1
       </el-tab-pane>
       <el-tab-pane  name="second">
         <span slot="label"> 喜讯</span>
-        2
       </el-tab-pane>
       <el-tab-pane  name="third">
         <span slot="label"> 专题报告</span>
-        3
       </el-tab-pane>
     </el-tabs>
   </div>
