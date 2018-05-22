@@ -11,29 +11,39 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane  name="first">
         <span slot="label"> 市委会动态</span>
+        <my-list :listType="type"></my-list>
       </el-tab-pane>
       <el-tab-pane  name="second">
         <span slot="label"> 喜讯</span>
+        <my-list :listType="type"></my-list>
       </el-tab-pane>
       <el-tab-pane  name="third">
         <span slot="label"> 专题报告</span>
+        <my-list :listType="type"></my-list>
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+  import MyList from '@/components/MyList.vue'
+
   export default {
     name: 'News',
     data() {
       return {
-        activeName: 'first'
+        activeName: 'first',
+        type:'市委会动态'
       }
     },
     methods: {
       handleClick(tab, event) {
-        console.log(tab, event);
+        this.type = event.target.innerText;
+        console.log(tab, event.target.innerText);
       }
+    },
+    components:{
+      'my-list': MyList
     }
   }
 </script>
