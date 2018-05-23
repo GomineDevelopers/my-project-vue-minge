@@ -4,8 +4,9 @@
       title="时政要闻"
     />
     <el-carousel :interval="5000" arrow="never">
-      <el-carousel-item v-for="item in 4" :key="item">
-        <h3>{{ item }}</h3>
+      <el-carousel-item v-for="(item,index) in images" :key="index">
+        <img :src="item.thumb">
+        <div class="slider-desc"><span v-text="item.title"></span></div>
       </el-carousel-item>
     </el-carousel>
     <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -33,13 +34,38 @@
     data() {
       return {
         activeName: 'first',
-        type: 35
+        type: 35,
+        images:[]
       }
+    },
+    mounted:function () {
+      this.getCarouselData()
     },
     methods: {
       handleClick(tab, event) {
         this.type = event.target.innerText == '实时要闻' ? 35 : 36;
-      }
+      },
+      getCarouselData(){
+        let vm = this
+        this.axios('http://192.168.0.5/app/', {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "article",
+            do: "shop",
+            m: "ewei_shop",
+            ccate: 36,
+            bannd:1
+          }
+        })
+          .then(function (response) {
+            vm.images = response.data.result.bannd
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        }
     },
     components: {
       'my-list': MyList
@@ -138,4 +164,25 @@
     overflow-y: auto;
   }
 
+  .slider-desc {
+    background-color: rgba(0,0,0,.2);
+    position: absolute;
+    bottom: 0;
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+    width: 100%;
+    height: 25px;
+    text-align: left;
+
+    word-wrap: normal; /* for IE */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .slider-desc span{
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+  }
 </style>
