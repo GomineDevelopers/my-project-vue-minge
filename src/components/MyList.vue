@@ -1,7 +1,8 @@
 <template>
   <scroller
-    :on-infinite="infinite" ref="myscroller">
+    :on-infinite="infinite" ref="myscroller" class="scroller-container">
     <!-- content goes here -->
+    <div style="height: 44px;"></div>
     <div v-for="item in items" class="row">
       <div class="image"><img :src="item.thumb"></div>
       <div class="text">
@@ -30,6 +31,9 @@
       this.getListByCateId(null);
     },
     methods: {
+      refresh(done) {
+        done();
+      },
       getListByCateId(done) {
         let vm = this;
         this.axios('http://192.168.0.5/app/', {
@@ -57,7 +61,6 @@
             else {
               vm.isLast = true;
             }
-            vm.$refs.myscroller.resize();
             if (done) {
               done();
             }
@@ -72,7 +75,8 @@
           vm.getListByCateId(done);
         }
         else {
-          vm.$refs.myscroller.finishInfinite(true);
+          done(true);
+          vm.$refs.myscroller.infinite = undefined;
         }
       }
     }
@@ -80,6 +84,11 @@
 </script>
 
 <style scoped>
+  .scroller-container {
+     top: -44px;
+    padding-bottom: 44px;
+  }
+
   .row {
     margin: 0 2%;
     padding: .9vh 0;
