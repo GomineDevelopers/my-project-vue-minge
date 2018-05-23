@@ -1,6 +1,6 @@
 <template>
   <scroller
-    :on-infinite="infinite" ref="myscroller" class="scroller-container">
+    :on-infinite="infinite"  class="scroller-container">
     <!-- content goes here -->
     <div style="height: 44px;"></div>
     <div v-for="item in items" class="row">
@@ -27,13 +27,7 @@
     props: {
       listType: Number
     },
-    mounted() {
-      this.getListByCateId(null);
-    },
     methods: {
-      refresh(done) {
-        done();
-      },
       getListByCateId(done) {
         let vm = this;
         this.axios('http://192.168.0.5/app/', {
@@ -43,27 +37,26 @@
             p: "article",
             do: "shop",
             m: "ewei_shop",
-            pcate: vm.listType,//分类
+            ccate: vm.listType,//分类
             page: vm.curPage
           }
         })
           .then(function (response) {
-            console.log(vm.curPage);
+            console.log(vm.listType, vm.curPage);
             if (response.data.result.list) {
               for (var i = 1; i <= response.data.result.list.length; i++) {
                 vm.items.push(response.data.result.list[i - 1])
               }
             }
-            if (response.data.result.list.length == 10) {
+
+            if (response.data.result.list && response.data.result.list.length == 10) {
               vm.isLast = false;
               vm.curPage++;
             }
             else {
               vm.isLast = true;
             }
-            if (done) {
-              done();
-            }
+            done();
           })
           .catch(function (error) {
             console.log(error);
@@ -76,16 +69,15 @@
         }
         else {
           done(true);
-          vm.$refs.myscroller.infinite = undefined;
         }
-      }
+      },
     }
   }
 </script>
 
 <style scoped>
   .scroller-container {
-     top: -44px;
+    top: -44px;
     padding-bottom: 44px;
   }
 

@@ -11,15 +11,15 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane name="first">
         <span slot="label"> 市委会动态</span>
-        <my-list :listType="type"></my-list>
+        <keep-alive>
+          <my-list :listType="type" v-if="type==36"></my-list>
+        </keep-alive>
       </el-tab-pane>
       <el-tab-pane name="second">
         <span slot="label"> 喜讯</span>
-
-      </el-tab-pane>
-      <el-tab-pane name="third">
-        <span slot="label"> 专题报告</span>
-
+        <keep-alive>
+          <my-list :listType="type" v-if="type==37 "></my-list>
+        </keep-alive>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -33,16 +33,16 @@
     data() {
       return {
         activeName: 'first',
-        type: 34
+        type: 36
       }
     },
     methods: {
       handleClick(tab, event) {
-        if (event.target.innerText=='市委会动态') {
-          this.type = 34;
+        if (event.target.innerText == '市委会动态') {
+          this.type = 36;
         }
-        else{
-          this.type = 35;
+        else {
+          this.type = 37;
         }
       }
     },
@@ -88,7 +88,7 @@
   }
 
   .el-tabs__item {
-    width: 33.33%;
+    width: 50%;
     color: #A4C3E4;
     height: 100%;
     line-height: 100%;
@@ -127,7 +127,6 @@
 
   .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
     padding-left: 20px;
-    border-right: 1px solid #A4C3E4;
   }
 
   .el-tabs--top .el-tabs__item.is-top:last-child {
@@ -141,7 +140,7 @@
 
   .el-tabs__content {
     height: 64vh;
-    overflow-y:auto ;
+    overflow-y: auto;
   }
 
 </style>
