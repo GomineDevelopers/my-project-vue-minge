@@ -10,15 +10,15 @@
     </el-carousel>
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane name="first">
-        <span slot="label"> 市委会动态</span>
+        <span slot="label"> 实时要闻</span>
         <keep-alive>
-          <my-list :listType="type" v-if="type==36"></my-list>
+          <my-list :listType="type" v-if="type==35"></my-list>
         </keep-alive>
       </el-tab-pane>
       <el-tab-pane name="second">
-        <span slot="label"> 喜讯</span>
+        <span slot="label"> 民革新闻</span>
         <keep-alive>
-          <my-list :listType="type" v-if="type==37 "></my-list>
+          <my-list :listType="type" v-if="type==36 "></my-list>
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -33,17 +33,12 @@
     data() {
       return {
         activeName: 'first',
-        type: 36
+        type: 35
       }
     },
     methods: {
       handleClick(tab, event) {
-        if (event.target.innerText == '市委会动态') {
-          this.type = 36;
-        }
-        else {
-          this.type = 37;
-        }
+        this.type = event.target.innerText == '实时要闻' ? 35 : 36;
       }
     },
     components: {
@@ -89,7 +84,7 @@
 
   .el-tabs__item {
     width: 50%;
-    color: #A4C3E4;
+    color: #c6daec;
     height: 100%;
     line-height: 100%;
     vertical-align: top;

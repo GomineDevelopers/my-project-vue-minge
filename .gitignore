@@ -13,3 +13,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 node_modules.7z
+src/components/HelloWorld.vue

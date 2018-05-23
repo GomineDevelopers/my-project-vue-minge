@@ -7,7 +7,7 @@
       <div class="image"><img :src="item.thumb"></div>
       <div class="text">
         <div class="title">{{item.title}}</div>
-        <div class="content">5月12日至14日，万鄂湘率民革中央、最高人民检察院联合调研组赴上海开展调研。高小玫、张伯军参加调研。</div>
+        <div class="content">{{item.contents}}</div>
       </div>
     </div>
   </scroller>
@@ -123,7 +123,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 14px;
+    font-size: 12px;
     margin-top: .6vh;
+    color:#999999;
   }
 </style>
