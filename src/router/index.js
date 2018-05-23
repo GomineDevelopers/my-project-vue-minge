@@ -5,6 +5,8 @@ import HelloWorld from '@/components/HelloWorld'
 import News from '@/pages/News'
 //最新发布
 import Announce from '@/pages/Announce'
+//最新发布
+import SocialService from '@/pages/SocialService'
 Vue.use(Router)
 
 export default new Router({
@@ -23,6 +25,11 @@ export default new Router({
       path: '/announce',
       name: 'Announce',
       component: Announce
+    },
+    {
+      path: '/socialService',
+      name: 'SocialService',
+      component: SocialService
     },
   ]
 })

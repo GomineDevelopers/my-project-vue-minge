@@ -1,21 +1,19 @@
 <template>
   <scroller
-    :on-infinite="infinite"  class="scroller-container">
+    :on-infinite="infinite" class="scroller-container">
     <!-- content goes here -->
     <div style="height: 44px;"></div>
     <div v-for="item in items" class="row">
+      <div class="title">{{item.title}}</div>
+      <div class="content">{{item.contents}}</div>
       <div class="image"><img :src="item.thumb"></div>
-      <div class="text">
-        <div class="title">{{item.title}}</div>
-        <div class="content">{{item.contents}}</div>
-      </div>
     </div>
   </scroller>
 </template>
 
 <script>
   export default {
-    name: "my-list",
+    name: "my-card-list",
     data() {
       return {
         items: [],
@@ -76,43 +74,25 @@
 </script>
 
 <style scoped>
+
   .scroller-container {
     top: -44px;
     padding-bottom: 44px;
+    background: #EBEBEB;
   }
 
   .row {
-    margin: 0 2%;
-    padding: .9vh 0;
-    height: 11vh;
+    padding: 5% 3vh;
     border-bottom: 1px solid #d3dce6;
-  }
-
-  .row .image {
-    height: 100%;
-    width: 30%;
-    float: left;
-  }
-
-  .row .image img {
-    height: 100%;
-    width: 100%;
-  }
-
-  .row .text {
-    width: 68%;
-    margin-left: 2%;
-    height: 100%;
-    line-height: 100%;
-    float: left;
-    text-align: justify;
+    background: white;
+    text-align:justify;
+    margin-bottom: 1.5vh;
   }
 
   .row .title {
     width: 100%;
     max-height: 6vh;
     line-height: 3vh;
-    margin-top: .7vh;
     overflow: hidden;
   }
 
@@ -125,6 +105,20 @@
     white-space: nowrap;
     font-size: 12px;
     margin-top: .6vh;
-    color:#999999;
+    color: #999999;
   }
+
+  .row .image {
+    margin-top:.6vh;
+    height: 20vh;
+    width: 100%;
+  }
+
+  .row .image img {
+    height: 100%;
+    width: 100%;
+  }
+
+
 </style>
+

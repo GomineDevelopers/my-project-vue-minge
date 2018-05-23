@@ -66,5 +66,8 @@
 
 .long-container .el-tabs__content {
   height: 94vh ;
-  overflow-y: auto;
+}
+
+.full-container .el-tabs__content {
+  height: 100vh ;
 }
