@@ -9,6 +9,8 @@ import VueAxios from 'vue-axios';
 import App from './App'
 import router from './router'
 
+import '../static/css/list.css' /*引入公共样式*/
+import '../static/css/carousel.css' /*引入公共样式*/
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
