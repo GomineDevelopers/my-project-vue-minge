@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import { Carousel,CarouselItem,Tabs,TabPane,Switch,Table,TableColumn,Col,Row} from 'element-ui';
+import Vue from 'vue';
+import Element from 'element-ui';
 import vueHeadful from 'vue-headful';
 import VueScroller from 'vue-scroller';
 import {commonTools} from '../static/js/common';
@@ -9,28 +9,57 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App'
 import router from './router'
-
-import '../static/css/list.css' /*引入公共样式*/
-import '../static/css/carousel.css' /*引入公共样式*/
+import 'element-ui/lib/theme-chalk/index.css';
+import '../static/css/list.css'
+/*引入公共样式*/
+import '../static/css/carousel.css'
+/*引入公共样式*/
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
 Vue.prototype.$commonTools = commonTools;
 Vue.use(VueScroller);
+Vue.use(Element, {size: 'small'});
+
+// 超时时间
+axios.defaults.timeout = 5000;
+// http请求拦截器
+var loadinginstace
+axios.interceptors.request.use(config => {
+  // element ui Loading方法
+  if (config.params.showLoading) {
+    loadinginstace = Element.Loading.service({fullscreen: true})
+  }
+  return config
+}, error => {
+  loadinginstace.close()
+  Element.Message.error({
+    message: '加载超时'
+  })
+  return Promise.reject(error)
+})
+// http响应拦截器
+axios.interceptors.response.use(data => {// 响应成功关闭loading
+  if (loadinginstace) {
+    loadinginstace.close()
+  }
+  return data
+}, error => {
+  if (loadinginstace) {
+    loadinginstace.close()
+  }
+  Element.Message.error({
+    message: '加载失败'
+  })
+  return Promise.reject(error)
+})
+
 Vue.use(VueAxios, axios);
-Vue.use(Carousel);
-Vue.use(CarouselItem);
-Vue.use(Tabs);
-Vue.use(Row);
-Vue.use(Col);
-Vue.use(TabPane);
-Vue.use(Switch);
-Vue.use(Table);
-Vue.use(TableColumn);
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })

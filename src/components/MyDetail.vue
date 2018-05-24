@@ -91,7 +91,8 @@
             p: "api_detail",
             do: "shop",
             m: "ewei_shop",
-            id: vm.$route.params.id
+            id: vm.$route.params.id,
+            showLoading:true,
           }
         })
           .then(function (response) {
