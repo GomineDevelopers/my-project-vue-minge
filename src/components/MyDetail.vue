@@ -27,7 +27,7 @@
           <span class="news-detail-bottom-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
-      <div class="news-detail-bottom-commentArea">
+      <div class="news-detail-bottom-commentArea" v-if="common_list.length>0">
         <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
              v-for="(item,index) in common_list" v-if="index<2">
           <el-row>
@@ -74,12 +74,11 @@
         return "发布日期：" + this.$commonTools.formatDate(this.article_time)
       },
       source_c: function () {
-        return "来源：" + this.source
+        return this.source == ''?'': "来源：" + this.source;
       }
     },
     created: function () {
       this.getDetailData();
-      this.getCommonData();
     },
     methods: {
       getDetailData: function () {
@@ -91,7 +90,7 @@
             p: "api_detail",
             do: "shop",
             m: "ewei_shop",
-            id: "223"
+            id: this.$route.params.id
           }
         })
           .then(function (response) {
@@ -99,26 +98,9 @@
             vm.content = response.data.result.data.content
             vm.article_time = response.data.result.data.createtime;
             vm.source = response.data.result.data.source;
-            vm.click_count = response.data.result.data.click
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      getCommonData: function () {
-        let vm = this;
-        this.axios(vm.$commonTools.g_restUrl,{
-          params: {
-            i: "8",
-            c: "entry",
-            p: "common",
-            do: "shop",
-            m: "ewei_shop",
-            id: "223"
-          }
-        })
-          .then(function (response) {
-            vm.common_list = response.data.result.data;
+            vm.click_count = response.data.result.data.click;
+
+            vm.common_list = response.data.result.common;
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
             })
