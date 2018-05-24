@@ -3,7 +3,10 @@
     <div class="news-detail-top">
       <el-row class="news-detail-top-row">
         <el-col :span="24">
-          <div class="news-detail-title"><span v-text="title"></span></div>
+          <div class="news-detail-title" :class="{'news-detail-title-more': !isTitleOneRow }"
+               ref="titleTxtContainer"><span v-text="title"
+                                             ref="titleTxt"></span>
+          </div>
         </el-col>
       </el-row>
       <el-row class="news-detail-top-row">
@@ -62,6 +65,7 @@
     data() {
       return {
         isLoadFinish: false,
+        isTitleOneRow: true,
         title: '',
         source: '',
         article_time: '',
@@ -78,13 +82,27 @@
         return this.source ? "来源：" + this.source : "";
       }
     },
-    watch:{
-      '$route':'getDetailData'
+    watch: {
+      '$route': 'getDetailData',
+      title: 'updateTitleCss',
     },
     created: function () {
       this.getDetailData();
     },
     methods: {
+      updateTitleCss: function () {
+        this.$nextTick(function () {
+          if (this.isOneRow())
+            this.isTitleOneRow = true;
+          else
+            this.isTitleOneRow = false;
+        });
+      },
+      isOneRow: function () {
+        var width1 = this.$refs.titleTxt.offsetWidth;
+        var width2 = this.$refs.titleTxtContainer.offsetWidth;
+        return width1 <= width2;
+      },
       getDetailData: function () {
         let vm = this;
         vm.axios(vm.$commonTools.g_restUrl, {
@@ -95,7 +113,7 @@
             do: "shop",
             m: "ewei_shop",
             id: vm.$route.params.id,
-            showLoading:true,
+            showLoading: true,
           }
         })
           .then(function (response) {
@@ -132,6 +150,13 @@
     color: #333333;
     font-size: 20px;
     padding: 10px 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .news-detail-title-more {
+    text-align: justify !important;
+    white-space: normal !important;
   }
 
   .news-detail-subtitle {
