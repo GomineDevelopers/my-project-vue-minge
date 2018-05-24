@@ -4,7 +4,7 @@ import Vue from 'vue'
 import { Carousel,CarouselItem,Tabs,TabPane,Switch,Table,TableColumn,Col,Row} from 'element-ui';
 import vueHeadful from 'vue-headful';
 import VueScroller from 'vue-scroller';
-import {formatDate} from '../static/js/common';
+import {formatDate,formatHour,g_restUrl} from '../static/js/common';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App'
@@ -17,6 +17,7 @@ Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
 
 Vue.prototype.$formatDate = formatDate;
+Vue.prototype.$formatHour = formatHour;
 
 Vue.use(VueScroller);
 Vue.use(VueAxios, axios);

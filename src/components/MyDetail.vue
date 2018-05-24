@@ -9,14 +9,7 @@
       <el-row class="news-detail-top-row">
         <el-col :span="24">
           <div class="news-detail-subtitle">
-            <span class="news-detail-subtitle-span" v-text="source"></span><span v-text="article_time_c"></span>
-          </div>
-        </el-col>
-      </el-row>
-      <el-row class="news-detail-top-row">
-        <el-col :span="24">
-          <div class="news-detail-img">
-            <img src="http://192.168.0.5/attachment/images/8/2018/04/cMZmK5kt0P7MRr0GfrTrtgz0H0rBG7.jpg">
+            <span class="news-detail-subtitle-span" v-text="source_c"></span><span v-text="article_time_c"></span>
           </div>
         </el-col>
       </el-row>
@@ -27,52 +20,34 @@
       </el-row>
     </div>
     <div class="news-detail-bottom">
-      <el-row>
-        <span class="news-detail-bottom-span-icon1"><img src="../pages/read.png"/><span
-          v-text="click_count"></span></span><span class="news-detail-bottom-span-icon2"><i
-        class="el-icon-edit-outline"></i>评论</span>
-      </el-row>
+      <div class="news-detail-bottom-span">
+        <el-row>
+          <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span v-text="click_count"></span></span>
+          <span class="news-detail-bottom-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+        </el-row>
+      </div>
       <div class="news-detail-bottom-commentArea">
-        <div class="news-detail-bottom-comment-border">
+        <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']" v-for="(item,index) in common_list" v-if="index<2">
           <el-row>
-            <el-col :span="4">
+            <el-col :span="3">
               <div class="news-detail-bottom-icon">
-                <img src="http://192.168.0.5/attachment/images/8/2018/04/cMZmK5kt0P7MRr0GfrTrtgz0H0rBG7.jpg">
+                <img :src="item.avatar">
               </div>
             </el-col>
-            <el-col :span="20" class="news-detail-bottom-comment">
+            <el-col :span="21" class="news-detail-bottom-comment">
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-username">借东西的小人</span></el-col>
+                <el-col :span="24"><span class="news-detail-bottom-username" v-text="item.nickname"></span></el-col>
               </el-row>
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-time">05-22 13:57</span></el-col>
+                <el-col :span="24"><span class="news-detail-bottom-time" v-text="item.create_time"></span></el-col>
               </el-row>
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-content">座谈中的内容结合自身实际，进一步激发老百姓脱贫的内生动力</span></el-col>
+                <el-col :span="24"><span class="news-detail-bottom-content" v-text="item.content"></span></el-col>
               </el-row>
             </el-col>
           </el-row>
         </div>
-        <div class="news-detail-bottom-comment-border">
-          <el-row>
-            <el-col :span="4">
-              <div class="news-detail-bottom-icon">
-                <img src="http://192.168.0.5/attachment/images/8/2018/04/cMZmK5kt0P7MRr0GfrTrtgz0H0rBG7.jpg">
-              </div>
-            </el-col>
-            <el-col :span="20" class="news-detail-bottom-comment">
-              <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-username">借东西的小人</span></el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-time">05-22 13:57</span></el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-content">座谈中的内容结合自身实际，进一步激发老百姓脱贫的内生动力</span></el-col>
-              </el-row>
-            </el-col>
-          </el-row>
-        </div>
+
       </div>
     </div>
   </div>
@@ -88,17 +63,19 @@
         content: '',
         source: '',
         article_time: '',
-        click_count: 0
+        click_count: 0,
+
+        common_list:[]
       }
     },
     mounted: function () {
-
-      this.getDetailData();
+      this.getDetailData()
+      this.getCommonData()
     },
     methods: {
       getDetailData: function () {
         let vm = this;
-        this.axios('http://192.168.0.5/app/index.php', {
+        this.axios('http://192.168.0.5/leather/gomineWechat/app/index.php', {
           params: {
             i: "8",
             c: "entry",
@@ -112,8 +89,32 @@
             vm.title = response.data.result.data.title
             vm.content = response.data.result.data.content
             vm.article_time = response.data.result.data.createtime;
+            vm.source = response.data.result.data.source;
 
             vm.click_count = response.data.result.data.click
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      getCommonData: function () {
+        let vm = this;
+        this.axios('http://192.168.0.5/leather/gomineWechat/app/index.php', {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "common",
+            do: "shop",
+            m: "ewei_shop",
+            id: "223"
+          }
+        })
+          .then(function (response) {
+            vm.common_list = response.data.result.data;
+            vm.common_list.forEach(function (element, index, array){
+              element.create_time = vm.$formatHour(element.create_time);
+            })
+
           })
           .catch(function (error) {
             console.log(error);
@@ -123,6 +124,9 @@
     computed: {
       article_time_c: function () {
         return "发布日期：" + this.$formatDate(this.article_time)
+      },
+      source_c: function () {
+        return "来源：" + this.source
       }
     }
   }
@@ -147,17 +151,11 @@
   .news-detail-subtitle {
     color: #999999;
     font-size: 14px;
-    padding-bottom: 10px;
   }
 
   .news-detail-subtitle-span {
     margin-right: 20px;
   }
-
-  .news-detail-img img {
-    width: 100%;
-  }
-
   .news-detail-top-article {
     text-align: left;
     padding: 0 5px;
@@ -169,6 +167,10 @@
 
   .news-detail-bottom span img {
     width: 20px;
+  }
+  .news-detail-bottom-span{
+    height: 20px;
+    line-height: 20px;
   }
 
   .news-detail-bottom-span-icon1 {
@@ -204,7 +206,7 @@
   }
 
   .news-detail-bottom-username {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .news-detail-bottom-time {
@@ -214,11 +216,15 @@
 
   .news-detail-bottom-content {
     font-size: 14px;
+    padding: 10px 0;
   }
 
-  .news-detail-bottom-comment-border {
+  .news-detail-top-comment-border {
     padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     margin-bottom: 8px;
+  }
+  .news-detail-bottom-commentArea-div{
+    padding: 10px 0;
   }
 </style>
