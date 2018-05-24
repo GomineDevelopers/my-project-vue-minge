@@ -1,5 +1,5 @@
 <template>
-  <div class="news-detail-container">
+  <div class="news-detail-container" v-show="isLoadFinish">
     <div class="news-detail-top">
       <el-row class="news-detail-top-row">
         <el-col :span="24">
@@ -62,6 +62,7 @@
     data() {
       return {
         title: '',
+        isLoadFinish:false,
         source: '',
         article_time: '',
         content: '',
@@ -71,7 +72,7 @@
     },
     computed: {
       article_time_c: function () {
-        return "发布日期：" + this.$commonTools.formatDate(this.article_time)
+        return this.article_time == ''? '' :"发布日期：" + this.$commonTools.formatDate(this.article_time);
       },
       source_c: function () {
         return this.source == ''?'': "来源：" + this.source;
@@ -104,6 +105,7 @@
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
             })
+            vm.isLoadFinish = true;
           })
           .catch(function (error) {
             console.log(error);
