@@ -1,9 +1,9 @@
 <template>
   <scroller
-    :on-infinite="infinite"  class="scroller-container">
+    :on-infinite="infinite" class="scroller-container">
     <!-- content goes here -->
     <div style="height: 44px;"></div>
-    <div v-for="item in items" class="row">
+    <div v-for="item in items" class="row" @click="goDetail(item.id)">
       <div class="image"><img :src="item.thumb"></div>
       <div class="text">
         <div class="title">{{item.title}}</div>
@@ -71,6 +71,9 @@
           done(true);
         }
       },
+      goDetail(id) {
+        this.$router.push({name: 'NewsDetail', params: {cate: this.listType, id: id}})
+      }
     }
   }
 </script>
@@ -125,6 +128,6 @@
     white-space: nowrap;
     font-size: 12px;
     margin-top: .6vh;
-    color:#999999;
+    color: #999999;
   }
 </style>

@@ -5,8 +5,11 @@ import HelloWorld from '@/components/HelloWorld'
 import News from '@/pages/News'
 //最新发布
 import Announce from '@/pages/Announce'
-//最新发布
+//社会服务
 import SocialService from '@/pages/SocialService'
+//各种详情页面
+import NewsDetail from '@/pages/NewsDetail'
+
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +33,11 @@ export default new Router({
       path: '/socialService',
       name: 'SocialService',
       component: SocialService
+    },
+    {
+      path: '/newsDetail/:cate/:id',
+      name: 'NewsDetail',
+      component: NewsDetail
     },
   ]
 })
