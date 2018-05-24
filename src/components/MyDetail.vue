@@ -22,12 +22,14 @@
     <div class="news-detail-bottom">
       <div class="news-detail-bottom-span">
         <el-row>
-          <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span v-text="click_count"></span></span>
+          <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span
+            v-text="click_count"></span></span>
           <span class="news-detail-bottom-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
       <div class="news-detail-bottom-commentArea">
-        <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']" v-for="(item,index) in common_list" v-if="index<2">
+        <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
+             v-for="(item,index) in common_list" v-if="index<2">
           <el-row>
             <el-col :span="3">
               <div class="news-detail-bottom-icon">
@@ -60,22 +62,29 @@
     data() {
       return {
         title: '',
-        content: '',
         source: '',
         article_time: '',
+        content: '',
         click_count: 0,
-
-        common_list:[]
+        common_list: []
       }
     },
-    mounted: function () {
-      this.getDetailData()
-      this.getCommonData()
+    computed: {
+      article_time_c: function () {
+        return "发布日期：" + this.$commonTools.formatDate(this.article_time)
+      },
+      source_c: function () {
+        return "来源：" + this.source
+      }
+    },
+    created: function () {
+      this.getDetailData();
+      this.getCommonData();
     },
     methods: {
       getDetailData: function () {
         let vm = this;
-        this.axios('http://192.168.0.5/leather/gomineWechat/app/index.php', {
+        vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: "8",
             c: "entry",
@@ -90,7 +99,6 @@
             vm.content = response.data.result.data.content
             vm.article_time = response.data.result.data.createtime;
             vm.source = response.data.result.data.source;
-
             vm.click_count = response.data.result.data.click
           })
           .catch(function (error) {
@@ -99,7 +107,7 @@
       },
       getCommonData: function () {
         let vm = this;
-        this.axios('http://192.168.0.5/leather/gomineWechat/app/index.php', {
+        this.axios(vm.$commonTools.g_restUrl,{
           params: {
             i: "8",
             c: "entry",
@@ -111,24 +119,15 @@
         })
           .then(function (response) {
             vm.common_list = response.data.result.data;
-            vm.common_list.forEach(function (element, index, array){
-              element.create_time = vm.$formatHour(element.create_time);
+            vm.common_list.forEach(function (element, index, array) {
+              element.create_time = vm.$commonTools.formatHour(element.create_time);
             })
-
           })
           .catch(function (error) {
             console.log(error);
           });
       }
     },
-    computed: {
-      article_time_c: function () {
-        return "发布日期：" + this.$formatDate(this.article_time)
-      },
-      source_c: function () {
-        return "来源：" + this.source
-      }
-    }
   }
 </script>
 
@@ -156,6 +155,7 @@
   .news-detail-subtitle-span {
     margin-right: 20px;
   }
+
   .news-detail-top-article {
     text-align: left;
     padding: 0 5px;
@@ -168,7 +168,8 @@
   .news-detail-bottom span img {
     width: 20px;
   }
-  .news-detail-bottom-span{
+
+  .news-detail-bottom-span {
     height: 20px;
     line-height: 20px;
   }
@@ -224,7 +225,8 @@
     border-top: 1px solid #ccc;
     margin-bottom: 8px;
   }
-  .news-detail-bottom-commentArea-div{
+
+  .news-detail-bottom-commentArea-div {
     padding: 10px 0;
   }
 </style>

@@ -28,7 +28,7 @@
     methods: {
       getListByCateId(done) {
         let vm = this;
-        this.axios('http://192.168.0.5/app/', {
+        this.axios(vm.$commonTools.g_restUrl,{
           params: {
             i: "8",
             c: "entry",
