@@ -61,8 +61,8 @@
     name: "MyDetail",
     data() {
       return {
+        isLoadFinish: false,
         title: '',
-        isLoadFinish:false,
         source: '',
         article_time: '',
         content: '',
@@ -72,10 +72,10 @@
     },
     computed: {
       article_time_c: function () {
-        return this.article_time == ''? '' :"发布日期：" + this.$commonTools.formatDate(this.article_time);
+        return this.article_time ? "发布日期：" + this.$commonTools.formatDate(this.article_time) : "";
       },
       source_c: function () {
-        return this.source == ''?'': "来源：" + this.source;
+        return this.source ? "来源：" + this.source : "";
       }
     },
     created: function () {
@@ -91,7 +91,7 @@
             p: "api_detail",
             do: "shop",
             m: "ewei_shop",
-            id: this.$route.params.id
+            id: vm.$route.params.id
           }
         })
           .then(function (response) {
@@ -100,7 +100,6 @@
             vm.article_time = response.data.result.data.createtime;
             vm.source = response.data.result.data.source;
             vm.click_count = response.data.result.data.click;
-
             vm.common_list = response.data.result.common;
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
