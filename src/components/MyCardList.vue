@@ -1,9 +1,9 @@
 <template>
   <scroller
-    :on-infinite="infinite" class="scroller-container">
+    :on-infinite="infinite" class="scroller-container" >
     <!-- content goes here -->
     <div style="height: 44px;"></div>
-    <div v-for="item in items" class="row">
+    <div v-for="item in items" class="row" @click="goDetail(item.id)">
       <div class="title">{{item.title}}</div>
       <div class="content">{{item.contents}}</div>
       <div class="image"><img :src="item.thumb"></div>
@@ -69,6 +69,9 @@
           done(true);
         }
       },
+      goDetail(id) {
+        this.$router.push({name: 'NewsDetail', params: {id: id}})
+      }
     }
   }
 </script>
