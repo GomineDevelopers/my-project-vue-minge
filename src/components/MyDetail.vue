@@ -78,6 +78,9 @@
         return this.source ? "来源：" + this.source : "";
       }
     },
+    watch:{
+      '$route':'getDetailData'
+    },
     created: function () {
       this.getDetailData();
     },
