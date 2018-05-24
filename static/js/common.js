@@ -1,4 +1,4 @@
-function formatDate (date, showDetail) {
+function formatDate(date, showDetail) {
   var isShow = showDetail || false;
   var d = new Date(parseInt(date) * 1000)
   var year = d.getFullYear();
@@ -12,6 +12,6 @@ function formatDate (date, showDetail) {
   else
     return year + "-" + month + "-" + date1;
 }
-export {
-  formatDate
-}
+
+
+export {formatDate}
