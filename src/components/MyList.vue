@@ -72,7 +72,7 @@
         }
       },
       goDetail(id) {
-        this.$router.push({name: 'NewsDetail', params: {cate: this.listType, id: id}})
+        this.$router.push({name: 'NewsDetail', params: {id: id}})
       }
     }
   }

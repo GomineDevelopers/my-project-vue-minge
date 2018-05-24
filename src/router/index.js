@@ -35,7 +35,7 @@ export default new Router({
       component: SocialService
     },
     {
-      path: '/newsDetail/:cate/:id',
+      path: '/newsDetail/:id',
       name: 'NewsDetail',
       component: NewsDetail
     },
