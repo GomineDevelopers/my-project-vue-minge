@@ -30,48 +30,52 @@
           <span class="news-detail-bottom-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
-      <div class="news-detail-bottom-commentArea" v-if="common_list.length>0">
-        <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
-             v-for="(item,index) in common_list" v-if="index<2">
-          <el-row>
-            <el-col :span="3">
-              <div class="news-detail-bottom-icon">
-                <img :src="item.avatar">
-              </div>
-            </el-col>
-            <el-col :span="21" class="news-detail-bottom-comment">
-              <el-row>
-                <el-col :span="22">
-                  <span class="news-detail-bottom-username" v-text="item.nickname"></span>
-                </el-col>
-                <el-col :span="2">
-                  <span :class="[isCollected == 1 ? 'news-detail-bottom-span-icon3-on':'news-detail-bottom-span-icon3-off']" @click="collect(isCollected)">
-                    <i class="el-icon-star-on"></i>
+      <div v-if="common_num>0" class="news-detail-margin-bottom">
+        <div class="news-detail-bottom-commentArea" >
+          <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
+               v-for="(item,index) in common_list" v-if="index<2">
+            <el-row>
+              <el-col :span="3">
+                <div class="news-detail-bottom-icon">
+                  <img :src="item.avatar">
+                </div>
+              </el-col>
+              <el-col :span="21" class="news-detail-bottom-comment">
+                <el-row>
+                  <el-col :span="22">
+                    <span class="news-detail-bottom-username" v-text="item.nickname"></span>
+                  </el-col>
+                  <el-col :span="2">
+                  <span class="news-detail-bottom-span-icon3">
+                    <i class="el-icon-star-on" v-show="item.status" @click="collect(item.id)"></i>
+                    <i class="el-icon-star-off" v-show="!item.status" @click="collect(item.id)"></i>
                   </span>
-                </el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="24"><div class="news-detail-bottom-content"><span v-text="item.content"></span></div></el-col>
-              </el-row>
-              <el-row>
-                <el-col :span="20">
-                  <span class="news-detail-bottom-time" v-text="item.create_time"></span>
-                </el-col>
-                <el-col :span="4">
-                  <span class="news-detail-bottom-time"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
-                </el-col>
-              </el-row>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="24">
+                    <div class="news-detail-bottom-content"><span v-text="item.content"></span></div>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="20">
+                    <span class="news-detail-bottom-time" v-text="item.create_time"></span>
+                  </el-col>
+                  <el-col :span="4">
+                    <span class="news-detail-bottom-time"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div class="news-detail-more" v-if="common_num>2">
+          <el-row>
+            <el-col :span="24">
+              <el-button type="primary" plain round>查看更多</el-button>
             </el-col>
           </el-row>
         </div>
-
-      </div>
-      <div class="news-detail-more">
-        <el-row>
-          <el-col :span="24">
-            <el-button type="primary" plain round>查看更多</el-button>
-          </el-col>
-        </el-row>
       </div>
     </div>
   </div>
@@ -85,13 +89,13 @@
       return {
         isLoadFinish: false,
         isTitleOneRow: true,
-        isCollected:0,
         title: '',
         source: '',
         article_time: '',
         content: '',
         click_count: 0,
-        common_list: []
+        common_list: [],
+        common_num: 0,
       }
     },
     computed: {
@@ -143,6 +147,8 @@
             vm.source = response.data.result.data.source;
             vm.click_count = response.data.result.data.click;
             vm.common_list = response.data.result.common;
+            vm.common_num = response.data.result.total;
+            
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
             })
@@ -152,27 +158,32 @@
             console.log(error);
           });
       },
-      collect:function (temp) {
+      collect: function (commentId) {
         let vm = this;
-        var temp = temp == 0 ? 1 : 0;
         vm.axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
           params: {
             i: "8",
             c: "entry",
             p: "api_detail",
             do: "shop",
             m: "ewei_shop",
-            comment_id: '223',
-            collection: temp,
+            comment_id: commentId,
           }
         })
           .then(function (response) {
-            vm.isCollected = temp;
+            if (response.status == "200") {
+              vm.common_list.forEach(function (element, index, array) {
+                if (element.id == commentId) {
+                  element.status = !element.status;
+                  tempStatus = element.status;
+                }
+              })
+            }
           })
           .catch(function (error) {
             console.log(error);
           });
-
       }
     }
 
@@ -242,15 +253,11 @@
     color: #0064ba;
     font-size: 14px;
   }
-  .news-detail-bottom-span-icon3-off{
+
+  .news-detail-bottom-span-icon3 {
     color: #0064ba;
     position: absolute;
-    right:0
-  }
-  .news-detail-bottom-span-icon3-on{
-    color: #FFD700;
-    position: absolute;
-    right:0
+    right: 0
   }
 
   .news-detail-bottom-icon img {
@@ -283,8 +290,9 @@
     font-size: 14px;
     padding: 5px 0;
   }
-  .news-detail-more{
-    padding: 10px 0 20px 0;
+
+  .news-detail-more {
+    padding: 10px 0 0 0;
   }
 
   .news-detail-top-comment-border {
@@ -294,5 +302,13 @@
 
   .news-detail-bottom-commentArea-div {
     padding: 10px 0;
+  }
+
+  .news-detail-bottom-commentArea-div .el-row {
+    min-height: 18px;
+  }
+
+  .news-detail-margin-bottom{
+    margin-bottom: 20px;
   }
 </style>
