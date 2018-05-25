@@ -41,18 +41,37 @@
             </el-col>
             <el-col :span="21" class="news-detail-bottom-comment">
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-username" v-text="item.nickname"></span></el-col>
+                <el-col :span="22">
+                  <span class="news-detail-bottom-username" v-text="item.nickname"></span>
+                </el-col>
+                <el-col :span="2">
+                  <span :class="[isCollected == 1 ? 'news-detail-bottom-span-icon3-on':'news-detail-bottom-span-icon3-off']" @click="collect(isCollected)">
+                    <i class="el-icon-star-on"></i>
+                  </span>
+                </el-col>
               </el-row>
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-time" v-text="item.create_time"></span></el-col>
+                <el-col :span="24"><div class="news-detail-bottom-content"><span v-text="item.content"></span></div></el-col>
               </el-row>
               <el-row>
-                <el-col :span="24"><span class="news-detail-bottom-content" v-text="item.content"></span></el-col>
+                <el-col :span="20">
+                  <span class="news-detail-bottom-time" v-text="item.create_time"></span>
+                </el-col>
+                <el-col :span="4">
+                  <span class="news-detail-bottom-time"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                </el-col>
               </el-row>
             </el-col>
           </el-row>
         </div>
 
+      </div>
+      <div class="news-detail-more">
+        <el-row>
+          <el-col :span="24">
+            <el-button type="primary" plain round>查看更多</el-button>
+          </el-col>
+        </el-row>
       </div>
     </div>
   </div>
@@ -66,6 +85,7 @@
       return {
         isLoadFinish: false,
         isTitleOneRow: true,
+        isCollected:0,
         title: '',
         source: '',
         article_time: '',
@@ -131,8 +151,31 @@
           .catch(function (error) {
             console.log(error);
           });
+      },
+      collect:function (temp) {
+        let vm = this;
+        var temp = temp == 0 ? 1 : 0;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "api_detail",
+            do: "shop",
+            m: "ewei_shop",
+            comment_id: '223',
+            collection: temp,
+          }
+        })
+          .then(function (response) {
+            vm.isCollected = temp;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
       }
-    },
+    }
+
   }
 </script>
 
@@ -199,6 +242,16 @@
     color: #0064ba;
     font-size: 14px;
   }
+  .news-detail-bottom-span-icon3-off{
+    color: #0064ba;
+    position: absolute;
+    right:0
+  }
+  .news-detail-bottom-span-icon3-on{
+    color: #FFD700;
+    position: absolute;
+    right:0
+  }
 
   .news-detail-bottom-icon img {
     width: 26px;
@@ -211,7 +264,6 @@
     border: 1px dashed #cccccc;
     border-radius: 5px;
     padding: 10px;
-    margin-bottom: 30px;
   }
 
   .news-detail-bottom-comment {
@@ -229,13 +281,15 @@
 
   .news-detail-bottom-content {
     font-size: 14px;
-    padding: 10px 0;
+    padding: 5px 0;
+  }
+  .news-detail-more{
+    padding: 10px 0 20px 0;
   }
 
   .news-detail-top-comment-border {
     padding-bottom: 10px;
     border-top: 1px solid #ccc;
-    margin-bottom: 8px;
   }
 
   .news-detail-bottom-commentArea-div {
