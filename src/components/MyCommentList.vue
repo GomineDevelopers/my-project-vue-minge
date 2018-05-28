@@ -10,7 +10,15 @@
             </el-col>
             <el-col :span="21" class="comment-right">
                 <el-row>
-                  <el-col :span="24"><span class="comment-userName" v-text="name"></span></el-col>
+                  <el-col :span="22">
+                    <span class="comment-userName" v-text="name"></span>
+                  </el-col>
+                  <el-col :span="2">
+                    <span class="comment-icon">
+                      <i class="el-icon-star-on" v-show="item.status" @click="collect(item.id)"></i>
+                      <i class="el-icon-star-off" v-show="!item.status" @click="collect(item.id)"></i>
+                    </span>
+                  </el-col>
                   <el-col :span="24">
                     <div class="comment-content">很多组件的渲染输出由它的 props 决定。事实上，如果一个组件的渲染输出完全取决于它的 props，那么它会让测试变得简单，就好像断言不同参数的纯函数的返回值。看下面这个例子：</div>
                     <div class="comment-reply">
@@ -102,6 +110,33 @@
             }
 
           }
+        },
+        collect: function (commentId) {
+          let vm = this;
+          vm.axios(vm.$commonTools.g_restUrl, {
+            method: 'post',
+            params: {
+              i: "8",
+              c: "entry",
+              p: "api_detail",
+              do: "shop",
+              m: "ewei_shop",
+              comment_id: commentId,
+            }
+          })
+            .then(function (response) {
+              if (response.status == "200") {
+                vm.common_list.forEach(function (element, index, array) {
+                  if (element.id == commentId) {
+                    element.status = !element.status;
+                    tempStatus = element.status;
+                  }
+                })
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
     }
 </script>
@@ -131,6 +166,11 @@
   }
   .comment-userName{
     font-size: 12px;
+  }
+  .comment-icon{
+    color: #0064ba;
+    position: absolute;
+    right: 0
   }
   .comment-content{
     font-size: 14px;
