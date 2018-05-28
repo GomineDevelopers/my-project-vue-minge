@@ -366,5 +366,13 @@
   }
 </style>
 
+<style>
+  .el-button--primary.is-plain:hover{
+    color: #409EFF;
+    background: #ecf5ff;
+    border-color: #b3d8ff;
+  }
+</style>
+
 
 
