@@ -27,7 +27,7 @@
         <el-row>
           <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span
             v-text="click_count"></span></span>
-          <span class="news-detail-bottom-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+          <span class="news-detail-bottom-span-icon2" @click="goComment(3)"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
       <div v-if="common_num>0" class="news-detail-margin-bottom">
@@ -61,8 +61,8 @@
                   <el-col :span="20">
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
-                  <el-col :span="4">
-                    <span class="news-detail-bottom-time"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                  <el-col :span="4" >
+                    <span class="news-detail-bottom-time" @click="goComment(4,item.id)"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
               </el-col>
@@ -72,7 +72,7 @@
         <div class="news-detail-more" v-if="common_num>2">
           <el-row>
             <el-col :span="24">
-              <el-button type="primary" plain round>查看更多</el-button>
+              <el-button type="primary" plain round @click="goComment(1)">查看更多</el-button>
             </el-col>
           </el-row>
         </div>
@@ -107,7 +107,7 @@
       }
     },
     watch: {
-      '$route': 'getDetailData',
+      '$route': 'updatePage',
       title: 'updateTitleCss',
     },
     created: function () {
@@ -126,6 +126,10 @@
         var width1 = this.$refs.titleTxt.offsetWidth;
         var width2 = this.$refs.titleTxtContainer.offsetWidth;
         return width1 <= width2;
+      },
+      updatePage:function () {
+        this.updateTitleCss();
+        this.getDetailData();
       },
       getDetailData: function () {
         let vm = this;
@@ -148,7 +152,7 @@
             vm.click_count = response.data.result.data.click;
             vm.common_list = response.data.result.common;
             vm.common_num = response.data.result.total;
-            
+
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
             })
@@ -184,6 +188,11 @@
           .catch(function (error) {
             console.log(error);
           });
+      },
+      goComment: function (typeId,id){
+        let vm=this;
+        let tmpId=id ||vm.$route.params.id
+        vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId:typeId}})
       }
     }
 

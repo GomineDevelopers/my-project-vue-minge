@@ -9,7 +9,8 @@ import Announce from '@/pages/Announce'
 import SocialService from '@/pages/SocialService'
 //各种详情页面
 import NewsDetail from '@/pages/NewsDetail'
-
+//新闻评论页面
+import NewsComment from '@/pages/NewsComment'
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +39,11 @@ export default new Router({
       path: '/newsDetail/:id',
       name: 'NewsDetail',
       component: NewsDetail
+    },
+    {
+      path: '/newsComment/:id/:typeId',
+      name: 'NewsComment',
+      component: NewsComment
     },
   ]
 })

@@ -71,3 +71,13 @@
 .full-container .el-tabs__content {
   height: 100vh ;
 }
+
+/*圆角 输入框*/
+.el-input__inner {
+  border-radius: 15px;
+}
+
+/*my-comment-list*/
+.my-comment-list .loading-layer{
+   top: -60px;
+}
