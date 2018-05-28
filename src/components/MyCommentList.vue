@@ -74,27 +74,29 @@
         :on-infinite="infiniteReply" class="scroller-container">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
-        <div v-for="(item,index) in replyList" :class="[index == 0 ? 'comment-list':'comment-list-border']">
-          <el-row>
-            <el-col :span="3">
-              <div class="comment-avatar">
-                <img
-                  :src="item.avatar">
-              </div>
-            </el-col>
-            <el-col :span="21" class="comment-right">
-              <el-row>
-                <el-col :span="24"><span class="comment-userName" v-text="item.nickname"></span></el-col>
-                <el-col :span="24">
-                  <div class="comment-content">{{item.content}}
-                  </div>
-                </el-col>
-                <el-col :span="24">
-                  <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-row>
+        <div class="comment-container" v-show="replyList.length>0">
+          <div v-for="(item,index) in replyList" :class="[index == 0 ? 'comment-list':'comment-list-border']">
+            <el-row>
+              <el-col :span="3">
+                <div class="comment-avatar">
+                  <img
+                    :src="item.avatar">
+                </div>
+              </el-col>
+              <el-col :span="21" class="comment-right">
+                <el-row>
+                  <el-col :span="24"><span class="comment-userName" v-text="item.nickname"></span></el-col>
+                  <el-col :span="24">
+                    <div class="comment-content">{{item.content}}
+                    </div>
+                  </el-col>
+                  <el-col :span="24">
+                    <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+          </div>
         </div>
       </scroller>
       <div class="reply-box" @click="reply(3)">
@@ -161,8 +163,8 @@
         let vm = this;
         vm.curPage = 1;
         vm.isLast = false;
-        vm.commentList=[];
-        vm.replyList=[];
+        vm.commentList = [];
+        vm.replyList = [];
         vm.type = vm.$route.params.typeId;
       },
       getCommentData(done) {
@@ -274,7 +276,7 @@
     border: 1px dashed #cccccc;
     border-radius: 5px;
     padding: 0 10px;
-    margin: 0px 25px 60px 25px;
+    margin: -19px 25px 60px 25px;
   }
 
   .comment-detail {
@@ -283,7 +285,7 @@
 
   .comment-list-border {
     padding: 10px 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #e5e5e5;
   }
 
   .comment-list {
