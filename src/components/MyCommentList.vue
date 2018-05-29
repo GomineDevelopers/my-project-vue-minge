@@ -116,7 +116,7 @@
     <div v-if="type == 3" class="reply-content">
       <el-row class="reply-content-border">
         <el-col :span="24">
-          <el-input type="textarea" :rows="10" placeholder="请输入您的留言~" v-model="comment">
+          <el-input type="textarea" :rows="20" placeholder="请输入您的留言~" v-model="comment" maxlength="400">
           </el-input>
         </el-col>
       </el-row>
@@ -129,7 +129,7 @@
     <div v-if="type == 4" class="reply-content">
       <el-row class="reply-content-border">
         <el-col :span="24">
-          <el-input type="textarea" :rows="10" :placeholder="placeHolder" v-model="commentReply">
+          <el-input type="textarea" :rows="20" :placeholder="placeHolder" v-model="commentReply" maxlength="400">
           </el-input>
         </el-col>
       </el-row>
@@ -276,7 +276,7 @@
         })
           .then(function (response) {
             if (response.status == "200") {
-              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+              vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
             }
           })
           .catch(function (error) {
@@ -301,7 +301,7 @@
         })
           .then(function (response) {
             if (response.status == "200") {
-              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.query.aId, typeId: 1}})
+              vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.query.aId, typeId: 1}})
             }
           })
           .catch(function (error) {
@@ -399,6 +399,8 @@
   .comment-content {
     font-size: 14px;
     padding: 5px 0;
+    word-break:break-all;
+    word-wrap:break-word;
   }
 
   .comment-time, .comment-rep {
@@ -424,6 +426,8 @@
 
   .comment-reply-content {
     font-size: 10px;
+    word-break:break-all;
+    word-wrap:break-word;
   }
 
   .comment-transition {
