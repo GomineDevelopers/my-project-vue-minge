@@ -399,8 +399,8 @@
   .comment-content {
     font-size: 14px;
     padding: 5px 0;
-    word-break:break-all;
     word-wrap:break-word;
+    text-align: justify;
   }
 
   .comment-time, .comment-rep {
@@ -422,12 +422,14 @@
   .comment-reply-userName {
     font-size: 10px;
     color: #0064ba;
+   /* display: inline-block;
+    float: left;*/
   }
 
   .comment-reply-content {
     font-size: 10px;
-    word-break:break-all;
     word-wrap:break-word;
+    text-align: justify;
   }
 
   .comment-transition {

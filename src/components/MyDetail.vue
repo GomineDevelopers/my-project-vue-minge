@@ -307,6 +307,8 @@
   .news-detail-bottom-content {
     font-size: 14px;
     padding: 5px 0;
+    word-wrap:break-word;
+    text-align: justify;
   }
 
   .news-detail-more {
