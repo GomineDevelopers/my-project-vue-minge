@@ -34,7 +34,8 @@
                           <span class="comment-reply-userName">{{subItem.nickname}}：</span><span
                           class="comment-reply-content">{{subItem.content}}</span>
                         </div>
-                        <div @click="reply(2,item.id)" v-show="item.total>2"><span class="comment-reply-userName">共有{{item.total}}条回复<i
+                        <div @click="reply(2,item.id,item.nickname)" v-show="item.total>2"><span
+                          class="comment-reply-userName">共有{{item.total}}条回复<i
                           class="el-icon-d-arrow-right"></i></span></div>
                       </div>
                     </div>
@@ -45,7 +46,7 @@
                         <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
                       </el-col>
                       <el-col :span="4">
-                    <span class="comment-rep" @click="reply(4)"><i
+                    <span class="comment-rep" @click="reply(4,item.id,item.nickname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                       </el-col>
                     </el-row>
@@ -59,7 +60,7 @@
       <div class="reply-box" @click="reply(3)">
         <el-row class="reply-box-row">
           <el-col :span="19">
-            <el-input size="small" placeholder="请输入您的留言内容~" v-model="inputReply" clearable></el-input>
+            <el-input size="small" placeholder="请输入您的留言内容~" clearable></el-input>
           </el-col>
           <el-col :span="5">
             <div class="reply-box-span">
@@ -99,10 +100,10 @@
           </div>
         </div>
       </scroller>
-      <div class="reply-box" @click="reply(3)">
+      <div class="reply-box" @click="reply(4,null,$route.query.name)">
         <el-row class="reply-box-row">
           <el-col :span="19">
-            <el-input size="small" placeholder="请输入您的回复内容~" v-model="inputReply" clearable></el-input>
+            <el-input size="small" placeholder="请输入您的回复内容~" clearable></el-input>
           </el-col>
           <el-col :span="5">
             <div class="reply-box-span">
@@ -128,7 +129,7 @@
     <div v-if="type == 4" class="reply-content">
       <el-row class="reply-content-border">
         <el-col :span="24">
-          <el-input type="textarea" :rows="10" :placeholder="pName" v-model="commonReply">
+          <el-input type="textarea" :rows="10" :placeholder="placeHolder" v-model="commentReply">
           </el-input>
         </el-col>
       </el-row>
@@ -148,13 +149,12 @@
       return {
         commentList: [],
         replyList: [],
-        inputReply: '',
         type: 1,
         curPage: 1,
         isLast: false,
-        pName:'回复借东西的小人',
-        comment:'',
-        commonReply:''
+        placeHolder: '',
+        comment: '',
+        commentReply: ''
       }
     },
     watch: {
@@ -188,6 +188,9 @@
         vm.isLast = false;
         vm.commentList = [];
         vm.replyList = [];
+        vm.comment = "";
+        vm.commentReply = '';
+        vm.placeHolder = '回复' + this.$route.query.name + ":";
         vm.type = vm.$route.params.typeId;
       },
       getCommentData(done) {
@@ -292,22 +295,32 @@
             m: "ewei_shop",
             ac: "add",
             pid: vm.$route.params.id,
-            content: vm.commonReply
+            content: vm.commentReply,
+            id: vm.$route.query.aId
           }
         })
           .then(function (response) {
             if (response.status == "200") {
-              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.query.aId, typeId: 1}})
             }
           })
           .catch(function (error) {
             console.log(error);
           });
       },
-      reply: function (temp, id) {
+      reply: function (temp, id, name) {
         let vm = this;
         let tmpId = id || vm.$route.params.id
-        vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId: temp}})
+        if (temp != 4 && temp != 2) {
+          vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId: temp}});
+        }
+        else {
+          vm.$router.push({
+            name: 'NewsComment',
+            params: {id: tmpId, typeId: temp},
+            query: {aId: vm.$route.query.aId || vm.$route.params.id, name: name}
+          });
+        }
       },
       collect: function (commentId) {
         let vm = this;
@@ -436,12 +449,12 @@
     padding: 10px 20px;
   }
 
-  .reply-content{
+  .reply-content {
     background-color: #f0f5f9;
     height: 100vh;
   }
 
-  .reply-content-border{
+  .reply-content-border {
     clear: both;
     border-radius: 5px;
     margin: 0 30px 20px 30px;
@@ -451,7 +464,7 @@
 </style>
 
 <style>
-  .el-textarea__inner{
+  .el-textarea__inner {
     border: 1px dashed #cccccc;
   }
 </style>

@@ -31,7 +31,7 @@
         </el-row>
       </div>
       <div v-if="common_num>0" class="news-detail-margin-bottom">
-        <div class="news-detail-bottom-commentArea" >
+        <div class="news-detail-bottom-commentArea">
           <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
                v-for="(item,index) in common_list" v-if="index<2">
             <el-row>
@@ -61,8 +61,9 @@
                   <el-col :span="20">
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
-                  <el-col :span="4" >
-                    <span class="news-detail-bottom-time" @click="goComment(4,item.id)"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                  <el-col :span="4">
+                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.nickname)"><i
+                      class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
               </el-col>
@@ -127,7 +128,7 @@
         var width2 = this.$refs.titleTxtContainer.offsetWidth;
         return width1 <= width2;
       },
-      updatePage:function () {
+      updatePage: function () {
         this.updateTitleCss();
         this.getDetailData();
       },
@@ -189,13 +190,21 @@
             console.log(error);
           });
       },
-      goComment: function (typeId,id){
-        let vm=this;
-        let tmpId=id ||vm.$route.params.id
-        vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId:typeId}})
+      goComment: function (typeId, id, name) {
+        let vm = this;
+        let tmpId = id || vm.$route.params.id
+        if (typeId != 4) {
+          vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId: typeId}});
+        }
+        else {
+          vm.$router.push({
+            name: 'NewsComment',
+            params: {id: tmpId, typeId: typeId},
+            query: {aId: vm.$route.params.id, name: name}
+          });
+        }
       }
     }
-
   }
 </script>
 
@@ -317,7 +326,7 @@
     min-height: 18px;
   }
 
-  .news-detail-margin-bottom{
+  .news-detail-margin-bottom {
     margin-bottom: 20px;
   }
 </style>
