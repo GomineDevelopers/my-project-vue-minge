@@ -499,11 +499,4 @@
 
 </style>
 
-<style>
-  .el-textarea__inner {
-    border: 1px dashed #cccccc;
-  }
-</style>
-
-
 
