@@ -77,6 +77,12 @@
   border-radius: 15px;
 }
 
+.el-button--primary.is-plain:hover{
+  color: #409EFF;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
+}
+
 /*my-comment-list*/
 .my-comment-list .loading-layer{
    top: -50px;

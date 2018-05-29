@@ -233,6 +233,54 @@
             console.log(error);
           });
       },
+      addComment() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
+          params: {
+            i: "8",
+            c: "entry",
+            p: "common",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "add",
+            id: vm.$route.params.id,
+            content: "2"
+          }
+        })
+          .then(function (response) {
+            if (response.status == "200") {
+              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
+      addReply() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
+          params: {
+            i: "8",
+            c: "entry",
+            p: "common",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "add",
+            pid: vm.$route.params.id,
+            content: "2"
+          }
+        })
+          .then(function (response) {
+            if (response.status == "200") {
+              vm.$router.push({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
       reply: function (temp, id) {
         let vm = this;
         let tmpId = id || vm.$route.params.id
@@ -363,14 +411,6 @@
 
   .reply-box-row {
     padding: 10px 20px;
-  }
-</style>
-
-<style>
-  .el-button--primary.is-plain:hover{
-    color: #409EFF;
-    background: #ecf5ff;
-    border-color: #b3d8ff;
   }
 </style>
 
