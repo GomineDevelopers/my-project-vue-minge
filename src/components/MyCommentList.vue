@@ -35,7 +35,7 @@
                           class="comment-reply-content">{{subItem.content}}</span>
                         </div>
                         <div @click="reply(2,item.id,item.nickname)" v-show="item.total>2"><span
-                          class="comment-reply-userName">共有{{item.total}}条回复<i
+                          class="comment-reply-message">共有{{item.total}}条回复<i
                           class="el-icon-d-arrow-right"></i></span></div>
                       </div>
                     </div>
@@ -399,7 +399,7 @@
   .comment-content {
     font-size: 14px;
     padding: 5px 0;
-    word-wrap:break-word;
+    word-wrap: break-word;
     text-align: justify;
   }
 
@@ -422,13 +422,17 @@
   .comment-reply-userName {
     font-size: 10px;
     color: #0064ba;
-   /* display: inline-block;
-    float: left;*/
+    display: inline-block;
+    float: left;
   }
 
+  .comment-reply-message{
+    font-size: 10px;
+    color: #0064ba;
+  }
   .comment-reply-content {
     font-size: 10px;
-    word-wrap:break-word;
+    word-wrap: break-word;
     text-align: justify;
   }
 
