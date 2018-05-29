@@ -113,10 +113,30 @@
       </div>
     </div>
     <div v-if="type == 3" class="reply-content">
-      3333
+      <el-row class="reply-content-border">
+        <el-col :span="24">
+          <el-input type="textarea" :rows="10" placeholder="请输入您的留言~" v-model="comment">
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-button type="primary" round @click="addComment()">&nbsp;&nbsp;发&nbsp;&nbsp;送&nbsp;&nbsp;</el-button>
+        </el-col>
+      </el-row>
     </div>
     <div v-if="type == 4" class="reply-content">
-      4444
+      <el-row class="reply-content-border">
+        <el-col :span="24">
+          <el-input type="textarea" :rows="10" :placeholder="pName" v-model="commonReply">
+          </el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-button type="primary" round @click="addReply()">&nbsp;&nbsp;发&nbsp;&nbsp;送&nbsp;&nbsp;</el-button>
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -132,6 +152,9 @@
         type: 1,
         curPage: 1,
         isLast: false,
+        pName:'回复借东西的小人',
+        comment:'',
+        commonReply:''
       }
     },
     watch: {
@@ -245,7 +268,7 @@
             m: "ewei_shop",
             ac: "add",
             id: vm.$route.params.id,
-            content: "2"
+            content: vm.comment
           }
         })
           .then(function (response) {
@@ -269,7 +292,7 @@
             m: "ewei_shop",
             ac: "add",
             pid: vm.$route.params.id,
-            content: "2"
+            content: vm.commonReply
           }
         })
           .then(function (response) {
@@ -411,6 +434,25 @@
 
   .reply-box-row {
     padding: 10px 20px;
+  }
+
+  .reply-content{
+    background-color: #f0f5f9;
+    height: 100vh;
+  }
+
+  .reply-content-border{
+    clear: both;
+    border-radius: 5px;
+    margin: 0 30px 20px 30px;
+    padding-top: 20px;
+  }
+
+</style>
+
+<style>
+  .el-textarea__inner{
+    border: 1px dashed #cccccc;
   }
 </style>
 
