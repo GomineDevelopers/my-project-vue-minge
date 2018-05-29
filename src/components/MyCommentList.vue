@@ -261,61 +261,86 @@
       },
       addComment() {
         let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
-          params: {
-            i: "8",
-            c: "entry",
-            p: "common",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "add",
-            id: vm.$route.params.id,
-            content: vm.comment
-          }
-        })
-          .then(function (response) {
-            if (response.status == "200") {
-              vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+        if (!vm.comment) {
+          vm.$message({
+            message: '请填写留言内容!',
+            type: 'error',
+            showClose: true,
+          });
+        }
+        else {
+          vm.axios(vm.$commonTools.g_restUrl, {
+            method: 'post',
+            params: {
+              i: "8",
+              c: "entry",
+              p: "common",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "add",
+              id: vm.$route.params.id,
+              content: vm.comment
             }
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+            .then(function (response) {
+              if (response.status == "200") {
+                vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.params.id, typeId: 1}})
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
       },
       addReply() {
         let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
-          params: {
-            i: "8",
-            c: "entry",
-            p: "common",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "add",
-            pid: vm.$route.params.id,
-            content: vm.commentReply,
-            id: vm.$route.query.aId
-          }
-        })
-          .then(function (response) {
-            if (response.status == "200") {
-              vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.query.aId, typeId: 1}})
+        if (!vm.commentReply) {
+          vm.$message({
+            message: '请填写回复内容!',
+            type: 'error',
+            showClose: true,
+          });
+        }
+        else {
+          vm.axios(vm.$commonTools.g_restUrl, {
+            method: 'post',
+            params: {
+              i: "8",
+              c: "entry",
+              p: "common",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "add",
+              pid: vm.$route.params.id,
+              content: vm.commentReply,
+              id: vm.$route.query.aId
             }
           })
-          .catch(function (error) {
-            console.log(error);
-          });
+            .then(function (response) {
+              if (response.status == "200") {
+                vm.$router.replace({name: 'NewsComment', params: {id: vm.$route.query.aId, typeId: 1}})
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
       },
       reply: function (temp, id, name) {
         let vm = this;
         let tmpId = id || vm.$route.params.id
-        if (temp != 4 && temp != 2) {
-          vm.$router.push({name: 'NewsComment', params: {id: tmpId, typeId: temp}});
+        if (temp == 1 || temp == 3) {
+          vm.$router.replace({name: 'NewsComment', params: {id: tmpId, typeId: temp}});
         }
-        else {
+        else if (temp == 2) {
           vm.$router.push({
+            name: 'NewsComment',
+            params: {id: tmpId, typeId: temp},
+            query: {aId: vm.$route.query.aId || vm.$route.params.id, name: name}
+          });
+        }
+        else if (temp == 4) {
+          vm.$router.replace({
             name: 'NewsComment',
             params: {id: tmpId, typeId: temp},
             query: {aId: vm.$route.query.aId || vm.$route.params.id, name: name}
@@ -426,10 +451,11 @@
     float: left;
   }
 
-  .comment-reply-message{
+  .comment-reply-message {
     font-size: 10px;
     color: #0064ba;
   }
+
   .comment-reply-content {
     font-size: 10px;
     word-wrap: break-word;

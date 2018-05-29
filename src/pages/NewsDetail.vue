@@ -1,5 +1,8 @@
 <template>
+  <div>
+    <vue-headful title="文章详情" />
     <my-detail></my-detail>
+  </div>
 </template>
 
 <script>

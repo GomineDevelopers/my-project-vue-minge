@@ -87,3 +87,7 @@
 .my-comment-list .loading-layer{
    top: -50px;
 }
+
+.el-message  {
+  top:0 !important;
+}
