@@ -365,7 +365,6 @@
               vm.commentList.forEach(function (element, index, array) {
                 if (element.id == commentId) {
                   element.status = !element.status;
-                  tempStatus = element.status;
                 }
               })
             }
