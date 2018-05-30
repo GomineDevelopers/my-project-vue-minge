@@ -181,7 +181,6 @@
               vm.common_list.forEach(function (element, index, array) {
                 if (element.id == commentId) {
                   element.status = !element.status;
-                  tempStatus = element.status;
                 }
               })
             }
