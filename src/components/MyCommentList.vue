@@ -118,6 +118,7 @@
         <el-col :span="24">
           <el-input type="textarea" :rows="20" placeholder="请输入您的留言~" v-model="comment" maxlength="400">
           </el-input>
+          <span class="note" v-show="comment.length>0">{{comment.length}}/400</span>
         </el-col>
       </el-row>
       <el-row>
@@ -131,6 +132,7 @@
         <el-col :span="24">
           <el-input type="textarea" :rows="20" :placeholder="placeHolder" v-model="commentReply" maxlength="400">
           </el-input>
+          <span class="note" v-show="commentReply.length>0">{{commentReply.length}}/400</span>
         </el-col>
       </el-row>
       <el-row>
@@ -461,10 +463,6 @@
     text-align: justify;
   }
 
-  .comment-transition {
-    display: flex;
-  }
-
   .reply-box {
     background-color: #f2f6f9;
     position: fixed;
@@ -494,6 +492,14 @@
     border-radius: 5px;
     margin: 0 30px 20px 30px;
     padding-top: 20px;
+  }
+
+  .note{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: #999999;
+    font-size: 12px;
   }
 
 </style>
