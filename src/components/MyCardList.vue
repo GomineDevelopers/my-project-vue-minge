@@ -40,7 +40,6 @@
           }
         })
           .then(function (response) {
-            console.log(vm.listType, vm.curPage);
             if (response.data.result.list) {
               for (var i = 1; i <= response.data.result.list.length; i++) {
                 vm.items.push(response.data.result.list[i - 1])
