@@ -6,24 +6,26 @@
         :on-infinite="infinite" class="scroller-container">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
-
-        <div class="row status"
-             :class="[item.type == 1 ? 'status-success':[item.type == 2 ? 'status-uncheck':'status-wait']]"
-             v-for="item in listData">
-          <div class="note" v-text="item.name"></div>
-          <div class="block">
-            <div class="title" v-text="item.title"></div>
-            <div class="content" v-text="item.content"></div>
-            <div class="btn-row" v-if="item.type == 3"><span class="edit"><i
-              class="el-icon-edit-outline"></i>修改</span><span class="delete"><i class="el-icon-delete"></i>删除</span>
+        <div style=" margin-top: -44px">
+          <div class="row status"
+               :class="[item.type == 1 ? 'status-success':[item.type == 2 ? 'status-uncheck':'status-wait']]"
+               v-for="item in listData">
+            <div class="note" v-text="item.name"></div>
+            <div class="block">
+              <div class="title" v-text="item.title"></div>
+              <div class="content" v-text="item.content"></div>
+              <div class="btn-row" v-if="item.type == 3"><span class="edit"><i
+                class="el-icon-edit-outline"></i>修改</span><span class="delete"><i class="el-icon-delete"></i>删除</span>
+              </div>
+              <div class="c1"></div>
+              <div class="c2"></div>
+              <div class="c3" v-if="item.type == 1">已通过</div>
+              <div class="c3" v-else-if="item.type == 2">审核中</div>
+              <div class="c3" v-else-if="item.type == 3">待提交</div>
             </div>
-            <div class="c1"></div>
-            <div class="c2"></div>
-            <div class="c3" v-if="item.type == 1">已通过</div>
-            <div class="c3" v-else-if="item.type == 2">审核中</div>
-            <div class="c3" v-else-if="item.type == 3">待提交</div>
           </div>
         </div>
+
 
         <!--<div class="row status status-uncheck">
           <div class="note">提案2</div>
@@ -59,8 +61,8 @@
     data() {
       return {
         isLast: false,
-        listData:[],
-        i:1,
+        listData: [],
+        i: 1,
         listData1: [{"name": "提案1", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
           {
             "name": "提案2",
@@ -122,7 +124,7 @@
 
       }
     },
-    created: function () {},
+
     methods: {
       infinite: function (done) {
         let vm = this;
@@ -134,25 +136,32 @@
       },
       getListData: function (done) {
         let vm = this;
-        if(vm.i == 1){
+        if (vm.i == 1) {
           vm.isLast == false;
           vm.listData = vm.listData1;
-          vm.i ++ ;
+          vm.i++;
           done();
-        }else if(vm.i == 2){
+        } else if (vm.i == 2) {
           vm.isLast == true;
           vm.listData = vm.listData1.concat(vm.listData2);
           done(true);
         }
       },
-      del: function () {},
-      reWrite: function () {}
+      del: function () {
+      },
+      reWrite: function () {
+      }
     }
 
   }
 </script>
 
 <style scoped>
+  .scroller-container {
+    top: 20px;
+    padding-bottom: 44px;
+  }
+
   .proposal-cover {
     height: 100vh;
     position: relative;
@@ -160,8 +169,9 @@
 
   .proposal-cover .proposal-list {
     padding-top: 3vh;
-    height: 87vh;
+    height: 85vh;
     position: relative;
+    overflow: hidden;
   }
 
   .proposal-cover .proposal-list .row {

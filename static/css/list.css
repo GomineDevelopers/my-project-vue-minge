@@ -101,3 +101,7 @@
   background-size: 100% 100%;
   position: relative;
 }
+
+.proposal-cover .loading-layer{
+  padding-bottom: 10vh;
+}
