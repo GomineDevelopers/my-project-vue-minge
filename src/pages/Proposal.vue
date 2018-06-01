@@ -1,6 +1,6 @@
 <template>
   <div class="bg1 proposal-cover">
-    <vue-headful title="提案"/>
+    <vue-headful title="我的提案"/>
     <div class="proposal-list">
       <scroller
         :on-infinite="infinite" class="scroller-container">
@@ -24,7 +24,7 @@
             <div class="c3" v-else-if="item.type == 3">待提交</div>
           </div>
         </div>
-     
+
         <!--<div class="row status status-uncheck">
           <div class="note">提案2</div>
           <div class="block">
@@ -59,7 +59,9 @@
     data() {
       return {
         isLast: false,
-        listData: [{"name": "提案1", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
+        listData:[],
+        i:1,
+        listData1: [{"name": "提案1", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
           {
             "name": "提案2",
             "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。",
@@ -87,11 +89,40 @@
           },
           {"name": "提案7", "title": "本次党建工作十分66666666。", "content": "民革贵阳市委召开八", "type": 2},
           {"name": "提案8", "title": "本次党建工作十分7777777774。", "content": "陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵", "type": 3},
+        ],
+        listData2: [{"name": "提案11", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
+          {
+            "name": "提案22",
+            "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。",
+            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
+            "type": 2
+          },
+          {"name": "提案33", "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。。", "content": "民革贵阳市委召开八届三次会议", "type": 3},
+          {
+            "name": "提案44",
+            "title": "本次党建工作十分重要大家要积极参与333333333。",
+            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
+            "type": 1
+          },
+          {
+            "name": "提案55",
+            "title": "本次党建工作十分重要大家要积极参与4444444444444。",
+            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
+            "type": 3
+          },
+          {
+            "name": "提案66",
+            "title": "本次党建工作十分重55555555555。",
+            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
+            "type": 3
+          },
+          {"name": "提案77", "title": "本次党建工作十分66666666。", "content": "民革贵阳市委召开八", "type": 2},
+          {"name": "提案88", "title": "本次党建工作十分7777777774。", "content": "陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵", "type": 3},
         ]
+
       }
     },
-    created: function () {
-    },
+    created: function () {},
     methods: {
       infinite: function (done) {
         let vm = this;
@@ -101,12 +132,21 @@
           done(true);
         }
       },
-      getListData: function () {
+      getListData: function (done) {
+        let vm = this;
+        if(vm.i == 1){
+          vm.isLast == false;
+          vm.listData = vm.listData1;
+          vm.i ++ ;
+          done();
+        }else if(vm.i == 2){
+          vm.isLast == true;
+          vm.listData = vm.listData1.concat(vm.listData2);
+          done(true);
+        }
       },
-      del: function () {
-      },
-      reWrite: function () {
-      }
+      del: function () {},
+      reWrite: function () {}
     }
 
   }
