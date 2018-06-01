@@ -11,8 +11,10 @@ import SocialService from '@/pages/SocialService'
 import NewsDetail from '@/pages/NewsDetail'
 //新闻评论页面
 import NewsComment from '@/pages/NewsComment'
-//
+//我的提案
 import Proposal from '@/pages/Proposal'
+//党员风采
+import Member from '@/pages/Member'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +53,11 @@ export default new Router({
       path: '/proposal',
       name: 'Proposal',
       component: Proposal
+    },
+    {
+      path: '/member',
+      name: 'Member',
+      component: Member
     }
   ]
 })
