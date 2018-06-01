@@ -105,3 +105,11 @@
 .proposal-cover .loading-layer{
   padding-bottom: 10vh;
 }
+
+.memberBg{
+  background: url(../image/member_bg.png);
+  border-radius: 20px 0 0 20px;
+  background-size: 100% 100%;
+  position: relative;
+  box-shadow: 0px 1px 0px #cccccc;
+}
