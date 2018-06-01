@@ -24,7 +24,7 @@
             <div class="c3" v-else-if="item.type == 3">待提交</div>
           </div>
         </div>
-     
+
         <!--<div class="row status status-uncheck">
           <div class="note">提案2</div>
           <div class="block">
