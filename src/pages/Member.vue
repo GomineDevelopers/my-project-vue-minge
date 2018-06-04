@@ -2,10 +2,10 @@
   <div class="memberCover">
     <div class="memberBg memberContainer" v-for="item in listData">
       <el-row class="memberRow">
-        <el-col :span="7" class="avatar"></el-col>
+        <el-col :span="7" class="avatar"><img :src="item.thumb"></el-col>
         <el-col :span="17">
           <div class="memberName" v-text="item.name"></div>
-          <div class="memberDescription" v-text="item.decription"></div>
+          <div class="memberDescription" v-html="item.description"></div>
         </el-col>
       </el-row>
     </div>
@@ -17,15 +17,34 @@
         name: "member",
         data(){
           return{
-            listData:[
-              {"name":"龙超云","decription":"贵州中药民族药质量控制的守望者"},
-              {"name":"栗战书","decription":"民革党员李健铭：当选全国青联委员并 参加全国青联十二。"},
-              {"name":"刘奇葆","decription":"唱响中国人的高男高音"},
-              {"name":"陈希","decription":"老林村的致富引路人"},
-              {"name":"龙超云","decription":"贵州中药民族药质量控制的守望者"},
-              {"name":"龙超云","decription":"贵州中药民族药质量控制的守望者"},
-              {"name":"龙超云","decription":"贵州中药民族药质量控制的守望者"},
-            ]
+            listData:[]
+          }
+        },
+        created() {
+          this.getMemberList();
+        },
+        methods:{
+          getMemberList:function () {
+            let vm = this;
+            this.axios(vm.$commonTools.g_restUrl,{
+              params:{
+                i: "8",
+                c: "entry",
+                p: "information",
+                do: "shop",
+                m: "ewei_shop"
+              }
+            })
+              .then(function (response) {
+                if(response.data.result.data){
+                  for(var i = 0 ; i < response.data.result.data.length ; i++){
+                    vm.listData.push(response.data.result.data[i]);
+                  }
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
           }
         }
     }
@@ -47,15 +66,14 @@
 
   .avatar{
     height: inherit;
-    background-image: url("./1.jpg");
     background-size: 100% 100%;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    width: 80px;
   }
 
   .avatar img {
     width: inherit;
     height: inherit;
+    border-radius: 10px 0 0 10px;
   }
 
   .memberName{
