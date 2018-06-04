@@ -1,5 +1,6 @@
 <template>
   <div class="memberCover">
+    <vue-headful title="党员风采"/>
     <div class="memberBg memberContainer" v-for="item in listData">
       <el-row class="memberRow">
         <el-col :span="7" class="avatar"><img :src="item.thumb"></el-col>
