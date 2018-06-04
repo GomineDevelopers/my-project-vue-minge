@@ -3,7 +3,7 @@
     <vue-headful title="我的提案"/>
     <div class="proposal-list">
       <scroller
-        :on-infinite="infinite" class="scroller-container">
+        :on-infinite="infinite" class="scroller-container" ref="scroller">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
         <div style=" margin-top: -44px">
@@ -102,14 +102,19 @@
             }
           })
             .then(function (response) {
+
               if(response.data.status == '200'){
-                vm.curPage = 1;
-                vm.listData = [];
                 vm.$message({
                   type: 'success',
                   message: '删除成功!',
-                  onClose:vm.getListData()
                 });
+                vm.$nextTick(function () {
+                  vm.listData = [];
+                  vm.curPage=1;
+                  vm.isLast=false;
+                  vm.$refs.scroller.finishInfinite(false);
+                });
+
               }else if(response.data.status == '403'){
                 vm.$message({
                   type: 'success',
