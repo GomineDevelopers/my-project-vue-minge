@@ -103,10 +103,12 @@
           })
             .then(function (response) {
               if(response.data.status == '200'){
+                vm.curPage = 1;
+                vm.listData = [];
                 vm.$message({
                   type: 'success',
                   message: '删除成功!',
-                  onClose:vm.getDeletedData(id)
+                  onClose:vm.getListData()
                 });
               }else if(response.data.status == '403'){
                 vm.$message({
@@ -123,14 +125,6 @@
             type: 'info',
             message: '已取消删除'
           });
-        });
-      },
-      getDeletedData:function(id){
-        let vm = this;
-        vm.listData.forEach(function (element, index, array){
-          if(element.id == id){
-            vm.listData.splice(index, 1);
-          }
         });
       },
       reWrite: function () {
