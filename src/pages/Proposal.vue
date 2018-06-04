@@ -8,47 +8,24 @@
         <div style="height: 44px;"></div>
         <div style=" margin-top: -44px">
           <div class="row status"
-               :class="[item.type == 1 ? 'status-success':[item.type == 2 ? 'status-uncheck':'status-wait']]"
-               v-for="item in listData">
-            <div class="note" v-text="item.name"></div>
+               :class="[item.status == 2 ? 'status-success':[item.status == 1 ? 'status-uncheck':'status-wait']]"
+               v-for="(item,index) in listData">
+            <div class="note" v-text='"提案"+(index+1)'></div>
             <div class="block">
               <div class="title" v-text="item.title"></div>
               <div class="content" v-text="item.content"></div>
-              <div class="btn-row" v-if="item.type == 3"><span class="edit"><i
-                class="el-icon-edit-outline"></i>修改</span><span class="delete"><i class="el-icon-delete"></i>删除</span>
+              <div class="btn-row" v-if="item.status == 0">
+                <span class="edit"><i class="el-icon-edit-outline"></i>修改</span>
+                <span class="delete" @click="del(item.id)"><i class="el-icon-delete"></i>删除</span>
               </div>
               <div class="c1"></div>
               <div class="c2"></div>
-              <div class="c3" v-if="item.type == 1">已通过</div>
-              <div class="c3" v-else-if="item.type == 2">审核中</div>
-              <div class="c3" v-else-if="item.type == 3">待提交</div>
+              <div class="c3" v-if="item.status == 2">已通过</div>
+              <div class="c3" v-else-if="item.status == 1">审核中</div>
+              <div class="c3" v-else-if="item.status == 0">待提交</div>
             </div>
           </div>
         </div>
-
-
-        <!--<div class="row status status-uncheck">
-          <div class="note">提案2</div>
-          <div class="block">
-            <div class="title">本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。</div>
-            <div class="content">培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵</div>
-            <div class="c1"></div>
-            <div class="c2"></div>
-            <div class="c3">审核中</div>
-          </div>
-        </div>
-        <div class="row status status-wait">
-          <div class="note">提案3</div>
-          <div class="block">
-            <div class="title">本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。</div>
-            <div class="content">培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵</div>
-            <div class="btn-row"><span class="edit"><i class="el-icon-edit-outline"></i>修改</span><span class="delete"><i class="el-icon-delete"></i>删除</span>
-            </div>
-            <div class="c1"></div>
-            <div class="c2"></div>
-            <div class="c3">待提交</div>
-          </div>
-        </div>-->
       </scroller>
     </div>
     <el-button type="primary" round class="bottom-btn">填写提案</el-button>
@@ -62,69 +39,9 @@
       return {
         isLast: false,
         listData: [],
-        i: 1,
-        listData1: [{"name": "提案1", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
-          {
-            "name": "提案2",
-            "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。",
-            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 2
-          },
-          {"name": "提案3", "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。。", "content": "民革贵阳市委召开八届三次会议", "type": 3},
-          {
-            "name": "提案4",
-            "title": "本次党建工作十分重要大家要积极参与333333333。",
-            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 1
-          },
-          {
-            "name": "提案5",
-            "title": "本次党建工作十分重要大家要积极参与4444444444444。",
-            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 3
-          },
-          {
-            "name": "提案6",
-            "title": "本次党建工作十分重55555555555。",
-            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 3
-          },
-          {"name": "提案7", "title": "本次党建工作十分66666666。", "content": "民革贵阳市委召开八", "type": 2},
-          {"name": "提案8", "title": "本次党建工作十分7777777774。", "content": "陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵", "type": 3},
-        ],
-        listData2: [{"name": "提案11", "title": "本次党建工作十分重要大家要积极参与。", "content": "民革贵阳市委召开八届三次会议", "type": 1},
-          {
-            "name": "提案22",
-            "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。",
-            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 2
-          },
-          {"name": "提案33", "title": "本次党建工作十分重要大家要积极参与。本次党建工作十分重要大家要积极参与。。", "content": "民革贵阳市委召开八届三次会议", "type": 3},
-          {
-            "name": "提案44",
-            "title": "本次党建工作十分重要大家要积极参与333333333。",
-            "content": "培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 1
-          },
-          {
-            "name": "提案55",
-            "title": "本次党建工作十分重要大家要积极参与4444444444444。",
-            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 3
-          },
-          {
-            "name": "提案66",
-            "title": "本次党建工作十分重55555555555。",
-            "content": "民革贵阳市委召开八届三次会议,培训会上，陈应副主委希望大家重视宣传和 作，发挥好培训会上，陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵",
-            "type": 3
-          },
-          {"name": "提案77", "title": "本次党建工作十分66666666。", "content": "民革贵阳市委召开八", "type": 2},
-          {"name": "提案88", "title": "本次党建工作十分7777777774。", "content": "陈应副主委希望大家重视宣传和 作，发挥好各支部的宣传的阵", "type": 3},
-        ]
-
+        curPage: 1
       }
     },
-
     methods: {
       infinite: function (done) {
         let vm = this;
@@ -136,18 +53,85 @@
       },
       getListData: function (done) {
         let vm = this;
-        if (vm.i == 1) {
-          vm.isLast == false;
-          vm.listData = vm.listData1;
-          vm.i++;
-          done();
-        } else if (vm.i == 2) {
-          vm.isLast == true;
-          vm.listData = vm.listData1.concat(vm.listData2);
-          done(true);
-        }
+        this.axios(vm.$commonTools.g_restUrl,{
+          params: {
+            i: "8",
+            c: "entry",
+            p: "proposal",
+            do: "shop",
+            m: "ewei_shop",
+            page: vm.curPage
+          }
+        })
+          .then(function (response) {
+            if (response.data.result.data) {
+              for (var i = 0; i < response.data.result.data.length; i++) {
+                vm.listData.push(response.data.result.data[i]);
+              }
+            }
+
+            if (response.data.result.data && response.data.result.data.length == 10) {
+              vm.isLast = false;
+              vm.curPage++;
+            }
+            else {
+              vm.isLast = true;
+            }
+            done();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       },
-      del: function () {
+      del: function (id) {
+        let vm = this;
+        vm.$confirm('是否要删除该提案?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.axios(vm.$commonTools.g_restUrl,{
+            params: {
+              i: "8",
+              c: "entry",
+              p: "proposal",
+              do: "shop",
+              m: "ewei_shop",
+              ac:"del",
+              id:id
+            }
+          })
+            .then(function (response) {
+              if(response.data.status == '200'){
+                vm.$message({
+                  type: 'success',
+                  message: '删除成功!',
+                  onClose:vm.getDeletedData(id)
+                });
+              }else if(response.data.status == '403'){
+                vm.$message({
+                  type: 'success',
+                  message: '删除失败，请重试!'
+                });
+              }
+            })
+            .catch(function (error) {
+              console.info(error);
+            });
+        }).catch(() => {
+          vm.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      getDeletedData:function(id){
+        let vm = this;
+        vm.listData.forEach(function (element, index, array){
+          if(element.id == id){
+            vm.listData.splice(index, 1);
+          }
+        });
       },
       reWrite: function () {
       }
@@ -288,5 +272,11 @@
 
   .status-wait .c1 {
     border-top: 60px solid #D26E7A;
+  }
+</style>
+
+<style>
+  .el-message-box{
+    width:auto;
   }
 </style>
