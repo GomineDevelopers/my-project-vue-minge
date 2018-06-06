@@ -54,26 +54,40 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
   })
   return Promise.reject(error)
 })
+Vue.use(VueAxios, axios);
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
-    let pass=false;
-    if (!pass) {
-      next({
-        path: '/noMember',
-        query: { redirect: to.fullPath }
+    axios(commonTools.g_restUrl, {
+      params: {
+        i: "8",
+        c: "entry",
+        p: "user",
+        do: "shop",
+        m: "ewei_shop",
+        ac: "is_leather"
+      }
+    })
+      .then(function (response) {
+        if (response.data && response.data.result && response.data.result.is_leather == "1") {
+          next()
+        } else {
+          next({
+            path: '/noMember',
+            query: {redirect: to.fullPath}
+          })
+        }
       })
-    } else {
-      next()
-    }
+      .catch(function (error) {
+        console.log(error);
+      });
   } else {
     next() // 确保一定要调用 next()
   }
 })
 
-Vue.use(VueAxios, axios);
 
 /* eslint-disable no-new */
 new Vue({

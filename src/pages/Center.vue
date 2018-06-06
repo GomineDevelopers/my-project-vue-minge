@@ -3,15 +3,16 @@
     <vue-headful title="我的民革"/>
     <div class="header">
       <div class="logo">
-        <img src="../assets/webwxgeticon.jpg"/>
+        <img :src="imgUrl"/>
       </div>
       <div class="name">
-        蔡一天
+        {{name}}
       </div>
     </div>
     <div class="row">
       <div class="title">
-        <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"></span></span>
+        <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
+                                                                                       v-show="hasMessage"></span></span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
@@ -29,27 +30,29 @@
       <div class="content">
         <div class="content-area">
           <span class="comma"></span>
-            <span class="content-text">
-             <p>共提交了<span class="text-colored">12</span>次提案</p>
-             <p>通过了<span class="text-colored">8</span>次提案</p>  
+          <span class="content-text">
+             <p>共提交了<span class="text-colored">{{totalProposal}}</span>次提案</p>
+             <p>通过了<span class="text-colored">{{passProposal}}</span>次提案</p>
             </span>
         </div>
 
       </div>
     </div>
     <div class="row">
-      <div class="title" @click="goComment">
+      <div v-if="comment>0" class="title" @click="goComment">
         <i class=" iconfont icon-liuyan"></i>&nbsp;<span class="text">我的留言</span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
+      <div v-else class="title" >
+        <i class=" iconfont icon-liuyan"></i>&nbsp;<span class="text">我的留言</span>
+      </div>
       <div class="content">
-          <div class="content-area">
-            <span class="comma"></span>
-              <span class="content-text">
-                <p>共保存了<span class="text-colored">56</span>条留言</p>
-                
-              </span>
-          </div>
+        <div class="content-area">
+          <span class="comma"></span>
+          <span class="content-text">
+                <p>共保存了<span class="text-colored">{{comment}}</span>条留言</p>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -60,18 +63,45 @@
     name: "center",
     data() {
       return {
-
+        name: "",
+        imgUrl: "",
+        hasMessage: false,
+        totalProposal: 0,
+        passProposal: 0,
+        comment: 0,
       }
     },
-    created() {
+    mounted() {
       this.getCenterData();
     },
     methods: {
       getCenterData: function () {
         let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "get_info",
+            showLoading: true
+          }
+        })
+          .then(function (response) {
+            vm.name = response.data.result.nickname;
+            vm.imgUrl = response.data.result.avatar;
+            vm.hasMessage = response.data.result.mg;
+            vm.totalProposal = response.data.result.proposal;
+            vm.passProposal = response.data.result.c_proposal;
+            vm.comment = response.data.result.common_num;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       },
       goComment: function () {
-        this.$router.push({ name: 'CenterComment'})
+        this.$router.push({name: 'CenterComment'})
       },
     }
   }
@@ -125,38 +155,41 @@
   .title .text {
     position: relative;
   }
- .row .content{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   background-color: #fafafa;
-   width: 100%;
-   height: 18vh;
- }
- .content .content-area{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex-direction: column;
-   border: 1px dashed #ccc;
-   border-radius: 5px;
-   height: 10vh;
-   width: 70%;
-  padding: 5px;
-  position: relative;
-  
- }
- 
- .content-text .text-colored{
-   color: #2780c0;
-   font-weight: bold;
- }
+
+  .row .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+    width: 100%;
+    height: 18vh;
+  }
+
+  .content .content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+    height: 10vh;
+    width: 70%;
+    padding: 5px;
+    position: relative;
+
+  }
+
+  .content-text .text-colored {
+    color: #2780c0;
+    font-weight: bold;
+  }
+
   .title .arrow {
     float: right !important;
     color: #CACACA;
   }
-  
-  .comma::after{
+
+  .comma::after {
     content: "”";
     font-size: 50px;
     color: #ccc;
@@ -166,7 +199,8 @@
     right: 10px;
     bottom: -25px;
   }
-  .comma::before{
+
+  .comma::before {
     content: "“";
     font-size: 50px;
     color: #ccc;
@@ -176,6 +210,7 @@
     left: 10px;
     top: 0px;
   }
+
   .red-point::before {
     content: " ";
     border: 4px solid #E6616C;
