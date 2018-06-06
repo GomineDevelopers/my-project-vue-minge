@@ -31,7 +31,7 @@
     },
     methods: {
       getMemberType: function () {
-        this.memberType = 1;
+        this.memberType = 2;
       }
     }
   }

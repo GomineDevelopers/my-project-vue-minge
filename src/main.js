@@ -14,6 +14,7 @@ import '../static/css/list.css'
 /*引入公共样式*/
 import '../static/css/carousel.css'
 /*引入公共样式*/
+import '../static/css/iconfont.css'
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
