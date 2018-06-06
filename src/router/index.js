@@ -15,8 +15,12 @@ import NewsComment from '@/pages/NewsComment'
 import Proposal from '@/pages/Proposal'
 //党员风采
 import Member from '@/pages/Member'
+//我的民革-不是会员
+import NoMember from '@/pages/NoMember'
 //我的民革
 import Center from '@/pages/Center'
+//我的留言
+import CenterComment from '@/pages/CenterComment'
 
 Vue.use(Router)
 
@@ -63,9 +67,20 @@ export default new Router({
       component: Member
     },
     {
+      path: '/noMember',
+      name: 'NoMember',
+      component: NoMember,
+    },
+    {
       path: '/center',
       name: 'Center',
-      component: Center
+      component: Center,
     },
+    {
+      path: '/center/comment',
+      name: 'CenterComment',
+      component: CenterComment
+    },
+
   ]
 })

@@ -20,41 +20,41 @@
 </template>
 
 <script>
-    export default {
-        name: "my-comment",
-        data() {
-          return {
-            dataList:[]
+  export default {
+    name: "center-comment",
+    data() {
+      return {
+        dataList:[]
+      }
+    },
+    created(){
+      this.getMyComments();
+    },
+    methods:{
+      getMyComments:function () {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl,{
+          params:{
+            i: "8",
+            c: "entry",
+            p: "common",
+            do: "shop",
+            m: "ewei_shop",
+            ac:"collection",
+            psize:"999"
           }
-        },
-        created(){
-          this.getMyComments();
-        },
-        methods:{
-          getMyComments:function () {
-            let vm = this;
-            vm.axios(vm.$commonTools.g_restUrl,{
-              params:{
-                i: "8",
-                c: "entry",
-                p: "common",
-                do: "shop",
-                m: "ewei_shop",
-                ac:"collection",
-                psize:"999"
-              }
-            })
-              .then(function (response) {
-                if(response.data.result.data){
-                  vm.dataList = response.data.result.data;
-                }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }
-        }
+        })
+          .then(function (response) {
+            if(response.data.result.data){
+              vm.dataList = response.data.result.data;
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     }
+  }
 </script>
 
 <style scoped>
