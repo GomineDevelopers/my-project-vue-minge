@@ -27,6 +27,13 @@
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
       <div class="content">
+        <div class="content-area">
+          <span class="comma"></span>
+            <span class="content-text">
+             <p>共提交了<span class="text-colored">12</span>次提案</p>
+             <p>通过了<span class="text-colored">8</span>次提案</p>  
+            </span>
+        </div>
 
       </div>
     </div>
@@ -36,7 +43,13 @@
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
       <div class="content">
-
+          <div class="content-area">
+            <span class="comma"></span>
+              <span class="content-text">
+                <p>共保存了<span class="text-colored">56</span>条留言</p>
+                
+              </span>
+          </div>
       </div>
     </div>
   </div>
@@ -112,12 +125,57 @@
   .title .text {
     position: relative;
   }
-
+ .row .content{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #fafafa;
+   width: 100%;
+   height: 18vh;
+ }
+ .content .content-area{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   border: 1px dashed #ccc;
+   border-radius: 5px;
+   height: 10vh;
+   width: 70%;
+  padding: 5px;
+  position: relative;
+  
+ }
+ 
+ .content-text .text-colored{
+   color: #2780c0;
+   font-weight: bold;
+ }
   .title .arrow {
     float: right !important;
     color: #CACACA;
   }
-
+  
+  .comma::after{
+    content: "”";
+    font-size: 50px;
+    color: #ccc;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1000;
+    right: 10px;
+    bottom: -25px;
+  }
+  .comma::before{
+    content: "“";
+    font-size: 50px;
+    color: #ccc;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1000;
+    left: 10px;
+    top: 0px;
+  }
   .red-point::before {
     content: " ";
     border: 4px solid #E6616C;
