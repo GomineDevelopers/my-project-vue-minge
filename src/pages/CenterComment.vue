@@ -74,6 +74,8 @@
     text-align: left;
     box-shadow:2px 2px 10px 1px #cbcdcf;
     margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
   }
 
   .my-all-comments-mycom{
@@ -85,7 +87,9 @@
     color: #838e97;
     display: inline-block;
     border-left: 4px solid #5c8ab2;
-    padding-left: 8px;
+    padding-left: 6px;
+    margin-left: 9px;
+    line-height: 11px;
   }
 
   .my-all-comments-title{
