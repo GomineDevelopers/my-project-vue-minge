@@ -75,11 +75,13 @@ export default new Router({
       path: '/center',
       name: 'Center',
       component: Center,
+      meta: { requiresAuth: true }
     },
     {
       path: '/center/comment',
       name: 'CenterComment',
-      component: CenterComment
+      component: CenterComment,
+      meta: { requiresAuth: true }
     },
 
   ]

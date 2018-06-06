@@ -55,6 +55,24 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
   return Promise.reject(error)
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    let pass=false;
+    if (!pass) {
+      next({
+        path: '/noMember',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
+
 Vue.use(VueAxios, axios);
 
 /* eslint-disable no-new */
