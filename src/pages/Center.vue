@@ -31,8 +31,8 @@
         <div class="content-area">
           <span class="comma"></span>
           <span class="content-text">
-             <p>共提交了<span class="text-colored">{{totalProposal}}</span>次提案</p>
-             <p>通过了<span class="text-colored">{{passProposal}}</span>次提案</p>
+             <div class="mb">共提交了<span class="text-colored">{{totalProposal}}</span>次提案</div>
+             <div>通过了<span class="text-colored">{{passProposal}}</span>次提案</div>
             </span>
         </div>
 
@@ -163,6 +163,8 @@
     background-color: #fafafa;
     width: 100%;
     height: 18vh;
+    border-top: 1px solid #F0F0F0;
+    border-bottom: 1px solid #B9BABA;
   }
 
   .content .content-area {
@@ -236,5 +238,9 @@
 
   .icon-liuyan {
     color: #8395EA;
+  }
+
+  .mb{
+    margin-bottom: 3px;
   }
 </style>
