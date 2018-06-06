@@ -5,7 +5,7 @@
       <div class="my-all-comments-card" v-for="(item,index) in dataList">
         <el-row>
           <el-row>
-            <el-col :span="24"><div class="my-all-comments-mycom"><span>|</span>&nbsp;&nbsp;我的留言{{index+1}}</div></el-col>
+            <el-col :span="24"><div class="my-all-comments-mycom"><span>我的留言{{index+1}}</span></div></el-col>
           </el-row>
           <el-row>
             <el-col :span="24" class="my-all-comments-title"><span v-text="item.title"></span></el-col>
@@ -72,20 +72,20 @@
   .my-all-comments-card{
     background-color: #ffffff;
     text-align: left;
-    box-shadow:2px 2px 2px 2px  #cbcdcf;
+    box-shadow:2px 2px 10px 1px #cbcdcf;
     margin-top: 10px;
   }
 
   .my-all-comments-mycom{
-    font-size: 14px;
-    color: #838e97;
     padding: 10px 10px 10px 0;
   }
 
   .my-all-comments-mycom span{
-    color:#5c8ab2;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 14px;
+    color: #838e97;
+    display: inline-block;
+    border-left: 4px solid #5c8ab2;
+    padding-left: 8px;
   }
 
   .my-all-comments-title{
