@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="title">
+      <div class="title" @click="goComment">
         <i class=" iconfont icon-liuyan"></i>&nbsp;<span class="text">我的留言</span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
@@ -44,8 +44,25 @@
 
 <script>
   export default {
-    name: "center"
+    name: "center",
+    data() {
+      return {
+
+      }
+    },
+    created() {
+      this.getCenterData();
+    },
+    methods: {
+      getCenterData: function () {
+        let vm = this;
+      },
+      goComment: function () {
+        this.$router.push({ name: 'CenterComment'})
+      },
+    }
   }
+
 </script>
 
 <style scoped>
@@ -117,7 +134,7 @@
   }
 
   .icon-icon {
-    color:#e9c72a
+    color: #e9c72a
   }
 
   .icon-wenzhang2 {

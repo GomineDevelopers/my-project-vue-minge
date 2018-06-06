@@ -41,7 +41,8 @@
             do: "shop",
             m: "ewei_shop",
             ac:"collection",
-            psize:"999"
+            psize:"999",
+            showLoading: true,
           }
         })
           .then(function (response) {
