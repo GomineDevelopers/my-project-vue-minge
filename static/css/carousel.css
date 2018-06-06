@@ -12,7 +12,6 @@
 }
 
 .slider-desc {
-  background-color: rgba(0, 0, 0, .2);
   position: absolute;
   bottom: 0;
   padding: 10px;
@@ -25,10 +24,12 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  background: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,1));
 }
 
 .slider-desc span {
   height: 25px;
   line-height: 25px;
   font-size: 14px;
+  
 }
