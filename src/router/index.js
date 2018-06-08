@@ -19,6 +19,8 @@ import Member from '@/pages/Member'
 import NoMember from '@/pages/NoMember'
 //我的民革
 import Center from '@/pages/Center'
+//我的民革-个人中心
+import CenterHome from '@/pages/CenterHome'
 //我的留言
 import CenterComment from '@/pages/CenterComment'
 
@@ -81,6 +83,12 @@ export default new Router({
       path: '/center/comment',
       name: 'CenterComment',
       component: CenterComment,
+      meta: { requiresAuth: true }
+    },
+    {
+      path: '/center/home',
+      name: 'CenterHome',
+      component: CenterHome,
       meta: { requiresAuth: true }
     },
 

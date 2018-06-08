@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="title">
+      <div class="title" @click="goHome">
         <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
                                                                                        v-show="hasMessage"></span></span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
@@ -43,7 +43,7 @@
         <i class=" iconfont icon-liuyan"></i>&nbsp;<span class="text">我的留言</span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
-      <div v-else class="title" >
+      <div v-else class="title">
         <i class=" iconfont icon-liuyan"></i>&nbsp;<span class="text">我的留言</span>
       </div>
       <div class="content">
@@ -101,7 +101,10 @@
           });
       },
       goComment: function () {
-        this.$router.push({name: 'CenterComment'})
+        this.$router.push({name: 'CenterComment'});
+      },
+      goHome: function () {
+        this.$router.push({name: 'CenterHome'});
       },
     }
   }
@@ -240,7 +243,7 @@
     color: #8395EA;
   }
 
-  .mb{
+  .mb {
     margin-bottom: 3px;
   }
 </style>
