@@ -28,7 +28,7 @@
         </div>
       </scroller>
     </div>
-    <el-button type="primary" round class="bottom-btn">填写提案</el-button>
+    <el-button type="primary" round class="bottom-btn" @click="goProposalEdit">填写提案</el-button>
   </div>
 </template>
 
@@ -132,7 +132,8 @@
           });
         });
       },
-      reWrite: function () {
+      goProposalEdit: function () {
+        this.$router.push({name: 'ProposalEdit'});
       }
     }
 

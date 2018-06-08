@@ -15,7 +15,7 @@
             <el-input type="textarea" :rows="4" v-model="form.ProposalAdvice"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button class="bottom-btn" round type="primary" @click="onSubmit">立即创建</el-button>
+            <el-button class="bottom-btn" round type="primary" @click="onSubmit">提交</el-button>
           </el-form-item>
         </el-form>
    </div>

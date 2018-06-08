@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="title">
+      <div class="title" @click="goProposal">
         <i class=" iconfont icon-wenzhang2"></i>&nbsp;<span class="text">我的提案</span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
@@ -105,6 +105,9 @@
       },
       goHome: function () {
         this.$router.push({name: 'CenterHome'});
+      },
+      goProposal: function () {
+        this.$router.push({name: 'Proposal'});
       },
     }
   }
