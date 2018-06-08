@@ -13,6 +13,8 @@ import NewsDetail from '@/pages/NewsDetail'
 import NewsComment from '@/pages/NewsComment'
 //我的提案
 import Proposal from '@/pages/Proposal'
+//编辑提案
+import proposalEdit from '@/pages/ProposalEdit'
 //党员风采
 import Member from '@/pages/Member'
 //我的民革-不是会员
@@ -31,8 +33,7 @@ import QuickRegister from '@/pages/QuickRegister'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
@@ -68,6 +69,11 @@ export default new Router({
       component: Proposal
     },
     {
+      path: '/proposal/edit',
+      name: 'proposalEdit',
+      component: proposalEdit
+    },
+    {
       path: '/member',
       name: 'Member',
       component: Member
@@ -81,19 +87,25 @@ export default new Router({
       path: '/center',
       name: 'Center',
       component: Center,
-      meta: { requiresAuth: true }
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/center/comment',
       name: 'CenterComment',
       component: CenterComment,
-      meta: { requiresAuth: true }
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/center/home',
       name: 'CenterHome',
       component: CenterHome,
-      meta: { requiresAuth: true }
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/register',
