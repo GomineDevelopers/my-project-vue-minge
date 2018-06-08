@@ -23,6 +23,10 @@ import Center from '@/pages/Center'
 import CenterHome from '@/pages/CenterHome'
 //我的留言
 import CenterComment from '@/pages/CenterComment'
+//注册
+import Register from '@/pages/Register'
+//快速注册
+import QuickRegister from '@/pages/QuickRegister'
 
 Vue.use(Router)
 
@@ -91,6 +95,15 @@ export default new Router({
       component: CenterHome,
       meta: { requiresAuth: true }
     },
-
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+    {
+      path: '/quickRegister',
+      name: 'QuickRegister',
+      component: QuickRegister
+    },
   ]
 })
