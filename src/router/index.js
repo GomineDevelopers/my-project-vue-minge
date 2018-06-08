@@ -14,7 +14,7 @@ import NewsComment from '@/pages/NewsComment'
 //我的提案
 import Proposal from '@/pages/Proposal'
 //编辑提案
-import proposalEdit from '@/pages/ProposalEdit'
+import ProposalEdit from '@/pages/ProposalEdit'
 //党员风采
 import Member from '@/pages/Member'
 //我的民革-不是会员
@@ -70,8 +70,8 @@ export default new Router({
     },
     {
       path: '/proposal/edit',
-      name: 'proposalEdit',
-      component: proposalEdit
+      name: 'ProposalEdit',
+      component: ProposalEdit
     },
     {
       path: '/member',

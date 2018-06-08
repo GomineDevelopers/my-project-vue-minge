@@ -1,6 +1,6 @@
 <template>
   <div class="center_no_bg">
-    <vue-headful title="我的民革--注册"/>
+    <vue-headful title="我的民革"/>
     <div class="register-container">
       <el-row>
         <el-row>
