@@ -73,7 +73,7 @@
 }
 
 /*圆角 输入框*/
-.el-input__inner {
+.my-comment-list .el-input__inner {
   border-radius: 15px;
 }
 
