@@ -96,8 +96,8 @@
   border: 1px dashed #cccccc;
 }
 
-.bg1{
-  background: url(../image/bg1.png);
+.proposal_bg{
+  background: url(../image/proposal_bg.png);
   background-size: 100% 100%;
   position: relative;
 }

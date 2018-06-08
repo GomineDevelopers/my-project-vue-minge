@@ -1,5 +1,5 @@
 <template>
-  <div class="bg1 proposal-cover">
+  <div class="proposal_bg proposal-cover">
     <vue-headful title="我的提案"/>
     <div class="proposal-list">
       <scroller
