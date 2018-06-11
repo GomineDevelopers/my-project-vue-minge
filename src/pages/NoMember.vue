@@ -15,7 +15,7 @@
     name: "no-member",
     methods: {
       goQuickRegister: function () {
-        this.$router.push({name: 'QuickRegister'});
+        this.$router.push({name: 'QuickValidate'});
       },
       goRegister: function () {
         this.$router.push({name: 'Register'});
