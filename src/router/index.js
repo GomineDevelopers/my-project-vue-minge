@@ -124,7 +124,7 @@ export default new Router({
       name: 'QuickValidate',
       component: QuickValidate,
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: false
       }
     },
     {
@@ -132,7 +132,7 @@ export default new Router({
       name: 'Apply',
       component: Apply,
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: false
       }
     },
   ]
