@@ -18,7 +18,7 @@
         this.$router.push({name: 'QuickValidate'});
       },
       goRegister: function () {
-        this.$router.push({name: 'Register'});
+        this.$router.push({name: 'Apply'});
       },
     }
   }
