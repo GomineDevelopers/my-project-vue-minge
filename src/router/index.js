@@ -27,9 +27,10 @@ import CenterHome from '@/pages/CenterHome'
 import CenterComment from '@/pages/CenterComment'
 //注册
 import Register from '@/pages/Register'
-//快速注册
-import QuickRegister from '@/pages/QuickRegister'
-
+//快速验证
+import QuickValidate from '@/pages/QuickValidate'
+//入党申请
+import Apply from '@/pages/Apply'
 Vue.use(Router)
 
 export default new Router({
@@ -82,6 +83,9 @@ export default new Router({
       path: '/noMember',
       name: 'NoMember',
       component: NoMember,
+      meta: {
+        requiresNoAuth: true
+      }
     },
     {
       path: '/center',
@@ -110,12 +114,26 @@ export default new Router({
     {
       path: '/register',
       name: 'Register',
-      component: Register
+      component: Register,
+      meta: {
+        requiresNoAuth: true
+      }
     },
     {
-      path: '/quickRegister',
-      name: 'QuickRegister',
-      component: QuickRegister
+      path: '/quickValidate',
+      name: 'QuickValidate',
+      component: QuickValidate,
+      meta: {
+        requiresNoAuth: true
+      }
+    },
+    {
+      path: '/apply',
+      name: 'Apply',
+      component: Apply,
+      meta: {
+        requiresNoAuth: true
+      }
     },
   ]
 })

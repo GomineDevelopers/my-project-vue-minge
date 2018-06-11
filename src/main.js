@@ -71,19 +71,62 @@ router.beforeEach((to, from, next) => {
       }
     })
       .then(function (response) {
-        if (response.data && response.data.result && response.data.result.is_leather == "1") {
-          next()
-        } else {
+        if (response.data && response.data.result && response.data.result.is_registered == "0") {
+          next({
+            path: '/register',
+            query: {redirect: to.fullPath}
+          })
+        } else if (response.data && response.data.result && response.data.result.is_leather == "0") {
           next({
             path: '/noMember',
             query: {redirect: to.fullPath}
           })
         }
+        else {
+          next()
+        }
       })
       .catch(function (error) {
         console.log(error);
       });
-  } else {
+  }
+  else if (to.matched.some(record => record.meta.requiresNoAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    axios(commonTools.g_restUrl, {
+      params: {
+        i: "8",
+        c: "entry",
+        p: "user",
+        do: "shop",
+        m: "ewei_shop",
+        ac: "is_leather"
+      }
+    })
+      .then(function (response) {
+        if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "1") {
+          next({
+            name: 'Center',
+          })
+        } else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" && to.name !="NoMember" ) {
+          next({
+            name: 'NoMember',
+          })
+        }
+        else if (response.data && response.data.result && response.data.result.is_registered == "0"   && to.name !="Register" ) {
+          next({
+            name: 'Register',
+          })
+        }
+        else {
+          next()
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  else  {
     next() // 确保一定要调用 next()
   }
 })
