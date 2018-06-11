@@ -290,7 +290,10 @@ export default {
           })
           .then(function(response) {
             if (response.status == '200') {
-              vm.$router.replace({ name: 'Proposal' })
+              vm.$router.replace({
+                name: 'NewsComment',
+                params: { id: vm.$route.params.id, typeId: 1 }
+              })
             }
           })
           .catch(function(error) {
