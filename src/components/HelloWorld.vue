@@ -64,6 +64,7 @@
         </el-row>
       </el-row>
     </div>
+    <v-distpicker></v-distpicker>
   </div>
 </template>
 

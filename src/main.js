@@ -4,6 +4,7 @@ import Vue from 'vue';
 import Element from 'element-ui';
 import vueHeadful from 'vue-headful';
 import VueScroller from 'vue-scroller';
+import VDistpicker from 'v-distpicker';
 import {commonTools} from '../static/js/common';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -18,6 +19,7 @@ import '../static/css/iconfont.css'
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
+Vue.component('v-distpicker', VDistpicker)
 Vue.prototype.$commonTools = commonTools;
 Vue.use(VueScroller);
 Vue.use(Element, {size: 'small'});
