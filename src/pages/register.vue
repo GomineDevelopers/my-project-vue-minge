@@ -163,11 +163,11 @@
               do: "shop",
               m: "ewei_shop",
               ac: "update_member",
-              data:postData
+              data: postData
             }
           })
             .then(function (response) {
-              /*vm.$router.push({ name: 'Proposal' });*/
+              vm.$router.push({name: 'NoMember'});
             })
             .catch(function (error) {
               console.log(error);
