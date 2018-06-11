@@ -20,7 +20,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="registerName" size="medium" clearable></el-input>
+            <el-input v-model="registerName" size="medium" clearable maxlength="15"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -29,7 +29,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="registerPhone" size="medium" clearable></el-input>
+            <el-input v-model="registerPhone" size="medium" clearable maxlength="11"></el-input>
           </el-col>
         </el-row>
         <div v-show="type == 0">
@@ -39,7 +39,7 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-input v-model="registerEmail" size="medium" clearable></el-input>
+              <el-input v-model="registerEmail" size="medium" clearable maxlength="25"></el-input>
             </el-col>
           </el-row>
         </div>
@@ -48,7 +48,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="registerCompany" size="medium" clearable></el-input>
+            <el-input v-model="registerCompany" size="medium" clearable maxlength="30"></el-input>
           </el-col>
         </el-row>
         <div v-show="type == 0">
@@ -167,8 +167,7 @@
             }
           })
             .then(function (response) {
-              console.info(response)
-
+              /*vm.$router.push({ name: 'Proposal' });*/
             })
             .catch(function (error) {
               console.log(error);
