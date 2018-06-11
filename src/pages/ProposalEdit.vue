@@ -49,6 +49,7 @@
           <el-col>
             <el-button class="bottom-btn" round type="primary" @click="postProposal(1)">提交</el-button>
           </el-col>
+          <p>{{form.proposalId}}</p>
         </el-row>
         
         
@@ -91,19 +92,48 @@
 <script>
 export default {
   name: 'proposal-edit',
+  props: {},
   data() {
     return {
       form: {
         ProposalName: '',
         ProposalBackground: '',
         ProposalQuestion: '',
-        ProposalAdvice: ''
+        ProposalAdvice: '',
+        proposalId: ''
       }
     }
   },
+  mounted: function() {
+    this.editProposal()
+  },
   methods: {
-    onSubmit() {
-      console.log('submit!')
+    editProposal() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'proposal',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'one_proposal',
+            id: vm.$route.params.proposalId
+          }
+        })
+        .then(function(response) {
+          if (response.status == '200') {
+            vm.form.ProposalName = response.data.result.data.title
+            vm.form.ProposalBackground = response.data.result.data.back
+            vm.form.ProposalQuestion = response.data.result.data.suggest
+            vm.form.ProposalAdvice = response.data.result.data.content
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     },
     postProposal(typeId) {
       let vm = this
