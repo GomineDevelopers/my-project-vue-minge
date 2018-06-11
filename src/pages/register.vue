@@ -59,7 +59,7 @@
           <el-row>
             <el-col :span="24">
               <el-date-picker v-model="registerBirthday" type="date" size="large" placeholder="请选择"
-                              class="register-select"></el-date-picker>
+                              class="register-select" :picker-options="pickerOptions1"></el-date-picker>
             </el-col>
           </el-row>
         </div>
@@ -90,6 +90,9 @@
           {value: '台湾民主自治同盟', label: '台湾民主自治同盟'},
           {value: '无党派人士', label: '无党派人士'}
         ],
+        pickerOptions1: {
+          disabledDate(time) {return time.getTime() > Date.now();}
+        },
         type: 1,
         selected: '',
         registerName: '',
