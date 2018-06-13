@@ -116,7 +116,7 @@ export default new Router({
       name: 'Register',
       component: Register,
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: false
       }
     },
     {
