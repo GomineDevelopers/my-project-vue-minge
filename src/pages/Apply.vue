@@ -201,8 +201,6 @@ export default {
           key: Date.now()
         })
       }
-
-      console.log(this.dynamicValidateForm.domains)
     },
     validator: function() {
       let vm = this
