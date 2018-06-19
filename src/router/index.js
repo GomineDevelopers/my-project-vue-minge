@@ -25,6 +25,14 @@ import Center from '@/pages/Center'
 import CenterHome from '@/pages/CenterHome'
 //我的留言
 import CenterComment from '@/pages/CenterComment'
+//我的作品
+import CenterWorks from '@/pages/CenterWorks'
+//我的感想
+import CenterFeedback from '@/pages/CenterFeedback'
+//我的图片
+import CenterPicture from '@/pages/CenterPicture'
+//我的视频
+import CenterVideo from '@/pages/CenterVideo'
 //注册
 import Register from '@/pages/Register'
 //快速验证
@@ -108,7 +116,39 @@ export default new Router({
       name: 'CenterHome',
       component: CenterHome,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/works',
+      name: 'CenterWorks',
+      component: CenterWorks,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/feedback',
+      name: 'CenterFeedback',
+      component: CenterFeedback,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/picture',
+      name: 'CenterPicture',
+      component: CenterPicture,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/video',
+      name: 'CenterVideo',
+      component: CenterVideo,
+      meta: {
+        requiresAuth: false
       }
     },
     {

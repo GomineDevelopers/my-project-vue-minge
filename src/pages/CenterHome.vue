@@ -39,24 +39,32 @@
       </el-col>
     </el-row>
     <el-row class="mt-5">
-      <el-col :span="9" :offset="2" class="document-cover d1">
-        <i class="iconfont icon-zuopinji note"/>
-        <span class="text"><i class="iconfont icon-yuandian dot"/> 作品</span>
-      </el-col>
-      <el-col :span="9" :offset="1" class="document-cover d2">
-        <i class="iconfont icon-tupian note"/>
-        <span class="text"><i class="iconfont icon-yuandian dot"/> 图片</span>
-      </el-col>
+      <div @click="goWorks">
+        <el-col :span="9" :offset="2" class="document-cover d1">
+          <i class="iconfont icon-zuopinji note"/>
+          <span class="text"><i class="iconfont icon-yuandian dot"/> 作品</span>
+        </el-col>
+      </div>
+      <div @click="goPicture">
+        <el-col :span="9" :offset="1" class="document-cover d2">
+          <i class="iconfont icon-tupian note"/>
+          <span class="text"><i class="iconfont icon-yuandian dot"/> 图片</span>
+        </el-col>
+      </div>
     </el-row>
     <el-row class="mt-1-5">
-      <el-col :span="9" :offset="2" class="document-cover d3">
-        <i class="iconfont icon-shipin-tianchong note"/>
-        <span class="text"><i class="iconfont icon-yuandian dot"/> 视频</span>
-      </el-col>
-      <el-col :span="9" :offset="1" class="document-cover d4">
-        <i class="iconfont icon-jilu note"/>
-        <span class="text"><i class="iconfont icon-yuandian dot"/> 感想</span>
-      </el-col>
+      <div @click="goVideo">
+        <el-col :span="9" :offset="2" class="document-cover d3">
+          <i class="iconfont icon-shipin-tianchong note"/>
+          <span class="text"><i class="iconfont icon-yuandian dot"/> 视频</span>
+        </el-col>
+      </div>
+      <div @click="goFeedback">
+        <el-col :span="9" :offset="1" class="document-cover d4">
+          <i class="iconfont icon-jilu note"/>
+          <span class="text"><i class="iconfont icon-yuandian dot"/> 感想</span>
+        </el-col>
+      </div>
     </el-row>
     <el-row class="mt-8">
       <el-col :span="12" :offset="6">
@@ -108,6 +116,18 @@
       },
       goHome: function () {
         this.$router.push({name: 'CenterHome'});
+      },
+      goWorks: function () {
+        this.$router.push({name: 'CenterWorks'});
+      },
+      goFeedback: function () {
+        this.$router.push({name: 'CenterFeedback'});
+      },
+      goPicture: function () {
+        this.$router.push({name: 'CenterPicture'});
+      },
+      goVideo: function () {
+        this.$router.push({name: 'CenterVideo'});
       },
     }
   }
