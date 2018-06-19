@@ -39,6 +39,9 @@ import Register from '@/pages/Register'
 import QuickValidate from '@/pages/QuickValidate'
 //入党申请
 import Apply from '@/pages/Apply'
+//入党申请的审核
+import CheckApply from '@/pages/CheckApply'
+
 Vue.use(Router)
 
 export default new Router({
@@ -147,6 +150,14 @@ export default new Router({
       path: '/center/video',
       name: 'CenterVideo',
       component: CenterVideo,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/checkApply',
+      name: 'CheckApply',
+      component: CheckApply,
       meta: {
         requiresAuth: false
       }

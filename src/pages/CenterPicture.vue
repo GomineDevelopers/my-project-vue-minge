@@ -1,6 +1,14 @@
 <template>
   <div class="center_home_bg ">
-    <div class="title">我的图片</div>
+    <div class="center-title">我的图片</div>
+    <div class="pictureList center-list">
+
+    </div>
+    <div class="center-footer">
+      <div class="center-add-btn"></div>
+      <div class="center-add-btn-row"></div>
+      <div class="center-add-btn-col"></div>
+    </div>
   </div>
 </template>
 
@@ -11,10 +19,5 @@
 </script>
 
 <style scoped>
-  .title {
-    height: 10vh;
-    line-height: 10vh;
-    color: white;
-    font-size: 2.5vh;
-  }
+
 </style>
