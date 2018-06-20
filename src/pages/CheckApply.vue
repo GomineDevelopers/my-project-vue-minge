@@ -80,9 +80,9 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="24"><div class="application_content" v-text="application.application"></div></el-col>
+        <el-col :span="24"><div class="application_content" v-html="application.application"></div></el-col>
       </el-row>
-      <el-row class="newApplication_button">
+      <el-row class="application_button">
         <el-col :span="24">
           <el-button type="primary" size="medium" @click="changeDiv(1)">返回</el-button>
         </el-col>
@@ -116,7 +116,7 @@
               do: "shop",
               m: "ewei_shop",
               ac: "list_party",
-              id: 2
+              id: 9
             }
           })
             .then(function (response) {
@@ -137,7 +137,7 @@
               do: "shop",
               m: "ewei_shop",
               ac: "list_party",
-              id: 2,
+              id: 9,
               status:temp
             }
           })
@@ -167,6 +167,9 @@
     text-align: left;
     height: 5vh;
     line-height: 5vh;
+    overflow:hidden;
+    white-space : nowrap;
+    text-overflow:ellipsis;
   }
 
   .spanColor{
@@ -181,6 +184,7 @@
     height:18vh;
     overflow-x: hidden;
     overflow-y: auto;
+    word-wrap: break-word;
   }
 
   .newApplication_detail_exp span{
@@ -265,5 +269,13 @@
     height: 66vh;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  .application_button{
+    position: fixed;
+    bottom: 14vh;
+    margin: 0 auto;
+    left:0;
+    right:0;
   }
 </style>

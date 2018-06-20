@@ -243,12 +243,11 @@ export default {
 
 
       postData.realname = vm.registerName
-      postData.birth = vm.registerBirthday
       postData.sex = vm.genderValue
+      postData.birth = vm.registerBirthday
       postData.ethnicgroup = vm.ethnicGroup
       postData.origin = vm.distmix
-      postData.education = vm.distmix
-      postData.origin = vm.degreeValue
+      postData.education = vm.degreeValue
       postData.experience = vm.experiences
       postData.application = vm.applycation
 
@@ -266,7 +265,9 @@ export default {
             data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
-            //vm.$router.push({ name: 'NoMember' })
+            if(response.status == 200){
+              //vm.$router.push({ name: 'NoMember' })
+            }
           })
           .catch(function(error) {
             console.log(error)
