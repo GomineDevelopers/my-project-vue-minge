@@ -101,7 +101,7 @@
           application:Object
         }
       },
-      mounted:function () {
+      created:function () {
         this.getPartyApplication();
       },
       methods:{
