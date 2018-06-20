@@ -195,8 +195,7 @@ export default {
     },
     getCommentData(done) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -231,8 +230,7 @@ export default {
     },
     getReplyData(done) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -267,6 +265,10 @@ export default {
     },
     addComment() {
       let vm = this
+      let postData = {};
+      postData.id = vm.$route.params.id;
+      postData.content = vm.comment;
+
       if (!vm.comment) {
         vm.$message({
           message: '请填写留言内容!',
@@ -274,8 +276,7 @@ export default {
           showClose: true
         })
       } else {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -283,10 +284,9 @@ export default {
               p: 'common',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'add',
-              id: vm.$route.params.id,
-              content: vm.comment
-            }
+              ac: 'add'
+            },
+            data:vm.$qs.stringify(postData)
           })
           .then(function(response) {
             if (response.status == '200') {
@@ -302,7 +302,11 @@ export default {
       }
     },
     addReply() {
-      let vm = this
+      let vm = this;
+      let postData = {};
+      postData.pid = vm.$route.params.id;
+      postData.content = vm.commentReply;
+      postData.id = vm.$route.query.aId;
       if (!vm.commentReply) {
         vm.$message({
           message: '请填写回复内容!',
@@ -310,8 +314,7 @@ export default {
           showClose: true
         })
       } else {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -319,11 +322,9 @@ export default {
               p: 'common',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'add',
-              pid: vm.$route.params.id,
-              content: vm.commentReply,
-              id: vm.$route.query.aId
-            }
+              ac: 'add'
+            },
+            data:vm.$qs.stringify(postData)
           })
           .then(function(response) {
             if (response.status == '200') {
@@ -362,9 +363,7 @@ export default {
     },
     collect: function(commentId) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',

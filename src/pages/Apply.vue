@@ -67,17 +67,17 @@
           <el-col :span="24">
             <el-form :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic">
               <el-form-item size="medium">
-              <el-input type="textarea" v-model="experience" autosize></el-input><i class="el-icon-plus" @click="addDomain"></i>
+              <el-input type="textarea" v-model="experience" autosize class="input_border"></el-input><i class="el-icon-plus" @click="addDomain"></i>
                <div class="form-items"
                v-for="(domain, index) in dynamicValidateForm.domains"
                 :key="domain.key"
                 :prop="'domains.' + index + '.value'"
-                :rules="{
-                        required: true, message: '工作经历不能为空', trigger: 'blur'
-                      }"
-                ><el-input type="textarea"  autosize  v-model="domain.value"></el-input><i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i></div>
+                :rules="{required: true, message: '工作经历不能为空', trigger: 'blur'}"
+                >
+                 <el-input type="textarea"  autosize  v-model="domain.value" class="input_border"></el-input>
+                 <i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i>
+               </div>
               </el-form-item>
-
             </el-form>
           </el-col>
         </el-row>
@@ -86,7 +86,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input
+            <el-input class="input_border"
               type="textarea"
               v-model="applycation"
               :rows="4"
@@ -361,7 +361,7 @@ export default {
 .distCommit {
   background-color: white;
 }
-.el-textarea__inner {
+.input_border .el-textarea__inner {
   border: none;
 }
 .address-container {

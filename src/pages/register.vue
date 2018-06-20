@@ -158,8 +158,7 @@ export default {
         postData.birth = vm.registerBirthday
       }
       if (vm.validator()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -167,9 +166,9 @@ export default {
               p: 'user',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'update_member',
-              data: postData
-            }
+              ac: 'update_member'
+            },
+            data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
             vm.$router.push({ name: 'NoMember' })

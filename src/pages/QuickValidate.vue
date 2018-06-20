@@ -66,9 +66,9 @@
               p: "user",
               do: "shop",
               m: "ewei_shop",
-              ac: "add_verification",
-              data: postData
-            }
+              ac: "add_verification"
+            },
+            data: vm.$qs.stringify(postData)
           })
             .then(function (response) {
               console.info(response);

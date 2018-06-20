@@ -2,7 +2,6 @@
   <div class="proposal_bg">
     <vue-headful title="提案编辑"/>
     <div class="register-container">
-      
       <el-row>
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>提案名</span>
@@ -42,7 +41,7 @@
         </el-row>
         <el-row class="register-btn">
           <el-col>
-            <el-button type="primary " plain round class="my-btn "  @click="postProposal(0)">保存</el-button>
+            <el-button type="primary" plain round class="my-btn" @click="postProposal(0)">保存</el-button>
           </el-col>
         </el-row>
         <el-row class="register-btn">
@@ -51,42 +50,8 @@
           </el-col>
           <p>{{form.proposalId}}</p>
         </el-row>
-        
-        
       </el-row>
     </div>
-
-
-    <!-- <div class="Proposal-wrapper">
-      <el-row>
-        <el-row>
-          <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>手机号码</span>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-input v-model="inputContent" size="medium" clearable></el-input>
-          </el-col>
-        </el-row>
-        <el-form ref="form" :model="form" >
-          <el-form-item label="提案名称">
-            <el-input v-model="form.ProposalName"></el-input>
-          </el-form-item>
-          <el-form-item label="提案背景">
-            <el-input v-model="form.ProposalBackground"></el-input>
-          </el-form-item>
-          <el-form-item label="问题">
-            <el-input type="textarea" :rows="4" v-model="form.ProposalQuestion"></el-input>
-          </el-form-item>
-          <el-form-item label="建议">
-            <el-input type="textarea" :rows="4" v-model="form.ProposalAdvice"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" round class="my-btn"  @click="goQuickRegister">保存</el-button>
-            <el-button class="bottom-btn" round type="primary" @click="postProposal">提交</el-button>
-          </el-form-item>
-        </el-form>
-   </div> -->
   </div>
 </template>
 <script>
@@ -142,10 +107,10 @@ export default {
       postData.back = vm.form.ProposalBackground
       postData.suggest = vm.form.ProposalQuestion
       postData.content = vm.form.ProposalAdvice
-      postData.status = typeId
+      postData.status = typeId;
+      postData.id = vm.$route.params.proposalId;
       if (vm.proposalValidate()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -153,9 +118,9 @@ export default {
               p: 'user',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'add_proposal',
-              data: postData
-            }
+              ac: 'add_proposal'
+            },
+            data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
             if (response.status == '200') {

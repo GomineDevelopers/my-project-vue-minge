@@ -166,7 +166,6 @@
       collect: function (commentId) {
         let vm = this;
         vm.axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
           params: {
             i: "8",
             c: "entry",
