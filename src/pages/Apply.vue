@@ -1,10 +1,10 @@
 <template>
   <div class="quick_validate_bg"  >
     <vue-headful title="我的民革"/>
-   <div class="blanks" v-if="isArea" @click="hide" @touchmove.prevent ></div>  
+   <div class="blanks" v-if="isArea" @click="hide" @touchmove.prevent ></div>
     <div class="dist-select" v-show="isArea"  >
       <v-distpicker type="mobile"  @selected="onSelected"></v-distpicker>
-    </div> 
+    </div>
     <div class="register-container">
       <el-row>
         <el-row>
@@ -47,7 +47,7 @@
            <el-input v-model="distmix" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
           </el-col>
         </el-row>
-        
+
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>学历</span></el-col>
         </el-row>
@@ -57,9 +57,9 @@
               <el-option v-for="item in degreeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-col>
-          
+
         </el-row>
-        
+
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>工作经历</span></el-col>
         </el-row>
@@ -68,16 +68,16 @@
             <el-form :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic">
               <el-form-item size="medium">
               <el-input type="textarea" v-model="experience" autosize></el-input><i class="el-icon-plus" @click="addDomain"></i>
-               <div class="form-items" 
+               <div class="form-items"
                v-for="(domain, index) in dynamicValidateForm.domains"
                 :key="domain.key"
                 :prop="'domains.' + index + '.value'"
                 :rules="{
                         required: true, message: '工作经历不能为空', trigger: 'blur'
                       }"
-                ><el-input type="textarea"  autosize  v-model="domain.value"></el-input><i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i></div>  
+                ><el-input type="textarea"  autosize  v-model="domain.value"></el-input><i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i></div>
               </el-form-item>
-              
+
             </el-form>
           </el-col>
         </el-row>
@@ -182,7 +182,7 @@ export default {
       }
     },
     addDomain() {
-      let hasEmpty = false
+      let hasEmpty = false;
       this.dynamicValidateForm.domains.forEach(function(item, index) {
         if (!item.value) {
           hasEmpty = true
@@ -201,6 +201,8 @@ export default {
           key: Date.now()
         })
       }
+
+
     },
     validator: function() {
       let vm = this
@@ -239,6 +241,7 @@ export default {
         vm.experiences.push(item.value)
       })
 
+
       postData.realname = vm.registerName
       postData.birth = vm.registerBirthday
       postData.sex = vm.genderValue
@@ -248,10 +251,9 @@ export default {
       postData.origin = vm.degreeValue
       postData.experience = vm.experiences
       postData.application = vm.applycation
-      console.info(postData)
+
       if (vm.validator()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -260,8 +262,8 @@ export default {
               do: 'shop',
               m: 'ewei_shop',
               ac: 'add_party',
-              data: postData
-            }
+            },
+            data: postData
           })
           .then(function(response) {
             //vm.$router.push({ name: 'NoMember' })
