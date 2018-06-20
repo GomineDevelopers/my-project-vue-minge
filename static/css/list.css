@@ -166,7 +166,7 @@
   overflow-x: hidden;
   overflow-y:auto;
   -webkit-overflow-scrolling : touch;
-  padding-top: 3vh;
+  margin-top: 3vh;
   height: 77vh;
 }
 

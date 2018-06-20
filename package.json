@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.3.9",
+    "img-vuer": "^0.11.0",
     "v-distpicker": "^1.0.17",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.1",

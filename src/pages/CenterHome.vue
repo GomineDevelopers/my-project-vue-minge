@@ -25,7 +25,7 @@
       </el-col>
     </el-row>
     <el-row class="mt-1-5">
-      <el-col :span="20" :offset="2" class="message-cover">
+      <el-col :span="20" :offset="2" class="message-cover" >
         <span class="dot"></span><span class="message">新的读书邀请</span>
         <span class="number" v-show="inviteNum>0 && inviteNum<10"> {{inviteNum}}</span>
         <span class="number more-number" v-show=" inviteNum>10"> ...</span>

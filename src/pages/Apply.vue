@@ -263,7 +263,7 @@ export default {
               m: 'ewei_shop',
               ac: 'add_party',
             },
-            data: postData
+            data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
             //vm.$router.push({ name: 'NoMember' })

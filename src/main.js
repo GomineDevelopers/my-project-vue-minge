@@ -7,7 +7,9 @@ import VueScroller from 'vue-scroller';
 import VDistpicker from 'v-distpicker';
 import {commonTools} from '../static/js/common';
 import axios from 'axios';
+import qs from 'qs';
 import VueAxios from 'vue-axios';
+import gallery from 'img-vuer';
 import App from './App'
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -19,15 +21,18 @@ import '../static/css/iconfont.css'
 
 Vue.config.productionTip = false
 Vue.component('vue-headful', vueHeadful);
-Vue.component('v-distpicker', VDistpicker)
+Vue.component('v-distpicker', VDistpicker);
 Vue.prototype.$commonTools = commonTools;
+Vue.prototype.$qs = qs;
 Vue.use(VueScroller);
+Vue.use(gallery);
 Vue.use(Element, {size: 'small'});
+
 
 // 超时时间
 axios.defaults.timeout = 5000;
 // http请求拦截器
-var loadinginstace
+var loadinginstace;
 axios.interceptors.request.use(config => {
   // element ui Loading方法
   if (config.params.showLoading) {
@@ -56,6 +61,7 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
   })
   return Promise.reject(error)
 })
+
 Vue.use(VueAxios, axios);
 
 router.beforeEach((to, from, next) => {
