@@ -47,6 +47,8 @@ import CheckApply from '@/pages/CheckApply'
 import CheckRead from '@/pages/CheckRead'
 //提案的审核
 import CheckProposal from '@/pages/CheckProposal'
+//个人中心未处理列表
+import CenterUnreadList from '@/pages/CenterUnreadList'
 
 Vue.use(Router)
 
@@ -190,6 +192,14 @@ export default new Router({
       component: CheckProposal,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/center/centerUnreadList/:type',
+      name: 'CenterUnreadList',
+      component: CenterUnreadList,
+      meta: {
+        requiresNoAuth: false
       }
     },
     {

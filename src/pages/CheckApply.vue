@@ -115,7 +115,7 @@
               do: "shop",
               m: "ewei_shop",
               ac: "list_party",
-              id: 9
+              id: vm.$route.params.id
             }
           })
             .then(function (response) {
@@ -135,7 +135,7 @@
               do: "shop",
               m: "ewei_shop",
               ac: "list_party",
-              id: 9,
+              id: vm.$route.params.id,
               status:temp
             }
           })

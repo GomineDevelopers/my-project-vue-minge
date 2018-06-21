@@ -5,25 +5,25 @@
         <el-row class="proposal-card">
           <el-col :span="24" class="proposal-title">提案名称</el-col>
           <el-col :span="24" class="proposal-content" v-text="proposalTitle">
-              
+
           </el-col>
         </el-row>
         <el-row class="proposal-card">
           <el-col :span="24" class="proposal-title" >提案背景</el-col>
           <el-col :span="24" class="proposal-content" v-text="proposalBackground">
-              
+
           </el-col>
         </el-row>
         <el-row class="proposal-card">
           <el-col :span="24" class="proposal-title">问题</el-col>
           <el-col :span="24" class="proposal-content" v-text="proposalContent">
-              
+
           </el-col>
         </el-row>
         <el-row class="proposal-card">
           <el-col :span="24" class="proposal-title">建议</el-col>
           <el-col :span="24" class="proposal-content" v-text="proposalSuggests">
-              
+
           </el-col>
         </el-row>
         <el-row>
@@ -34,7 +34,7 @@
         </el-row>
        </el-col>
      </el-row>
-     
+
  </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
           do: 'shop',
           m: 'ewei_shop',
           ac: 'one_proposal',
-          id: 53
+          id: vm.$route.params.id
         }
       })
         .then(function(response) {
@@ -71,7 +71,6 @@ export default {
           vm.proposalContent = response.data.result.data.suggest
           vm.proposalBackground = response.data.result.data.back
           vm.proposalSuggests = response.data.result.data.content
-          console.log(response)
         })
         .catch(function(error) {
           console.log(error)
@@ -94,7 +93,7 @@ export default {
   font-size: 18px;
   font-weight: bold;
   color: #357baa;
-  margin-bottom: 0.2vh;
+  margin-bottom: 1.5vh;
 }
 .proposal-card .proposal-content {
   font-size: 14px;

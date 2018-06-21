@@ -7,31 +7,37 @@
       </el-col>
     </el-row>
     <el-row class="mt-5">
-      <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
-        <span class="dot"></span><span class="message">新的入党申请</span>
-        <span class="number" v-show="partyNum>0 && partyNum<10"> {{partyNum}}</span>
-        <span class="number more-number" v-show=" partyNum>10"> ...</span>
-        <i class="iconfont icon-dang"/>
-        <span class="c1"></span>
-      </el-col>
+      <div @click="goUnreadList(1)">
+        <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
+          <span class="dot"></span><span class="message">新的入党申请</span>
+          <span class="number" v-show="partyNum>0 && partyNum<10"> {{partyNum}}</span>
+          <span class="number more-number" v-show=" partyNum>10"> ...</span>
+          <i class="iconfont icon-dang"/>
+          <span class="c1"></span>
+        </el-col>
+      </div>
     </el-row>
     <el-row class="mt-1-5">
-      <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
-        <span class="dot"></span><span class="message">新的提案</span>
-        <span class="number" v-show="proposalNum>0 && proposalNum<10"> {{proposalNum}}</span>
-        <span class="number more-number" v-show=" proposalNum>10"> ...</span>
-        <i class="iconfont icon-tianguanli"/>
-        <span class="c1"></span>
-      </el-col>
+      <div @click="goUnreadList(2)">
+        <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
+          <span class="dot"></span><span class="message">新的提案</span>
+          <span class="number" v-show="proposalNum>0 && proposalNum<10"> {{proposalNum}}</span>
+          <span class="number more-number" v-show=" proposalNum>10"> ...</span>
+          <i class="iconfont icon-tianguanli"/>
+          <span class="c1"></span>
+        </el-col>
+      </div>
     </el-row>
     <el-row class="mt-1-5">
-      <el-col :span="20" :offset="2" class="message-cover" >
-        <span class="dot"></span><span class="message">新的读书邀请</span>
-        <span class="number" v-show="inviteNum>0 && inviteNum<10"> {{inviteNum}}</span>
-        <span class="number more-number" v-show=" inviteNum>10"> ...</span>
-        <i class="iconfont icon-dushu"/>
-        <span class="c1"></span>
-      </el-col>
+      <div @click="goUnreadList(3)">
+        <el-col :span="20" :offset="2" class="message-cover" >
+          <span class="dot"></span><span class="message">新的读书邀请</span>
+          <span class="number" v-show="inviteNum>0 && inviteNum<10"> {{inviteNum}}</span>
+          <span class="number more-number" v-show=" inviteNum>10"> ...</span>
+          <i class="iconfont icon-dushu"/>
+          <span class="c1"></span>
+        </el-col>
+      </div>
     </el-row>
     <el-row class="mt-1-5">
       <el-col :span="20" :offset="2" class="title-cover">
@@ -130,6 +136,9 @@
       goVideo: function () {
         this.$router.push({name: 'CenterVideo'});
       },
+      goUnreadList:function (temp) {
+        this.$router.push({name: 'CenterUnreadList',params: { type: temp }});
+      }
     }
   }
 </script>
