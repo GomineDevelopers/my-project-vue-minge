@@ -41,6 +41,10 @@ import QuickValidate from '@/pages/QuickValidate'
 import Apply from '@/pages/Apply'
 //入党申请的审核
 import CheckApply from '@/pages/CheckApply'
+//读书邀请的审核
+import CheckRead from '@/pages/CheckRead'
+//提案的审核
+import CheckProposal from '@/pages/CheckProposal'
 
 Vue.use(Router)
 
@@ -158,6 +162,22 @@ export default new Router({
       path: '/center/checkApply',
       name: 'CheckApply',
       component: CheckApply,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/checkRead',
+      name: 'CheckRead',
+      component: CheckRead,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/checkProposal',
+      name: 'CheckProposal',
+      component: CheckProposal,
       meta: {
         requiresAuth: false
       }
