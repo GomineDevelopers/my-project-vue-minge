@@ -2,7 +2,7 @@
   <div class="center_home_bg ">
     <div class="center-title">我的感想</div>
     <div class="feedbackList center-list">
-      <div class="feedback-cover" v-for="(item,index) in feedbackList">
+      <div class="video-cover" v-for="(item,index) in feedbackList">
         <div class="title">{{item.title}}</div>
         <div class="middle">
           {{item.content}}
@@ -57,14 +57,14 @@
 </script>
 
 <style scoped>
-  .feedback-cover {
-    height: 14vh;
+  .video-cover {
+    height: 15vh;
     border-radius: 5px;
     background: #ffffff;
     margin-bottom: 1vh;
   }
 
-  .feedback-cover .title {
+  .video-cover .title {
     height: 6vh;
     line-height: 6vh;
     color: #2f81b9;
@@ -76,9 +76,9 @@
     white-space: nowrap;
   }
 
-  .feedback-cover .middle {
-    height: 4vh;
-    line-height: 4vh;
+  .video-cover .middle {
+    height: 5vh;
+    line-height: 5vh;
     padding: 0 10px;
     color: #628ba8;
     font-size: 14px;
@@ -88,7 +88,7 @@
     white-space: nowrap;
   }
 
-  .feedback-cover .bt {
+  .video-cover .bt {
     height: 4vh;
     line-height: 4vh;
     color: #a2aab1;
