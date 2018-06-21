@@ -14,13 +14,20 @@
       <el-row v-for="item in unreadList" :key="item.id">
         <el-col :span="24">
           <div class="Un_card" :class="[item.status == 1 ? 'status-success' : 'status-wait' ]" @click="goDetail(item.id)">
-            <el-row class="Un_card_list">
+            <!--<el-row >
               <el-col :span="1"><span>●</span></el-col>
               <el-col :span="14"><div v-text="item.title" class="title"></div></el-col>
               <el-col :span="9" v-if="type == 1" class="Un_card_div">的入党申请</el-col>
               <el-col :span="9" v-else-if="type == 2" class="Un_card_div">的提案</el-col>
               <el-col :span="9" v-else="type == 3" class="Un_card_div">的读书邀请</el-col>
-            </el-row>
+            </el-row>-->
+            <div class="Un_card_list">
+              <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
+              <div v-text="item.title" class="title"></div>
+              <div v-if="type == 1" class="Un_card_div">的入党申请</div>
+              <div v-else-if="type == 2" class="Un_card_div">的提案</div>
+              <div v-else="type == 3" class="Un_card_div">的读书邀请</div>
+            </div>
             <div class="c1"></div>
             <div class="c2"></div>
             <div class="c3" v-if="item.status == 0">未处理</div>
@@ -142,10 +149,14 @@
   }
 
   .Un_card_list{
-    margin : 0 6vw 0 4vw
+    width: 100%;
+    margin : 0 6vw 0 4vw;
+    display: inline-flex;
   }
 
   .Un_card .title{
+    display: inline-block;
+    max-width: 52%;
     height: 7.5vh;
     line-height: 7.5vh;
     color:#56b0f0;
@@ -155,11 +166,18 @@
   }
 
   .Un_card_div{
+
+    width: 37.5%;
     height: 7.5vh;
     line-height: 7.5vh;
   }
 
-  .Un_card span{
+  .circle{
+    display: inline-flex;
+  }
+
+  .circle span{
+    width:4.1%;
     height: 7.5vh;
     line-height: 7.5vh;
     color:#56b0f0;
