@@ -28,8 +28,8 @@
         </el-row>
         <el-row>
           <el-col :span="24" class="proposal-button-wrap">
-              <el-button type="primary" size="medium">通过</el-button>
-              <el-button class="color-button" type="" plain size="medium">拒绝</el-button>
+              <el-button type="primary" size="medium" @click="changeStatus(1)">通过</el-button>
+              <el-button class="color-button" type="" plain size="medium"  @click="changeStatus(2)">拒绝</el-button>
           </el-col>
         </el-row>
        </el-col>
@@ -74,6 +74,28 @@ export default {
         })
         .catch(function(error) {
           console.log(error)
+        })
+    },
+    changeStatus(temp) {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'proposal',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'check_proposal',
+            id: vm.$route.params.id,
+            status: temp
+          }
+        })
+        .then(function(response) {
+          console.info(response)
+        })
+        .catch(function(error) {
+          console.info(error)
         })
     }
   }
