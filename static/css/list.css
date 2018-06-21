@@ -221,3 +221,6 @@
 .el-message-box{
   width: 80% !important;
 }
+.videoList .el-button--mini{
+  padding: 2px 4px;
+}
