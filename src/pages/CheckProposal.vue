@@ -68,9 +68,9 @@ export default {
       })
         .then(function(response) {
           vm.proposalTitle = response.data.result.data.title
-          vm.proposalContent = response.data.result.data.content
+          vm.proposalContent = response.data.result.data.suggest
           vm.proposalBackground = response.data.result.data.back
-          vm.proposalSuggests = response.data.result.data.suggest
+          vm.proposalSuggests = response.data.result.data.content
           console.log(response)
         })
         .catch(function(error) {
