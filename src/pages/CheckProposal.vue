@@ -1,13 +1,110 @@
 <template>
-
+ <div class="proposal_bg">
+     <el-row class="check-proposal-wrap">
+       <el-col :span="24">
+        <el-row class="proposal-card">
+          <el-col :span="24" class="proposal-title">提案名称</el-col>
+          <el-col :span="24" class="proposal-content" v-text="proposalTitle">
+              
+          </el-col>
+        </el-row>
+        <el-row class="proposal-card">
+          <el-col :span="24" class="proposal-title" >提案背景</el-col>
+          <el-col :span="24" class="proposal-content" v-text="proposalBackground">
+              
+          </el-col>
+        </el-row>
+        <el-row class="proposal-card">
+          <el-col :span="24" class="proposal-title">问题</el-col>
+          <el-col :span="24" class="proposal-content" v-text="proposalContent">
+              
+          </el-col>
+        </el-row>
+        <el-row class="proposal-card">
+          <el-col :span="24" class="proposal-title">建议</el-col>
+          <el-col :span="24" class="proposal-content" v-text="proposalSuggests">
+              
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" class="proposal-button-wrap">
+              <el-button type="primary" size="medium">通过</el-button>
+              <el-button class="color-button" type="" plain size="medium">拒绝</el-button>
+          </el-col>
+        </el-row>
+       </el-col>
+     </el-row>
+     
+ </div>
 </template>
 
 <script>
-    export default {
-        name: "check-proposal"
+export default {
+  name: 'check-proposal',
+  data() {
+    return {
+      proposalTitle: '',
+      proposalContent: '',
+      proposalBackground: '',
+      proposalSuggests: ''
     }
+  },
+  mounted: function() {
+    this.getCheckProposal()
+  },
+  methods: {
+    getCheckProposal() {
+      let vm = this
+      this.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: '8',
+          c: 'entry',
+          p: 'proposal',
+          do: 'shop',
+          m: 'ewei_shop',
+          ac: 'one_proposal',
+          id: 53
+        }
+      })
+        .then(function(response) {
+          vm.proposalTitle = response.data.result.data.title
+          vm.proposalContent = response.data.result.data.suggest
+          vm.proposalBackground = response.data.result.data.back
+          vm.proposalSuggests = response.data.result.data.content
+          console.log(response)
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
+  }
+}
 </script>
 
 <style scoped>
-
+.check-proposal-wrap {
+  margin: 10%;
+  text-align: left;
+}
+.check-proposal-wrap .proposal-card {
+  padding: 1.5vh 0;
+  border-bottom: 1px dashed #357baa;
+}
+.proposal-card .proposal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #357baa;
+  margin-bottom: 0.2vh;
+}
+.proposal-card .proposal-content {
+  font-size: 14px;
+  color: #333333;
+}
+.proposal-button-wrap {
+  margin: 4vh 0;
+  text-align: center;
+}
+.proposal-button-wrap .color-button {
+  color: #2192e0;
+}
 </style>
