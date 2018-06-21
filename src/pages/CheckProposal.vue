@@ -29,7 +29,7 @@
         <el-row>
           <el-col :span="24" class="proposal-button-wrap">
               <el-button type="primary" size="medium" @click="changeStatus(1)">通过</el-button>
-              <el-button class="color-button" type="" plain size="medium"  @click="changeStatus(2)">拒绝</el-button>
+              <el-button class="color-button" type="" plain size="medium"  @click="changeStatus(4)">拒绝</el-button>
           </el-col>
         </el-row>
        </el-col>
