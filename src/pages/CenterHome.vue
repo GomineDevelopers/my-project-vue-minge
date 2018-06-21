@@ -99,6 +99,7 @@
             do: "shop",
             m: "ewei_shop",
             ac: "get_remind",
+            showLoading:true
           }
         })
           .then(function (response) {

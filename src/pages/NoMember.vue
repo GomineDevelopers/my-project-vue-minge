@@ -1,6 +1,6 @@
 <template>
   <div class="center_no_bg ">
-    <div class="info"><span>您好，您还不是民革成员暂无使用权限。</span></div>
+    <div class="info"><img src="../../static/image/no_member.png"/></div>
     <div>
       <el-button type="primary" round   @click="goRegister">入党申请(非党员)</el-button>
     </div>
@@ -27,17 +27,15 @@
 <style scoped>
 
   .info {
-    width: 60%;
+    width: 80%;
     margin: 8vh auto 6vh;
-    height: 20vh;
-    border: 1px dashed #B3B3B3;
-    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center
   }
-  .info span{
-    width: 70%;
+  .info img{
+    width: 100%;
+    height: 100%;
   }
 
   .el-button {

@@ -19,6 +19,8 @@ import ProposalEdit from '@/pages/ProposalEdit'
 import Member from '@/pages/Member'
 //我的民革-不是会员
 import NoMember from '@/pages/NoMember'
+//我的民革-不是会员的不同状态
+import NoMemberStatus from '@/pages/NoMemberStatus'
 //我的民革
 import Center from '@/pages/Center'
 //我的民革-个人中心
@@ -50,10 +52,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
+    path: '/',
+    name: 'HelloWorld',
+    component: HelloWorld
+  },
     {
       path: '/news',
       name: 'News',
@@ -103,6 +105,14 @@ export default new Router({
       }
     },
     {
+      path: '/noMemberStatus',
+      name: 'NoMemberStatus',
+      component: NoMemberStatus,
+      meta: {
+        requiresNoAuth: true
+      }
+    },
+    {
       path: '/center',
       name: 'Center',
       component: Center,
@@ -123,7 +133,7 @@ export default new Router({
       name: 'CenterHome',
       component: CenterHome,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -131,7 +141,7 @@ export default new Router({
       name: 'CenterWorks',
       component: CenterWorks,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -139,7 +149,7 @@ export default new Router({
       name: 'CenterFeedback',
       component: CenterFeedback,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -147,7 +157,7 @@ export default new Router({
       name: 'CenterPicture',
       component: CenterPicture,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -155,7 +165,7 @@ export default new Router({
       name: 'CenterVideo',
       component: CenterVideo,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -163,7 +173,7 @@ export default new Router({
       name: 'CheckApply',
       component: CheckApply,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -171,7 +181,7 @@ export default new Router({
       name: 'CheckRead',
       component: CheckRead,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -179,7 +189,7 @@ export default new Router({
       name: 'CheckProposal',
       component: CheckProposal,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -187,7 +197,7 @@ export default new Router({
       name: 'Register',
       component: Register,
       meta: {
-        requiresNoAuth: false
+        requiresNoAuth: true
       }
     },
     {
@@ -195,7 +205,7 @@ export default new Router({
       name: 'QuickValidate',
       component: QuickValidate,
       meta: {
-        requiresNoAuth: false
+        requiresNoAuth: true
       }
     },
     {
@@ -203,7 +213,7 @@ export default new Router({
       name: 'Apply',
       component: Apply,
       meta: {
-        requiresNoAuth: false
+        requiresNoAuth: true
       }
     },
   ]
