@@ -28,7 +28,7 @@
         </el-row>
         <el-row>
           <el-col :span="24" class="proposal-button-wrap">
-              <el-button type="primary" size="medium" @click="changeStatus(1)">通过</el-button>
+              <el-button type="primary" size="medium" @click="changeStatus(3)">通过</el-button>
               <el-button class="color-button" type="" plain size="medium"  @click="changeStatus(4)">拒绝</el-button>
           </el-col>
         </el-row>
@@ -78,8 +78,7 @@ export default {
     },
     changeStatus(temp) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -92,7 +91,9 @@ export default {
           }
         })
         .then(function(response) {
-          console.info(response)
+          if(response.status == '200'){
+            vm.$router.push({name: 'CenterUnreadList',params: { type: 2 }});
+          }
         })
         .catch(function(error) {
           console.info(error)

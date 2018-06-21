@@ -65,8 +65,8 @@
     </el-row>
       <el-row class="newApplication_button">
         <el-col :span="24">
-          <el-button type="primary" size="medium" @click="changeStatus(1)">通过</el-button>
-          <el-button type="primary" size="medium" plain @click="changeStatus(2)">拒绝</el-button>
+          <el-button type="primary" size="medium" @click="changeStatus(3)">通过</el-button>
+          <el-button type="primary" size="medium" plain @click="changeStatus(4)">拒绝</el-button>
         </el-col>
       </el-row>
     </div>
@@ -134,13 +134,15 @@
               p: "user",
               do: "shop",
               m: "ewei_shop",
-              ac: "list_party",
+              ac: "check_party",
               id: vm.$route.params.id,
               status:temp
             }
           })
             .then(function (response) {
-              console.info(response);
+              if(response.status == '200'){
+                vm.$router.push({name: 'CenterUnreadList',params: { type: 1 }});
+              }
             })
             .catch(function (error) {
               console.info(error);

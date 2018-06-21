@@ -13,14 +13,7 @@
       </el-row>
       <el-row v-for="item in unreadList" :key="item.id">
         <el-col :span="24">
-          <div class="Un_card" :class="[item.status == 1 ? 'status-success' : 'status-wait' ]" @click="goDetail(item.id)">
-            <!--<el-row >
-              <el-col :span="1"><span>●</span></el-col>
-              <el-col :span="14"><div v-text="item.title" class="title"></div></el-col>
-              <el-col :span="9" v-if="type == 1" class="Un_card_div">的入党申请</el-col>
-              <el-col :span="9" v-else-if="type == 2" class="Un_card_div">的提案</el-col>
-              <el-col :span="9" v-else="type == 3" class="Un_card_div">的读书邀请</el-col>
-            </el-row>-->
+          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 0 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
               <div v-text="item.title" class="title"></div>
@@ -31,7 +24,8 @@
             <div class="c1"></div>
             <div class="c2"></div>
             <div class="c3" v-if="item.status == 0">未处理</div>
-            <div class="c3" v-if="item.status == 1">已处理</div>
+            <div class="c3" v-if="item.status == 3">通过</div>
+            <div class="c3" v-if="item.status == 4">拒绝</div>
           </div>
         </el-col>
       </el-row>
@@ -189,6 +183,10 @@
 
   .status-wait .c1 {
     border-top: 7.5vh solid #d26e7a;
+  }
+
+  .status-refuse .c1{
+    border-top: 7.5vh solid #E6A23C;
   }
 
 </style>
