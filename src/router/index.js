@@ -50,6 +50,15 @@ import CheckProposal from '@/pages/CheckProposal'
 //个人中心未处理列表
 import CenterUnreadList from '@/pages/CenterUnreadList'
 
+//书友会
+import Public from '@/pages/read/Public'
+//图书中心
+import BooksCenter from '@/pages/read/BooksCenter'
+//心得笔记
+import NotesCenter from '@/pages/read/NotesCenter'
+//约伴读书
+import ShareReadCenter from '@/pages/read/ShareReadCenter'
+
 Vue.use(Router)
 
 export default new Router({
@@ -223,5 +232,24 @@ export default new Router({
         requiresNoAuth: true
       }
     },
+    { path: '/public/', component: Public,
+      children: [
+        {
+          path: 'booksCenter',
+          component: BooksCenter
+        },
+        {
+          path: 'notesCenter',
+          component: NotesCenter
+        },
+        {
+          path: 'shareReadCenter',
+          component: ShareReadCenter
+        },
+      ],
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
