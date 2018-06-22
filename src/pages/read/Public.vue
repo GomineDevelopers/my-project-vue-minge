@@ -68,17 +68,19 @@ export default {
   width: 100%;
 }
 .active {
-  color: #ffffff;
+  position: relative;
 }
-.active span::after {
-  content: '';
+.active span {
+  color: #fff;
+}
+.active ::before {
+  content: ' ';
   background: white;
   height: 5px;
   width: 5px;
   position: absolute;
-  bottom: -2px;
+  bottom: 3px;
   left: 50%;
-  margin-left: -2.5px;
 }
 .tab-wrapper {
   height: 6vh;
