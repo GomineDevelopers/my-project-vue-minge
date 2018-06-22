@@ -2,17 +2,15 @@
     <div class="container">
       <div class="card">
         <el-row type="flex" justify="space-between">
-          <el-col :span="6">
-            <div class="book"><img src="static/image/book-default.png"></div>
-          </el-col>
-          <el-col :span="10">
-            <div class="bookTitle">地图中的历史</div>
+          
+          <el-col :span="16">
+            <div class="bookTitle"><span>地图中的历史</span> </div>
             <el-row>
-              <el-col :span="12"><div class="author">王小波</div></el-col>
-              <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-              <el-col :span="8"><div class="translate">王小波</div></el-col>
+              <el-col :span="16"><div class="author">第九章：决战不可避免</div></el-col>
+              <el-col :span="8"><div class="translate"><i class="el-icon-edit-outline"></i>王小波</div></el-col>
             </el-row>
-            <div class="publish">天地人和出版社</div>
+            <div class="publish">网络连载历史小说，作者是当年明月，本名
+石悦，广东顺德海关公务员。</div>
           </el-col>
           <el-col :span="6" class="reader">
             <div class="reader-container">
@@ -24,191 +22,8 @@
         </el-row>
       </div>
 
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
 
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
-    <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="book"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row>
-            <el-col :span="12"><div class="author">王小波</div></el-col>
-            <el-col :span="3"><div class="circle"><span>译</span></div></el-col>
-            <el-col :span="8"><div class="translate">王小波</div></el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerTime">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
-      </el-row>
-    </div>
+
   </div>
 </template>
 
@@ -244,11 +59,17 @@ export default {
   font-weight: bold;
   margin: 1vh 0;
 }
+.bookTitle span {
+  font-size: 18px;
+
+  border-left: 4px solid #419ddc;
+  padding-left: 7%;
+}
 
 .author {
+  font-size: 16px;
+  font-weight: bold;
   margin: 0.2vh 0;
-  background-color: #e2edf5;
-  border-radius: 5px;
   color: #457094;
   font-size: 0.8rem;
   padding: 0.6vh 0;
@@ -270,7 +91,7 @@ export default {
 .translate {
   margin: 0.2vh 0;
   padding: 0.6vh 0;
-  color: #8a969f;
+  color: #5452a0;
   font-size: 0.7rem;
 }
 
@@ -279,6 +100,8 @@ export default {
   color: #8a969f;
   margin: 5px 0;
   font-size: 0.7rem;
+  padding: 0.2rem;
+  padding-left: 8%;
 }
 
 .reader {
