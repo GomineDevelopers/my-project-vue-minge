@@ -71,7 +71,9 @@
             data: vm.$qs.stringify(postData)
           })
             .then(function (response) {
-              console.info(response);
+              if(response.status == 200){
+                vm.$router.push({ name: 'NoMember' })
+              }
             })
             .catch(function (error) {
               console.info(error);

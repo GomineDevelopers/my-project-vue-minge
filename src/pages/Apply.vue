@@ -266,7 +266,7 @@ export default {
           })
           .then(function(response) {
             if(response.status == 200){
-              //vm.$router.push({ name: 'NoMember' })
+               vm.$router.push({ name: 'NoMember' })
             }
           })
           .catch(function(error) {

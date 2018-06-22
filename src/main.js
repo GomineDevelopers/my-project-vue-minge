@@ -64,7 +64,7 @@ axios.interceptors.response.use(data => {// 响应成功关闭loading
 
 Vue.use(VueAxios, axios);
 
-/*router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
@@ -116,12 +116,20 @@ Vue.use(VueAxios, axios);
           next({
             name: 'Center',
           })
-        } else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" && to.name !="NoMember" ) {
+        }
+        else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" && to.name != "NoMember" && to.name != "Apply" && to.name != "QuickValidate" && response.data.result.check_status == 0) {
           next({
             name: 'NoMember',
           })
         }
-        else if (response.data && response.data.result && response.data.result.is_registered == "0"   && to.name !="Register" ) {
+        else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" && response.data.result.check_status != 0) {
+          let sId = response.data.result.check_status;
+          next({
+            name: 'NoMemberStatus',
+            params: {'statusId': sId}
+          })
+        }
+        else if (response.data && response.data.result && response.data.result.is_registered == "0" && to.name != "Register") {
           next({
             name: 'Register',
           })
@@ -134,10 +142,10 @@ Vue.use(VueAxios, axios);
         console.log(error);
       });
   }
-  else  {
+  else {
     next() // 确保一定要调用 next()
   }
-})*/
+})
 
 
 /* eslint-disable no-new */
