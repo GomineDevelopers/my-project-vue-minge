@@ -58,8 +58,8 @@ import BooksCenter from '@/pages/read/BooksCenter'
 import NotesCenter from '@/pages/read/NotesCenter'
 //约伴读书
 import ShareReadCenter from '@/pages/read/ShareReadCenter'
-//心得笔记-列表
-import NotesCenterList from '@/pages/read/NotesCenterList'
+//心得笔记-详情
+import NotesCenterDetail from '@/pages/read/NotesCenterDetail'
 
 //书友会-个人
 import Personal from '@/pages/read/Personal'
@@ -265,9 +265,9 @@ export default new Router({
           name: 'ShareReadCenter'
         },
         {
-          path: 'notesCenterList',
-          component: NotesCenterList,
-          name: 'NotesCenterList'
+          path: 'notesCenterDetail',
+          component: NotesCenterDetail,
+          name: 'NotesCenterDetail'
         },
       ],
       meta: {

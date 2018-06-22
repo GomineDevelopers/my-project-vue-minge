@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "notes-center-lsit"
+        name: "notes-center-detail"
     }
 </script>
 
