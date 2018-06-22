@@ -50,7 +50,7 @@ import CheckProposal from '@/pages/CheckProposal'
 //个人中心未处理列表
 import CenterUnreadList from '@/pages/CenterUnreadList'
 
-//书友会
+//书友会-公共
 import Public from '@/pages/read/Public'
 //图书中心
 import BooksCenter from '@/pages/read/BooksCenter'
@@ -58,6 +58,17 @@ import BooksCenter from '@/pages/read/BooksCenter'
 import NotesCenter from '@/pages/read/NotesCenter'
 //约伴读书
 import ShareReadCenter from '@/pages/read/ShareReadCenter'
+//书友会-个人
+import Personal from '@/pages/read/Personal'
+//我的图书
+import BookList from '@/pages/read/BookList'
+//添加图书
+import AddBook from '@/pages/read/AddBook'
+//我的笔记
+import NoteList from '@/pages/read/NoteList'
+//添加笔记
+import AddNote from '@/pages/read/AddNote'
+
 
 Vue.use(Router)
 
@@ -232,7 +243,8 @@ export default new Router({
         requiresNoAuth: true
       }
     },
-    { path: '/public/', component: Public,
+    {
+      path: '/public/', component: Public,
       children: [
         {
           path: 'booksCenter',
@@ -245,6 +257,30 @@ export default new Router({
         {
           path: 'shareReadCenter',
           component: ShareReadCenter
+        },
+      ],
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/personal/', component: Personal,
+      children: [
+        {
+          path: 'bookList',
+          component: BookList
+        },
+        {
+          path: 'addBook',
+          component: AddBook
+        },
+        {
+          path: 'noteList',
+          component: NoteList
+        },
+        {
+          path: 'addNote',
+          component: AddNote
         },
       ],
       meta: {
