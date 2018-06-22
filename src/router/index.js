@@ -74,10 +74,10 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-    path: '/',
-    name: 'HelloWorld',
-    component: HelloWorld
-  },
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
     {
       path: '/news',
       name: 'News',
@@ -244,19 +244,22 @@ export default new Router({
       }
     },
     {
-      path: '/public/', component: Public,
-      children: [
-        {
+      path: '/public/',
+      component: Public,
+      children: [{
           path: 'booksCenter',
-          component: BooksCenter
+          component: BooksCenter,
+          name: 'BooksCenter'
         },
         {
           path: 'notesCenter',
-          component: NotesCenter
+          component: NotesCenter,
+          name: 'NotesCenter'
         },
         {
           path: 'shareReadCenter',
-          component: ShareReadCenter
+          component: ShareReadCenter,
+          name: 'ShareReadCenter'
         },
       ],
       meta: {
@@ -264,23 +267,27 @@ export default new Router({
       }
     },
     {
-      path: '/personal/', component: Personal,
-      children: [
-        {
+      path: '/personal/',
+      component: Personal,
+      children: [{
           path: 'bookList',
-          component: BookList
+          component: BookList,
+          name: 'bookList'
         },
         {
           path: 'addBook',
-          component: AddBook
+          component: AddBook,
+          name: 'addBook'
         },
         {
           path: 'noteList',
-          component: NoteList
+          component: NoteList,
+          name: 'noteList'
         },
         {
           path: 'addNote',
-          component: AddNote
+          component: AddNote,
+          name: 'addNote'
         },
       ],
       meta: {

@@ -1,5 +1,5 @@
 <template>
-  <div class="list-container">
+  <div class="list-container news-list">
     <vue-headful
       title="时政要闻"
     />
@@ -27,50 +27,49 @@
 </template>
 
 <script>
-  import MyList from '@/components/MyList.vue'
+import MyList from '@/components/MyList.vue'
 
-  export default {
-    name: 'News',
-    data() {
-      return {
-        activeName: 'first',
-        type: 35,
-        images:[]
-      }
-    },
-    created:function () {
-      this.getCarouselData()
-    },
-    methods: {
-      handleClick(tab, event) {
-        this.type = event.target.innerText == '实时要闻' ? 35 : 36;
-      },
-      getCarouselData(){
-        let vm = this
-        this.axios(vm.$commonTools.g_restUrl, {
-          params: {
-            i: "8",
-            c: "entry",
-            p: "article",
-            do: "shop",
-            m: "ewei_shop",
-            ccate: 36,
-            bannd:1
-          }
-        })
-          .then(function (response) {
-            vm.images = response.data.result.bannd
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-
-        }
-    },
-    components: {
-      'my-list': MyList
+export default {
+  name: 'News',
+  data() {
+    return {
+      activeName: 'first',
+      type: 35,
+      images: []
     }
+  },
+  created: function() {
+    this.getCarouselData()
+  },
+  methods: {
+    handleClick(tab, event) {
+      this.type = event.target.innerText == '实时要闻' ? 35 : 36
+    },
+    getCarouselData() {
+      let vm = this
+      this.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: '8',
+          c: 'entry',
+          p: 'article',
+          do: 'shop',
+          m: 'ewei_shop',
+          ccate: 36,
+          bannd: 1
+        }
+      })
+        .then(function(response) {
+          vm.images = response.data.result.bannd
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    }
+  },
+  components: {
+    'my-list': MyList
   }
+}
 </script>
 
 

@@ -2,13 +2,13 @@
   height: 100%;
 }
 
-.el-tabs__nav {
+.news-list .el-tabs__nav {
   height: 6vh;
   background: #3A88D5;
   width: 100%;
 }
 
-.el-tabs__item {
+.news-list .el-tabs__item {
   width: 50%;
   color: #c6daec;
   height: 100%;
@@ -16,7 +16,7 @@
   vertical-align: top;
 }
 
-.el-tabs__item span {
+.news-list .el-tabs__item span {
   position: absolute;
   line-height: 4vh;
   width: 100%;
@@ -26,12 +26,12 @@
   margin-top: -2vh;
 }
 
-.el-tabs__item.is-active {
+.news-list .el-tabs__item.is-active {
   color: white;
   font-weight: bold;
 }
 
-.el-tabs__item.is-active span::after {
+.news-list .el-tabs__item.is-active span::after {
   content: "";
   background: white;
   height: 5px;
@@ -42,24 +42,24 @@
   margin-left: -2.5px;
 }
 
-.el-tabs__active-bar {
+.news-list .el-tabs__active-bar {
   height: 0;
 }
 
-.el-tabs--top .el-tabs__item.is-top:nth-child(2) {
+.news-list .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
   padding-left: 20px;
 }
 
-.el-tabs--top .el-tabs__item.is-top:last-child {
+.news-list .el-tabs--top .el-tabs__item.is-top:last-child {
   padding-right: 20px;
   border-left: 1px solid #A4C3E4;
 }
 
-.el-tabs__header {
+.news-list .el-tabs__header {
   margin: 0;
 }
 
-.el-tabs__content {
+.news-list .el-tabs__content {
   height: 64vh;
   overflow-y: auto;
 }
@@ -152,6 +152,7 @@
 }
 
 /*我的民革下我的4块*/
+
 .center-title {
   height: 10vh;
   line-height: 10vh;
@@ -187,7 +188,8 @@
   box-shadow: 0px 0px 20px 5px #e9e9e9;
 }
 
-.center-add-btn-row, .center-add-btn-col {
+.center-add-btn-row,
+.center-add-btn-col {
   position: absolute;
   height: 5vh;
   width: .6vh;
@@ -218,9 +220,10 @@
   display: none;
 }
 
-.el-message-box{
+.el-message-box {
   width: 80% !important;
 }
-.videoList .el-button--mini{
+
+.videoList .el-button--mini {
   padding: 2px 4px;
 }
