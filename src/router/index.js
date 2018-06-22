@@ -58,6 +58,9 @@ import BooksCenter from '@/pages/read/BooksCenter'
 import NotesCenter from '@/pages/read/NotesCenter'
 //约伴读书
 import ShareReadCenter from '@/pages/read/ShareReadCenter'
+//心得笔记-列表
+import NotesCenterList from '@/pages/read/NotesCenterList'
+
 //书友会-个人
 import Personal from '@/pages/read/Personal'
 //我的图书
@@ -261,6 +264,11 @@ export default new Router({
           component: ShareReadCenter,
           name: 'ShareReadCenter'
         },
+        {
+          path: 'notesCenterList',
+          component: NotesCenterList,
+          name: 'NotesCenterList'
+        },
       ],
       meta: {
         requiresAuth: true
@@ -272,22 +280,22 @@ export default new Router({
       children: [{
           path: 'bookList',
           component: BookList,
-          name: 'bookList'
+          name: 'BookList'
         },
         {
           path: 'addBook',
           component: AddBook,
-          name: 'addBook'
+          name: 'AddBook'
         },
         {
           path: 'noteList',
           component: NoteList,
-          name: 'noteList'
+          name: 'NoteList'
         },
         {
           path: 'addNote',
           component: AddNote,
-          name: 'addNote'
+          name: 'AddNote'
         },
       ],
       meta: {
