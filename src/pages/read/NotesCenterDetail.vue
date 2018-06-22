@@ -1,5 +1,6 @@
 <template>
   <div class="NCD_container">
+    <vue-headful title="心得体会"/>
     <div class="NCD_topContainer">
       <div class="title">《明朝那些事儿》</div>
       <div class="chapter">第九章：决战不可避免</div>
@@ -53,95 +54,93 @@
 </template>
 
 <script>
-    export default {
-        name: "notes-center-detail"
-    }
+export default {
+  name: 'notes-center-detail'
+}
 </script>
 
 <style scoped>
-  .NCD_container{
-    margin: 3vh;
-  }
+.NCD_container {
+  margin: 3vh;
+}
 
-  .NCD_topContainer{
-    background-color: white;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-    border-top: 3px solid #419ddc;
-  }
+.NCD_topContainer {
+  background-color: white;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  border-top: 3px solid #419ddc;
+}
 
-  .title{
-    color: #457094;
-    font-size: 1.2rem;
-    height: 6vh;
-    line-height: 6vh;
-    padding-top: 3vh;
-  }
+.title {
+  color: #457094;
+  font-size: 1.2rem;
+  height: 6vh;
+  line-height: 6vh;
+  padding-top: 3vh;
+}
 
-  .chapter{
-    color:#457094;
-    height: 6vh;
-    line-height: 6vh;
-  }
+.chapter {
+  color: #457094;
+  height: 6vh;
+  line-height: 6vh;
+}
 
-  .content{
-    text-align: left;
-    padding: 0 3vh 2vh 3vh;
-  }
+.content {
+  text-align: left;
+  padding: 0 3vh 2vh 3vh;
+}
 
-  .NCD_bottomContainer{
-    margin-top: 3vh;
-  }
+.NCD_bottomContainer {
+  margin-top: 3vh;
+}
 
-  .NCD_bottomContainer_commentArea{
-    clear: both;
-    border: 1px dashed #cccccc;
-    border-radius: 5px;
-    padding:10px;
-    text-align: left;
-  }
+.NCD_bottomContainer_commentArea {
+  clear: both;
+  border: 1px dashed #cccccc;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
+}
 
-  .NCD_bottomContainer_commentAreaDiv1{
-    padding: 10px 0;
-  }
+.NCD_bottomContainer_commentAreaDiv1 {
+  padding: 10px 0;
+}
 
-  .NCD_bottomContainer_commentAreaDiv2{
-    padding: 10px 0;
-    border-top: 1px solid #cccccc;
-  }
+.NCD_bottomContainer_commentAreaDiv2 {
+  padding: 10px 0;
+  border-top: 1px solid #cccccc;
+}
 
-  .avatar img {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-  }
+.avatar img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
 
-  .userName{
-    font-size: 12px;
-  }
+.userName {
+  font-size: 12px;
+}
 
-  .commentContent{
-    font-size: 14px;
-    padding: 5px 0;
-  }
+.commentContent {
+  font-size: 14px;
+  padding: 5px 0;
+}
 
-  .NCD_bottomContainer-span-icon1 {
-    float: left;
-    padding-bottom: 10px;
-    color: #999999;
-    font-size: 14px;
-  }
+.NCD_bottomContainer-span-icon1 {
+  float: left;
+  padding-bottom: 10px;
+  color: #999999;
+  font-size: 14px;
+}
 
-  .NCD_bottomContainer-span-icon2 {
-    float: right;
-    padding-bottom: 10px;
-    color: #0064ba;
-    font-size: 14px;
-  }
+.NCD_bottomContainer-span-icon2 {
+  float: right;
+  padding-bottom: 10px;
+  color: #0064ba;
+  font-size: 14px;
+}
 
-  .NCD_bottomContainer_commentArea_span{
-    font-size: 12px;
-    color: #cccccc;
-  }
-
-
+.NCD_bottomContainer_commentArea_span {
+  font-size: 12px;
+  color: #cccccc;
+}
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <vue-headful title="约伴读书"/>
       <div class="card">
         <el-row type="flex" justify="space-between">
           <el-col :span="6">
@@ -129,130 +130,130 @@
 </template>
 
 <script>
-    export default {
-        name: "share-read-center"
-    }
+export default {
+  name: 'share-read-center'
+}
 </script>
 
 <style scoped>
-  .card{
-    margin: 2vh 3vh;
-    background-color: white;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-    border-radius: 5px;
-  }
+.card {
+  margin: 2vh 3vh;
+  background-color: white;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  border-radius: 5px;
+}
 
-  .card .bookImg{
-    margin: 1vh;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-    border-radius: 5px;
-  }
+.card .bookImg {
+  margin: 1vh;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  border-radius: 5px;
+}
 
-  .card .bookImg img{
-    width: 100%;
-    height: 100%;
-  }
+.card .bookImg img {
+  width: 100%;
+  height: 100%;
+}
 
-  .book-container{
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-  }
+.book-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .book-center{
-    margin: 0 0 1vh 0;
-  }
+.book-center {
+  margin: 0 0 1vh 0;
+}
 
-  .bookTitle{
-    text-align: left;
-    color: #457094;
-    font-weight: bold;
-    margin: 0 0 1.5vh 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.bookTitle {
+  text-align: left;
+  color: #457094;
+  font-weight: bold;
+  margin: 0 0 1.5vh 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .authorDiv{
-    height: 3vh;
-    line-height: 3vh;
-    display: flex;
-    align-items: center;
-  }
+.authorDiv {
+  height: 3vh;
+  line-height: 3vh;
+  display: flex;
+  align-items: center;
+}
 
-  .author{
-    width: 80%;
-    background-color: #e2edf5;
-    border-radius: 5px;
-    color: #457094;
-    font-size: .8rem;
-    padding: 3px 0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.author {
+  width: 80%;
+  background-color: #e2edf5;
+  border-radius: 5px;
+  color: #457094;
+  font-size: 0.8rem;
+  padding: 3px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .translate{
-    text-align: left;
-    height: 3vh;
-    line-height: 3vh;
-    display: flex;
-    align-items: center;
-  }
+.translate {
+  text-align: left;
+  height: 3vh;
+  line-height: 3vh;
+  display: flex;
+  align-items: center;
+}
 
-  .translate img{
-    width: 16px;
-    height:16px;
-  }
+.translate img {
+  width: 16px;
+  height: 16px;
+}
 
-  .translate span{
-    color: #8a969f;
-    font-size: .7rem;
-    display: inline-block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.translate span {
+  color: #8a969f;
+  font-size: 0.7rem;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .publish{
-    text-align: left;
-    color: #8a969f;
-    margin: 5px 0;
-    font-size: .7rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.publish {
+  text-align: left;
+  color: #8a969f;
+  margin: 5px 0;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .reader{
-    display: flex;
-    flex-direction:column;
-    justify-content:center;
-  }
+.reader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .reader-container{
-    background-color: #419ddc;
-    color: #ffffff;
-    font-size: .6rem;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    text-align: left
-  }
-  .readerName{
-    font-size:1rem ;
-    font-weight: bold;
-    border-top:1px dashed #ffffff ;
-    border-bottom:1px dashed #ffffff ;
-    padding: .5vh .85vh;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .readerPerson{
-    padding: .5vh .85vh;
-    letter-spacing: 2px;
-  }
-  .readerTime{
-    padding: .5vh .85vh;
-  }
+.reader-container {
+  background-color: #419ddc;
+  color: #ffffff;
+  font-size: 0.6rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  text-align: left;
+}
+.readerName {
+  font-size: 1rem;
+  font-weight: bold;
+  border-top: 1px dashed #ffffff;
+  border-bottom: 1px dashed #ffffff;
+  padding: 0.5vh 0.85vh;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.readerPerson {
+  padding: 0.5vh 0.85vh;
+  letter-spacing: 2px;
+}
+.readerTime {
+  padding: 0.5vh 0.85vh;
+}
 </style>
