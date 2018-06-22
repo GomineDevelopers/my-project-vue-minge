@@ -13,7 +13,7 @@
       </el-row>
       <el-row v-for="item in unreadList" :key="item.id">
         <el-col :span="24">
-          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 0 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id)">
+          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
               <div v-text="item.title" class="title"></div>
@@ -23,7 +23,7 @@
             </div>
             <div class="c1"></div>
             <div class="c2"></div>
-            <div class="c3" v-if="item.status == 0">未处理</div>
+            <div class="c3" v-if="item.status == 1">未处理</div>
             <div class="c3" v-if="item.status == 3">通过</div>
             <div class="c3" v-if="item.status == 4">拒绝</div>
           </div>

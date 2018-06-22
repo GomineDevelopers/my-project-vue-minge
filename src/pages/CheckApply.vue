@@ -64,9 +64,13 @@
       </el-col>
     </el-row>
       <el-row class="newApplication_button">
-        <el-col :span="24">
+        <el-col :span="24" v-if="application.status == 1">
           <el-button type="primary" size="medium" @click="changeStatus(3)">通过</el-button>
           <el-button type="primary" size="medium" plain @click="changeStatus(4)">拒绝</el-button>
+        </el-col>
+        <el-col :span="24">
+          <el-tag type="success" size="medium" v-if="application.status == 3">已通过</el-tag>
+          <el-tag type="warning" size="medium"  v-if="application.status == 4">已拒绝</el-tag>
         </el-col>
       </el-row>
     </div>
@@ -141,7 +145,7 @@
           })
             .then(function (response) {
               if(response.status == '200'){
-                vm.$router.push({name: 'CenterUnreadList',params: { type: 1 }});
+                vm.$router.replace({name: 'CenterUnreadList',params: { type: 1 }});
               }
             })
             .catch(function (error) {

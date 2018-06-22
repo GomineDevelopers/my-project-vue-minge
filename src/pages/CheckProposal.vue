@@ -27,9 +27,13 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="24" class="proposal-button-wrap">
+          <el-col :span="24" class="proposal-button-wrap" v-if="status == 1">
               <el-button type="primary" size="medium" @click="changeStatus(3)">通过</el-button>
               <el-button class="color-button" type="" plain size="medium"  @click="changeStatus(4)">拒绝</el-button>
+          </el-col>
+          <el-col :span="24" class="proposal-button-wrap">
+            <el-tag type="success" size="medium" v-if="status == 3">已通过</el-tag>
+            <el-tag type="warning" size="medium"  v-if="status == 4">已拒绝</el-tag>
           </el-col>
         </el-row>
        </el-col>
@@ -46,7 +50,8 @@ export default {
       proposalTitle: '',
       proposalContent: '',
       proposalBackground: '',
-      proposalSuggests: ''
+      proposalSuggests: '',
+      status:''
     }
   },
   mounted: function() {
@@ -71,6 +76,7 @@ export default {
           vm.proposalContent = response.data.result.data.suggest
           vm.proposalBackground = response.data.result.data.back
           vm.proposalSuggests = response.data.result.data.content
+          vm.status = response.data.result.data.status
         })
         .catch(function(error) {
           console.log(error)
@@ -92,7 +98,7 @@ export default {
         })
         .then(function(response) {
           if(response.status == '200'){
-            vm.$router.push({name: 'CenterUnreadList',params: { type: 2 }});
+            vm.$router.replace({name: 'CenterUnreadList',params: { type: 2 }});
           }
         })
         .catch(function(error) {
