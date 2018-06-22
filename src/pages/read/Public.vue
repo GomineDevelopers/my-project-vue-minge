@@ -3,11 +3,11 @@
     <vue-headful title="书友会"/>
     <div class="read-center-wrap">
       <div class="tab-wrapper" >
-          <div class="tab-item" @click="handleClick('first')" :class="{active:activeOne}"> <span>图书分享</span></div>
+          <div class="tab-item" @click="handleClick('first')" :class="{active:activeOne}"> <span>图书中心</span></div>
           <div class="tab-item" @click="handleClick('second')" :class="{active:activeTwo}"><span>心得笔记</span> </div>
           <div class="tab-item" @click="handleClick('third')" :class="{active:activeThree}"><span>约伴读书</span> </div>
          </div>
-         <div class="click-button"> <img src="../../../static/image/my-book-icon.png" alt="" srcset=""> </div>
+         <div class="click-button" @click="gobooklist"> <img src="../../../static/image/my-book-icon.png" alt="" srcset=""> </div>
       </div>
        <div class="router-view-wrapper">
         <keep-alive>
@@ -30,9 +30,9 @@ export default {
       activeThree: false
     }
   },
-  mounted: function() {
-    this.$router.push({ name: 'BooksCenter' })
-  },
+  // mounted: function() {
+  //   this.$router.push({ name: 'BooksCenter' })
+  // },
   methods: {
     handleClick(flag) {
       if (flag == 'first') {
@@ -54,6 +54,9 @@ export default {
         this.activeThree = true
         this.$router.push({ name: 'ShareReadCenter' })
       }
+    },
+    gobooklist() {
+      this.$router.push({ name: 'BookList' })
     }
   }
 }
@@ -79,7 +82,7 @@ export default {
   height: 5px;
   width: 5px;
   position: absolute;
-  bottom: 3px;
+  bottom: 5px;
   left: 50%;
 }
 .tab-wrapper {
@@ -108,7 +111,9 @@ export default {
 .router-view-wrapper {
   margin-top: 6vh;
   height: 94vh;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .click-button {
   width: 20vh;
