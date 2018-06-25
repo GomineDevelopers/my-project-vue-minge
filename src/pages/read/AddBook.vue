@@ -120,7 +120,7 @@ export default {
       bookName: '',
       bookPublisher: '',
       writer: '',
-      interpreter: '',
+      translators: '',
       totalPage: '',
       checkValues: [{ text: '是', value: true }, { text: '否', value: false }],
       defaultValue: false
