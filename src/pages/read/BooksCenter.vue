@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <vue-headful title="约伴读书"/>
     <div class="card" v-for="item in bookCenterData">
       <el-row type="flex" justify="space-between">
         <el-col :span="6">
@@ -28,6 +27,7 @@
             <div class="readerPerson">读书人</div>
             <div class="readerName" v-text="item.realname"></div>
             <div class="readerTime" v-text="$commonTools.formatDate(item.create_time)">2017-07-21</div>
+            <i class=" iconfont icon-icon-hxz"></i>
           </div>
         </el-col>
       </el-row>
@@ -38,18 +38,18 @@
 <script>
   export default {
     name: 'books-center',
-    data(){
+    data() {
       return {
-        bookCenterData:Array
+        bookCenterData: Array
       }
     },
-    created(){
+    created() {
       this.getBookCenterData();
     },
-    methods:{
-      getBookCenterData(){
+    methods: {
+      getBookCenterData() {
         let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl,{
+        vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -59,10 +59,10 @@
             ac: 'list_book',
           }
         })
-          .then(function(response) {
+          .then(function (response) {
             vm.bookCenterData = response.data.result;
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error)
           })
       }
@@ -172,8 +172,10 @@
     font-size: 0.6rem;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    text-align: left;
+    text-align: center;
+    position: relative;
   }
+
   .readerName {
     font-size: 1rem;
     font-weight: bold;
@@ -184,10 +186,20 @@
     white-space: nowrap;
     overflow: hidden;
   }
+
+  .icon-icon-hxz {
+    position: absolute;
+    font-size: 20px;
+    top: -8px;
+    right: -2px;
+    transform: rotate(-30deg);
+  }
+
   .readerPerson {
     padding: 0.5vh 0.85vh;
     letter-spacing: 2px;
   }
+
   .readerTime {
     padding: 0.5vh 0.85vh;
   }

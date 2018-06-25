@@ -1,6 +1,5 @@
 <template>
   <div class="NCD_container">
-    <vue-headful title="心得体会"/>
     <div class="NCD_topContainer">
       <div class="title">《明朝那些事儿》</div>
       <div class="chapter">第九章：决战不可避免</div>

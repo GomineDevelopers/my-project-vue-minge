@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <vue-headful title="约伴读书"/>
       <div class="card">
         <el-row type="flex" justify="space-between">
           <el-col :span="6">
