@@ -2,8 +2,8 @@
   <div>
     <el-row  class="gender-picker">
           <el-col :span="24">
-             <el-radio-group v-model="radioValue" size="large" @change="emitValue()">
-              <el-radio-button  v-for="(item, index) in radioValues" :key="index" :label="item"></el-radio-button>
+             <el-radio-group v-model="defaultValue" size="large" @change="emitValue()">
+              <el-radio-button  v-for="(item, index) in radioValues" :key="index" :label="item.value">{{item.text}}</el-radio-button>
             </el-radio-group>
           </el-col>
           
@@ -14,17 +14,18 @@
 export default {
   name: 'radio-picker',
   props: {
-    radioValues: Array
+    radioValues: Array,
+    radioValue: Boolean
   },
   data() {
     return {
-      radioValue: '男'
+      defaultValue: this.radioValue
     }
   },
 
   methods: {
     emitValue() {
-      this.$emit('handleGender', this.radioValue)
+      this.$emit('handleGender', this.defaultValue)
     }
   }
 }

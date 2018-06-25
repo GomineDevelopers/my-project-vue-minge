@@ -29,105 +29,104 @@
 </template>
 
 <script>
-  export default {
-    name: 'personal',
-    data() {
-      return {
-        activeItem: 0,
+export default {
+  name: 'personal',
+  data() {
+    return {
+      activeItem: 0
+    }
+  },
+  mounted() {
+    this.updateActiveItem()
+  },
+  watch: {
+    $route() {
+      this.updateActiveItem()
+    }
+  },
+  methods: {
+    updateActiveItem: function() {
+      switch (this.$route.name) {
+        case 'BookList':
+          this.activeItem = 1
+          break
+        case 'NoteList':
+          this.activeItem = 2
+          break
       }
     },
-    mounted() {
-      this.updateActiveItem();
-    },
-    watch: {
-      $route() {
-        this.updateActiveItem();
-      }
-    },
-    methods: {
-      updateActiveItem: function () {
-        switch (this.$route.name) {
-          case "BookList":
-            this.activeItem = 1;
-            break;
-          case "NoteList":
-            this.activeItem = 2;
-            break;
-        }
-      },
-      handleClick(flag) {
-        if (flag == 'first') {
-          this.$router.push({name: 'BookList'})
-        }
-        else if (flag == 'second') {
-          this.$router.push({name: 'NoteList'})
-        }
+    handleClick(flag) {
+      if (flag == 'first') {
+        this.$router.push({ name: 'BookList' })
+      } else if (flag == 'second') {
+        this.$router.push({ name: 'NoteList' })
       }
     }
   }
+}
 </script>
 
 <style scoped>
-  .read-center-wrap {
-    position: absolute;
-    bottom: 0;
-    height: 8vh;
-    background: #ffffff;
-    width: 100%;
-    z-index: 999;
-    box-shadow: 0px -10px 10px #e9e9e9;
-  }
+.read-center-wrap {
+  position: absolute;
+  bottom: 0;
+  height: 8vh;
+  background: #ffffff;
+  width: 100%;
+  z-index: 999;
+  /* box-shadow: 0px -10px 10px #e9e9e9; */
+}
 
-  .active {
-    position: relative;
-  }
+.active {
+  position: relative;
+}
 
-  .active span {
-    color: #333333;
-  }
+.active span {
+  color: #333333;
+}
 
-  .active i {
-    color: #0064ba !important;
-  }
+.active i {
+  color: #0064ba !important;
+}
 
-  .tab-wrapper {
-    height: 8vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.tab-wrapper {
+  height: 8vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .tab-wrapper .tab-item {
-    display: flex;
-    align-items: center;
-    width: 50%;
-    height: 8vh;
-    color: #333333;
-    font-weight: bold;
-    justify-content: center;
-  }
+.tab-wrapper .tab-item {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  height: 8vh;
+  color: #333333;
+  font-weight: bold;
+  justify-content: center;
+}
 
-  .tab-item .iconfont{
-    color: #cccccc;
-    font-size: 1.4rem;
-    font-weight: 100;
-  }
+.tab-item .iconfont {
+  color: #cccccc;
+  font-size: 1.4rem;
+  font-weight: 100;
+}
 
-  .tab-item .tab-text {
-    font-size: 0.7rem;
-  }
+.tab-item .tab-text {
+  font-size: 0.7rem;
+}
 
-  .tab-wrapper .tab-item:first-child {
-    border-right: 1px solid #cccccc;
-  }
+.tab-wrapper .tab-item:first-child {
+  border-right: 1px solid #cccccc;
+}
 
-  .router-view-wrapper {
-    height: 92vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+.router-view-wrapper {
+  height: 92vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 </style>
 
 

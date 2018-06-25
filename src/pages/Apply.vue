@@ -20,7 +20,7 @@
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>性别</span>
           </el-col>
         </el-row>
-        <radio-picker  :radioValues="genderValues" @handleGender="showGender" ></radio-picker>
+        <radio-picker  :radioValues="genderValues" :radioValue="genderValue" @handleGender="showGender" ></radio-picker>
           <el-row>
             <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>出生日期</span>
             </el-col>
@@ -116,8 +116,8 @@ export default {
           return time.getTime() > Date.now()
         }
       },
-      genderValues: ['男', '女'],
-      genderValue: '男',
+      genderValues: [{ text: '女', value: true }, { text: '男', value: false }],
+      genderValue: false,
       degreeOptions: [
         { value: '本科', label: '本科' },
         { value: '硕士', label: '硕士' },
@@ -182,7 +182,7 @@ export default {
       }
     },
     addDomain() {
-      let hasEmpty = false;
+      let hasEmpty = false
       this.dynamicValidateForm.domains.forEach(function(item, index) {
         if (!item.value) {
           hasEmpty = true
@@ -201,8 +201,6 @@ export default {
           key: Date.now()
         })
       }
-
-
     },
     validator: function() {
       let vm = this
@@ -241,7 +239,6 @@ export default {
         vm.experiences.push(item.value)
       })
 
-
       postData.realname = vm.registerName
       postData.sex = vm.genderValue
       postData.birth = vm.registerBirthday
@@ -252,7 +249,8 @@ export default {
       postData.application = vm.applycation
 
       if (vm.validator()) {
-        vm.axios(vm.$commonTools.g_restUrl, {
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -260,13 +258,13 @@ export default {
               p: 'user',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'add_party',
+              ac: 'add_party'
             },
             data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
-            if(response.status == 200){
-               vm.$router.push({ name: 'NoMember' })
+            if (response.status == 200) {
+              vm.$router.push({ name: 'NoMember' })
             }
           })
           .catch(function(error) {
