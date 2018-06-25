@@ -68,7 +68,7 @@
         </el-row>
       <el-row class="item-content">
         <el-col :span="24">
-            <el-input v-model="interpreter"  size="small" clearable></el-input>
+            <el-input v-model="translators"  size="small" clearable></el-input>
           </el-col>
       </el-row>
       </div>
