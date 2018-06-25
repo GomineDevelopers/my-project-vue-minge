@@ -3,6 +3,12 @@
     <vue-headful title="书友会"/>
     <div class="read-center-wrap">
       <div class="tab-wrapper">
+        <div class="circle-cover" v-if="showAdd" @click="goAddPage">
+          <div class="add-btn"></div>
+          <div class="add-btn-row"></div>
+          <div class="add-btn-col"></div>
+          <div class="add-btn-text">{{addBtnText}}</div>
+        </div>
         <div class="tab-item" @click="handleClick('first')" :class="{active:activeItem==1}">
           <el-row>
             <el-col :span="24"><i class="iconfont icon-dushu"></i></el-col>
@@ -19,114 +25,170 @@
       </div>
     </div>
     <div class="router-view-wrapper">
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
+      <router-view/>
     </div>
-
-
   </div>
 </template>
 
 <script>
-export default {
-  name: 'personal',
-  data() {
-    return {
-      activeItem: 0
-    }
-  },
-  mounted() {
-    this.updateActiveItem()
-  },
-  watch: {
-    $route() {
-      this.updateActiveItem()
-    }
-  },
-  methods: {
-    updateActiveItem: function() {
-      switch (this.$route.name) {
-        case 'BookList':
-          this.activeItem = 1
-          break
-        case 'NoteList':
-          this.activeItem = 2
-          break
+  export default {
+    name: 'personal',
+    data() {
+      return {
+        activeItem: 0,
+        showAdd: false,
+        addBtnText: ""
       }
     },
-    handleClick(flag) {
-      if (flag == 'first') {
-        this.$router.push({ name: 'BookList' })
-      } else if (flag == 'second') {
-        this.$router.push({ name: 'NoteList' })
+    mounted() {
+      this.updateActiveItem()
+    },
+    watch: {
+      $route() {
+        this.updateActiveItem()
       }
+    },
+    methods: {
+      updateActiveItem: function () {
+        switch (this.$route.name) {
+          case 'BookList':
+            this.activeItem = 1;
+            this.showAdd = true;
+            this.addBtnText = "添加图书";
+            break;
+          case 'NoteList':
+            this.activeItem = 2;
+            this.showAdd = true;
+            this.addBtnText = "添加笔记";
+            break;
+          case 'AddBook':
+            this.activeItem = 1;
+            this.showAdd = false;
+            break;
+          case 'AddNote':
+            this.activeItem = 2;
+            this.showAdd = false;
+            break;
+        }
+      },
+      handleClick(flag) {
+        if (flag == 'first') {
+          this.$router.push({name: 'BookList'})
+        } else if (flag == 'second') {
+          this.$router.push({name: 'NoteList'})
+        }
+      },
+      goAddPage: function () {
+        if (this.activeItem == 1) {
+          this.$router.push({name: 'AddBook'});
+        }
+        else {
+          this.$router.push({name: 'AddNote'});
+        }
+      }
+
     }
   }
-}
 </script>
 
 <style scoped>
-.read-center-wrap {
-  position: absolute;
-  bottom: 0;
-  height: 8vh;
-  background: #ffffff;
-  width: 100%;
-  z-index: 999;
-  /* box-shadow: 0px -10px 10px #e9e9e9; */
-}
 
-.active {
-  position: relative;
-}
+  .add-btn {
+    height: 8vh;
+    width: 8vh;
+    background: #2192e0;
+    position: absolute;
+    top: -4vh;
+    left: 50%;
+    margin-left: -4vh;
+    border-radius: 50%;
+    box-shadow: 0px 0px 20px 5px #e9e9e9;
+  }
 
-.active span {
-  color: #333333;
-}
+  .add-btn-row,
+  .add-btn-col {
+    position: absolute;
+    height: 5vh;
+    width: .6vh;
+    background: #ffffff;
+    top: -2.5vh;
+    left: 50%;
+    margin-left: -.3vh;
+    border-radius: 100px;
+  }
 
-.active i {
-  color: #0064ba !important;
-}
+  .add-btn-col {
+    transform: rotate(90deg);
+  }
 
-.tab-wrapper {
-  height: 8vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .add-btn-text {
+    position: absolute;
+    top: 4.5vh;
+    left: 50%;
+    margin-left: -24px;
+    font-size: 12px;
+  }
 
-.tab-wrapper .tab-item {
-  display: flex;
-  align-items: center;
-  width: 50%;
-  height: 8vh;
-  color: #333333;
-  font-weight: bold;
-  justify-content: center;
-}
+  .read-center-wrap {
+    position: absolute;
+    bottom: 0;
+    height: 8vh;
+    background: #ffffff;
+    width: 100%;
+    z-index: 999;
+    /* box-shadow: 0px -10px 10px #e9e9e9; */
+  }
 
-.tab-item .iconfont {
-  color: #cccccc;
-  font-size: 1.4rem;
-  font-weight: 100;
-}
+  .active {
+    position: relative;
+  }
 
-.tab-item .tab-text {
-  font-size: 0.7rem;
-}
+  .active span {
+    color: #333333;
+  }
 
-.tab-wrapper .tab-item:first-child {
-  border-right: 1px solid #cccccc;
-}
+  .active i {
+    color: #0064ba !important;
+  }
 
-.router-view-wrapper {
-  height: 92vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
+  .tab-wrapper {
+    height: 8vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-wrapper .tab-item {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 8vh;
+    color: #333333;
+    font-weight: bold;
+    justify-content: center;
+  }
+
+  .tab-item .iconfont {
+    color: #cccccc;
+    font-size: 1.4rem;
+    font-weight: 100;
+  }
+
+  .tab-item .tab-text {
+    font-size: 0.7rem;
+  }
+
+  .tab-wrapper .tab-item:first-child {
+    border-right: 1px solid #cccccc;
+  }
+
+  .router-view-wrapper {
+    height: 92vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 </style>
 
 
