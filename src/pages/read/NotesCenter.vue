@@ -63,7 +63,7 @@ export default {
   font-size: 18px;
 
   border-left: 4px solid #419ddc;
-  padding-left: 7%;
+  padding-left: 3vh;
 }
 
 .author {
@@ -72,7 +72,11 @@ export default {
   margin: 0.2vh 0;
   color: #457094;
   font-size: 0.8rem;
-  padding: 0.6vh 0;
+  padding: 0.6vh 3vh;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .circle {
@@ -101,7 +105,10 @@ export default {
   margin: 5px 0;
   font-size: 0.7rem;
   padding: 0.2rem;
-  padding-left: 8%;
+  padding-left: 3vh;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .reader {
