@@ -36,8 +36,16 @@
         activeItem: 0,
       }
     },
+    mounted() {
+      this.updateActiveItem();
+    },
     watch: {
       $route() {
+        this.updateActiveItem();
+      }
+    },
+    methods: {
+      updateActiveItem: function () {
         switch (this.$route.name) {
           case "BookList":
             this.activeItem = 1;
@@ -46,9 +54,7 @@
             this.activeItem = 2;
             break;
         }
-      }
-    },
-    methods: {
+      },
       handleClick(flag) {
         if (flag == 'first') {
           this.$router.push({name: 'BookList'})
