@@ -191,7 +191,7 @@ export default new Router({
       }
     },
     {
-      path: '/center/checkApply',
+      path: '/center/checkApply/:id',
       name: 'CheckApply',
       component: CheckApply,
       meta: {
@@ -207,7 +207,7 @@ export default new Router({
       }
     },
     {
-      path: '/center/checkProposal',
+      path: '/center/checkProposal/:id',
       name: 'CheckProposal',
       component: CheckProposal,
       meta: {
