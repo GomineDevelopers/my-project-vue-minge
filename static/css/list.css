@@ -227,3 +227,59 @@
 .videoList .el-button--mini {
   padding: 2px 4px;
 }
+
+/*elementui中的tab*/
+.el-tabs__item{
+  padding: 0 16px;
+  height: 35px;
+  line-height: 35px;
+}
+.el-tabs--card>.el-tabs__header{
+  border-bottom: none;
+  margin: 0;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item:last-child{
+  border-bottom:1px solid #2086ce;
+  border-top:1px solid #2086ce;
+  border-right:1px solid #2086ce;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 0 16px;
+  height: 35px;
+  line-height: 35px;
+}
+
+.el-tabs--card>.el-tabs__header .el-tabs__item:first-child{
+  border-bottom:1px solid #2086ce;
+  border-top:1px solid #2086ce;
+  border-left:1px solid #2086ce;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 0 16px;
+  height: 35px;
+  line-height: 35px;
+}
+
+.el-tabs__item.is-active:first-child{
+  background: #2086ce;
+  color: #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.el-tabs__item.is-active:last-child{
+  background: #2086ce;
+  color: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.el-tabs__nav{
+  float: none;
+  height: 9vh;
+  line-height: 9vh;
+}
+.el-tabs--card>.el-tabs__header .el-tabs__nav{
+  border: none;
+}
