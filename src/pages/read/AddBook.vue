@@ -2,7 +2,7 @@
   <div>
     <el-upload
       class="avatar-uploader"
-      action="https://jsonplaceholder.typicode.com/posts/"
+      :action=postImageUrl
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
       :before-upload="beforeAvatarUpload">
@@ -17,7 +17,8 @@
     name: "add-book",
     data() {
       return {
-        imageUrl: ''
+        imageUrl: '',
+        postImageUrl: this.$commonTools.g_restUrl + "?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images"
       };
     },
     methods: {
@@ -35,7 +36,7 @@
         if (!isLt2M) {
           this.$message.error('上传图片大小不能超过 2MB!');
         }
-        return isJPG && isLt2M;
+        return (isJPG || isPNG) && isLt2M;
       }
     }
   }

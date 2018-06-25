@@ -12,7 +12,7 @@
         </div>
         <div class="tab-item" @click="handleClick('second')" :class="{active:activeItem==2}">
           <el-row>
-            <el-col :span="24"><i class="iconfont icon-jilu note"></i></el-col>
+            <el-col :span="24"><i class="iconfont icon-biji note"></i></el-col>
             <el-col :span="24"><span class="tab-text">笔记</span></el-col>
           </el-row>
         </div>
@@ -108,14 +108,10 @@
     justify-content: center;
   }
 
-  .tab-item .icon-dushu {
+  .tab-item .iconfont{
     color: #cccccc;
     font-size: 1.4rem;
-  }
-
-  .tab-item .icon-jilu {
-    color: #cccccc;
-    font-size: 1.4rem;
+    font-weight: 100;
   }
 
   .tab-item .tab-text {
