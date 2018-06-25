@@ -206,7 +206,7 @@
     box-shadow: 0px 0px 20px 5px #e9e9e9;
     border-radius: 5px;
     width: 100%;
-    height: 100%;
+    max-height: 15vh;
   }
 
   .imgBottom{

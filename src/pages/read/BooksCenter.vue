@@ -3,14 +3,14 @@
     <div class="card" v-for="item in bookCenterData">
       <el-row type="flex" justify="space-between">
         <el-col :span="6">
-          <div class="bookImg"><img src="static/image/book-default.png"></div>
+          <div class="bookImg"><img :src="item.img"></div>
         </el-col>
         <el-col :span="10" class="book-container">
           <div class="bookTitle" v-text="item.title"></div>
           <el-row class="book-center">
             <el-col :span="12">
               <div class="authorDiv">
-                <div class="author" v-text="item.author">王小波</div>
+                <div class="author" v-text="item.author"></div>
               </div>
             </el-col>
             <el-col :span="12">
@@ -86,7 +86,7 @@
 
   .card .bookImg img {
     width: 100%;
-    height: 100%;
+    max-height: 15vh;
   }
 
   .book-container {
