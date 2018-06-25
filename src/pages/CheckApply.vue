@@ -1,7 +1,7 @@
 <template>
   <div class="quick_validate_bg">
     <vue-headful title="新的入党申请"/>
-    <div class="newApplication_container" v-if="temp == 1">
+    <div class="newApplication_container" v-if="temp == 1 && application">
       <el-row>
         <el-col :span="24">
           <div class="newApplication_detail">
@@ -126,8 +126,14 @@
           }
         })
           .then(function (response) {
-            if (response.status == 200)
+            if (response.data.status == "200")
               vm.application = response.data.result.data;
+            else if (response.data.status == "201") {
+              vm.$message({
+                type: 'error',
+                message: '您没有权限访问'
+              });
+            }
           })
           .catch(function (error) {
             console.info(error);
