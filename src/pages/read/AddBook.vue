@@ -6,7 +6,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>封面</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <div class="book-cover">
@@ -32,7 +32,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>书名</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <el-input v-model="bookName" size="small" clearable></el-input>
@@ -43,7 +43,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>出版社</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <el-input v-model="bookPublisher" size="small" clearable></el-input>
@@ -54,7 +54,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>作者</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <el-input v-model="writer" size="small" clearable></el-input>
@@ -65,7 +65,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock">译者</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <el-input v-model="interpreter"  size="small" clearable></el-input>
@@ -76,7 +76,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>私密读书</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="24">
             <radio-picker :radioValues="checkValues" :radioValue="defaultValue"></radio-picker>
@@ -87,7 +87,7 @@
        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>总页数</span>
           </el-col>
-        </el-row>  
+        </el-row>
       <el-row class="item-content">
         <el-col :span="20">
             <el-input v-model="totalPage" type="number" size="small" clearable></el-input>
@@ -195,12 +195,11 @@ export default {
             data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
-            // if (response.status == '200') {
-            //   vm.$router.replace({
-            //     name: 'Proposal',
-            //     params: { id: vm.$route.params.id, typeId: 1 }
-            //   })
-            // }
+            if (response.status == '200') {
+              vm.$router.push({
+                name: 'BookList',
+              })
+            }
             console.log(response)
           })
           .catch(function(error) {
@@ -248,8 +247,8 @@ export default {
   height: inherit;
 }
 .avatar-uploader img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 19vh;
 }
 .register-necessary {
   color: #cb1414;
