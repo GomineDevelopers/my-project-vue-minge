@@ -10,7 +10,7 @@
               <div class="author">第九章：决战不可避免</div>
             </el-col>
             <el-col :span="8">
-              <div class="translate"><i class="el-icon-edit-outline"></i>王小波</div>
+              <div class="translate"><i class="el-icon-edit-outline"></i>24条评论</div>
             </el-col>
           </el-row>
           <div class="publish">网络连载历史小说，作者是当年明月，本名
