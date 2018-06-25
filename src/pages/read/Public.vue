@@ -2,129 +2,136 @@
   <div class="user center_no_bg">
     <vue-headful title="书友会"/>
     <div class="read-center-wrap">
-      <div class="tab-wrapper" >
-          <div class="tab-item" @click="handleClick('first')" :class="{active:activeOne}"> <span>图书中心</span></div>
-          <div class="tab-item" @click="handleClick('second')" :class="{active:activeTwo}"><span>心得笔记</span> </div>
-          <div class="tab-item" @click="handleClick('third')" :class="{active:activeThree}"><span>约伴读书</span> </div>
-         </div>
-         <div class="click-button" @click="gobooklist"> <img src="../../../static/image/my-book-icon.png" alt="" srcset=""> </div>
+      <div class="tab-wrapper">
+        <div class="tab-item" @click="handleClick('first')" :class="{active:activeItem==1}"><span>图书中心</span></div>
+        <div class="tab-item" @click="handleClick('second')" :class="{active:activeItem==2}"><span>心得笔记</span></div>
+        <div class="tab-item" @click="handleClick('third')" :class="{active:activeItem==3}"><span>约伴读书</span></div>
       </div>
-       <div class="router-view-wrapper">
-        <keep-alive>
+      <div class="click-button" @click="gobooklist"><img src="../../../static/image/my-book-icon.png" alt="" srcset="">
+      </div>
+    </div>
+    <div class="router-view-wrapper">
+      <keep-alive>
         <router-view/>
-        </keep-alive>
-        </div>
-      
-   
-    
+      </keep-alive>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'public',
-  data() {
-    return {
-      activeOne: true,
-      activeTwo: false,
-      activeThree: false
-    }
-  },
-  // mounted: function() {
-  //   this.$router.push({ name: 'BooksCenter' })
-  // },
-  methods: {
-    handleClick(flag) {
-      if (flag == 'first') {
-        this.activeOne = true
-        this.activeTwo = false
-        this.activeThree = false
-        this.$router.push({ name: 'BooksCenter' })
-      }
-
-      if (flag == 'second') {
-        this.activeOne = false
-        this.activeTwo = true
-        this.activeThree = false
-        this.$router.push({ name: 'NotesCenter' })
-      }
-      if (flag == 'third') {
-        this.activeOne = false
-        this.activeTwo = false
-        this.activeThree = true
-        this.$router.push({ name: 'ShareReadCenter' })
+  export default {
+    name: 'public',
+    data() {
+      return {
+        activeItem:0
       }
     },
-    gobooklist() {
-      this.$router.push({ name: 'BookList' })
+    watch: {
+      $route() {
+        switch (this.$route.name) {
+          case "BooksCenter":
+            this.activeItem = 1;
+            break;
+          case "NotesCenter":
+            this.activeItem = 2;
+            break;
+          case "ShareReadCenter":
+            this.activeItem = 3;
+            break;
+        }
+      }
+    },
+    methods: {
+      handleClick(flag) {
+        if (flag == 'first') {
+          this.$router.push({name: 'BooksCenter'})
+        }
+
+        if (flag == 'second') {
+          this.$router.push({name: 'NotesCenter'})
+        }
+        if (flag == 'third') {
+          this.$router.push({name: 'ShareReadCenter'})
+        }
+      },
+      gobooklist() {
+        this.$router.push({name: 'BookList'})
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.read-center-wrap {
-  position: absolute;
-  top: 0;
-  height: 6vh;
-  background: #3a88d5;
-  width: 100%;
-}
-.active {
-  position: relative;
-}
-.active span {
-  color: #fff;
-}
-.active ::before {
-  content: ' ';
-  background: white;
-  height: 5px;
-  width: 5px;
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-}
-.tab-wrapper {
-  height: 6vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .read-center-wrap {
+    position: absolute;
+    top: 0;
+    height: 6vh;
+    background: #3a88d5;
+    width: 100%;
+  }
 
-.tab-wrapper .tab-item {
-  height: 6vh;
-  line-height: 6vh;
-  width: 33%;
-  color: #c6daec;
-  font-weight: bold;
-  justify-content: center;
-}
-.tab-wrapper .tab-item:first-child {
-  border-right: 1px solid #ffffff;
-}
-.tab-wrapper .tab-item:last-child {
-  border-left: 1px solid #ffffff;
-}
+  .active {
+    position: relative;
+  }
 
-.router-view-wrapper {
-  margin-top: 6vh;
-  height: 94vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.click-button {
-  width: 20vh;
-  position: absolute;
-  right: 0vh;
-  z-index: 998;
-  top: 70vh;
-}
-.click-button img {
-  width: 14vh;
-}
+  .active span {
+    color: #fff;
+  }
+
+  .active ::before {
+    content: ' ';
+    background: white;
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+  }
+
+  .tab-wrapper {
+    height: 6vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tab-wrapper .tab-item {
+    height: 6vh;
+    line-height: 6vh;
+    width: 33%;
+    color: #c6daec;
+    font-weight: bold;
+    justify-content: center;
+  }
+
+  .tab-wrapper .tab-item:first-child {
+    border-right: 1px solid #ffffff;
+  }
+
+  .tab-wrapper .tab-item:last-child {
+    border-left: 1px solid #ffffff;
+  }
+
+  .router-view-wrapper {
+    margin-top: 6vh;
+    height: 94vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .click-button {
+    width: 20vh;
+    position: absolute;
+    right: 0vh;
+    z-index: 998;
+    top: 70vh;
+  }
+
+  .click-button img {
+    width: 14vh;
+  }
 </style>
 
 
