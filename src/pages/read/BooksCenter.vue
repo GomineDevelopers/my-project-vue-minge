@@ -117,18 +117,18 @@
   }
 
   .author {
-    width: 80%;
     background-color: #e2edf5;
     border-radius: 5px;
     color: #457094;
     font-size: 0.8rem;
-    padding: 3px 0;
+    padding: 3px 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
   .translate {
+    margin-left: 5px;
     text-align: left;
     height: 3vh;
     line-height: 3vh;
