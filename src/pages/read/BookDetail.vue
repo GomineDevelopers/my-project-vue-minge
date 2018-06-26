@@ -144,7 +144,7 @@
             })
         },
         rewrite(id){
-          this.$router.push({name: 'AddBook',params:{id:id}});
+          this.$router.push({name: 'EditBook',params:{id:id}});
         }
       }
     }

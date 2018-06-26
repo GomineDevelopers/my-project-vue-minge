@@ -130,7 +130,9 @@ export default {
     'radio-picker': RadioPicker
   },
   created(){
-    this.getBookDetailData();
+    if(this.$route.params.id){
+      this.getBookDetailData();
+    }
   },
   methods: {
     getBookDetailData(){
@@ -153,6 +155,9 @@ export default {
           vm.translators = response.data.result.translators;
           vm.totalPage = response.data.result.page_number;
           vm.defaultValue = response.data.result.private_book;
+          vm.imageUrl = response.data.result.img;
+          let q =  response.data.result.img.indexOf('images');
+          vm.postImgName =  response.data.result.img.substring(q);
         })
         .catch(function(error) {
           console.log(error)
