@@ -188,7 +188,7 @@ export default {
       postData.img = vm.postImgName
       postData.book_id = vm.selectedBookname
       postData.chapter = vm.chapterName
-      postData.visible = vm.defaultValue
+      postData.is_private = vm.defaultValue
       postData.content = vm.bookNote
       if (vm.bookValidate()) {
         vm
