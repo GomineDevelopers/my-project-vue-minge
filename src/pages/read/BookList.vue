@@ -77,7 +77,7 @@
                 </div>
               </el-col>
               <el-col :span="10" class="middleDiv">
-                <div>
+                <div class="middleDiv2">
                   <div class="bookTitle" v-text="item.title"></div>
                   <div class="authorDiv">
                     <div class="author" v-text="item.author"></div>
