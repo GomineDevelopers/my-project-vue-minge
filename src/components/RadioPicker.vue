@@ -15,7 +15,7 @@ export default {
   name: 'radio-picker',
   props: {
     radioValues: Array,
-    radioValue: Boolean
+    radioValue: ''
   },
   data() {
     return {

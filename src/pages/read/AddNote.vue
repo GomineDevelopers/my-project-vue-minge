@@ -42,7 +42,19 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">*</span>精彩图片</span>
+                    <span class="register-spanblock"><span class="register-necessary">*</span>笔记</span>
+                </el-col>
+            </el-row>
+            <el-row class="item-content">
+                    <el-col :span="24"  class="aaa">
+                        <el-input v-model="bookNote" placeholder="笔记应不少于15个字" type="textarea" :rows="5"></el-input>
+                    </el-col>
+            </el-row>  
+        </div>
+        <div class="item-wrapper">
+            <el-row class="item-label">
+                <el-col :span="24">
+                    <span class="register-spanblock">精彩图片</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -65,18 +77,6 @@
                         </el-upload>
                     </el-col>
                      </div>
-            </el-row>  
-        </div>
-        <div class="item-wrapper">
-            <el-row class="item-label">
-                <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">*</span>笔记</span>
-                </el-col>
-            </el-row>
-            <el-row class="item-content">
-                    <el-col :span="24">
-                        <el-input v-model="bookNote" placeholder="笔记应不少于15个字" type="textarea" :rows="4"></el-input>
-                    </el-col>
             </el-row>  
         </div>
         <div class="submit-wrapper">
@@ -105,8 +105,8 @@ export default {
         '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images',
       postImgName: '',
       bookOptions: [],
-      checkValues: [{ text: '是', value: true }, { text: '否', value: false }],
-      defaultValue: false
+      checkValues: [{ text: '是', value: 1 }, { text: '否', value: 0 }],
+      defaultValue: 0
     }
   },
   components: {
@@ -154,9 +154,7 @@ export default {
             tmpItem.label = response.data.result[i].title
             tmpOptions[i] = tmpItem
           }
-
           vm.bookOptions = tmpOptions
-          console.log(vm.bookOptions)
         })
         .catch(function(error) {
           console.log(error)
@@ -205,8 +203,8 @@ export default {
           })
           .then(function(response) {
             if (response.status == '200') {
-              vm.$router.replace({
-                name: 'noteList'
+              vm.$router.push({
+                name: 'NoteList'
               })
             }
             console.log(response)

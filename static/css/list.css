@@ -99,6 +99,10 @@
   border: 1px dashed #cccccc;
 }
 
+.note-wrapper .el-textarea__inner {
+  border: 1px solid #cccccc;
+}
+
 .proposal_bg {
   background: url(../image/proposal_bg.png);
   background-size: 100% 100%;
