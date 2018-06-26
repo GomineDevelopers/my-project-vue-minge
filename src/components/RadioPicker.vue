@@ -6,7 +6,7 @@
               <el-radio-button  v-for="(item, index) in radioValues" :key="index" :label="item.value">{{item.text}}</el-radio-button>
             </el-radio-group>
           </el-col>
-          
+
     </el-row>
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 .gender-picker .el-radio-group {
   width: 100%;

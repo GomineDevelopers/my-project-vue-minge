@@ -13,7 +13,7 @@
                         <el-option v-for="item in bookOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                         </el-select>
                     </el-col>
-            </el-row>  
+            </el-row>
         </div>
         <div class="item-wrapper">
             <el-row class="item-label">
@@ -25,7 +25,7 @@
                     <el-col :span="24">
                         <el-input v-model="chapterName" placeholder="请输入章节名称"></el-input>
                     </el-col>
-            </el-row>  
+            </el-row>
         </div>
         <div class="item-wrapper">
             <el-row class="item-label">
@@ -35,9 +35,9 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24">
-                        <radio-picker :radioValues="checkValues" :radioValue="defaultValue"></radio-picker>
+                        <radio-picker :radioValues="checkValues" :radioValue="radioValue" @handleGender="setRadioValues"></radio-picker>
                     </el-col>
-            </el-row>  
+            </el-row>
         </div>
         <div class="item-wrapper">
             <el-row class="item-label">
@@ -49,7 +49,7 @@
                     <el-col :span="24"  class="aaa">
                         <el-input v-model="bookNote" placeholder="笔记应不少于15个字" type="textarea" :rows="5"></el-input>
                     </el-col>
-            </el-row>  
+            </el-row>
         </div>
         <div class="item-wrapper">
             <el-row class="item-label">
@@ -73,11 +73,11 @@
                                 <el-col :span="24">请上传图片</el-col>
                             </el-row>
                             </div>
-                           
+
                         </el-upload>
                     </el-col>
                      </div>
-            </el-row>  
+            </el-row>
         </div>
         <div class="submit-wrapper">
       <el-row class="item-content">
@@ -105,17 +105,21 @@ export default {
         '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images',
       postImgName: '',
       bookOptions: [],
-      checkValues: [{ text: '是', value: 1 }, { text: '否', value: 0 }],
-      defaultValue: 0
+      checkValues: [{ text: '是', value: '1' }, { text: '否', value: '0' }],
+      radioValue: 0
     }
   },
   components: {
     'radio-picker': RadioPicker
   },
   mounted: function() {
+    this.setRadioValues();
     this.getPersonalBookData()
   },
   methods: {
+    setRadioValues: function(radioValue) {
+      this.radioValue = radioValue
+    },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.postImgName = res.result.info.filename
@@ -188,7 +192,7 @@ export default {
       postData.img = vm.postImgName
       postData.book_id = vm.selectedBookname
       postData.chapter = vm.chapterName
-      postData.visible = vm.defaultValue
+      postData.is_private = vm.radioValue
       postData.content = vm.bookNote
       if (vm.bookValidate()) {
         vm
