@@ -73,6 +73,8 @@ import AddBook from '@/pages/read/AddBook'
 import NoteList from '@/pages/read/NoteList'
 //添加笔记
 import AddNote from '@/pages/read/AddNote'
+//我的笔记详情
+import NoteDetail from '@/pages/read/NoteDetail'
 
 
 Vue.use(Router)
@@ -303,6 +305,11 @@ export default new Router({
           path: 'addNote',
           component: AddNote,
           name: 'AddNote'
+        },
+        {
+          path: 'noteDetail',
+          component: NoteDetail,
+          name: 'NoteDetail'
         },
       ],
       meta: {

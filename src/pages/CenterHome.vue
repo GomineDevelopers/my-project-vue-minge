@@ -72,11 +72,11 @@
         </el-col>
       </div>
     </el-row>
-    <el-row class="mt-8">
-      <el-col :span="12" :offset="6">
-        <el-button type="primary" round>上传</el-button>
-      </el-col>
-    </el-row>
+    <!--<el-row class="mt-8">-->
+      <!--<el-col :span="12" :offset="6">-->
+        <!--<el-button type="primary" round>上传</el-button>-->
+      <!--</el-col>-->
+    <!--</el-row>-->
   </div>
 </template>
 
