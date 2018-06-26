@@ -153,6 +153,9 @@ export default {
             tmpItem.value = response.data.result[i].id
             tmpItem.label = response.data.result[i].title
             tmpOptions[i] = tmpItem
+
+            if (tmpItem.value == vm.$route.query.bookId)
+              vm.selectedBookname = tmpItem.value
           }
           vm.bookOptions = tmpOptions
         })
