@@ -298,3 +298,32 @@
 .el-tabs--card>.el-tabs__header .el-tabs__nav {
   border: none;
 }
+/*进度条*/
+.readProgress .el-progress{
+  float: left;
+  width: 55%;
+  height: 5vh;
+  line-height: 5vh;
+}
+
+.readProgress .el-progress__text{
+  color:#ec8947;
+}
+
+.progress .el-progress{
+  float: left;
+  width: 59%;
+  height: 3vh;
+  line-height: 3vh;
+}
+
+.progress .el-progress__text{
+  color:#ebb71d;
+}
+
+
+
+/*图书详情中mini按钮*/
+.el-button--mini{
+  padding: 3px 7px;
+}

@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="在读" name="first" class="tabFirst">
 
-        <div class="no_book" v-if="showItem == 0">
+        <div class="no_book" v-if="!showReading">
           <div class="no_bookImg">
             <img src="../../../static/image/no_book.png">
           </div>
@@ -14,9 +14,9 @@
             </div>
           </div>
         </div>
-
-        <div class="readingBook" v-if="showItem == 1">
-          <div class="card" v-for="(item,index) in privateBookData" :key="index" v-if="item.status == 0">
+        <div class="readingBook" v-else>
+          <div class="card" v-for="(item,index) in privateBookData" :key="index"
+               v-if="item.status == 0" @click="goBookDetail(item.id)">
             <el-row type="flex" justify="space-between">
               <el-col :span="6">
                 <div class="readingBookImg">
@@ -25,7 +25,7 @@
                 </div>
               </el-col>
               <el-col :span="10" class="middleDiv">
-                <div>
+                <div class="middleDiv2">
                   <div class="bookTitle" v-text="item.title"></div>
                   <div class="authorDiv">
                     <div class="author" v-text="item.author"></div>
@@ -35,12 +35,19 @@
                     </div>
                   </div>
                   <div class="publish" v-text="item.publisher"></div>
-                  <div class="progress" ><span v-text="item.page_number"></span>读书进度</div>
+                  <div class="progress">
+                    <el-progress :percentage="80" color="#ebb71d"></el-progress>
+                    <span>读书进度</span>
+                  </div>
+                  <div class="progress">
+                    <el-progress :percentage="80" color="#ebb71d"></el-progress>
+                    <span>读书进度</span>
+                  </div>
                 </div>
               </el-col>
               <el-col :span="6">
-                  <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                  <div class="note">写笔记</div>
+                <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
+                <div class="note">写笔记</div>
               </el-col>
             </el-row>
           </div>
@@ -48,8 +55,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="已读" name="second" class="tabLast">
-
-        <div class="no_book" v-if="showItem == 0">
+        <div class="no_book" v-if="!showRead">
           <div class="no_bookImg">
             <img src="../../../static/image/no_book.png">
           </div>
@@ -60,9 +66,9 @@
             </div>
           </div>
         </div>
-
-        <div class="readBook" v-if="showItem == 1">
-          <div class="card" v-for="(item,index) in privateBookData" :key="index" v-if="item.status == 1">
+        <div class="readBook" v-else>
+          <div class="card" v-for="(item,index) in privateBookData" :key="index"
+               v-if="item.status == 1" @click="goBookDetail(item.id)">
             <el-row type="flex" justify="space-between">
               <el-col :span="6">
                 <div class="readBookImg">
@@ -96,59 +102,68 @@
 </template>
 
 <script>
-    export default {
-      name: "book-list",
-      data() {
-        return {
-          activeName: 'first',
-          showItem : 1,
-          privateBookData : Array
-        }
-      },
-      mounted(){
-        this.getBookList();
-      },
-      methods: {
-        getBookList(){
-          let vm = this;
-          vm.axios(vm.$commonTools.g_restUrl,{
-            params: {
-              i: '8',
-              c: 'entry',
-              p: 'bookmates',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'private_book',
-            }
+  export default {
+    name: "book-list",
+    data() {
+      return {
+        activeName: 'first',
+        showReading: false,
+        showRead: false,
+        privateBookData: Array
+      }
+    },
+    mounted() {
+      this.getBookList();
+    },
+    methods: {
+      getBookList() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'bookmates',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'private_book',
+            showLoading: true
+          }
+        })
+          .then(function (response) {
+            response.data.result.forEach(function (val, index, arr) {
+              if (val.status == 0)
+                vm.showReading = true;
+              else if (val.status == 1)
+                vm.showRead = true;
+              if (vm.showReading && vm.showRead)
+                return false;
+            })
+            vm.privateBookData = response.data.result;
           })
-            .then(function (response) {
-              if(response.data.result){
-                vm.privateBookData = response.data.result;
-              }else{
-                vm.showItem = 0;
-              }
-            })
-            .catch(function (error) {
-              console.log(error)
-            })
-        }
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      goBookDetail(id) {
+        this.$router.push({name: 'BookDetail', params: {id: id}})
       }
     }
+  }
 </script>
 
 <style scoped>
 
   /*无图书*/
-  .no_bookImg img{
+  .no_bookImg img {
     width: 60vw;
   }
 
-  .no_bookDiv{
+  .no_bookDiv {
     display: flex;
     justify-content: center;
   }
 
-  .no_bookText{
+  .no_bookText {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -166,7 +181,7 @@
     border-radius: 4px;
     position: absolute;
     z-index: 1000;
-    right:0px;
+    right: 0px;
     bottom: -25px;
   }
 
@@ -182,7 +197,7 @@
   }
 
   /*图书在读、已读*/
-  .card{
+  .card {
     /*width: 100%;*/
     margin: 2vh 3vh;
     background-color: white;
@@ -190,18 +205,18 @@
     border-radius: 5px;
   }
 
-  .readingBook{
+  .readingBook {
     height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .readingBook,.readBook{
+  .readingBook, .readBook {
     text-align: left;
   }
 
-  .readingBookImg img,.readBookImg img{
+  .readingBookImg img, .readBookImg img {
     margin: 1vh;
     box-shadow: 0px 0px 20px 5px #e9e9e9;
     border-radius: 5px;
@@ -209,13 +224,13 @@
     max-height: 15vh;
   }
 
-  .imgBottom{
+  .imgBottom {
     position: absolute;
     bottom: 10px;
-    margin:0 1vh ;
+    margin: 0 1vh;
     width: 25%;
     font-size: .7rem;
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     color: #457094;
@@ -223,8 +238,17 @@
     letter-spacing: 1px;
   }
 
-  .number{
+  .number {
     color: #eaa41e;
+  }
+
+  .middleDiv {
+    display: flex;
+    align-items: center;
+  }
+
+  .middleDiv2{
+    width: 100%;
   }
 
   .bookTitle {
@@ -237,24 +261,19 @@
     overflow: hidden;
   }
 
-  .middleDiv{
-    display: flex;
-    align-items: center;
-  }
-
-  .authorDiv{
+  .authorDiv {
     display: flex;
     height: 1.5rem;
     line-height: 1.5rem;
   }
 
-  .author{
+  .author {
     background-color: #e2edf5;
     border-radius: 5px;
     color: #457094;
     font-size: 0.8rem;
-    padding:0 5px;
-    width: 14vw;
+    padding: 0 5px;
+    width: 60px;
     height: 1.5rem;
     line-height: 1.5rem;
     text-align: center;
@@ -263,19 +282,20 @@
     overflow: hidden;
   }
 
-  .translate{
+  .translate {
+    width: 50%;
     margin-left: 5px;
     text-align: left;
     display: flex;
     align-items: center;
   }
 
-  .translate img{
+  .translate img {
     width: 16px;
     height: 16px;
   }
 
-  .translate span{
+  .translate span {
     color: #8a969f;
     font-size: 0.7rem;
     display: inline-block;
@@ -284,32 +304,37 @@
     overflow: hidden;
   }
 
-  .publish{
+  .publish {
+    width: 100%;
     color: #8a969f;
     font-size: 0.7rem;
     height: 1.5rem;
     line-height: 1.5rem;
     padding-top: .5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
-  .progress{
+  .progress span{
     color: #8a969f;
     font-size: 0.7rem;
-    height: 1.5rem;
-    line-height: 1.5rem;
+    float: left;
+    height: 3vh;
+    line-height: 3vh;
   }
 
 
-  .time{
+  .time {
     position: absolute;
     right: 10px;
-    top:12px;
+    top: 12px;
     color: #8a969f;
     font-size: 0.7rem;
   }
 
-  .note{
-    height:30px;
+  .note {
+    height: 30px;
     line-height: 30px;
     background-color: #419ddc;
     color: #ffffff;
@@ -317,7 +342,7 @@
     text-align: center;
     padding: 0 5px;
     position: absolute;
-    top:50%;
+    top: 50%;
     margin-top: -15px;
     right: 10px;
     font-size: .9rem;

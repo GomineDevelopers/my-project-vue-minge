@@ -287,12 +287,12 @@ export default new Router({
           name: 'BookList'
         },
         {
-          path: 'bookDetail',
+          path: 'bookDetail/:id',
           component: BookDetail,
           name: 'BookDetail'
         },
         {
-          path: 'addBook',
+          path: 'addBook/:id',
           component: AddBook,
           name: 'AddBook'
         },
