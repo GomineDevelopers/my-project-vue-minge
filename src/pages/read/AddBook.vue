@@ -79,8 +79,8 @@
         </el-row>
       <el-row class="item-content">
         <el-col :span="24">
-            <radio-picker :radioValues="checkValues" :radioValue="defaultValue"></radio-picker>
-          </el-col>
+          <radio-picker :radioValues="checkValues" :radioValue="defaultValue"></radio-picker>
+        </el-col>
       </el-row>
       </div>
       <div class="item-wrapper">
@@ -129,7 +129,35 @@ export default {
   components: {
     'radio-picker': RadioPicker
   },
+  created(){
+    this.getBookDetailData();
+  },
   methods: {
+    getBookDetailData(){
+      let vm = this;
+      vm.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: '8',
+          c: 'entry',
+          p: 'bookmates',
+          do: 'shop',
+          m: 'ewei_shop',
+          ac: 'detail_book',
+          id:vm.$route.params.id
+        }
+      })
+        .then(function(response) {
+          vm.bookName = response.data.result.title;
+          vm.bookPublisher = response.data.result.publisher;
+          vm.writer = response.data.result.author;
+          vm.translators = response.data.result.translators;
+          vm.totalPage = response.data.result.page_number;
+          vm.defaultValue = response.data.result.private_book;
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw)
       this.postImgName = res.result.info.filename

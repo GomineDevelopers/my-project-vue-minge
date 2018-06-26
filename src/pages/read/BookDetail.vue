@@ -17,14 +17,17 @@
             <div class="wrapper textInterception">译者：<span v-text="bookDetailData.translators">猪老八</span></div>
           </el-row>
           <el-row>
-            <div class="wrapper">私密读书：<span>否</span></div>
+            <div class="wrapper">私密读书：
+              <span v-if="bookDetailData == 0">否</span>
+              <span v-else-if="bookDetailData == 1">是</span>
+            </div>
           </el-row>
           <el-row>
             <div class="wrapper">总页数：<span v-text="bookDetailData.page_number"></span><span>页</span></div>
           </el-row>
           <el-row class="wrapper">
               已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
-              <el-button size="mini" type="primary" plain @click="updatePages">更新</el-button>
+              <el-button size="mini" type="primary" plain @click="updatePages" v-if="bookDetailData.status == 0">更新</el-button>
           </el-row>
           <el-row>
             <div class="readProgress">
