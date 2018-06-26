@@ -65,6 +65,8 @@ import NotesCenterDetail from '@/pages/read/NotesCenterDetail'
 import Personal from '@/pages/read/Personal'
 //我的图书
 import BookList from '@/pages/read/BookList'
+//我的图书详情
+import BookDetail from '@/pages/read/BookDetail'
 //添加图书
 import AddBook from '@/pages/read/AddBook'
 //我的笔记
@@ -281,6 +283,11 @@ export default new Router({
           path: 'bookList',
           component: BookList,
           name: 'BookList'
+        },
+        {
+          path: 'bookDetail',
+          component: BookDetail,
+          name: 'BookDetail'
         },
         {
           path: 'addBook',

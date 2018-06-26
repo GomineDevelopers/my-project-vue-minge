@@ -56,6 +56,10 @@
             this.showAdd = true;
             this.addBtnText = "添加图书";
             break;
+          case 'BookDetail':
+            this.activeItem = 1;
+            this.showAdd = false;
+            break;
           case 'NoteList':
             this.activeItem = 2;
             this.showAdd = true;
