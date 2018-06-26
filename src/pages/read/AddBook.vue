@@ -122,42 +122,46 @@ export default {
       writer: '',
       translators: '',
       totalPage: '',
-      checkValues: [{ text: '是', value: true }, { text: '否', value: false }],
-      defaultValue: false
+      checkValues: [{ text: '是', value: '1' }, { text: '否', value: '0' }],
+      radioValue: 0
     }
   },
   components: {
     'radio-picker': RadioPicker
   },
-  created(){
-    if(this.$route.params.id){
-      this.getBookDetailData();
+  created() {
+    if (this.$route.params.id) {
+      this.getBookDetailData()
     }
   },
   methods: {
-    getBookDetailData(){
-      let vm = this;
-      vm.axios(vm.$commonTools.g_restUrl, {
-        params: {
-          i: '8',
-          c: 'entry',
-          p: 'bookmates',
-          do: 'shop',
-          m: 'ewei_shop',
-          ac: 'detail_book',
-          id:vm.$route.params.id
-        }
-      })
+    setRadioValues: function(radioValue) {
+      this.radioValue = radioValue
+    },
+    getBookDetailData() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'bookmates',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'detail_book',
+            id: vm.$route.params.id
+          }
+        })
         .then(function(response) {
-          vm.bookName = response.data.result.title;
-          vm.bookPublisher = response.data.result.publisher;
-          vm.writer = response.data.result.author;
-          vm.translators = response.data.result.translators;
-          vm.totalPage = response.data.result.page_number;
-          vm.defaultValue = response.data.result.private_book;
-          vm.imageUrl = response.data.result.img;
-          let q =  response.data.result.img.indexOf('images');
-          vm.postImgName =  response.data.result.img.substring(q);
+          vm.bookName = response.data.result.title
+          vm.bookPublisher = response.data.result.publisher
+          vm.writer = response.data.result.author
+          vm.translators = response.data.result.translators
+          vm.totalPage = response.data.result.page_number
+          vm.defaultValue = response.data.result.private_book
+          vm.imageUrl = response.data.result.img
+          let q = response.data.result.img.indexOf('images')
+          vm.postImgName = response.data.result.img.substring(q)
         })
         .catch(function(error) {
           console.log(error)

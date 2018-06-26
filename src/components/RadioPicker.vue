@@ -25,7 +25,7 @@ export default {
 
   methods: {
     emitValue() {
-      this.$emit('handleGender', this.defaultValue)
+      this.$emit('handleRadioValue', this.defaultValue)
     }
   }
 }

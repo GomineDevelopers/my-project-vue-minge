@@ -35,7 +35,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24">
-                        <radio-picker :radioValues="checkValues" :radioValue="radioValue" @handleGender="setRadioValues"></radio-picker>
+                        <radio-picker :radioValues="checkValues" :radioValue="radioValue" @handleRadioValue="setRadioValues"></radio-picker>
                     </el-col>
             </el-row>
         </div>
@@ -113,7 +113,7 @@ export default {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    this.setRadioValues();
+    this.setRadioValues()
     this.getPersonalBookData()
   },
   methods: {
