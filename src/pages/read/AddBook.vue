@@ -197,7 +197,7 @@ export default {
           .then(function(response) {
             if (response.status == '200') {
               vm.$router.push({
-                name: 'BookList',
+                name: 'BookList'
               })
             }
             console.log(response)
@@ -263,13 +263,13 @@ export default {
 .submit-wrapper {
   margin-top: 2vh;
   height: 2vh;
+  width: 100%;
 }
 .bottom-btn {
   width: 100%;
   margin-bottom: 2vh;
   padding: 12px 0;
   letter-spacing: 1px;
-  -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
   box-shadow: 0px 0px 20px 5px #e9e9e9;
 }
 </style>
