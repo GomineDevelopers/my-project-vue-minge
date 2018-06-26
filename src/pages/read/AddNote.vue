@@ -238,7 +238,6 @@ export default {
   margin-top: 1.2vh;
 }
 .item-content {
-  margin-top: 1vh;
   display: flex;
   align-items: center;
   text-align: center;
