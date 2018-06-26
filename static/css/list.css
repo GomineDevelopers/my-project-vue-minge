@@ -163,6 +163,14 @@
   height: 100vh;
 }
 
+.book_detail_bg{
+  background: url(../image/book_detail_bg.png);
+  background-size: 100% 100%;
+  position: absolute;
+  width: 100%;
+  height: 92vh;
+}
+
 /*我的民革下我的4块*/
 
 .center-title {
