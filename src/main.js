@@ -19,7 +19,7 @@ import '../static/css/carousel.css'
 /*引入公共样式*/
 import '../static/css/iconfont.css'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.component('vue-headful', vueHeadful);
 Vue.component('v-distpicker', VDistpicker);
 Vue.prototype.$commonTools = commonTools;
@@ -40,10 +40,10 @@ axios.interceptors.request.use(config => {
   }
   return config
 }, error => {
-  loadinginstace.close()
+  loadinginstace.close();
   Element.Message.error({
     message: '加载超时'
-  })
+  });
   return Promise.reject(error)
 })
 // http响应拦截器
