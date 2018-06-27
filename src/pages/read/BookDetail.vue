@@ -18,8 +18,8 @@
           </el-row>
           <el-row>
             <div class="wrapper">私密读书：
-              <span v-if="bookDetailData == 0">否</span>
-              <span v-else-if="bookDetailData == 1">是</span>
+              <span v-if="bookDetailData.private_book == 0">否</span>
+              <span v-else-if="bookDetailData.private_book == 1">是</span>
             </div>
           </el-row>
           <el-row>
@@ -123,25 +123,36 @@
         },
         del(id){
           let vm = this;
-          vm.axios(vm.$commonTools.g_restUrl, {
-            params: {
-              i: '8',
-              c: 'entry',
-              p: 'bookmates',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'del_book',
-              id: id
-            }
-          })
-            .then(function(response) {
-              if(response.data.result.info == '操作成功'){
-                vm.$router.replace({name: 'BookList'});
+          vm.$confirm('是否确定删除此书?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            vm.axios(vm.$commonTools.g_restUrl, {
+              params: {
+                i: '8',
+                c: 'entry',
+                p: 'bookmates',
+                do: 'shop',
+                m: 'ewei_shop',
+                ac: 'del_book',
+                id: id
               }
             })
-            .catch(function(error) {
-              console.log(error)
-            })
+              .then(function(response) {
+                if(response.data.result.info == '操作成功'){
+                  vm.$router.replace({name: 'BookList'});
+                }
+              })
+              .catch(function(error) {
+                console.log(error)
+              })
+          }).catch(() => {
+            vm.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          })
         },
         rewrite(id){
           this.$router.push({name: 'EditBook',params:{id:id}});
