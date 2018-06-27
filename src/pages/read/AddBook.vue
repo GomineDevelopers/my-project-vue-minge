@@ -79,7 +79,7 @@
         </el-row>
       <el-row class="item-content">
         <el-col :span="24">
-          <radio-picker :radioValues="checkValues" :radioValue="defaultValue"></radio-picker>
+          <radio-picker :radioValues="checkValues" :radioValue="radioValue" @handleRadioValue="setRadioValues"></radio-picker>
         </el-col>
       </el-row>
       </div>
@@ -131,12 +131,16 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
-      this.getBookDetailData()
+      this.getBookDetailData();
     }
+  },
+  mounted(){
+    this.setRadioValues();
   },
   methods: {
     setRadioValues: function(radioValue) {
       this.radioValue = radioValue
+      
     },
     getBookDetailData() {
       let vm = this
@@ -158,7 +162,7 @@ export default {
           vm.writer = response.data.result.author
           vm.translators = response.data.result.translators
           vm.totalPage = response.data.result.page_number
-          vm.defaultValue = response.data.result.private_book
+          vm.radioValue = response.data.result.private_book
           vm.imageUrl = response.data.result.img
           let q = response.data.result.img.indexOf('images')
           vm.postImgName = response.data.result.img.substring(q)
@@ -214,7 +218,7 @@ export default {
       postData.publisher = vm.bookPublisher
       postData.author = vm.writer
       postData.translators = vm.translators
-      postData.private_book = vm.defaultValue
+      postData.private_book = vm.radioValue
       postData.page_number = vm.totalPage
 
       if (vm.bookValidate()) {
