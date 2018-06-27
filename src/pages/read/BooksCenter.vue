@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card" v-for="item in bookCenterData">
+    <div class="card" v-for="item in bookCenterData" @click="goBookDetail(item.id)">
       <el-row type="flex" justify="space-between">
         <el-col :span="6">
           <div class="bookImg"><img :src="item.img"></div>
@@ -65,6 +65,9 @@
           .catch(function (error) {
             console.log(error)
           })
+      },
+      goBookDetail(id){
+        this.$router.push({name:'BookDetail',params:{id : id}});
       }
     }
   }
