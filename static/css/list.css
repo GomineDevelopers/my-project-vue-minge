@@ -245,6 +245,10 @@
   width: 80% !important;
 }
 
+.el-select-dropdown {
+  max-width: 80% !important;
+}
+
 .videoList .el-button--mini {
   padding: 2px 4px;
 }
