@@ -1,12 +1,12 @@
 <template>
   <div class="NCD_container">
     <div class="NCD_topContainer">
+       <div class="edit "><span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span></div> 
       <div class="title status-private"> <span>《<span class="title" v-text="noteTitle"></span>》</span>
             <div class="c1" v-show="noteprivate==1"></div>
             <div class="c3"><i class="iconfont icon-lock"></i></div>
-            <span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span>
             </div>
-            
+          
       <div class="chapter" v-text="noteChapter" ></div>
       <div class="content" v-if="noteImg!=''"><img :src="noteImg"/></div>
       <div class="content" v-text="noteContent"> </div>
@@ -123,9 +123,19 @@ export default {
 .title {
   color: #457094;
   font-size: 1.2rem;
-  height: 6vh;
-  line-height: 6vh;
-  padding-top: 3vh;
+  line-height: 1.6rem;
+  margin-top: 1vh;
+}
+.edit{
+  color: #457094;
+  font-size: 0.7rem;
+  height: 1rem;
+}
+.edit .editbutton {
+  position: absolute;
+  font-size: 0.85rem;
+  right: 3vh;
+  top: 1vh;
 }
 
 .chapter {
@@ -226,11 +236,7 @@ export default {
   text-align: center;
   letter-spacing: 0.5px;
 }
-.title .editbutton {
-  position: absolute;
-  font-size: 0.85rem;
-  right: 3vh;
-}
+
 .status-private .c1 {
   border-top: 50px solid #e6a23c;
 }
