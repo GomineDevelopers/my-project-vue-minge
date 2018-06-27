@@ -1,15 +1,15 @@
 <template>
   <div class="NCD_container">
     <div class="NCD_topContainer">
-      <div class="title status-private"> <span>《<span class="title" v-text="this.noteTitle"></span>》</span>
+      <div class="title status-private"> <span>《<span class="title" v-text="noteTitle"></span>》</span>
             <div class="c1" v-show="noteprivate==1"></div>
             <div class="c3"><i class="iconfont icon-lock"></i></div>
             <span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span>
             </div>
             
-      <div class="chapter" v-text="this.noteChapter" ></div>
-      <div class="content"><img :src="this.noteImg"/></div>
-      <div class="content" v-text="this.noteContent"> </div>
+      <div class="chapter" v-text="noteChapter" ></div>
+      <div class="content" v-if="noteImg!=''"><img :src="noteImg"/></div>
+      <div class="content" v-text="noteContent"> </div>
     </div>
     <div class="NCD_bottomContainer" v-show="noteprivate==1">
       <el-row>
@@ -212,23 +212,15 @@ export default {
   left: -3px;
   transform: rotate(-90deg) scale(0.9);
 }
-/* .title.c2 {
-    width: 0;
-    height: 0;
-    border-top: 3vh solid white;
-    border-left: 3vh solid transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-} */
+
 .title .c3 {
-  top: 1vh;
-  left: -1.3vh;
+  top: 0px;
+  left: 4px;
   color: white;
   position: absolute;
-  width: 9vh;
-  height: 3.6vh;
-  line-height: 3.6vh;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
   z-index: 111;
   font-size: 2vw;
   text-align: center;
@@ -240,6 +232,6 @@ export default {
   right: 3vh;
 }
 .status-private .c1 {
-  border-top: 9vh solid #e6a23c;
+  border-top: 50px solid #e6a23c;
 }
 </style>

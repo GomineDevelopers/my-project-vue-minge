@@ -1,23 +1,22 @@
 <template>
   <div class="container">
-    <div class="card" v-for="(item, index) in notelists" :key="index">
+    <div class="card" v-for="(item, index) in notelists" :key="index"  @click="goNoteDetail(item.id)">
       <el-row type="flex" justify="space-between" >
         <el-col :span="24">
-          <div class="bookTitle"><span>《<span v-text="item.title">地图中的历史</span>》</span></div>
+          <div class="bookTitle"><span>《<span v-text="item.title"></span>》</span></div>
           <el-row class="row-item">
             <el-col :span="24">
-              <div class="author" v-text="item.chapter">第九章：决战不可避免</div>
+              <div class="author" v-text="item.chapter"></div>
             </el-col>
           </el-row>
           <el-row class="row-item">
             <el-col :span="24">
-                 <div class="publish" v-text="item.content">网络连载历史小说，作者是当年明月，本名
-                    石悦，广东顺德海关公务员。
+                 <div class="publish" v-text="item.content">
                 </div>
             </el-col>
           </el-row>
           <el-row class="row-item">
-            <el-col :span="12" ><div class="time" v-text="$commonTools.formatDate(item.create_time)">2018-12</div></el-col>
+            <el-col :span="12" ><div class="time" v-text="$commonTools.formatDate(item.create_time)"></div></el-col>
              <el-col :span="12">
                  <div class="translate" v-show="item.is_private==0"><i class="el-icon-edit-outline"></i>24条评论</div>
                  <div class="private-note" v-show="item.is_private==1"><i class="iconfont icon-lock"></i>私人笔记</div>
@@ -41,6 +40,9 @@ export default {
     this.getNoteListData()
   },
   methods: {
+    goNoteDetail(id){
+      this.$router.push({ name: 'NotesCenterDetail', params: { noteId: id } })
+    },
     getNoteListData() {
       let vm = this
       vm

@@ -82,7 +82,7 @@
         <div class="submit-wrapper">
       <el-row class="item-content">
         <el-col :span="24">
-            <el-button class="bottom-btn" type="primary" @click="addNote" round>添加</el-button>
+            <el-button class="bottom-btn" type="primary" @click="addNote" round> <span v-text="changeButtonValue"></span> </el-button>
           </el-col>
       </el-row>
       </div>
@@ -106,7 +106,8 @@ export default {
       postImgName: '',
       bookOptions: [],
       checkValues: [{ text: '是', value: '1' }, { text: '否', value: '0' }],
-      radioValue: 0
+      radioValue: 0,
+      changeButtonValue:'添加'
     }
   },
   components: {
@@ -115,7 +116,8 @@ export default {
   mounted: function() {
     
     if(this.$route.query.noteEditId){
-      this.getExistNoteData()
+      this.getExistNoteData();
+      this.changeButtonValue='修改';
     }
     else{
       this.setRadioValues()
@@ -145,6 +147,7 @@ export default {
             vm.chapterName=response.data.result.chapter;
             vm.bookNote=response.data.result.content;
             vm.radioValue=response.data.result.is_private;
+            vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
              
         })
         .catch(function(error) {

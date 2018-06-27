@@ -10,7 +10,7 @@
               <div class="author" v-text="item.chapter " ></div>
             </el-col>
             <el-col :span="8">
-              <div class="translate"><i class="el-icon-edit-outline"></i></div>
+              <div class="translate"><i class="el-icon-edit-outline"></i> <span></span> <span>条评论</span> </div>
             </el-col>
           </el-row>
           <div class="publish" v-text="item.content "> </div>
@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted: function() {
-    this.getNoteListData();
+    this.getNoteListData()
   },
   methods: {
     getNoteListData() {
