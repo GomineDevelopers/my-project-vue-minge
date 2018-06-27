@@ -22,6 +22,7 @@
                 <div class="readingBookImg">
                   <img :src="item.img">
                   <div class="imgBottom"><span class="number">3</span>篇笔记</div>
+                  <div class="labelDiv" v-if="item.private_book == 1"><i class="el-icon-bell labelIcon"></i></div>
                 </div>
               </el-col>
               <el-col :span="10" class="middleDiv">
@@ -242,6 +243,20 @@ export default {
 
 .number {
   color: #eaa41e;
+}
+
+.labelDiv{
+  position: absolute;
+  border:17px solid;
+  border-color:#ec8947 transparent transparent #ec8947;
+  left:1vh;
+  top: 1vh;
+}
+
+.labelDiv .labelIcon{
+  position: absolute;
+  top:-14px;
+  left:-15px;
 }
 
 .middleDiv {

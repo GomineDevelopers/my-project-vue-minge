@@ -111,6 +111,7 @@
                 do: 'shop',
                 m: 'ewei_shop',
                 ac: 'detail_book',
+                showLoading: true,
                 id:vm.$route.params.id
               }
             })
