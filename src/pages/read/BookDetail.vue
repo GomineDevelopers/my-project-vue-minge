@@ -72,7 +72,15 @@
             inputPattern:  /^[1-9]\d*$/,
             inputErrorMessage: '只能输入非负整数'
           }).then(({ value }) => {
-            vm.updateNewPages(value);
+            if(value > vm.bookDetailData.page_number){
+              vm.$message({
+                type: 'warning',
+                message: '已读页数不能大于总页数'
+              });
+            }else{
+              vm.updateNewPages(value);
+            }
+
           }).catch(() => {
             vm.$message({
               type: 'info',
