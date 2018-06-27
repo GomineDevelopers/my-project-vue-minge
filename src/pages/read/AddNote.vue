@@ -197,7 +197,14 @@ export default {
               
           }
           vm.bookOptions = tmpOptions
-
+          if(vm.$route.query.bookId){
+           vm.bookOptions.forEach(function (val,index,arr) {
+              if(val.value == vm.$route.query.bookId){
+                vm.selectedBookname = val.label;
+              }
+              return false;
+            }) 
+          }
         })
         .catch(function(error) {
           console.log(error)

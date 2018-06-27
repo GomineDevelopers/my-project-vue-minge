@@ -48,7 +48,7 @@
               </el-col>
               <el-col :span="6">
                 <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                <div class="note" @click.stop="writeNote"><i class="iconfont icon-write"></i>写笔记</div>
+                <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
               </el-col>
             </el-row>
           </div>
@@ -149,8 +149,9 @@
       goBookDetail(id) {
         this.$router.push({name: 'BookDetail', params: {id: id}})
       },
-      writeNote(id) {
-        this.$router.push({name: 'AddNote', query: {bookId: id}})
+      writeNote(bookId) {
+      
+        this.$router.push({name: 'AddNote', query: {bookId: bookId}})
       }
     }
   }
