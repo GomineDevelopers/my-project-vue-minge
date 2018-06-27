@@ -1,130 +1,93 @@
 <template>
   <div class="container">
-      <div class="card">
-        <el-row type="flex" justify="space-between">
-          <el-col :span="6">
-            <div class="bookImg"><img src="static/image/book-default.png"></div>
-          </el-col>
-          <el-col :span="10" class="book-container">
-            <div class="bookTitle">地图中的历史</div>
-            <el-row class="book-center">
-              <el-col :span="12">
-                <div class="authorDiv">
-                  <div class="author">王小波</div>
-                </div>
-              </el-col>
-              <el-col :span="12">
-                <div class="translate">
-                  <img src="../../../static/image/interpriter-icon.png">
-                  <span>王小波</span>
-                </div>
-              </el-col>
-            </el-row>
-            <div class="publish">天地人和出版社</div>
-          </el-col>
-          <el-col :span="6" class="reader">
-            <div class="reader-container">
-              <div class="readerPerson">读书人</div>
-              <div class="readerName">长一一</div>
-              <div class="readerTime">2017-07-21</div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+    <div class="card">
+      <el-row>
+        <div class="topDiv">
+          <span>王小波</span>邀请
+          <span>大波</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>翠花</span>
+          一起阅读《明朝那些事儿》
+        </div>
+      </el-row>
+      <el-row>
+        <div class="bottomDiv">
+          <i class="el-icon-message"></i><span>2018-07-23</span>
+        </div>
+      </el-row>
+    </div>
 
     <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="bookImg"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10" class="book-container">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row class="book-center">
-            <el-col :span="12">
-              <div class="authorDiv">
-                <div class="author">王小波</div>
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="translate">
-                <img src="../../../static/image/interpriter-icon.png">
-                <span>王小波</span>
-              </div>
-            </el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerPerson">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
+      <el-row>
+        <div class="topDiv">
+          <span>王小波</span>邀请
+          <span>大波</span>
+          一起阅读《明朝那些事儿》
+        </div>
+      </el-row>
+      <el-row>
+        <div class="bottomDiv">
+          <i class="el-icon-message"></i><span>2018-07-23</span>
+        </div>
       </el-row>
     </div>
+
     <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="bookImg"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10" class="book-container">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row class="book-center">
-            <el-col :span="12">
-              <div class="authorDiv">
-                <div class="author">王小波</div>
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="translate">
-                <img src="../../../static/image/interpriter-icon.png">
-                <span>王小波</span>
-              </div>
-            </el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerPerson">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
+      <el-row>
+        <div class="topDiv">
+          <span>王小波</span>邀请
+          <span>大波</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          一起阅读《明朝那些事儿》
+        </div>
+      </el-row>
+      <el-row>
+        <div class="bottomDiv">
+          <i class="el-icon-message"></i><span>2018-07-23</span>
+        </div>
       </el-row>
     </div>
+
     <div class="card">
-      <el-row type="flex" justify="space-between">
-        <el-col :span="6">
-          <div class="bookImg"><img src="static/image/book-default.png"></div>
-        </el-col>
-        <el-col :span="10" class="book-container">
-          <div class="bookTitle">地图中的历史</div>
-          <el-row class="book-center">
-            <el-col :span="12">
-              <div class="authorDiv">
-                <div class="author">王小波</div>
-              </div>
-            </el-col>
-            <el-col :span="12">
-              <div class="translate">
-                <img src="../../../static/image/interpriter-icon.png">
-                <span>王小波</span>
-              </div>
-            </el-col>
-          </el-row>
-          <div class="publish">天地人和出版社</div>
-        </el-col>
-        <el-col :span="6" class="reader">
-          <div class="reader-container">
-            <div class="readerPerson">读书人</div>
-            <div class="readerName">长一一</div>
-            <div class="readerTime">2017-07-21</div>
-          </div>
-        </el-col>
+      <el-row>
+        <div class="topDiv">
+          <span>王小波</span>邀请
+          <span>大波</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>翠花</span>
+          一起阅读《明朝那些事儿》
+        </div>
+      </el-row>
+      <el-row>
+        <div class="bottomDiv">
+          <i class="el-icon-message"></i><span>2018-07-23</span>
+        </div>
       </el-row>
     </div>
+
+    <div class="card">
+      <el-row>
+        <div class="topDiv">
+          <span>王小波</span>邀请
+          <span>大波</span><span>、</span>
+          <span>阿狗</span><span>、</span>
+          <span>翠花</span>
+          一起阅读《明朝那些事儿》
+        </div>
+      </el-row>
+      <el-row>
+        <div class="bottomDiv">
+          <i class="el-icon-message"></i><span>2018-07-23</span>
+        </div>
+      </el-row>
+    </div>
+
   </div>
 </template>
 
@@ -135,124 +98,33 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  margin: 2vh 3vh;
-  background-color: white;
-  box-shadow: 0px 0px 20px 5px #e9e9e9;
-  border-radius: 5px;
-}
+  .card {
+    margin: 2vh 3vh;
+    background-color: white;
+    box-shadow: 0px 0px 20px 5px #e9e9e9;
+    border-radius: 5px;
+    text-align: left;
+    padding: 2vh;
+  }
 
-.card .bookImg {
-  margin: 1vh;
-  box-shadow: 0px 0px 20px 5px #e9e9e9;
-  border-radius: 5px;
-}
+  .topDiv{
+    line-height: 26px;
+  }
 
-.card .bookImg img {
-  width: 100%;
-  height: 100%;
-}
+  .topDiv span{
+    color:#dc9705;
+    font-weight: bold;
+  }
 
-.book-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  .bottomDiv{
+    text-align: right;
+    margin-top: 10px;
+  }
 
-.book-center {
-  margin: 0 0 1vh 0;
-}
+  .bottomDiv span{
+    padding-left: 5px;
+    color: #8a969f;
+    font-size: .9rem;
+  }
 
-.bookTitle {
-  text-align: left;
-  color: #457094;
-  font-weight: bold;
-  margin: 0 0 1.5vh 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.authorDiv {
-  height: 3vh;
-  line-height: 3vh;
-  display: flex;
-  align-items: center;
-}
-
-.author {
-  width: 80%;
-  background-color: #e2edf5;
-  border-radius: 5px;
-  color: #457094;
-  font-size: 0.8rem;
-  padding: 3px 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.translate {
-  text-align: left;
-  height: 3vh;
-  line-height: 3vh;
-  display: flex;
-  align-items: center;
-}
-
-.translate img {
-  width: 16px;
-  height: 16px;
-}
-
-.translate span {
-  color: #8a969f;
-  font-size: 0.7rem;
-  display: inline-block;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.publish {
-  text-align: left;
-  color: #8a969f;
-  margin: 5px 0;
-  font-size: 0.7rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.reader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.reader-container {
-  background-color: #419ddc;
-  color: #ffffff;
-  font-size: 0.6rem;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  text-align: left;
-}
-.readerName {
-  font-size: 1rem;
-  font-weight: bold;
-  border-top: 1px dashed #ffffff;
-  border-bottom: 1px dashed #ffffff;
-  padding: 0.5vh 0.85vh;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.readerPerson {
-  padding: 0.5vh 0.85vh;
-  letter-spacing: 2px;
-}
-.readerTime {
-  padding: 0.5vh 0.85vh;
-}
 </style>
