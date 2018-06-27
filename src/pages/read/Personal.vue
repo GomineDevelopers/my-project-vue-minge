@@ -51,6 +51,7 @@
     methods: {
       updateActiveItem: function () {
         switch (this.$route.name) {
+          case 'AskRead':
           case 'BookList':
             this.activeItem = 1;
             this.showAdd = true;

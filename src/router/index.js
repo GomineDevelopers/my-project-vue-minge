@@ -75,7 +75,8 @@ import NoteList from '@/pages/read/NoteList'
 import AddNote from '@/pages/read/AddNote'
 //我的笔记详情
 import NoteDetail from '@/pages/read/NoteDetail'
-
+//邀请读书
+import AskRead from '@/pages/read/AskRead'
 
 Vue.use(Router)
 
@@ -314,6 +315,11 @@ export default new Router({
           path: 'noteDetail',
           component: NoteDetail,
           name: 'NoteDetail'
+        },
+        {
+          path: 'askRead',
+          component: AskRead,
+          name: 'AskRead'
         },
       ],
       meta: {
