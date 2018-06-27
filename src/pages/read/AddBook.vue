@@ -126,7 +126,7 @@
         totalPage: '',
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
-        bottonText : '添加'
+        bottomText : '添加'
       }
     },
     components: {
@@ -135,9 +135,9 @@
     created() {
       if (this.$route.params.id) {
         this.getBookDetailData();
-        this.bottonText = "修改";
+        this.bottomText = "修改";
       }else {
-        this.setRadioValues();
+        this.setRadioValues(0);
       }
     },
     methods: {

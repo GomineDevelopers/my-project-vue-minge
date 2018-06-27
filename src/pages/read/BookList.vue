@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="在读" name="first" class="tabFirst">
 
-        <div class="no_book" v-if="!showReading">
+        <div class="no_book" v-if="isLoadFinish && !showReading">
           <div class="no_bookImg">
             <img src="../../../static/image/no_book.png">
           </div>
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="readingBook" v-else>
+        <div class="readingBook" v-if="isLoadFinish && showReading">
           <div class="card" v-for="(item,index) in privateBookData" :key="index"
                v-if="item.status == 0" @click="goBookDetail(item.id)">
             <el-row type="flex" justify="space-between">
@@ -56,7 +56,7 @@
       </el-tab-pane>
 
       <el-tab-pane label="已读" name="second" class="tabLast">
-        <div class="no_book" v-if="!showRead">
+        <div class="no_book" v-if="isLoadFinish && !showRead">
           <div class="no_bookImg">
             <img src="../../../static/image/no_book.png">
           </div>
@@ -67,7 +67,7 @@
             </div>
           </div>
         </div>
-        <div class="readBook" v-else>
+        <div class="readBook" v-if="isLoadFinish && showRead">
           <div class="card" v-for="(item,index) in privateBookData" :key="index"
                v-if="item.status == 1" @click="goBookDetail(item.id)">
             <el-row type="flex" justify="space-between">
@@ -93,7 +93,7 @@
               </el-col>
               <el-col :span="6">
                 <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                <div class="note" @click.stop="writeNote(item.id)">写笔记</div>
+                <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
               </el-col>
             </el-row>
           </div>
@@ -109,9 +109,10 @@
     data() {
       return {
         activeName: 'first',
-        showReading: false,
+        Reading: false,
         showRead: false,
-        privateBookData: Array
+        privateBookData: Array,
+        isLoadFinish:false,
       }
     },
     mounted() {
@@ -120,6 +121,7 @@
     methods: {
       getBookList() {
         let vm = this;
+        vm.isLoadFinish=false;
         vm.axios(vm.$commonTools.g_restUrl, {
             params: {
               i: '8',
@@ -128,7 +130,7 @@
               do: 'shop',
               m: 'ewei_shop',
               ac: 'private_book',
-              showLoading: true
+              showLoading:true
             }
           })
           .then(function (response) {
@@ -138,6 +140,7 @@
               if (vm.showReading && vm.showRead) return false;
             })
             vm.privateBookData = response.data.result;
+            vm.isLoadFinish=true;
           })
           .catch(function (error) {
             console.log(error);
