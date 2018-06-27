@@ -107,15 +107,13 @@ export default {
       bookOptions: [],
       checkValues: [{ text: '是', value: '1' }, { text: '否', value: '0' }],
       radioValue: 0,
-      changeButtonValue:'添加',
-      bookId:''
+      changeButtonValue:'添加'
     }
   },
   components: {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-
     if(this.$route.query.noteEditId){
       this.getExistNoteData();
       this.changeButtonValue='修改';
@@ -196,16 +194,10 @@ export default {
 
             if (tmpItem.value == vm.$route.query.bookId)
               vm.selectedBookname = tmpItem.value
+              
           }
           vm.bookOptions = tmpOptions
-          if(vm.$route.query.noteEditId){
-            vm.bookOptions.forEach(function (val,index,arr) {
-              if(val.label == vm.selectedBookname){
-                vm.bookId = val.value;
-              }
-              return false;
-            })
-          }
+
         })
         .catch(function(error) {
           console.log(error)
