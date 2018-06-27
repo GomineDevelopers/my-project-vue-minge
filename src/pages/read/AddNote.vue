@@ -120,7 +120,7 @@ export default {
       this.changeButtonValue='修改';
     }
     else{
-      this.setRadioValues()
+      this.setRadioValues(0)
     }
    
     this.getPersonalBookData()
@@ -230,6 +230,7 @@ export default {
       postData.book_id = vm.selectedBookname
       postData.chapter = vm.chapterName
       postData.is_private = vm.radioValue
+      console.log(vm.radioValue)
       postData.content = vm.bookNote
       if(vm.$route.query.noteEditId){
         postData.id = vm.$route.query.noteEditId
