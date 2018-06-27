@@ -216,7 +216,7 @@ export default {
 .title .c1 {
   width: 0;
   height: 0;
-  border-left: 9vh solid transparent;
+  border-left: 50px solid transparent;
   position: absolute;
   top: -6px;
   left: -3px;
