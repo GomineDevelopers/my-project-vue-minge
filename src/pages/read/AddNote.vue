@@ -113,10 +113,44 @@ export default {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    this.setRadioValues()
+    
+    if(this.$route.query.noteEditId){
+      this.getExistNoteData()
+    }
+    else{
+      this.setRadioValues()
+    }
+   
     this.getPersonalBookData()
   },
   methods: {
+     getExistNoteData() {
+      let vm = this
+      vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'bookmates',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'detail_experience',
+            id:vm.$route.query.noteEditId
+          }
+        })
+        .then(function(response) {
+            vm.selectedBookname=response.data.result.title;
+            vm.imageUrl = response.data.result.img;
+            let q = response.data.result.img.indexOf('images');
+            vm.postImgName = response.data.result.img.substring(q);
+            vm.chapterName=response.data.result.chapter;
+            vm.bookNote=response.data.result.content;
+            vm.radioValue=response.data.result.is_private;
+             
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
     setRadioValues: function(radioValue) {
       this.radioValue = radioValue
     },
@@ -194,9 +228,11 @@ export default {
       postData.chapter = vm.chapterName
       postData.is_private = vm.radioValue
       postData.content = vm.bookNote
+      if(vm.$route.query.noteEditId){
+        postData.id = vm.$route.query.noteEditId
+      }
       if (vm.bookValidate()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',

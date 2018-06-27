@@ -269,7 +269,7 @@ export default new Router({
           name: 'ShareReadCenter'
         },
         {
-          path: 'notesCenterDetail',
+          path: 'notesCenterDetail/:noteId',
           component: NotesCenterDetail,
           name: 'NotesCenterDetail'
         },

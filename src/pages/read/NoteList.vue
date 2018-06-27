@@ -20,7 +20,7 @@
             <el-col :span="12" ><div class="time" v-text="$commonTools.formatDate(item.create_time)">2018-12</div></el-col>
              <el-col :span="12">
                  <div class="translate" v-show="item.is_private==0"><i class="el-icon-edit-outline"></i>24条评论</div>
-                 <div class="private-note" v-show="item.is_private==1"><i class="el-icon-edit-outline"></i>私人笔记</div>
+                 <div class="private-note" v-show="item.is_private==1"><i class="iconfont icon-lock"></i>私人笔记</div>
              </el-col>
           </el-row>
         </el-col>
@@ -170,6 +170,10 @@ export default {
 
 .readerTime {
   padding: 4px 0;
+}
+
+.icon-lock{
+  font-size:12px;
 }
 </style>
 

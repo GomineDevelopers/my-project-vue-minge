@@ -1,18 +1,23 @@
 <template>
   <div class="NCD_container">
     <div class="NCD_topContainer">
-      <div class="title">《明朝那些事儿》</div>
-      <div class="chapter">第九章：决战不可避免</div>
-      <div class="content">在这段时间里，朱元璋做出的两个决策使得他成为了最终的战争胜利者，第一个决策是高筑墙、广积粮、缓称王，正是这个决定让他避开了天下</div>
+      <div class="title status-private"> <span>《<span class="title" v-text="this.noteTitle"></span>》</span>
+            <div class="c1" v-show="noteprivate==1"></div>
+            <div class="c3"><i class="iconfont icon-lock"></i></div>
+            <span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span>
+            </div>
+            
+      <div class="chapter" v-text="this.noteChapter" ></div>
+      <div class="content"><img :src="this.noteImg"/></div>
+      <div class="content" v-text="this.noteContent"> </div>
     </div>
-    <div class="NCD_bottomContainer">
+    <div class="NCD_bottomContainer" v-show="noteprivate==1">
       <el-row>
           <span class="NCD_bottomContainer-span-icon1"><i class="el-icon-view"></i>&nbsp;<span>1212</span></span>
         <span class="NCD_bottomContainer-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
       </el-row>
-
       <div class="NCD_bottomContainer_commentArea">
-        <div class="NCD_bottomContainer_commentAreaDiv1">
+        <div class="NCD_bottomContainer_commentAreaDiv1">   
           <el-row>
             <el-col :span="3" class="avatar"><img src="../../../static/image/book-default.png"></el-col>
             <el-col :span="21">
@@ -54,19 +59,65 @@
 
 <script>
 export default {
-  name: 'notes-center-detail'
+  name: 'notes-center-detail',
+  data(){
+    return{
+        noteTitle:'',
+        noteImg:'',
+        noteChapter:'',
+        noteContent:'',
+        noteprivate:''
+
+    }
+  },
+  mounted(){
+    this.getNoteCenterDetailData();
+  },
+  methods: {
+    getNoteCenterDetailData() {
+      let vm = this
+      vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'bookmates',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'detail_experience',
+            id:vm.$route.params.noteId
+          }
+        })
+        .then(function(response) {
+             vm.noteTitle=response.data.result.title;
+             vm.noteImg=response.data.result.img;
+             vm.noteChapter=response.data.result.chapter;
+             vm.noteContent=response.data.result.content;
+             vm.noteprivate=response.data.result.is_private;
+             
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    goNoteEdit(){
+      this.$router.push({ name: 'AddNote', query: { noteEditId: this.$route.params.noteId } })
+    }
+  }
 }
 </script>
 
 <style scoped>
 .NCD_container {
   margin: 3vh;
+  
 }
 
 .NCD_topContainer {
+  position: relative;
   background-color: white;
   box-shadow: 0px 0px 20px 5px #e9e9e9;
   border-top: 3px solid #419ddc;
+  
 }
 
 .title {
@@ -79,15 +130,25 @@ export default {
 
 .chapter {
   color: #457094;
-  height: 6vh;
-  line-height: 6vh;
+  padding: 0 3vh 2vh 3vh;
+  word-wrap:break-word; 
+  word-break:break-all; 
 }
 
 .content {
   text-align: left;
+  color: #333333;
   padding: 0 3vh 2vh 3vh;
+  word-wrap:break-word; 
+  word-break:break-all; 
+  
 }
-
+.content img{
+  width: 100%;
+  height: 20vh;
+  border: 1px solid #f5f7fa;
+  border-radius: 5px;
+}
 .NCD_bottomContainer {
   margin-top: 3vh;
 }
@@ -141,5 +202,44 @@ export default {
 .NCD_bottomContainer_commentArea_span {
   font-size: 12px;
   color: #cccccc;
+}
+.title .c1 {
+  width: 0;
+  height: 0;
+  border-left: 9vh solid transparent;
+  position: absolute;
+  top: -6px;
+  left: -3px;
+  transform: rotate(-90deg) scale(0.9);
+}
+/* .title.c2 {
+    width: 0;
+    height: 0;
+    border-top: 3vh solid white;
+    border-left: 3vh solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+.title .c3 {
+  top: 1vh;
+  left: -1.3vh;
+  color: white;
+  position: absolute;
+  width: 9vh;
+  height: 3.6vh;
+  line-height: 3.6vh;
+  z-index: 111;
+  font-size: 2vw;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+.title .editbutton {
+  position: absolute;
+  font-size: 0.85rem;
+  right: 3vh;
+}
+.status-private .c1 {
+  border-top: 9vh solid #e6a23c;
 }
 </style>

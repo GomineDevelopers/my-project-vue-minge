@@ -1,28 +1,26 @@
 <template>
   <div class="container">
-    <div class="card" v-for="(item, index) in notelists" :key="index">
+    <div class="card" v-for="(item, index) in notelists" :key="index" @click="goNoteDetail(item.id)">
       <el-row type="flex" justify="space-between">
 
         <el-col :span="16">
-          <div class="bookTitle"><span >《<span v-text="item.title">地图中的历史</span>》</span></div>
+          <div class="bookTitle"><span >《<span v-text="item.title"></span>》</span></div>
           <el-row>
             <el-col :span="16">
-              <div class="author" v-text="item.chapter " >第九章：决战不可避免</div>
+              <div class="author" v-text="item.chapter " ></div>
             </el-col>
             <el-col :span="8">
-              <div class="translate"><i class="el-icon-edit-outline"></i>24条评论</div>
+              <div class="translate"><i class="el-icon-edit-outline"></i></div>
             </el-col>
           </el-row>
-          <div class="publish" v-text="item.content ">网络连载历史小说，作者是当年明月，本名
-            石悦，广东顺德海关公务员。
-          </div>
+          <div class="publish" v-text="item.content "> </div>
+         
         </el-col>
         <el-col :span="6" class="reader">
           <div class="reader-container">
             <div class="readerTime" >分享人 &nbsp; <i class=" iconfont icon-aixin"></i></div>
-            <div class="readerName" v-text="item.realname ">长一一</div>
-            <div class="readerTime" v-text="$commonTools.formatDate(item.create_time)">2017-07-21</div>
-
+            <div class="readerName" v-text="item.realname "></div>
+            <div class="readerTime" v-text="$commonTools.formatDate(item.create_time)"></div>
           </div>
         </el-col>
       </el-row>
@@ -40,13 +38,12 @@ export default {
     }
   },
   mounted: function() {
-    this.getNoteListData()
+    this.getNoteListData();
   },
   methods: {
     getNoteListData() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -58,12 +55,15 @@ export default {
         })
         .then(function(response) {
           vm.notelists = response.data.result
-          console.log(vm.notelists)
         })
         .catch(function(error) {
           console.log(error)
         })
+    },
+    goNoteDetail(id){
+      this.$router.push({ name: 'NotesCenterDetail', params: { noteId: id } })
     }
+
   }
 }
 </script>
