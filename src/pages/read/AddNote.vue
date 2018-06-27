@@ -253,7 +253,6 @@ export default {
                 name: 'NoteList'
               })
             }
-            console.log(response)
           })
           .catch(function(error) {
             console.log(error)
