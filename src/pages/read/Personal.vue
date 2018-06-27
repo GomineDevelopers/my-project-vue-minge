@@ -143,7 +143,7 @@
     background: #ffffff;
     width: 100%;
     z-index: 999;
-    /* box-shadow: 0px -10px 10px #e9e9e9; */
+    border-top: 1px solid #cccccc;
   }
 
   .active {

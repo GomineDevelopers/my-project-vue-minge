@@ -48,7 +48,7 @@
               </el-col>
               <el-col :span="6">
                 <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                <div class="note" @click.stop="writeNote"><i class="iconfont icon-ymb"></i>写笔记</div>
+                <div class="note" @click.stop="writeNote"><i class="iconfont icon-write"></i>写笔记</div>
               </el-col>
             </el-row>
           </div>
@@ -366,7 +366,7 @@
     padding: 2px 10px;
   }
 
-  .icon-ymb {
+  .icon-write {
     font-size: 12px;
     margin-right: 3px;
   }
