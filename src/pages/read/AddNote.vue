@@ -107,14 +107,15 @@ export default {
       bookOptions: [],
       checkValues: [{ text: '是', value: '1' }, { text: '否', value: '0' }],
       radioValue: 0,
-      changeButtonValue:'添加'
+      changeButtonValue:'添加',
+      bookId:''
     }
   },
   components: {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    
+
     if(this.$route.query.noteEditId){
       this.getExistNoteData();
       this.changeButtonValue='修改';
@@ -122,7 +123,7 @@ export default {
     else{
       this.setRadioValues(0)
     }
-   
+
     this.getPersonalBookData()
   },
   methods: {
@@ -148,7 +149,6 @@ export default {
             vm.bookNote=response.data.result.content;
             vm.radioValue=response.data.result.is_private;
             vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
-             
         })
         .catch(function(error) {
           console.log(error)
@@ -176,8 +176,7 @@ export default {
     },
     getPersonalBookData() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -199,6 +198,14 @@ export default {
               vm.selectedBookname = tmpItem.value
           }
           vm.bookOptions = tmpOptions
+          if(vm.$route.query.noteEditId){
+            vm.bookOptions.forEach(function (val,index,arr) {
+              if(val.label == vm.selectedBookname){
+                vm.bookId = val.value;
+              }
+              return false;
+            })
+          }
         })
         .catch(function(error) {
           console.log(error)
@@ -230,10 +237,10 @@ export default {
       postData.book_id = vm.selectedBookname
       postData.chapter = vm.chapterName
       postData.is_private = vm.radioValue
-      console.log(vm.radioValue)
       postData.content = vm.bookNote
       if(vm.$route.query.noteEditId){
-        postData.id = vm.$route.query.noteEditId
+        postData.id = vm.$route.query.noteEditId;
+        postData.book_id = vm.bookId;
       }
       if (vm.bookValidate()) {
         vm.axios(vm.$commonTools.g_restUrl, {
