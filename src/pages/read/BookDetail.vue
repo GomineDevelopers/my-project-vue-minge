@@ -42,10 +42,10 @@
         </el-col>
       </el-row>
     </div>
-    <div class="iconRight read" v-if="bookDetailData.my_book == 1">
+    <div class="iconRight read" v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
       <i class="iconfont icon-read"/><span class="icon-text">邀伴读书</span>
     </div>
-    <div class="iconRight edit" @click="rewrite(bookDetailData.id)" v-if="bookDetailData.my_book == 1">
+    <div class="iconRight edit" @click="rewrite(bookDetailData.id)" v-if="bookDetailData.my_book == 1  ">
       <i class="el-icon-edit"/><span class="icon-text">编辑</span>
     </div>
     <div class="iconRight delete" @click="del(bookDetailData.id)">
