@@ -21,7 +21,7 @@
               <el-col :span="6">
                 <div class="readingBookImg">
                   <img :src="item.img">
-                  <div class="imgBottom"><span class="number">3</span>篇笔记</div>
+                  <div class="imgBottom"><span class="number" v-text="item.total"></span>篇笔记</div>
                   <div class="labelDiv" v-if="item.private_book == 1"><i class="iconfont icon-lock labelIcon"></i></div>
                 </div>
               </el-col>
@@ -74,7 +74,8 @@
               <el-col :span="6">
                 <div class="readBookImg">
                   <img :src="item.img">
-                  <div class="imgBottom"><span class="number">3</span>篇笔记</div>
+                  <div class="imgBottom"><span class="number" v-text="item.total"></span>篇笔记</div>
+                  <div class="labelDiv" v-if="item.private_book == 1"><i class="iconfont icon-lock labelIcon"></i></div>
                 </div>
               </el-col>
               <el-col :span="10" class="middleDiv">
@@ -114,13 +115,12 @@
       }
     },
     mounted() {
-      this.getBookList()
+      this.getBookList();
     },
     methods: {
       getBookList() {
-        let vm = this
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
             params: {
               i: '8',
               c: 'entry',
@@ -133,14 +133,14 @@
           })
           .then(function (response) {
             response.data.result.forEach(function (val, index, arr) {
-              if (val.status == 0) vm.showReading = true
-              else if (val.status == 1) vm.showRead = true
-              if (vm.showReading && vm.showRead) return false
+              if (val.status == 0) vm.showReading = true;
+              else if (val.status == 1) vm.showRead = true;
+              if (vm.showReading && vm.showRead) return false;
             })
-            vm.privateBookData = response.data.result
+            vm.privateBookData = response.data.result;
           })
           .catch(function (error) {
-            console.log(error)
+            console.log(error);
           })
       },
       goBookDetail(id) {
