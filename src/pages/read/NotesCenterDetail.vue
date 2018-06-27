@@ -122,7 +122,6 @@ export default {
 
 .title {
   color: #457094;
-  font-size: 1.2rem;
   line-height: 1.6rem;
   margin-top: 1vh;
 }
