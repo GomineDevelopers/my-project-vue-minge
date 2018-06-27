@@ -42,7 +42,8 @@
         </el-col>
       </el-row>
     </div>
-    <div class="iconRight read" v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
+    <div class="iconRight read" @click="askRead(bookDetailData.id,bookDetailData.title)"
+         v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
       <i class="iconfont icon-read"/><span class="icon-text">邀伴读书</span>
     </div>
     <div class="iconRight edit" @click="rewrite(bookDetailData.id)" v-if="bookDetailData.my_book == 1  ">
@@ -167,6 +168,9 @@
       },
       rewrite(id) {
         this.$router.push({name: 'EditBook', params: {id: id}});
+      },
+      askRead(id, name) {
+        this.$router.push({name: 'AskRead', query: {bookId: id, bookName: name}});
       }
     }
   }
@@ -209,36 +213,38 @@
     background: #ffffff;
     border-radius: 50%;
     right: 30px;
-    color:#409EFF;
+    color: #409EFF;
     border: 1px solid #409EFF;
   }
 
-  .iconRight i{
+  .iconRight i {
     font-size: 20px;
-    top:50%;
+    top: 50%;
     margin-top: -10px;
     position: absolute;
     left: 50%;
     margin-left: -10px;
   }
 
-  .iconRight  .icon-text {
+  .iconRight .icon-text {
     position: absolute;
     top: 42px;
     font-size: 10px;
     width: 60px;
     margin-left: -30px;
   }
+
   .read {
     top: 100px;
   }
+
   .edit {
     top: 170px;
   }
+
   .delete {
     top: 240px;
   }
-
 
   .title {
     text-overflow: ellipsis;
