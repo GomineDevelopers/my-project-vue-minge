@@ -12,7 +12,7 @@
       </el-row>
       <el-row>
         <div class="bottomDiv">
-          <i class="el-icon-message"></i><span>2018-07-23</span>
+          <i class="iconfont icon-together-read"></i><span>2018-07-23</span>
         </div>
       </el-row>
     </div>

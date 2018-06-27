@@ -98,7 +98,8 @@
         <div class="submit-wrapper">
           <el-row class="item-content">
             <el-col :span="24">
-              <el-button class="bottom-btn" type="primary" @click="addBook" round><span v-text="bottonText"></span></el-button>
+              <el-button class="bottom-btn" type="primary" @click="addBook" round><span v-text="bottomText"></span>
+              </el-button>
             </el-col>
           </el-row>
         </div>
@@ -126,7 +127,7 @@
         totalPage: '',
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
-        bottomText : '添加'
+        bottomText: '添加'
       }
     },
     components: {
@@ -136,7 +137,7 @@
       if (this.$route.params.id) {
         this.getBookDetailData();
         this.bottomText = "修改";
-      }else {
+      } else {
         this.setRadioValues(0);
       }
     },
@@ -241,11 +242,20 @@
           })
             .then(function (response) {
               if (response.status == '200') {
-                vm.$router.push({
-                  name: 'BookList'
-                })
+                let changeLink="";
+                if (vm.$route.params.id) {
+
+                  changeLink = {
+                    name: 'BookDetail',
+                    params: {id: vm.$route.params.id}
+                  }
+                } else {
+                  changeLink = {
+                    name: 'BookList'
+                  }
+                }
+                vm.$router.push(changeLink)
               }
-              console.log(response)
             })
             .catch(function (error) {
               console.log(error)

@@ -27,7 +27,7 @@
           </el-row>
           <el-row class="wrapper">
             已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
-            <el-button size="mini" type="primary" plain @click="updatePages" v-if="bookDetailData.status == 0">更新
+            <el-button size="mini" type="primary" plain @click="updatePages">更新
             </el-button>
           </el-row>
           <el-row>
