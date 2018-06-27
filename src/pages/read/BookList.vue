@@ -109,7 +109,7 @@
     data() {
       return {
         activeName: 'first',
-        Reading: false,
+        showReading:false,
         showRead: false,
         privateBookData: Array,
         isLoadFinish:false,
