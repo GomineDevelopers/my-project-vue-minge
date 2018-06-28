@@ -1,100 +1,66 @@
 <template>
   <div class="container">
-    <div class="card">
+    <div class="card" v-for="item in shareReadList">
       <el-row>
         <div class="topDiv">
-          <span>王小波</span>邀请
-          <span>大波</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>翠花</span>
-          一起阅读《明朝那些事儿》
+          <span class="people">{{item.sender}}</span>邀请
+          <span class="people">{{item.accept}}</span>
+          {{item.book}}
         </div>
       </el-row>
       <el-row>
         <div class="bottomDiv">
-          <i class="iconfont icon-together-read"></i><span>2018-07-23</span>
+          <span><i class="iconfont icon-together-read"></i> &nbsp;{{item.date}}</span>
         </div>
       </el-row>
     </div>
-
-    <div class="card">
-      <el-row>
-        <div class="topDiv">
-          <span>王小波</span>邀请
-          <span>大波</span>
-          一起阅读《明朝那些事儿》
-        </div>
-      </el-row>
-      <el-row>
-        <div class="bottomDiv">
-          <i class="el-icon-message"></i><span>2018-07-23</span>
-        </div>
-      </el-row>
-    </div>
-
-    <div class="card">
-      <el-row>
-        <div class="topDiv">
-          <span>王小波</span>邀请
-          <span>大波</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          一起阅读《明朝那些事儿》
-        </div>
-      </el-row>
-      <el-row>
-        <div class="bottomDiv">
-          <i class="el-icon-message"></i><span>2018-07-23</span>
-        </div>
-      </el-row>
-    </div>
-
-    <div class="card">
-      <el-row>
-        <div class="topDiv">
-          <span>王小波</span>邀请
-          <span>大波</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>翠花</span>
-          一起阅读《明朝那些事儿》
-        </div>
-      </el-row>
-      <el-row>
-        <div class="bottomDiv">
-          <i class="el-icon-message"></i><span>2018-07-23</span>
-        </div>
-      </el-row>
-    </div>
-
-    <div class="card">
-      <el-row>
-        <div class="topDiv">
-          <span>王小波</span>邀请
-          <span>大波</span><span>、</span>
-          <span>阿狗</span><span>、</span>
-          <span>翠花</span>
-          一起阅读《明朝那些事儿》
-        </div>
-      </el-row>
-      <el-row>
-        <div class="bottomDiv">
-          <i class="el-icon-message"></i><span>2018-07-23</span>
-        </div>
-      </el-row>
-    </div>
-
   </div>
 </template>
 
 <script>
-export default {
-  name: 'share-read-center'
-}
+  export default {
+    name: 'share-read-center',
+    data() {
+      return {
+        shareReadList: []
+      }
+    },
+    created() {
+      this.getShareReadList();
+    },
+    methods: {
+      getShareReadList() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'mq',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'mq_invite',
+          }
+        })
+          .then(function (response) {
+            for (let i = 0; i < response.data.result.length; i++) {
+              let message = response.data.result[i].message;
+              let messageArray = message.split(";");
+              let messageObject = {
+                "sender": messageArray[0],
+                "act": messageArray[1],
+                "accept": messageArray[2].substring(0, messageArray[2].length - 1),
+                "book": messageArray[3],
+                "date": vm.$commonTools.formatDate(response.data.result[i].create_time)
+              }
+              vm.shareReadList.push(messageObject);
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+    }
+  }
 </script>
 
 <style scoped>
@@ -107,24 +73,24 @@ export default {
     padding: 2vh;
   }
 
-  .topDiv{
+  .topDiv {
     line-height: 26px;
   }
 
-  .topDiv span{
-    color:#dc9705;
+  .topDiv .people {
+    color: #dc9705;
     font-weight: bold;
   }
 
-  .bottomDiv{
+  .bottomDiv {
     text-align: right;
     margin-top: 10px;
   }
 
-  .bottomDiv span{
+  .bottomDiv span {
     padding-left: 5px;
     color: #8a969f;
-    font-size: .9rem;
+    font-size: 14px;
   }
 
 </style>
