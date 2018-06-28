@@ -23,7 +23,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24"  class="aaa">
-                        <el-input v-model="worksContent" placeholder="请输入作品内容" type="textarea" :rows="7"></el-input>
+                        <el-input v-model="worksContent" placeholder="请输入作品内容" type="textarea" :rows="14"></el-input>
                     </el-col>
             </el-row>
         </div>
@@ -49,7 +49,8 @@ export default {
   data() {
     return {
       worksTitle: '',
-      worksContent: ''
+      worksContent: '',
+      type: '1'
     }
   },
   methods: {
@@ -73,6 +74,7 @@ export default {
       let postData = {}
       postData.title = vm.worksTitle
       postData.content = vm.worksContent
+      postData.type = vm.type
       if (vm.worksValidate()) {
         vm
           .axios(vm.$commonTools.g_restUrl, {
@@ -114,7 +116,7 @@ export default {
 }
 .addworks-wrap {
   text-align: left;
-  margin: 1vh auto;
+  margin: 0vh auto;
   width: 80%;
   display: flex;
   justify-content: center;
@@ -130,6 +132,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
+  margin-top: 1vh;
 }
 .bottom-btn {
   width: 80%;

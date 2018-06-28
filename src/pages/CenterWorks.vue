@@ -39,7 +39,8 @@ export default {
             p: 'works',
             do: 'shop',
             m: 'ewei_shop',
-            ac: 'list_works'
+            ac: 'list_works',
+            type: '1'
           }
         })
         .then(function(response) {
