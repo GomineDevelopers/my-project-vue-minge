@@ -340,3 +340,8 @@
 .el-button--mini{
   padding: 3px 7px;
 }
+
+.my-dialog .el-dialog{
+  top: 50%;
+  margin-top: -95px !important;
+}

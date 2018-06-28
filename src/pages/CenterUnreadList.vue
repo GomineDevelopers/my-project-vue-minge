@@ -31,15 +31,14 @@
           </div>
         </el-col>
       </el-row>
-
-      <el-dialog title="提示" :visible.sync="dialogVisible" width="80%">
-        <span>是否同意读书邀请?</span>
-        <span slot="footer" class="dialog-footer">
+    </div>
+    <el-dialog title="提示" :visible.sync="dialogVisible" :center="true" width="80%" class="my-dialog">
+      <span>是否同意读书邀请?</span>
+      <span slot="footer" class="dialog-footer">
           <el-button @click="changeStatus(4)">拒绝</el-button>
           <el-button type="primary" @click="changeStatus(3)">通过</el-button>
         </span>
-      </el-dialog>
-    </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -104,13 +103,21 @@
             }
           })
             .then(function (response) {
-              if (response.status == '200') {
+              if (response.data.status == '200') {
                 vm.dialogVisible = false;
                 vm.unreadList.forEach(function(element, index, array) {
                   if (element.id == vm.inviteId) {
                     element.status = temp
                   }
                 })
+              }
+              else if(response.data.status == '201'){
+                vm.$message({
+                  type: 'info',
+                  message: '书已被邀请者删除，该邀请无效。'
+                });
+                vm.dialogVisible = false;
+                vm.getUnreadList();
               }
             })
             .catch(function (error) {
@@ -122,6 +129,7 @@
 </script>
 
 <style scoped>
+
   .center_home_bg{
     overflow-x: hidden;
     overflow-y: auto;

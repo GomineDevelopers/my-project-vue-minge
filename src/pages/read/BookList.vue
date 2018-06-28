@@ -109,10 +109,10 @@
     data() {
       return {
         activeName: 'first',
-        showReading:false,
+        showReading: false,
         showRead: false,
         privateBookData: Array,
-        isLoadFinish:false,
+        isLoadFinish: false,
       }
     },
     mounted() {
@@ -121,26 +121,32 @@
     methods: {
       getBookList() {
         let vm = this;
-        vm.isLoadFinish=false;
+        vm.isLoadFinish = false;
         vm.axios(vm.$commonTools.g_restUrl, {
-            params: {
-              i: '8',
-              c: 'entry',
-              p: 'bookmates',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'private_book',
-              showLoading:true
-            }
-          })
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'bookmates',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'private_book',
+            showLoading: true
+          }
+        })
           .then(function (response) {
-            response.data.result.forEach(function (val, index, arr) {
-              if (val.status == 0) vm.showReading = true;
-              else if (val.status == 1) vm.showRead = true;
-              if (vm.showReading && vm.showRead) return false;
-            })
+            if (response.data && response.data.result) {
+              response.data.result.forEach(function (val, index, arr) {
+                if (val.status == 0) {
+                  vm.showReading = true;
+                }
+                else if (val.status == 1) {
+                  vm.showRead = true;
+                }
+                if (vm.showReading && vm.showRead) return false;
+              })
+            }
             vm.privateBookData = response.data.result;
-            vm.isLoadFinish=true;
+            vm.isLoadFinish = true;
           })
           .catch(function (error) {
             console.log(error);
