@@ -13,7 +13,7 @@
       </el-row>
       <el-row v-for="item in unreadList" :key="item.id">
         <el-col :span="24">
-          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id)">
+          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id,item.status)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
               <div v-text="item.title" class="title" v-if="type != 3"></div>
@@ -31,6 +31,14 @@
           </div>
         </el-col>
       </el-row>
+
+      <el-dialog title="提示" :visible.sync="dialogVisible" width="80%">
+        <span>是否同意读书邀请?</span>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="changeStatus(4)">拒绝</el-button>
+          <el-button type="primary" @click="changeStatus(3)">通过</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -41,7 +49,9 @@
       data () {
         return {
           unreadList : [],
-          type:this.$route.params.type
+          type:this.$route.params.type,
+          inviteId: "",
+          dialogVisible:false
         }
       },
       created(){
@@ -68,27 +78,18 @@
               console.info(error);
             })
         },
-        goDetail(id){
+        goDetail(id,status){
           let vm = this;
           if(vm.$route.params.type == 1){
             this.$router.push({name: 'CheckApply',params: { id: id }});
           }else if(vm.$route.params.type == 2){
             this.$router.push({name: 'CheckProposal',params: { id: id }});
-          }else if(vm.$route.params.type == 3){
-            vm.$confirm('是否同意读书邀请?', '提示', {
-              confirmButtonText: '通过',
-              cancelButtonText: '拒绝',
-              type: 'warning',
-              showClose:false,
-              closeOnClickModal:false
-            }).then(() => {
-              vm.changeStatus(id,3);
-            }).catch(() => {
-              vm.changeStatus(id,4);
-            });
+          }else if(vm.$route.params.type == 3 && status == 1){
+            vm.dialogVisible = true;
+            vm.inviteId = id;
           }
         },
-        changeStatus(id,temp){
+        changeStatus(temp){
           let vm = this;
           vm.axios(vm.$commonTools.g_restUrl, {
             params: {
@@ -98,17 +99,22 @@
               do: "shop",
               m: "ewei_shop",
               ac: "set_invite",
-              id: id,
+              id: vm.inviteId,
               status: temp
             }
           })
             .then(function (response) {
               if (response.status == '200') {
-                vm.$router.go(0);
+                vm.dialogVisible = false;
+                vm.unreadList.forEach(function(element, index, array) {
+                  if (element.id == vm.inviteId) {
+                    element.status = temp
+                  }
+                })
               }
             })
             .catch(function (error) {
-              this.$message(error);
+              console.info(error)
             })
         },
       }
