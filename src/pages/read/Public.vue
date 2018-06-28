@@ -37,9 +37,11 @@
     methods: {
       updateActiveItem: function () {
         switch (this.$route.name) {
+          case "BookDetailPublic":
           case "BooksCenter":
             this.activeItem = 1;
             break;
+          case "NotesCenterDetail":
           case "NotesCenter":
             this.activeItem = 2;
             break;

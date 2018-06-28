@@ -150,7 +150,6 @@
         this.$router.push({name: 'BookDetail', params: {id: id}})
       },
       writeNote(bookId) {
-      
         this.$router.push({name: 'AddNote', query: {bookId: bookId}})
       }
     }

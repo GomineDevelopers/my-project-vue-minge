@@ -67,7 +67,7 @@
           })
       },
       goBookDetail(id){
-        this.$router.push({name:'BookDetail',params:{id : id}});
+        this.$router.push({name:'BookDetailPublic',params:{id : id}});
       }
     }
   }
