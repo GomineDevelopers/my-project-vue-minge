@@ -65,8 +65,10 @@ import NotesCenterDetail from '@/pages/read/NotesCenterDetail'
 import Personal from '@/pages/read/Personal'
 //我的图书
 import BookList from '@/pages/read/BookList'
-//我的图书详情
+//我的私人图书详情
 import BookDetail from '@/pages/read/BookDetail'
+//公开图书详情
+import BookDetailPublic from '@/pages/read/BookDetailPublic'
 //添加图书
 import AddBook from '@/pages/read/AddBook'
 //我的笔记
@@ -273,7 +275,11 @@ export default new Router({
           path: 'notesCenterDetail/:noteId',
           component: NotesCenterDetail,
           name: 'NotesCenterDetail'
-        },
+        },{
+          path: 'bookDetailPublic/:id',
+          component: BookDetailPublic,
+          name: 'BookDetailPublic'
+        }
       ],
       meta: {
         requiresAuth: true
@@ -320,7 +326,7 @@ export default new Router({
           path: 'askRead',
           component: AskRead,
           name: 'AskRead'
-        },
+        }
       ],
       meta: {
         requiresAuth: true
