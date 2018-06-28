@@ -9,7 +9,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24">
-                        <el-select v-model="selectedBookname" placeholder="请选择" size="medium" class="book-select">
+                        <el-select v-model="selectedBook" placeholder="请选择" size="medium" class="book-select">
                         <el-option v-for="item in bookOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
                         </el-select>
                     </el-col>
@@ -96,7 +96,7 @@ export default {
   name: 'add-note',
   data() {
     return {
-      selectedBookname: '',
+      selectedBook:'',
       chapterName: '',
       bookNote: '',
       imageUrl: '',
@@ -192,18 +192,25 @@ export default {
             tmpItem.label = response.data.result[i].title
             tmpOptions[i] = tmpItem
 
-            if (tmpItem.value == vm.$route.query.bookId)
-              vm.selectedBookname = tmpItem.value
-              
-          }
+            /*if (tmpItem.value == vm.$route.query.bookId)
+              vm.selectedBookid = tmpItem.value*/
+            }
           vm.bookOptions = tmpOptions
-          if(vm.$route.query.bookId){
+
+          if(vm.$route.query.bookId){ //图书列表进入
            vm.bookOptions.forEach(function (val,index,arr) {
               if(val.value == vm.$route.query.bookId){
-                vm.selectedBookname = val.label;
+                vm.selectedBook = val.value;
               }
               return false;
-            }) 
+            })
+          }else if(vm.$route.query.noteEditId){ //笔记详情进入
+            vm.bookOptions.forEach(function (val,index,arr) {
+              if(val.label == vm.selectedBookname){
+                vm.selectedBook = val.value;
+              }
+              return false;
+            })
           }
         })
         .catch(function(error) {
@@ -213,7 +220,7 @@ export default {
     bookValidate() {
       let vm = this
       let msg = ''
-      if (!vm.selectedBookname) {
+      if (!vm.selectedBook) {
         msg = '未选择书名'
       } else if (!vm.chapterName) {
         msg = '未填写章节名'
@@ -233,13 +240,12 @@ export default {
       let vm = this
       let postData = {}
       postData.img = vm.postImgName
-      postData.book_id = vm.selectedBookname
+      postData.book_id = vm.selectedBook;
       postData.chapter = vm.chapterName
       postData.is_private = vm.radioValue
       postData.content = vm.bookNote
       if(vm.$route.query.noteEditId){
         postData.id = vm.$route.query.noteEditId;
-        postData.book_id = vm.bookId;
       }
       if (vm.bookValidate()) {
         vm.axios(vm.$commonTools.g_restUrl, {
