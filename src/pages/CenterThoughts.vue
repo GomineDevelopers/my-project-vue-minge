@@ -43,7 +43,8 @@ export default {
             p: 'works',
             do: 'shop',
             m: 'ewei_shop',
-            ac: 'list_feelings'
+            ac: 'list_feelings',
+            type: '2'
           }
         })
         .then(function(response) {
