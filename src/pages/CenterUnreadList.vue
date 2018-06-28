@@ -80,7 +80,9 @@
 
 <style scoped>
   .center_home_bg{
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .Un_container{

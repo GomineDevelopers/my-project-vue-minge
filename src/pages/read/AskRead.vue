@@ -58,7 +58,8 @@
               p: 'user',
               do: 'shop',
               m: 'ewei_shop',
-              ac: 'get_user_list'
+              ac: 'get_user_list',
+              book_id:vm.bookId
             }
           })
           .then(function (response) {
@@ -70,23 +71,29 @@
       },
       sendAsk: function () {
         let vm = this
+        let postData = {}
+        postData.is_private = vm.radioValue;
+        postData.ids = vm.selectFriends;
+        postData.book_id = vm.bookId;
         if (vm.selectFriends.length == 0) {
           vm.$message.error("请至少选择一个伙伴")
         }
         else {
           vm
             .axios(vm.$commonTools.g_restUrl, {
+              method: 'post',
               params: {
                 i: '8',
                 c: 'entry',
                 p: 'user',
                 do: 'shop',
                 m: 'ewei_shop',
-                ac: 'get_user_list'
-              }
+                ac: 'add_invite'
+              },
+              data: vm.$qs.stringify(postData)
             })
             .then(function (response) {
-              if (response.status = "200")
+              if (response.data.status = "200")
                 vm.$router.push({name: 'BookDetail', params: {id: vm.bookId}})
             })
             .catch(function (error) {
