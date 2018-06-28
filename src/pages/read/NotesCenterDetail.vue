@@ -3,7 +3,7 @@
     <div class="NCD_topContainer">
        <div class="edit "><span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span></div> 
       <div class="title status-private"> <span>《<span class="title" v-text="noteTitle"></span>》</span>
-            <div class="c1" v-show="noteprivate==0"></div>
+            <div class="c1" v-show="noteprivate==1"></div>
             <div class="c3"><i class="iconfont icon-lock"></i></div>
             </div>
           
