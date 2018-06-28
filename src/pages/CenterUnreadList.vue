@@ -16,10 +16,12 @@
           <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
-              <div v-text="item.title" class="title"></div>
+              <div v-text="item.title" class="title" v-if="type != 3"></div>
               <div v-if="type == 1" class="Un_card_div">的入党申请</div>
               <div v-else-if="type == 2" class="Un_card_div">的提案</div>
-              <div v-else="type == 3" class="Un_card_div">的读书邀请</div>
+              <div v-else="type == 3" class="Un_card_div3">
+                <div><span v-text="item.nickname" class="nickname"></span>邀请你一起阅读《<span v-text="item.book_name"></span>》</div>
+              </div>
             </div>
             <div class="c1"></div>
             <div class="c2"></div>
@@ -72,8 +74,43 @@
             this.$router.push({name: 'CheckApply',params: { id: id }});
           }else if(vm.$route.params.type == 2){
             this.$router.push({name: 'CheckProposal',params: { id: id }});
-          }else if(vm.$route.params.type == 3){}
-        }
+          }else if(vm.$route.params.type == 3){
+            vm.$confirm('是否同意读书邀请?', '提示', {
+              confirmButtonText: '通过',
+              cancelButtonText: '拒绝',
+              type: 'warning',
+              showClose:false,
+              closeOnClickModal:false
+            }).then(() => {
+              vm.changeStatus(id,3);
+            }).catch(() => {
+              vm.changeStatus(id,4);
+            });
+          }
+        },
+        changeStatus(id,temp){
+          let vm = this;
+          vm.axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: "8",
+              c: "entry",
+              p: "user",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "set_invite",
+              id: id,
+              status: temp
+            }
+          })
+            .then(function (response) {
+              if (response.status == '200') {
+                vm.$router.go(0);
+              }
+            })
+            .catch(function (error) {
+              this.$message(error);
+            })
+        },
       }
     }
 </script>
@@ -162,10 +199,20 @@
   }
 
   .Un_card_div{
+     width: 37.5%;
+     height: 7.5vh;
+     line-height: 7.5vh;
+   }
 
-    width: 37.5%;
-    height: 7.5vh;
-    line-height: 7.5vh;
+  .Un_card_div3{
+    display: flex;
+    align-items: center;
+    margin-right: 8vh;
+    padding: 10px 0;
+  }
+
+  .Un_card_div3 .nickname{
+    color:#56b0f0;
   }
 
   .circle{

@@ -12,7 +12,7 @@
     <div class="row">
       <div class="title" @click="goHome">
         <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
-                                                                                       v-show="hasMessage"></span></span>
+         v-show="hasMessage"></span></span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
@@ -35,7 +35,6 @@
              <div>通过了<span class="text-colored">{{passProposal}}</span>次提案</div>
             </span>
         </div>
-
       </div>
     </div>
     <div class="row">
@@ -77,8 +76,7 @@ export default {
   methods: {
     getCenterData: function() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -90,7 +88,6 @@ export default {
           }
         })
         .then(function(response) {
-          console.log(response)
           vm.name = response.data.result.nickname
           vm.imgUrl = response.data.result.avatar
           vm.hasMessage = response.data.result.mg
