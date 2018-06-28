@@ -37,6 +37,8 @@ import CenterThoughts from '@/pages/CenterThoughts'
 import CenterThoughtsAdd from '@/pages/CenterThoughtsAdd'
 //我的图片
 import CenterPicture from '@/pages/CenterPicture'
+//添加图片
+import CenterPictureAdd from '@/pages/CenterPictureAdd'
 //我的视频
 import CenterVideo from '@/pages/CenterVideo'
 //注册
@@ -205,6 +207,14 @@ export default new Router({
       path: '/center/picture',
       name: 'CenterPicture',
       component: CenterPicture,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/center/addpicture',
+      name: 'CenterPictureAdd',
+      component: CenterPictureAdd,
       meta: {
         requiresAuth: true
       }

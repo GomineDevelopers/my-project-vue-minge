@@ -1,0 +1,142 @@
+<template>
+  <div class="center_home_bg ">
+    <div class="center-title">添加图片</div>
+    <div class="addworks-wrap">
+        <div class="item-wrapper">
+            <el-row class="item-content">
+                <div class="book-cover">
+                    <el-col :span="24">
+                        <el-upload
+                            class="avatar-uploader"
+                            :action=postImageUrl
+                            :show-file-list="false"
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload">
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                            <div v-else>
+                            <i  class="el-icon-picture"></i>
+                            <el-row class="description" >
+                                <el-col :span="24">请上传图片</el-col>
+                            </el-row>
+                            </div>
+
+                        </el-upload>
+                    </el-col>
+                     </div>
+            </el-row>
+        </div>
+       
+        <div class="item-wrapper">
+            <div class="submit-wrapper">
+                <el-row class="item-content">
+                  <el-col :span="24">
+                      <el-button class="bottom-btn" type="primary" @click="addpicture()" round>提交</el-button>
+                    </el-col>
+                </el-row>
+            </div>
+        </div>
+      </div>
+    </div>
+  
+</template>
+
+<script>
+export default {
+  name: 'center-picture-add',
+  data() {
+    return {
+      imageUrl: '',
+      postImageUrl:
+        this.$commonTools.g_restUrl +
+        '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images',
+      postImgName: ''
+    }
+  },
+
+  methods: {
+    //图片上传
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
+      this.postImgName = res.result.info.filename
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isPNG = file.type === 'image/png'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG && !isPNG) {
+        this.$message.error('上传图片只能是 JPG 或PNG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!')
+      }
+      return (isJPG || isPNG) && isLt2M
+    }
+    // 添加图片
+  }
+}
+</script>
+
+<style scoped>
+.addworks-wrap {
+  text-align: left;
+  margin: 10vh auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.item-wrapper {
+  margin-top: 0.1vh;
+}
+.item-wrapper .item-label {
+  margin-top: 1.2vh;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2192e0;
+}
+.item-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 1vh;
+}
+.item-wrapper {
+  margin-top: 0.1vh;
+}
+.book-cover {
+  width: 100%;
+  height: 40vh;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 1vh;
+  display: flex;
+  align-items: center;
+}
+.avatar-uploader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+}
+.item-content .el-icon-picture {
+  font-size: 34vh;
+  color: #bbcad6;
+}
+.avatar-uploader img {
+  width: 100%;
+  height: 40vh;
+}
+.bottom-btn {
+  width: 80%;
+  margin-top: 2vh;
+  background-color: #2192e0;
+  margin-bottom: 2vh;
+  padding: 12px 0;
+  letter-spacing: 1px;
+  -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+}
+</style>
