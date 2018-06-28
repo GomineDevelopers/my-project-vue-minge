@@ -3,7 +3,7 @@
     <div class="NCD_topContainer">
        <div class="edit "><span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span></div> 
       <div class="title status-private"> <span>《<span class="title" v-text="noteTitle"></span>》</span>
-            <div class="c1" v-show="noteprivate==1"></div>
+            <div class="c1" v-show="noteprivate==0"></div>
             <div class="c3"><i class="iconfont icon-lock"></i></div>
             </div>
           
@@ -11,7 +11,7 @@
       <div class="content" v-if="noteImg!=''"><img :src="noteImg"/></div>
       <div class="content" v-text="noteContent"> </div>
     </div>
-    <div class="NCD_bottomContainer" v-show="noteprivate==1">
+    <div class="NCD_bottomContainer" v-show="noteprivate==0">
       <el-row>
           <span class="NCD_bottomContainer-span-icon1"><i class="el-icon-view"></i>&nbsp;<span>1212</span></span>
         <span class="NCD_bottomContainer-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
