@@ -123,18 +123,21 @@ export default {
 .title {
   color: #457094;
   line-height: 1.6rem;
-  margin-top: 1vh;
+  margin-top: 2vh;
 }
 .edit{
-  color: #457094;
   font-size: 0.7rem;
   height: 1rem;
 }
 .edit .editbutton {
-  position: absolute;
-  font-size: 0.85rem;
-  right: 3vh;
-  top: 1vh;
+    position: absolute;
+    font-size: 0.85rem;
+    right: 1vh;
+    top: 1vh;
+    padding: 3px 6px;
+    background-color: #3a87d6;
+    border-radius: 3px;
+    color: white;
 }
 
 .chapter {
@@ -146,6 +149,7 @@ export default {
 
 .content {
   text-align: left;
+  font-size: 0.85rem;
   color: #333333;
   padding: 0 3vh 2vh 3vh;
   word-wrap:break-word; 
