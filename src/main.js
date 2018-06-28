@@ -10,6 +10,7 @@ import axios from 'axios';
 import qs from 'qs';
 import VueAxios from 'vue-axios';
 import gallery from 'img-vuer';
+import VueClipboard from 'vue-clipboard2'
 import App from './App'
 import router from './router'
 import 'element-ui/lib/theme-chalk/index.css';
@@ -27,6 +28,7 @@ Vue.prototype.$qs = qs;
 Vue.use(VueScroller);
 Vue.use(gallery);
 Vue.use(Element, {size: 'small'});
+Vue.use(VueClipboard)
 
 
 // 超时时间

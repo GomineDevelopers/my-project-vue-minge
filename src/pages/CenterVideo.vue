@@ -6,7 +6,12 @@
         <div class="title">视频{{index+1}}</div>
         <div class="middle">
           <span class="text">来源：{{index==0?"抖音":"优酷"}}</span>
-          <span class="url"> <el-button type="info" icon="el-icon-share" size="mini">复制链接</el-button></span>
+          <span class="url">
+            <el-button type="info" icon="el-icon-share" size="mini"
+                        v-clipboard:copy="message"
+                       v-clipboard:success="onCopy"
+                       v-clipboard:error="onError">复制链接</el-button>
+          </span>
         </div>
         <div class="bt">
           <span class="time">{{$commonTools.formatDate(item.create_time)}}</span>
@@ -28,6 +33,7 @@
     data() {
       return {
         videoList: [],
+        message:'http://v.youku.com/v_show/id_XMzI3NTQ5OTYyOA==.html?sharekey=22f5b37c881a9083125402f770de44ac1'
       }
     },
     mounted() {
@@ -53,6 +59,16 @@
             console.log(error);
           });
       },
+      onCopy: function (e) {
+        /*alert(e.text)*/
+        this.$message({
+          message: '复制成功！请去浏览器中打开视频',
+          type: 'success'
+        });
+      },
+      onError: function (e) {
+        /*alert('Failed to copy texts')*/
+      }
     }
   }
 </script>
