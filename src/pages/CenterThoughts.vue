@@ -1,16 +1,20 @@
 <template>
   <div class="center_home_bg ">
-    <div class="center-title">我的作品</div>
-    <div class="worksList center-list">
-      <div class="works-cover" v-for="(item,index) in worksList">
+    <div class="center-title">我的感想</div>
+    <div class="feedbackList center-list">
+      <div class="video-cover" v-for="(item,index) in feedbackList">
         <div class="title">{{item.title}}</div>
+        <div class="middle">
+          {{item.content}}
+        </div>
         <div class="bt">
           <span class="time">{{$commonTools.formatDate(item.create_time)}}</span>
-          <span class="delete"><i class="el-icon-delete"></i>&nbsp;删除</span></div>
+          <span class="delete"><i class="el-icon-delete"></i>&nbsp;删除</span>
+        </div>
       </div>
     </div>
     <div class="center-footer">
-      <div class="center-add-btn" @click="goAddWorks()"></div>
+      <div class="center-add-btn" @click="goAddThoughts()"></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
     </div>
@@ -19,17 +23,17 @@
 
 <script>
 export default {
-  name: 'center-works',
+  name: 'center-feedback',
   data() {
     return {
-      worksList: []
+      feedbackList: []
     }
   },
   mounted() {
-    this.getWorksList()
+    this.getFeedbackList()
   },
   methods: {
-    getWorksList: function() {
+    getFeedbackList: function() {
       let vm = this
       vm
         .axios(vm.$commonTools.g_restUrl, {
@@ -39,19 +43,19 @@ export default {
             p: 'works',
             do: 'shop',
             m: 'ewei_shop',
-            ac: 'list_works'
+            ac: 'list_feelings'
           }
         })
         .then(function(response) {
-          vm.worksList = response.data.result
+          vm.feedbackList = response.data.result
         })
         .catch(function(error) {
           console.log(error)
         })
     },
-    goAddWorks() {
+    goAddThoughts() {
       this.$router.push({
-        name: 'CenterAddWorks'
+        name: 'CenterAddThoughts'
       })
     }
   }
@@ -59,15 +63,14 @@ export default {
 </script>
 
 <style scoped>
-.works-cover {
-  height: 11vh;
+.video-cover {
+  height: 15vh;
   border-radius: 5px;
   background: #ffffff;
-  border-left: 5px solid #2f81b9;
   margin-bottom: 1vh;
 }
 
-.works-cover .title {
+.video-cover .title {
   height: 6vh;
   line-height: 6vh;
   color: #2f81b9;
@@ -79,9 +82,21 @@ export default {
   white-space: nowrap;
 }
 
-.works-cover .bt {
+.video-cover .middle {
   height: 5vh;
   line-height: 5vh;
+  padding: 0 10px;
+  color: #628ba8;
+  font-size: 14px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-cover .bt {
+  height: 4vh;
+  line-height: 4vh;
   color: #a2aab1;
   font-size: 14px;
   text-align: left;

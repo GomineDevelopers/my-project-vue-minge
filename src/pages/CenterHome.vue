@@ -81,217 +81,217 @@
 </template>
 
 <script>
-  export default {
-    name: "center-home",
-    data() {
-      return {
-        partyNum: 0,
-        proposalNum: 0,
-        inviteNum: 0,
-        grade: 1,
-      }
-    },
-    mounted() {
-      this.getCenterHomeData();
-    },
-    methods: {
-      getCenterHomeData: function () {
-        let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
+export default {
+  name: 'center-home',
+  data() {
+    return {
+      partyNum: 0,
+      proposalNum: 0,
+      inviteNum: 0,
+      grade: 1
+    }
+  },
+  mounted() {
+    this.getCenterHomeData()
+  },
+  methods: {
+    getCenterHomeData: function() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
-            i: "8",
-            c: "entry",
-            p: "user",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "get_remind",
-            showLoading:true
+            i: '8',
+            c: 'entry',
+            p: 'user',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'get_remind',
+            showLoading: true
           }
         })
-          .then(function (response) {
-            vm.partyNum = response.data.result.party;
-            vm.proposalNum = response.data.result.proposal;
-            vm.inviteNum = response.data.result.invite;
-            vm.grade = response.data.result.grade;
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      },
-      goComment: function () {
-        this.$router.push({name: 'CenterComment'});
-      },
-      goHome: function () {
-        this.$router.push({name: 'CenterHome'});
-      },
-      goWorks: function () {
-        this.$router.push({name: 'CenterWorks'});
-      },
-      goFeedback: function () {
-        this.$router.push({name: 'CenterFeedback'});
-      },
-      goPicture: function () {
-        this.$router.push({name: 'CenterPicture'});
-      },
-      goVideo: function () {
-        this.$router.push({name: 'CenterVideo'});
-      },
-      goUnreadList:function (temp) {
-        this.$router.push({name: 'CenterUnreadList',params: { type: temp }});
-      }
+        .then(function(response) {
+          vm.partyNum = response.data.result.party
+          vm.proposalNum = response.data.result.proposal
+          vm.inviteNum = response.data.result.invite
+          vm.grade = response.data.result.grade
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    goComment: function() {
+      this.$router.push({ name: 'CenterComment' })
+    },
+    goHome: function() {
+      this.$router.push({ name: 'CenterHome' })
+    },
+    goWorks: function() {
+      this.$router.push({ name: 'CenterWorks' })
+    },
+    goFeedback: function() {
+      this.$router.push({ name: 'CenterThoughts' })
+    },
+    goPicture: function() {
+      this.$router.push({ name: 'CenterPicture' })
+    },
+    goVideo: function() {
+      this.$router.push({ name: 'CenterVideo' })
+    },
+    goUnreadList: function(temp) {
+      this.$router.push({ name: 'CenterUnreadList', params: { type: temp } })
     }
   }
+}
 </script>
 
 <style scoped>
-  .mt-10 {
-    margin-top: 10vh;
-  }
+.mt-10 {
+  margin-top: 10vh;
+}
 
-  .mt-5 {
-    margin-top: 5vh;
-  }
+.mt-5 {
+  margin-top: 5vh;
+}
 
-  .mt-8 {
-    margin-top: 8vh;
-  }
+.mt-8 {
+  margin-top: 8vh;
+}
 
-  .mt-1-5 {
-    margin-top: 1.5vh;
-  }
+.mt-1-5 {
+  margin-top: 1.5vh;
+}
 
-  .document-cover {
-    width: 39.5%;
-  }
+.document-cover {
+  width: 39.5%;
+}
 
-  .title-cover {
-    position: absolute;
-  }
+.title-cover {
+  position: absolute;
+}
 
-  .title {
-    padding-left: 3px;
-  }
+.title {
+  padding-left: 3px;
+}
 
-  .title::before {
-    content: "";
-    position: absolute;
-    top: 20%;
-    left: -3px;
-    height: 70%;
-    border-radius: 30%;
-    width: 4px;
-    background: #2293e0;
-  }
+.title::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -3px;
+  height: 70%;
+  border-radius: 30%;
+  width: 4px;
+  background: #2293e0;
+}
 
-  .message-cover {
-    background: white;
-    line-height: 7vh;
-    height: 7vh;
-    padding: 0 10px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 20px 5px #E9E9E9;
-    position: relative;
-    overflow: hidden;
-  }
+.message-cover {
+  background: white;
+  line-height: 7vh;
+  height: 7vh;
+  padding: 0 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  position: relative;
+  overflow: hidden;
+}
 
-  .message-cover .dot {
-    background: #74baeb;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    margin-top: -4px;
-  }
+.message-cover .dot {
+  background: #74baeb;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  margin-top: -4px;
+}
 
-  .message-cover .message {
-    margin-left: 15px;
-  }
+.message-cover .message {
+  margin-left: 15px;
+}
 
-  .message-cover .number {
-    background: #f0565a;
-    color: white;
-    line-height: 16px;
-    height: 16px;
-    text-align: center;
-    width: 16px;
-    border-radius: 50%;
-    display: inline-block;
-    font-size: 10px;
-    margin-left: 3px;
-    margin-top: 8px;
-    vertical-align: top;
-  }
+.message-cover .number {
+  background: #f0565a;
+  color: white;
+  line-height: 16px;
+  height: 16px;
+  text-align: center;
+  width: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 10px;
+  margin-left: 3px;
+  margin-top: 8px;
+  vertical-align: top;
+}
 
-  .message-cover .more-number {
-    line-height: 10px !important;
-  }
+.message-cover .more-number {
+  line-height: 10px !important;
+}
 
-  .message-cover .iconfont {
-    position: absolute;
-    color: #c1e2fa;
-    right: 5px;
-    line-height: 10px;
-    top: 7px;
-    font-size: 12px;
-    z-index: 1;
-  }
+.message-cover .iconfont {
+  position: absolute;
+  color: #c1e2fa;
+  right: 5px;
+  line-height: 10px;
+  top: 7px;
+  font-size: 12px;
+  z-index: 1;
+}
 
-  .message-cover .c1 {
-    width: 0;
-    height: 0;
-    border-top: 40px solid #56b0f0;
-    border-left: 40px solid transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.message-cover .c1 {
+  width: 0;
+  height: 0;
+  border-top: 40px solid #56b0f0;
+  border-left: 40px solid transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-  .document-cover {
-    background: white;
-    box-shadow: 0px 0px 20px 5px #E9E9E9;
-    border-radius: 5px;
-    position: relative;
-    height: 14vh;
-  }
+.document-cover {
+  background: white;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  border-radius: 5px;
+  position: relative;
+  height: 14vh;
+}
 
-  .document-cover .note {
-    font-size: 36px;
-    left: 20px;
-    top: 12px;
-    position: absolute;
-  }
+.document-cover .note {
+  font-size: 36px;
+  left: 20px;
+  top: 12px;
+  position: absolute;
+}
 
-  .document-cover .text {
-    right: 20px;
-    bottom: 12px;
-    position: absolute;
-    vertical-align: middle;
-  }
+.document-cover .text {
+  right: 20px;
+  bottom: 12px;
+  position: absolute;
+  vertical-align: middle;
+}
 
-  .d1 .iconfont {
-    color: #37c276;
-  }
+.d1 .iconfont {
+  color: #37c276;
+}
 
-  .d2 .iconfont {
-    color: #ed7663;
-  }
+.d2 .iconfont {
+  color: #ed7663;
+}
 
-  .d3 .iconfont {
-    color: #8395ea;
-  }
+.d3 .iconfont {
+  color: #8395ea;
+}
 
-  .d4 .iconfont {
-    color: #e5d020;
-  }
+.d4 .iconfont {
+  color: #e5d020;
+}
 
-  .el-button {
-    width: 100%;
-    height: 5vh;
+.el-button {
+  width: 100%;
+  height: 5vh;
+}
 
-  }
-
-  .el-col {
-    text-align: left;
-  }
+.el-col {
+  text-align: left;
+}
 </style>

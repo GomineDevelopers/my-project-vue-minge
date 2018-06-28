@@ -29,8 +29,12 @@ import CenterHome from '@/pages/CenterHome'
 import CenterComment from '@/pages/CenterComment'
 //我的作品
 import CenterWorks from '@/pages/CenterWorks'
+//添加感想
+import CenterWorksAdd from '@/pages/CenterWorksAdd'
 //我的感想
-import CenterFeedback from '@/pages/CenterFeedback'
+import CenterThoughts from '@/pages/CenterThoughts'
+//添加感想
+import CenterThoughtsAdd from '@/pages/CenterThoughtsAdd'
 //我的图片
 import CenterPicture from '@/pages/CenterPicture'
 //我的视频
@@ -174,11 +178,27 @@ export default new Router({
       }
     },
     {
-      path: '/center/feedback',
-      name: 'CenterFeedback',
-      component: CenterFeedback,
+      path: '/center/addworks',
+      name: 'CenterAddWorks',
+      component: CenterWorksAdd,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/thoughts',
+      name: 'CenterThoughts',
+      component: CenterThoughts,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/center/addthoughts',
+      name: 'CenterAddThoughts',
+      component: CenterThoughtsAdd,
+      meta: {
+        requiresAuth: false
       }
     },
     {
@@ -275,7 +295,7 @@ export default new Router({
           path: 'notesCenterDetail/:noteId',
           component: NotesCenterDetail,
           name: 'NotesCenterDetail'
-        },{
+        }, {
           path: 'bookDetailPublic/:id',
           component: BookDetailPublic,
           name: 'BookDetailPublic'
@@ -302,7 +322,7 @@ export default new Router({
           path: 'addBook/:id',
           component: AddBook,
           name: 'EditBook'
-        },{
+        }, {
           path: 'addBook',
           component: AddBook,
           name: 'AddBook'
