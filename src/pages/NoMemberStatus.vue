@@ -46,9 +46,14 @@
 <script>
   export default {
     name: "member-status",
-    data(){
+    data() {
       return {
         statusId: this.$route.params.statusId
+      }
+    },
+    watch: {
+      $route() {
+        statusId = this.$route.params.statusId
       }
     }
   }
