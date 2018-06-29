@@ -17,7 +17,7 @@
         <div class="readingBook" v-if="isLoadFinish && showReading">
           <div class="card" v-for="(item,index) in privateBookData" :key="index"
                v-if="item.status == 0" @click="goBookDetail(item.id)">
-            <el-row type="flex" justify="space-between">
+            <el-row class="contentDiv">
               <el-col :span="6">
                 <div class="readingBookImg">
                   <img :src="item.img">
@@ -25,30 +25,33 @@
                   <div class="labelDiv" v-if="item.private_book == 1"><i class="iconfont icon-lock labelIcon"></i></div>
                 </div>
               </el-col>
-              <el-col :span="10" class="middleDiv">
-                <div class="middleDiv2">
-                  <div class="bookTitle" v-text="item.title"></div>
-                  <div class="authorDiv">
-                    <div class="author" v-text="item.author"></div>
-                    <div class="translate" v-if="item.translators != '' ">
-                      <img src="../../../static/image/interpriter-icon.png">
-                      <span v-text="item.translators"></span>
+              <el-col :span="18" class="middleDiv">
+                <el-row>
+                  <el-col :span="18">
+                    <div class="middleDiv2">
+                      <div class="bookTitle" v-text="item.title"></div>
+                      <div class="authorDiv">
+                        <div class="author" v-text="item.author"></div>
+                        <div class="translate" v-if="item.translators != '' ">
+                          <img src="../../../static/image/interpriter-icon.png">
+                          <span v-text="item.translators"></span>
+                        </div>
+                      </div>
+                      <div class="publish" v-text="item.publisher"></div>
                     </div>
+                  </el-col>
+                  <el-col :span="6">
+                    <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
+                    <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <div class="progress" v-for="m in item.list" v-if="m.length > 1">
+                    <el-progress :percentage="m.percentage" color="#ebb71d"></el-progress>
+                    <span v-if="m.is_currentuser">我的进度</span>
+                    <span v-if="!m.is_currentuser"><span v-text="m.nickname" class="nickname"></span>的进度</span>
                   </div>
-                  <div class="publish" v-text="item.publisher"></div>
-                  <div class="progress">
-                    <el-progress :percentage="80" color="#ebb71d"></el-progress>
-                    <span>读书进度</span>
-                  </div>
-                  <div class="progress">
-                    <el-progress :percentage="80" color="#ebb71d"></el-progress>
-                    <span>读书进度</span>
-                  </div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
+                </el-row>
               </el-col>
             </el-row>
           </div>
@@ -68,9 +71,9 @@
           </div>
         </div>
         <div class="readBook" v-if="isLoadFinish && showRead">
-          <div class="card" v-for="(item,index) in privateBookData" :key="index"
+          <!--<div class="card" v-for="(item,index) in privateBookData" :key="index"
                v-if="item.status == 1" @click="goBookDetail(item.id)">
-            <el-row type="flex" justify="space-between">
+            <el-row type="flex" justify="space-between" class="contentDiv">
               <el-col :span="6">
                 <div class="readBookImg">
                   <img :src="item.img">
@@ -96,6 +99,39 @@
                 <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
               </el-col>
             </el-row>
+          </div>-->
+          <div class="card" v-for="(item,index) in privateBookData" :key="index"
+               v-if="item.status == 1" @click="goBookDetail(item.id)">
+            <el-row class="contentDiv">
+              <el-col :span="6">
+                <div class="readingBookImg">
+                  <img :src="item.img">
+                  <div class="imgBottom"><span class="number" v-text="item.total"></span>篇笔记</div>
+                  <div class="labelDiv" v-if="item.private_book == 1"><i class="iconfont icon-lock labelIcon"></i></div>
+                </div>
+              </el-col>
+              <el-col :span="18" class="middleDiv">
+                <el-row>
+                  <el-col :span="18">
+                    <div class="middleDiv2">
+                      <div class="bookTitle" v-text="item.title"></div>
+                      <div class="authorDiv">
+                        <div class="author" v-text="item.author"></div>
+                        <div class="translate" v-if="item.translators != '' ">
+                          <img src="../../../static/image/interpriter-icon.png">
+                          <span v-text="item.translators"></span>
+                        </div>
+                      </div>
+                      <div class="publish" v-text="item.publisher"></div>
+                    </div>
+                  </el-col>
+                  <el-col :span="6">
+                    <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
+                    <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
           </div>
         </div>
       </el-tab-pane>
@@ -111,7 +147,7 @@
         activeName: 'first',
         showReading: false,
         showRead: false,
-        privateBookData: Array,
+        privateBookData: '',
         isLoadFinish: false,
       }
     },
@@ -143,7 +179,16 @@
                   vm.showRead = true;
                 }
                 if (vm.showReading && vm.showRead) return false;
-              })
+                let newListData = [];
+                val.list.forEach(function (element,index,arr) {
+                  if(element.is_currentuser){
+                    newListData.unshift(element);
+                  }else{
+                    newListData.push(element)
+                  }
+                })
+                val.list = newListData;
+              });
             }
             vm.privateBookData = response.data.result;
             vm.isLoadFinish = true;
@@ -215,6 +260,10 @@
     border-radius: 5px;
   }
 
+  .contentDiv{
+    padding: 10px;
+  }
+
   .readingBook {
     height: 80vh;
     overflow-x: hidden;
@@ -233,7 +282,7 @@
     box-shadow: 0px 0px 20px 5px #e9e9e9;
     border-radius: 5px;
     width: 100%;
-    max-height: 15vh;
+    /*max-height: 15vh;*/
   }
 
   .imgBottom {
@@ -271,12 +320,12 @@
   }
 
   .middleDiv {
-    display: flex;
-    align-items: center;
+    padding-left: 2vw;
   }
 
   .middleDiv2 {
     width: 100%;
+    padding: 0 12px;
   }
 
   .bookTitle {
@@ -327,6 +376,7 @@
     color: #8a969f;
     font-size: 0.7rem;
     display: inline-block;
+    width: 10vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -370,14 +420,22 @@
     position: absolute;
     top: 50%;
     margin-top: -15px;
-    right: 10px;
+    right: 0px;
     font-size: 0.9rem;
-    padding: 2px 10px;
+    padding: 2px 6px;
   }
 
   .icon-write {
     font-size: 12px;
     margin-right: 3px;
+  }
+
+  .nickname{
+    display: inline-block;
+    max-width: 13vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 </style>
 

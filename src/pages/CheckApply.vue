@@ -12,7 +12,9 @@
       <el-row>
         <el-col :span="24">
           <div class="newApplication_detail">
-            <span class="spanColor">性别：</span><span v-text="application.sex"></span>
+            <span class="spanColor">性别：</span>
+            <span v-if="application.sex == 0">男</span>
+            <span v-else-if="application.sex == 1">女</span>
           </div>
         </el-col>
       </el-row>
@@ -58,7 +60,7 @@
         <el-col :span="24">
           <div class="newApplication_detail_content">
             <span>申请书：</span>
-            <div class="newApplication_content" v-text="application.application"></div>
+            <div class="newApplication_content" v-html="application.application"></div>
             <div class="readMore" @click="changeDiv(2)">查看更多>></div>
           </div>
         </el-col>
