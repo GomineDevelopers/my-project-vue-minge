@@ -8,7 +8,7 @@
         <div style="height: 44px;"></div>
         <div style=" margin-top: -44px">
           <div class="row status"
-               :class="[item.status == 2 ? 'status-success':[item.status == 1 ? 'status-uncheck':'status-wait']]"
+               :class="{'status-wait':item.status == 0  , 'status-uncheck':item.status == 1,'status-success':item.status == 3,'status-refuse':item.status == 4 }"
                v-for="(item,index) in listData">
             <div class="note" v-text='"提案"+(index+1)'></div>
             <div class="block">
@@ -20,7 +20,8 @@
               </div>
               <div class="c1"></div>
               <div class="c2"></div>
-              <div class="c3" v-if="item.status == 2">已通过</div>
+              <div class="c3 status-pass" v-if="item.status == 3">已通过</div>
+              <div class="c3" v-else-if="item.status == 4">被拒绝</div>
               <div class="c3" v-else-if="item.status == 1">审核中</div>
               <div class="c3" v-else-if="item.status == 0">待提交</div>
             </div>
@@ -276,6 +277,10 @@ export default {
 
 .status-wait .c1 {
   border-top: 60px solid #d26e7a;
+}
+
+.status-refuse .c1 {
+  border-top: 60px solid #E6A23C;
 }
 </style>
 
