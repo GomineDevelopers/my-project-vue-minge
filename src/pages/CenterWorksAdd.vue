@@ -11,7 +11,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24">
-                        <el-input v-model="worksTitle" placeholder="请输入标题"></el-input>
+                        <el-input v-model.trim="worksTitle" placeholder="请输入标题"></el-input>
                     </el-col>
             </el-row>
         </div>
@@ -23,7 +23,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24"  class="aaa">
-                        <el-input v-model="worksContent" placeholder="请输入作品内容" type="textarea" :rows="14"></el-input>
+                        <el-input v-model.trim="worksContent" placeholder="请输入作品内容" type="textarea" :rows="14"></el-input>
                     </el-col>
             </el-row>
         </div>
@@ -65,7 +65,7 @@ export default {
       let vm = this
       let msg = ''
       if (!vm.worksTitle) {
-        msg = '未填写作品名称'
+        msg = '未填写作品标题'
       } else if (!vm.worksContent) {
         msg = '未填写作品内容'
       }

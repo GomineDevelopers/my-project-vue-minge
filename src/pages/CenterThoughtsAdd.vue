@@ -11,7 +11,7 @@
             </el-row>
             <el-row class="item-content">
                     <el-col :span="24">
-                        <el-input v-model="thoughtsTitle" placeholder="请输入标题"></el-input>
+                        <el-input v-model.trim="thoughtsTitle" placeholder="请输入感想标题"></el-input>
                     </el-col>
             </el-row>
         </div>
@@ -23,7 +23,7 @@
             </el-row>
             <el-row class="item-content">
               <el-col :span="24"  class="aaa">
-                  <el-input v-model="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
+                  <el-input v-model.trim="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
               </el-col>
             </el-row>
         </div>
@@ -65,9 +65,9 @@ export default {
       let vm = this
       let msg = ''
       if (!vm.thoughtsTitle) {
-        msg = '未填写想法标题'
+        msg = '未填写感想标题'
       } else if (!vm.thoughtsContent) {
-        msg = '未填写想法内容'
+        msg = '未填写感想内容'
       }
       if (msg) {
         vm.$message.error(msg)
