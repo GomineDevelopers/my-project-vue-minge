@@ -1,46 +1,46 @@
 <template>
   <div class="book_detail_bg">
     <div class="book_detail">
-      <el-row>
-        <el-col :span="20">
-          <el-row class="cover">
-            封面：
-            <img :src="bookDetailData.img">
-          </el-row>
-          <el-row>
-            <div class="wrapper title">书名：<span>《</span><span v-text="bookDetailData.title"></span><span>》</span></div>
-          </el-row>
-          <el-row>
-            <div class="wrapper textInterception">作者：<span v-text="bookDetailData.author"></span></div>
-          </el-row>
-          <el-row v-if="bookDetailData.translators != ''">
-            <div class="wrapper textInterception">译者：<span v-text="bookDetailData.translators">猪老八</span></div>
-          </el-row>
-          <el-row>
-            <div class="wrapper">私密读书：
-              <span v-if="bookDetailData.private_book == 0">否</span>
-              <span v-else-if="bookDetailData.private_book == 1">是</span>
-            </div>
-          </el-row>
-          <el-row>
-            <div class="wrapper">总页数：<span v-text="bookDetailData.page_number"></span><span>页</span></div>
-          </el-row>
-          <el-row class="wrapper">
-            已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
-            <el-button size="mini" type="primary" plain @click="updatePages">更新
-            </el-button>
-          </el-row>
-          <el-row>
-            <div class="readProgress">
-              <span>读书进度：</span>
-              <el-progress :percentage="bookDetailData.percentage" color="#ec8947"></el-progress>
-            </div>
-          </el-row>
-          <el-row>
-            <div class="wrapper">读书伙伴：<span>80%小小苏</span></div>
-          </el-row>
-        </el-col>
-      </el-row>
+        <el-row class="cover">
+          封面：
+          <img :src="bookDetailData.img">
+        </el-row>
+        <el-row>
+          <div class="wrapper title">书名：<span>《</span><span v-text="bookDetailData.title"></span><span>》</span></div>
+        </el-row>
+        <el-row>
+          <div class="wrapper textInterception">作者：<span v-text="bookDetailData.author"></span></div>
+        </el-row>
+        <el-row v-if="bookDetailData.translators != ''">
+          <div class="wrapper textInterception">译者：<span v-text="bookDetailData.translators">猪老八</span></div>
+        </el-row>
+        <el-row>
+          <div class="wrapper">私密读书：
+            <span v-if="bookDetailData.private_book == 0">否</span>
+            <span v-else-if="bookDetailData.private_book == 1">是</span>
+          </div>
+        </el-row>
+        <el-row>
+          <div class="wrapper">总页数：<span v-text="bookDetailData.page_number"></span><span>页</span></div>
+        </el-row>
+        <el-row class="wrapper">
+          已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
+          <el-button size="mini" type="primary" plain @click="updatePages">更新
+          </el-button>
+        </el-row>
+        <el-row>
+          <div class="readProgress">
+            <span class="spanLeft">读书进度：</span>
+            <el-progress :percentage="bookDetailData.percentage" color="#ec8947"></el-progress>
+          </div>
+        </el-row>
+        <el-row v-for="item in bookDetailData.list" v-if="item != ''">
+          <div class="wrapper readProgress">
+            <span class="spanLeft">读书伙伴：</span>
+            <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
+            <span class="friendName textInterception" v-text="item.nickname"></span>
+          </div>
+        </el-row>
     </div>
     <div class="iconRight read" @click="askRead(bookDetailData.id,bookDetailData.title)"
          v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
@@ -190,7 +190,7 @@ export default {
 <style scoped>
 .book_detail {
   text-align: left;
-  margin: 12vw 16vw;
+  margin: 12vw 10vw 12vw 16vw;
 }
 
 .cover {
@@ -263,17 +263,27 @@ export default {
   overflow: hidden;
 }
 
-.readProgress span {
+.readProgress .spanLeft {
   float: left;
   height: 5vh;
   line-height: 5vh;
   font-weight: normal;
 }
 
-.textInterception {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
+  .spanWidth{
+    width: 80px;
+  }
+
+  .friendName{
+    display: inline-block;
+    width: 15vw;
+    font-size: .8rem;
+  }
+
+  .textInterception {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 </style>
 

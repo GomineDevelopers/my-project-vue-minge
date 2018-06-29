@@ -318,7 +318,7 @@
 
 .readProgress .el-progress {
   float: left;
-  width: 55%;
+  width: 45%;
   height: 5vh;
   line-height: 5vh;
 }
