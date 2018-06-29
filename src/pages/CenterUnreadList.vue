@@ -7,20 +7,26 @@
           <div class="Un_border-left">
             <span v-if="type == 1">新的入党申请</span>
             <span v-else-if="type == 2">新的提案</span>
-            <span v-else="type == 3">新的读书邀请</span>
+            <span v-else-if="type == 3">新的读书邀请</span>
+            <span v-else-if="type == 4">新的快速验证申请</span>
           </div>
         </el-col>
       </el-row>
       <el-row v-for="item in unreadList" :key="item.id">
         <el-col :span="24">
-          <div class="Un_card" :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]" @click="goDetail(item.id,item.status)">
+          <div class="Un_card"
+               :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]"
+               @click="goDetail(item)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
               <div v-text="item.title" class="title" v-if="type != 3"></div>
+              <div v-text="item.realname" class="title" v-if="type == 4"></div>
               <div v-if="type == 1" class="Un_card_div">的入党申请</div>
+              <div v-if="type == 4" class="Un_card_div">的快速验证申请</div>
               <div v-else-if="type == 2" class="Un_card_div">的提案</div>
-              <div v-else="type == 3" class="Un_card_div3">
-                <div><span v-text="item.nickname" class="nickname"></span>邀请你一起阅读《<span v-text="item.book_name"></span>》</div>
+              <div v-else-if="type == 3" class="Un_card_div3">
+                <div><span v-text="item.nickname" class="nickname"></span>邀请你一起阅读《<span v-text="item.book_name"></span>》
+                </div>
               </div>
             </div>
             <div class="c1"></div>
@@ -39,125 +45,179 @@
           <el-button type="primary" @click="changeStatus(3)">通过</el-button>
         </span>
     </el-dialog>
+    <el-dialog title="是否通过快速验证" :visible.sync="quickDialogVisible" :center="true" width="80%" class="my-dialog">
+      <div class="dialog-div">申请人: {{quickApply.name}}</div>
+      <div class="dialog-div">生日: {{quickApply.date}}</div>
+      <div class="dialog-div">介绍人:{{quickApply.introducer}}</div>
+      <span slot="footer" class="dialog-footer">
+          <el-button @click="changeQuickStatus(quickApply.id ,4)">拒绝</el-button>
+          <el-button type="primary" @click="changeQuickStatus(quickApply.id ,3)">通过</el-button>
+        </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-    export default {
-      name: "CenterUnreadList",
-      data () {
-        return {
-          unreadList : [],
-          type:this.$route.params.type,
-          inviteId: "",
-          dialogVisible:false
+  export default {
+    name: "CenterUnreadList",
+    data() {
+      return {
+        unreadList: [],
+        type: this.$route.params.type,
+        inviteId: "",
+        dialogVisible: false,
+        quickDialogVisible: false,
+        quickApply: {}
+      }
+    },
+    created() {
+      this.getUnreadList();
+    },
+    methods: {
+      getUnreadList() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "mq",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "mq_list",
+            type: vm.$route.params.type,
+          }
+        })
+          .then(function (response) {
+            vm.unreadList = response.data.result;
+          })
+          .catch(function (error) {
+            console.info(error);
+          })
+      },
+      goDetail(item) {
+        let id = item.id;
+        let status = item.status;
+        let vm = this;
+        if (vm.$route.params.type == 1) {
+          this.$router.push({name: 'CheckApply', params: {id: id}});
+        } else if (vm.$route.params.type == 2) {
+          this.$router.push({name: 'CheckProposal', params: {id: id}});
+        } else if (vm.$route.params.type == 3 && status == 1) {
+          vm.dialogVisible = true;
+          vm.inviteId = id;
+        }
+        else if (vm.$route.params.type == 4) {
+          let tmpItem = {}
+          tmpItem.name = item.realname;
+          tmpItem.date = vm.$commonTools.formatDate(item.birth);
+          tmpItem.introducer = item.introducer;
+          tmpItem.id = item.id;
+          vm.quickApply = tmpItem;
+          vm.quickDialogVisible = true;
         }
       },
-      created(){
-        this.getUnreadList();
-      },
-      methods:{
-        getUnreadList(){
-          let vm = this;
-          vm.axios(vm.$commonTools.g_restUrl,{
-            params: {
-              i: "8",
-              c: "entry",
-              p: "mq",
-              do: "shop",
-              m: "ewei_shop",
-              ac: "mq_list",
-              type: vm.$route.params.type,
-            }
-          })
-            .then(function (response) {
-              vm.unreadList = response.data.result;
-            })
-            .catch(function (error) {
-              console.info(error);
-            })
-        },
-        goDetail(id,status){
-          let vm = this;
-          if(vm.$route.params.type == 1){
-            this.$router.push({name: 'CheckApply',params: { id: id }});
-          }else if(vm.$route.params.type == 2){
-            this.$router.push({name: 'CheckProposal',params: { id: id }});
-          }else if(vm.$route.params.type == 3 && status == 1){
-            vm.dialogVisible = true;
-            vm.inviteId = id;
+      changeStatus(temp) {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "set_invite",
+            id: vm.inviteId,
+            status: temp
           }
-        },
-        changeStatus(temp){
-          let vm = this;
-          vm.axios(vm.$commonTools.g_restUrl, {
-            params: {
-              i: "8",
-              c: "entry",
-              p: "user",
-              do: "shop",
-              m: "ewei_shop",
-              ac: "set_invite",
-              id: vm.inviteId,
-              status: temp
+        })
+          .then(function (response) {
+            if (response.data.status == '200') {
+              vm.dialogVisible = false;
+              vm.unreadList.forEach(function (element, index, array) {
+                if (element.id == vm.inviteId) {
+                  element.status = temp
+                }
+              })
+            }
+            else if (response.data.status == '201') {
+              vm.$message({
+                type: 'info',
+                message: '书已被邀请者删除，该邀请无效。'
+              });
+              vm.dialogVisible = false;
+              vm.getUnreadList();
             }
           })
-            .then(function (response) {
-              if (response.data.status == '200') {
-                vm.dialogVisible = false;
-                vm.unreadList.forEach(function(element, index, array) {
-                  if (element.id == vm.inviteId) {
-                    element.status = temp
-                  }
-                })
-              }
-              else if(response.data.status == '201'){
-                vm.$message({
-                  type: 'info',
-                  message: '书已被邀请者删除，该邀请无效。'
-                });
-                vm.dialogVisible = false;
-                vm.getUnreadList();
-              }
-            })
-            .catch(function (error) {
-              console.info(error)
-            })
-        },
-      }
+          .catch(function (error) {
+            console.info(error)
+          })
+      },
+      changeQuickStatus(id, status) {
+        let vm = this;
+        let postData = {
+          'id': id,
+          'status': status
+        }
+        vm.axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
+          params: {
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "edit_verification",
+          },
+          data: vm.$qs.stringify(postData)
+        })
+          .then(function (response) {
+            if (response.data.status == '201') {
+              vm.$message({
+                type: 'info',
+                message: '此申请已被处理，请刷新。'
+              });
+            }
+            vm.dialogVisible = false;
+            vm.getUnreadList();
+          })
+          .catch(function (error) {
+            console.info(error)
+          })
+      },
     }
+  }
 </script>
 
 <style scoped>
 
-  .center_home_bg{
+  .center_home_bg {
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .Un_container{
+  .Un_container {
     margin: 12vh 3vh 0 3vh;
   }
 
-  .Un_border-left{
+  .Un_border-left {
     text-align: left;
     border-left: 3px solid #357baa;
   }
 
-  .Un_border-left span{
+  .Un_border-left span {
     display: inline-block;
     padding-left: 10px;
   }
 
-  .Un_card{
+  .Un_card {
     text-align: left;
     background: #ffffff;
     -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
     box-shadow: 0px 0px 20px 5px #e9e9e9;
     position: relative;
     border-radius: 5px;
-    margin: .5rem  0 .2rem 0;
+    margin: .5rem 0 .2rem 0;
   }
 
   .Un_card .c1 {
@@ -195,49 +255,49 @@
     letter-spacing: 0.5px;
   }
 
-  .Un_card_list{
+  .Un_card_list {
     width: 100%;
-    margin : 0 6vw 0 4vw;
+    margin: 0 6vw 0 4vw;
     display: inline-flex;
   }
 
-  .Un_card .title{
+  .Un_card .title {
     display: inline-block;
     max-width: 52%;
     height: 7.5vh;
     line-height: 7.5vh;
-    color:#56b0f0;
+    color: #56b0f0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
 
-  .Un_card_div{
-     width: 37.5%;
-     height: 7.5vh;
-     line-height: 7.5vh;
-   }
+  .Un_card_div {
+    width: 37.5%;
+    height: 7.5vh;
+    line-height: 7.5vh;
+  }
 
-  .Un_card_div3{
+  .Un_card_div3 {
     display: flex;
     align-items: center;
     margin-right: 8vh;
     padding: 10px 0;
   }
 
-  .Un_card_div3 .nickname{
-    color:#56b0f0;
+  .Un_card_div3 .nickname {
+    color: #56b0f0;
   }
 
-  .circle{
+  .circle {
     display: inline-flex;
   }
 
-  .circle span{
-    width:4.1%;
+  .circle span {
+    width: 4.1%;
     height: 7.5vh;
     line-height: 7.5vh;
-    color:#56b0f0;
+    color: #56b0f0;
   }
 
   .status-success .c1 {
@@ -248,8 +308,13 @@
     border-top: 7.5vh solid #d26e7a;
   }
 
-  .status-refuse .c1{
+  .status-refuse .c1 {
     border-top: 7.5vh solid #E6A23C;
+  }
+
+  .dialog-div {
+    font-size: 16px;
+    margin: .8vh 0;
   }
 
 </style>
