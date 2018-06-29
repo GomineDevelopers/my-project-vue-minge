@@ -35,7 +35,7 @@
           </div>
         </el-row>
         <div class="readFriendDiv">
-          <el-row v-for="(item,index) in bookDetailData.list" v-if="item != ''" :key="index">
+          <el-row v-for="(item,index) in bookDetailData.list" v-if="bookDetailData.list.length != 0" :key="index">
             <div class="wrapper2 readProgress2 readProgressText">
               <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
               <span class="spanLeft spanWidth" v-if="index != 0"></span>
