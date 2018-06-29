@@ -88,7 +88,7 @@
           <el-col :span="24">
             <el-input class="input_border"
               type="textarea"
-              v-model="applycation"
+              v-model.trim="applycation"
               :rows="4"
               placeholder="请输入内容"
                >

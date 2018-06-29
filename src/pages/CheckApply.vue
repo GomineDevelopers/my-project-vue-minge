@@ -238,6 +238,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    height: 8vw;
   }
 
   .readMore {
