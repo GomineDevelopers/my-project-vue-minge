@@ -31,16 +31,19 @@
         <el-row>
           <div class="readProgress">
             <span class="spanLeft">读书进度：</span>
-            <el-progress :percentage="bookDetailData.percentage" color="#ec8947"></el-progress>
+            <el-progress :percentage="bookDetailData.percentage" color="#ec8947" :stroke-width="8"></el-progress>
           </div>
         </el-row>
-        <el-row v-for="item in bookDetailData.list" v-if="item != ''">
-          <div class="wrapper readProgress readProgressText">
-            <span class="spanLeft">读书伙伴：</span>
-            <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
-            <span class="friendName textInterception" v-text="item.nickname"></span>
-          </div>
-        </el-row>
+        <div class="readFriendDiv">
+          <el-row v-for="(item,index) in bookDetailData.list" v-if="item != ''" :key="index">
+            <div class="wrapper2 readProgress2 readProgressText">
+              <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
+              <span class="spanLeft spanWidth" v-if="index != 0"></span>
+              <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
+              <span class="friendName textInterception" v-text="item.nickname"></span>
+            </div>
+          </el-row>
+        </div>
     </div>
     <div class="iconRight read" @click="askRead(bookDetailData.id,bookDetailData.title)"
          v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
@@ -190,7 +193,8 @@ export default {
 <style scoped>
 .book_detail {
   text-align: left;
-  margin: 12vw 10vw 12vw 16vw;
+  margin: 12vw 10vw 12vw 12vw;
+  font-size: 14px;
 }
 
 .cover {
@@ -215,6 +219,11 @@ export default {
 .book_detail .wrapper {
   height: 5vh;
   line-height: 5vh;
+}
+
+.book_detail .wrapper2 {
+  height: 3vh;
+  line-height: 3vh;
 }
 
 .iconRight {
@@ -270,13 +279,24 @@ export default {
   font-weight: normal;
 }
 
+.readFriendDiv{
+  padding-top: 1vh;
+}
+
+.readProgress2 .spanLeft{
+  float: left;
+  height: 3vh;
+  line-height: 3vh;
+  font-weight: normal;
+}
+
   .spanWidth{
-    width: 80px;
+    width: 70px;
   }
 
   .friendName{
     display: inline-block;
-    width: 15vw;
+    width: 24vw;
     font-size: .8rem;
   }
 
