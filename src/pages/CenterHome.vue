@@ -117,7 +117,7 @@
             }
           })
           .then(function (response) {
-            vm.quickNum = response.data.result.party
+            vm.quickNum = response.data.result.quick
             vm.partyNum = response.data.result.party
             vm.proposalNum = response.data.result.proposal
             vm.inviteNum = response.data.result.invite
