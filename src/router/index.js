@@ -179,7 +179,7 @@ export default new Router({
       name: 'CenterWorks',
       component: CenterWorks,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -187,7 +187,7 @@ export default new Router({
       name: 'CenterEditAddWorks',
       component: CenterWorksAdd,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -195,7 +195,7 @@ export default new Router({
       name: 'CenterAddWorks',
       component: CenterWorksAdd,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -203,7 +203,7 @@ export default new Router({
       name: 'CenterThoughts',
       component: CenterThoughts,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -211,14 +211,14 @@ export default new Router({
       name: 'CenterEditThoughts',
       component: CenterThoughtsAdd,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }, {
       path: '/center/addthoughts',
       name: 'CenterAddThoughts',
       component: CenterThoughtsAdd,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -274,7 +274,7 @@ export default new Router({
       name: 'CenterUnreadList',
       component: CenterUnreadList,
       meta: {
-        requiresNoAuth: false
+        requiresAuth: true
       }
     },
     {
