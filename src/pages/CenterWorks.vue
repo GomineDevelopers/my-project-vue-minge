@@ -62,7 +62,7 @@ export default {
       let vm = this
       let postData = {}
       postData.id = id
-      console.log(postData.id)
+
       vm
         .$confirm('是否确定删除此作品?', '提示', {
           confirmButtonText: '确定',
