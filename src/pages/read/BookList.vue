@@ -46,7 +46,7 @@
                   </el-col>
                 </el-row>
                 <el-row>
-                  <div class="progress" v-for="m in item.list" v-if="m.length > 1">
+                  <div class="progress" v-for="m in item.list" v-if="item.list.length > 1">
                     <el-progress :percentage="m.percentage" color="#ebb71d"></el-progress>
                     <span v-if="m.is_currentuser">我的进度</span>
                     <span v-if="!m.is_currentuser"><span v-text="m.nickname" class="nickname"></span>的进度</span>
