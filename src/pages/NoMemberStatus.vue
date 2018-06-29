@@ -53,7 +53,7 @@
     },
     watch: {
       $route() {
-        statusId = this.$route.params.statusId
+        this.statusId = this.$route.params.statusId
       }
     }
   }
