@@ -344,7 +344,12 @@
   padding: 3px 7px;
 }
 
-.my-dialog .el-dialog{
+. read-dialog .my-dialog .el-dialog{
   top: 50%;
   margin-top: -95px !important;
+}
+
+. quick-dialog .my-dialog .el-dialog{
+  top: 50%;
+  margin-top: -127px !important;
 }

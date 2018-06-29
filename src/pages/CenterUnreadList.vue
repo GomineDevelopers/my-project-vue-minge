@@ -38,22 +38,27 @@
         </el-col>
       </el-row>
     </div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" :center="true" width="80%" class="my-dialog">
-      <span>是否同意读书邀请?</span>
-      <span slot="footer" class="dialog-footer">
+    <div class="read-dialog">
+      <el-dialog title="提示" :visible.sync="dialogVisible" :center="true" width="80%" class="my-dialog">
+        <span>是否同意读书邀请?</span>
+        <span slot="footer" class="dialog-footer">
           <el-button @click="changeStatus(4)">拒绝</el-button>
           <el-button type="primary" @click="changeStatus(3)">通过</el-button>
         </span>
-    </el-dialog>
-    <el-dialog title="是否通过快速验证" :visible.sync="quickDialogVisible" :center="true" width="80%" class="my-dialog">
-      <div class="dialog-div">申请人: {{quickApply.name}}</div>
-      <div class="dialog-div">生日: {{quickApply.date}}</div>
-      <div class="dialog-div">介绍人:{{quickApply.introducer}}</div>
-      <span slot="footer" class="dialog-footer">
+      </el-dialog>
+    </div>
+    <div class="quick-dialog">
+      <el-dialog title="是否通过快速验证" :visible.sync="quickDialogVisible" :center="true" width="80%" class="my-dialog">
+        <div class="dialog-div">申请人: {{quickApply.name}}</div>
+        <div class="dialog-div">生日: {{quickApply.date}}</div>
+        <div class="dialog-div">介绍人:{{quickApply.introducer}}</div>
+        <span slot="footer" class="dialog-footer">
           <el-button @click="changeQuickStatus(quickApply.id ,4)">拒绝</el-button>
           <el-button type="primary" @click="changeQuickStatus(quickApply.id ,3)">通过</el-button>
         </span>
-    </el-dialog>
+      </el-dialog>
+    </div>
+
   </div>
 </template>
 
