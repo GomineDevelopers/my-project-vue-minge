@@ -137,7 +137,7 @@
             m: "ewei_shop",
             ac: "set_invite",
           },
-          data:postData
+          data:vm.$qs.stringify(postData)
         })
           .then(function (response) {
             if (response.data.status == '200') {
