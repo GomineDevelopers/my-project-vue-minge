@@ -333,6 +333,7 @@
     color: #457094;
     font-weight: bold;
     margin: 0 0 1.5vh 0;
+    max-width: 35vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -394,6 +395,10 @@
     overflow: hidden;
   }
 
+  .progress{
+    padding-left: 5px;
+  }
+  
   .progress span {
     color: #8a969f;
     font-size: 0.7rem;
@@ -432,7 +437,7 @@
 
   .nickname{
     display: inline-block;
-    max-width: 13vw;
+    max-width: 12vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
