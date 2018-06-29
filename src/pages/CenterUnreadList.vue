@@ -106,7 +106,7 @@
           vm.dialogVisible = true;
           vm.inviteId = id;
         }
-        else if (vm.$route.params.type == 4) {
+        else if (vm.$route.params.type == 4 && status == 1) {
           let tmpItem = {}
           tmpItem.name = item.realname;
           tmpItem.date = vm.$commonTools.formatDate(item.birth);
@@ -177,7 +177,7 @@
                 message: '此申请已被处理，请刷新。'
               });
             }
-            vm.dialogVisible = false;
+            vm.quickDialogVisible = false;
             vm.getUnreadList();
           })
           .catch(function (error) {
