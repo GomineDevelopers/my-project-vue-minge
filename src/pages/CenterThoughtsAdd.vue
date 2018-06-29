@@ -51,13 +51,13 @@ export default {
       thoughtsTitle: '',
       thoughtsContent: '',
       type: '2',
-      defautTitle:'添加感想'
+      defautTitle: '添加感想'
     }
   },
   mounted: function() {
-    if(this.$route.params.thoughtId){
-    this.defautTitle='修改感想'
-    this.getExistedThoughtData()
+    if (this.$route.params.thoughtId) {
+      this.defautTitle = '修改感想'
+      this.getExistedThoughtData()
     }
   },
   methods: {
@@ -83,11 +83,12 @@ export default {
       postData.title = vm.thoughtsTitle
       postData.content = vm.thoughtsContent
       postData.type = vm.type
-      if(vm.$route.params.thoughtId){
-       postData.id = vm.$route.params.thoughtId
+      if (vm.$route.params.thoughtId) {
+        postData.id = vm.$route.params.thoughtId
       }
       if (vm.thoughtsValidate()) {
-        vm.axios(vm.$commonTools.g_restUrl, {
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -126,8 +127,15 @@ export default {
           }
         })
         .then(function(response) {
-          vm.thoughtsTitle = response.data.result.title
-          vm.thoughtsContent = response.data.result.content
+          if (response.data.status == '200') {
+            vm.thoughtsTitle = response.data.result.title
+            vm.thoughtsContent = response.data.result.content
+          } else if (response.data.status == '201') {
+            vm.$message({
+              type: 'error',
+              message: '无访问权限，请返回'
+            })
+          }
         })
         .catch(function(error) {
           console.log(error)

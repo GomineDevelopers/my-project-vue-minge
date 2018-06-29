@@ -51,12 +51,12 @@ export default {
       worksTitle: '',
       worksContent: '',
       type: '1',
-      defaultTitle:'添加作品'
+      defaultTitle: '添加作品'
     }
   },
   mounted: function() {
     if (this.$route.params.workId) {
-      this.defaultTitle='修改作品'
+      this.defaultTitle = '修改作品'
       this.getExistWorkData()
     }
   },
@@ -82,7 +82,7 @@ export default {
       postData.title = vm.worksTitle
       postData.content = vm.worksContent
       postData.type = vm.type
-      if(vm.$route.params.workId){
+      if (vm.$route.params.workId) {
         postData.id = vm.$route.params.workId
       }
       if (vm.worksValidate()) {
@@ -126,8 +126,15 @@ export default {
           }
         })
         .then(function(response) {
-          vm.worksTitle = response.data.result.title
-          vm.worksContent = response.data.result.content
+          if (response.data.status == '200') {
+            vm.worksTitle = response.data.result.title
+            vm.worksContent = response.data.result.content
+          } else if (response.data.status == '201') {
+            vm.$message({
+              type: 'error',
+              message: '无访问权限，请返回'
+            })
+          }
         })
         .catch(function(error) {
           console.log(error)
