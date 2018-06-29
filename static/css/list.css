@@ -318,13 +318,17 @@
 
 .readProgress .el-progress {
   float: left;
-  width: 55%;
+  width: 45%;
   height: 5vh;
   line-height: 5vh;
 }
 
 .readProgress .el-progress__text {
   color: #ec8947;
+}
+
+.readProgressText .el-progress__text {
+  color: #ebb71d;
 }
 
 .progress .el-progress {

@@ -46,7 +46,7 @@
                   </el-col>
                 </el-row>
                 <el-row>
-                  <div class="progress" v-for="m in item.list" v-if="m.length > 1">
+                  <div class="progress" v-for="m in item.list" v-if="item.list.length > 1">
                     <el-progress :percentage="m.percentage" color="#ebb71d"></el-progress>
                     <span v-if="m.is_currentuser">我的进度</span>
                     <span v-if="!m.is_currentuser"><span v-text="m.nickname" class="nickname"></span>的进度</span>
@@ -282,7 +282,7 @@
     box-shadow: 0px 0px 20px 5px #e9e9e9;
     border-radius: 5px;
     width: 100%;
-    /*max-height: 15vh;*/
+    max-height: 15vh;
   }
 
   .imgBottom {
@@ -333,6 +333,7 @@
     color: #457094;
     font-weight: bold;
     margin: 0 0 1.5vh 0;
+    max-width: 35vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -394,6 +395,10 @@
     overflow: hidden;
   }
 
+  .progress{
+    padding-left: 5px;
+  }
+  
   .progress span {
     color: #8a969f;
     font-size: 0.7rem;
@@ -432,7 +437,7 @@
 
   .nickname{
     display: inline-block;
-    max-width: 13vw;
+    max-width: 12vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

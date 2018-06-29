@@ -146,6 +146,9 @@ export default new Router({
       path: '/noMemberStatus/:statusId',
       name: 'NoMemberStatus',
       component: NoMemberStatus,
+      meta: {
+        requiresNoAuth: true
+      }
     },
     {
       path: '/center',

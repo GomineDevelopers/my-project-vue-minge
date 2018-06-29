@@ -124,7 +124,7 @@ router.beforeEach((to, from, next) => {
             name: 'NoMember',
           })
         }
-        else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" && response.data.result.check_status != 0) {
+        else if (response.data && response.data.result && response.data.result.is_registered == "1" && response.data.result.is_leather == "0" &&to.name != "NoMemberStatus" &&  response.data.result.check_status != 0) {
           let sId = response.data.result.check_status;
           next({
             name: 'NoMemberStatus',
