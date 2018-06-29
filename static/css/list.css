@@ -327,6 +327,10 @@
   color: #ec8947;
 }
 
+.readProgressText .el-progress__text {
+  color: #ebb71d;
+}
+
 .progress .el-progress {
   float: left;
   width: 59%;
@@ -344,12 +348,7 @@
   padding: 3px 7px;
 }
 
-. read-dialog .my-dialog .el-dialog{
+.my-dialog .el-dialog{
   top: 50%;
   margin-top: -95px !important;
-}
-
-. quick-dialog .my-dialog .el-dialog{
-  top: 50%;
-  margin-top: -127px !important;
 }

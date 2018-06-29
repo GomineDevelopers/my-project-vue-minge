@@ -35,7 +35,7 @@
           </div>
         </el-row>
         <el-row v-for="item in bookDetailData.list" v-if="item != ''">
-          <div class="wrapper readProgress">
+          <div class="wrapper readProgress readProgressText">
             <span class="spanLeft">读书伙伴：</span>
             <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
             <span class="friendName textInterception" v-text="item.nickname"></span>
