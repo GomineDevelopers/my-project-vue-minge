@@ -123,7 +123,12 @@
       },
       changeStatus(temp) {
         let vm = this;
+        let postData = {
+          "id": vm.inviteId,
+          "status": temp
+        };
         vm.axios(vm.$commonTools.g_restUrl, {
+          method: "post",
           params: {
             i: "8",
             c: "entry",
@@ -131,9 +136,8 @@
             do: "shop",
             m: "ewei_shop",
             ac: "set_invite",
-            id: vm.inviteId,
-            status: temp
-          }
+          },
+          data:postData
         })
           .then(function (response) {
             if (response.data.status == '200') {
