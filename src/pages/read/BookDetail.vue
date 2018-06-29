@@ -56,44 +56,47 @@
 </template>
 
 <script>
-  export default {
-    name: "book-detail",
-    data() {
-      return {
-        bookDetailData: Object
-      }
-    },
-    created() {
-      this.getBookDetailData()
-    },
-    methods: {
-      updatePages() {
-        let vm = this;
-        vm.$prompt('输入页数', '更新进度', {
+export default {
+  name: 'book-detail',
+  data() {
+    return {
+      bookDetailData: Object
+    }
+  },
+  created() {
+    this.getBookDetailData()
+  },
+  methods: {
+    updatePages() {
+      let vm = this
+      vm
+        .$prompt('输入页数', '更新进度', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /^[1-9]\d*$/,
           inputErrorMessage: '只能输入非负整数'
-        }).then(({value}) => {
+        })
+        .then(({ value }) => {
           if (parseInt(value) > parseInt(vm.bookDetailData.page_number)) {
             vm.$message({
               type: 'warning',
               message: '已读页数不能大于总页数'
-            });
+            })
           } else {
-            vm.updateNewPages(value);
+            vm.updateNewPages(value)
           }
-
-        }).catch(() => {
+        })
+        .catch(() => {
           vm.$message({
             type: 'info',
             message: '取消输入'
-          });
-        });
-      },
-      updateNewPages(value) {
-        let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
+          })
+        })
+    },
+    updateNewPages(value) {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -105,16 +108,17 @@
             page_schedule: value
           }
         })
-          .then(function (response) {
-            vm.getBookDetailData();
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      },
-      getBookDetailData() {
-        let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
+        .then(function(response) {
+          vm.getBookDetailData()
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    getBookDetailData() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -126,143 +130,150 @@
             id: vm.$route.params.id
           }
         })
-          .then(function (response) {
-            vm.bookDetailData = response.data.result;
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      },
-      del(id) {
-        let vm = this;
-        vm.$confirm('是否确定删除此书?', '提示', {
+        .then(function(response) {
+          vm.bookDetailData = response.data.result
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    del(id) {
+      let vm = this
+      vm
+        .$confirm('是否确定删除此书?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
-        }).then(() => {
-          vm.axios(vm.$commonTools.g_restUrl, {
-            params: {
-              i: '8',
-              c: 'entry',
-              p: 'bookmates',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'del_book',
-              id: id
-            }
-          })
-            .then(function (response) {
-              if (response.data.result.info == '操作成功') {
-                vm.$router.replace({name: 'BookList'});
+        })
+        .then(() => {
+          vm
+            .axios(vm.$commonTools.g_restUrl, {
+              params: {
+                i: '8',
+                c: 'entry',
+                p: 'bookmates',
+                do: 'shop',
+                m: 'ewei_shop',
+                ac: 'del_book',
+                id: id
               }
             })
-            .catch(function (error) {
+            .then(function(response) {
+              if (response.data.result.info == '操作成功') {
+                vm.$router.replace({ name: 'BookList' })
+              }
+            })
+            .catch(function(error) {
               console.log(error)
             })
-        }).catch(() => {
+        })
+        .catch(() => {
           vm.$message({
             type: 'info',
             message: '已取消删除'
-          });
+          })
         })
-      },
-      rewrite(id) {
-        this.$router.push({name: 'EditBook', params: {id: id}});
-      },
-      askRead(id, name) {
-        this.$router.push({name: 'AskRead', query: {bookId: id, bookName: name}});
-      }
+    },
+    rewrite(id) {
+      this.$router.push({ name: 'EditBook', params: { id: id } })
+    },
+    askRead(id, name) {
+      this.$router.push({
+        name: 'AskRead',
+        query: { bookId: id, bookName: name }
+      })
     }
   }
+}
 </script>
 
 <style scoped>
-  .book_detail {
-    text-align: left;
-    margin: 12vw 16vw;
-  }
+.book_detail {
+  text-align: left;
+  margin: 12vw 16vw;
+}
 
-  .cover {
-    display: flex;
-    align-items: flex-start;
-    padding-bottom: 1vh;
-    max-height: 20vh;
-  }
+.cover {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 1vh;
+  max-height: 20vh;
+}
 
-  .cover img {
-    max-height: 17vh;
-    max-width: 70%;
-    padding: 5px;
-    border: 1px solid #b3b3b3;
-    border-radius: 5px;
-  }
+.cover img {
+  max-height: 17vh;
+  max-width: 70%;
+  padding: 5px;
+  border: 1px solid #b3b3b3;
+  border-radius: 5px;
+}
 
-  .book_detail span {
-    font-weight: bold;
-  }
+.book_detail span {
+  font-weight: bold;
+}
 
-  .book_detail .wrapper {
-    height: 5vh;
-    line-height: 5vh;
-  }
+.book_detail .wrapper {
+  height: 5vh;
+  line-height: 5vh;
+}
 
-  .iconRight {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background: #ffffff;
-    border-radius: 50%;
-    right: 30px;
-    color: #409EFF;
-    border: 1px solid #409EFF;
-  }
+.iconRight {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 50%;
+  right: 30px;
+  color: #409eff;
+  border: 1px solid #409eff;
+}
 
-  .iconRight i {
-    font-size: 20px;
-    top: 50%;
-    margin-top: -10px;
-    position: absolute;
-    left: 50%;
-    margin-left: -10px;
-  }
+.iconRight i {
+  font-size: 20px;
+  top: 50%;
+  margin-top: -10px;
+  position: absolute;
+  left: 50%;
+  margin-left: -10px;
+}
 
-  .iconRight .icon-text {
-    position: absolute;
-    top: 42px;
-    font-size: 10px;
-    width: 60px;
-    margin-left: -30px;
-  }
+.iconRight .icon-text {
+  position: absolute;
+  top: 42px;
+  font-size: 10px;
+  width: 60px;
+  margin-left: -30px;
+}
 
-  .read {
-    top: 100px;
-  }
+.read {
+  top: 100px;
+}
 
-  .edit {
-    top: 170px;
-  }
+.edit {
+  top: 170px;
+}
 
-  .delete {
-    top: 240px;
-  }
+.delete {
+  top: 240px;
+}
 
-  .title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .readProgress span {
-    float: left;
-    height: 5vh;
-    line-height: 5vh;
-    font-weight: normal;
-  }
+.readProgress span {
+  float: left;
+  height: 5vh;
+  line-height: 5vh;
+  font-weight: normal;
+}
 
-  .textInterception {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.textInterception {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 </style>
 

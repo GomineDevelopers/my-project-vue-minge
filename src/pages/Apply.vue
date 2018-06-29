@@ -20,7 +20,7 @@
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>性别</span>
           </el-col>
         </el-row>
-        <radio-picker  :radioValues="genderValues" :radioValue="genderValue" @handleGender="showGender" ></radio-picker>
+        <radio-picker  :radioValues="genderValues" :radioValue="genderValue" @handleRadioValue="showGender" ></radio-picker>
           <el-row>
             <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>出生日期</span>
             </el-col>
@@ -116,8 +116,8 @@ export default {
           return time.getTime() > Date.now()
         }
       },
-      genderValues: [{ text: '女', value: true }, { text: '男', value: false }],
-      genderValue: false,
+      genderValues: [{ text: '女', value: 1 }, { text: '男', value: 0 }],
+      genderValue: 0,
       degreeOptions: [
         { value: '本科', label: '本科' },
         { value: '硕士', label: '硕士' },
@@ -156,6 +156,7 @@ export default {
     },
     showGender: function(radioValue) {
       this.genderValue = radioValue
+      console.info(this.genderValue)
     },
     onSelected(data) {
       let vm = this
@@ -209,8 +210,6 @@ export default {
         msg = '未选择出生日期'
       } else if (!vm.registerName) {
         msg = '未填写真实姓名'
-      } else if (!vm.genderValue) {
-        msg = '未选择性别'
       } else if (!vm.ethnicGroup) {
         msg = '未填写民族'
       } else if (!vm.distmix) {

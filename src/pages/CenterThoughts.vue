@@ -2,19 +2,19 @@
   <div class="center_home_bg ">
     <div class="center-title">我的感想</div>
     <div class="feedbackList center-list">
-      <div class="video-cover" v-for="(item,index) in feedbackList">
+      <div class="video-cover" v-for="(item,index) in feedbackList" >
         <div class="title">{{item.title}}</div>
         <div class="middle">
           {{item.content}}
         </div>
         <div class="bt">
           <span class="time">{{$commonTools.formatDate(item.create_time)}}</span>
-          <span class="delete"><i class="el-icon-delete"></i>&nbsp;删除</span>
+          <span class="delete" @click="deleteItem(item.deleted)"><i class="el-icon-delete"></i>&nbsp;删除</span>
         </div>
       </div>
     </div>
     <div class="center-footer">
-      <div class="center-add-btn" @click="goAddThoughts()"></div>
+      <div class="center-add-btn" @click.stop="goAddThoughts()"></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
     </div>
@@ -53,6 +53,9 @@ export default {
         .catch(function(error) {
           console.log(error)
         })
+    },
+    deleteItem(deleteStatus) {
+      deleteStatus = 1
     },
     goAddThoughts() {
       this.$router.push({
