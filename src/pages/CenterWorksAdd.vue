@@ -1,6 +1,6 @@
 <template>
   <div class="center_home_bg ">
-    <div class="center-title">添加作品</div>
+    <div class="center-title" v-text="defaultTitle"></div>
     <div class="outline-wrapper">
     <div class="addworks-wrap">
         <div class="item-wrapper">
@@ -50,7 +50,14 @@ export default {
     return {
       worksTitle: '',
       worksContent: '',
-      type: '1'
+      type: '1',
+      defaultTitle:'添加作品'
+    }
+  },
+  mounted: function() {
+    if (this.$route.params.workId) {
+      this.defaultTitle='修改作品'
+      this.getExistWorkData()
     }
   },
   methods: {
@@ -75,6 +82,9 @@ export default {
       postData.title = vm.worksTitle
       postData.content = vm.worksContent
       postData.type = vm.type
+      if(vm.$route.params.workId){
+        postData.id = vm.$route.params.workId
+      }
       if (vm.worksValidate()) {
         vm
           .axios(vm.$commonTools.g_restUrl, {
@@ -100,6 +110,28 @@ export default {
             console.log(error)
           })
       }
+    },
+    getExistWorkData() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'works',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'detail_works',
+            id: vm.$route.params.workId
+          }
+        })
+        .then(function(response) {
+          vm.worksTitle = response.data.result.title
+          vm.worksContent = response.data.result.content
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
   }
 }

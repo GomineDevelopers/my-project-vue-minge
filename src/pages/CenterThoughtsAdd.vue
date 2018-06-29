@@ -1,6 +1,6 @@
 <template>
   <div class="center_home_bg ">
-    <div class="center-title">添加感想</div>
+    <div class="center-title" v-text="defautTitle">添加感想</div>
     <div class="outline-wrapper">
     <div class="addworks-wrap">
         <div class="item-wrapper">
@@ -22,9 +22,9 @@
                 </el-col>
             </el-row>
             <el-row class="item-content">
-                    <el-col :span="24"  class="aaa">
-                        <el-input v-model="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
-                    </el-col>
+              <el-col :span="24"  class="aaa">
+                  <el-input v-model="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
+              </el-col>
             </el-row>
         </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="submit-wrapper">
       <el-row class="item-content">
         <el-col :span="24">
-            <el-button class="bottom-btn" type="primary" @click="addThoughts()" round>提交</el-button>
+            <el-button class="bottom-btn" type="primary" @click="addThoughts" round>提交</el-button>
           </el-col>
       </el-row>
       </div>
@@ -50,7 +50,14 @@ export default {
     return {
       thoughtsTitle: '',
       thoughtsContent: '',
-      type: '2'
+      type: '2',
+      defautTitle:'添加感想'
+    }
+  },
+  mounted: function() {
+    if(this.$route.params.thoughtId){
+    this.defautTitle='修改感想'
+    this.getExistedThoughtData()
     }
   },
   methods: {
@@ -69,15 +76,18 @@ export default {
         return true
       }
     },
+
     addThoughts() {
       let vm = this
       let postData = {}
       postData.title = vm.thoughtsTitle
       postData.content = vm.thoughtsContent
       postData.type = vm.type
+      if(vm.$route.params.thoughtId){
+       postData.id = vm.$route.params.thoughtId
+      }
       if (vm.thoughtsValidate()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -100,6 +110,28 @@ export default {
             console.log(error)
           })
       }
+    },
+    getExistedThoughtData() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'works',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'detail_works',
+            id: vm.$route.params.thoughtId
+          }
+        })
+        .then(function(response) {
+          vm.thoughtsTitle = response.data.result.title
+          vm.thoughtsContent = response.data.result.content
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     }
   }
 }

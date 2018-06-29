@@ -176,7 +176,15 @@ export default new Router({
       name: 'CenterWorks',
       component: CenterWorks,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/center/addworks/:workId',
+      name: 'CenterEditAddWorks',
+      component: CenterWorksAdd,
+      meta: {
+        requiresAuth: false
       }
     },
     {
@@ -192,10 +200,17 @@ export default new Router({
       name: 'CenterThoughts',
       component: CenterThoughts,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
+      path: '/center/addthoughts/:thoughtId',
+      name: 'CenterEditThoughts',
+      component: CenterThoughtsAdd,
+      meta: {
+        requiresAuth: false
+      }
+    }, {
       path: '/center/addthoughts',
       name: 'CenterAddThoughts',
       component: CenterThoughtsAdd,

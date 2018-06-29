@@ -2,11 +2,11 @@
   <div class="center_home_bg ">
     <div class="center-title">我的作品</div>
     <div class="worksList center-list">
-      <div class="works-cover" v-for="(item,index) in worksList">
+      <div class="works-cover" v-for="(item,index) in worksList" @click="goEdit(item.id)">
         <div class="title">{{item.title}}</div>
         <div class="bt">
           <span class="time">{{$commonTools.formatDate(item.create_time)}}</span>
-          <span class="delete"><i class="el-icon-delete"></i>&nbsp;删除</span></div>
+          <span class="delete" @click.stop="deleteItem(item.id)"><i class="el-icon-delete"></i>&nbsp;删除</span></div>
       </div>
     </div>
     <div class="center-footer">
@@ -54,6 +54,50 @@ export default {
       this.$router.push({
         name: 'CenterAddWorks'
       })
+    },
+    goEdit(id) {
+      this.$router.push({ name: 'CenterEditAddWorks', params: { workId: id } })
+    },
+    deleteItem(id) {
+      let vm = this
+      let postData = {}
+      postData.id = id
+      console.log(postData.id)
+      vm
+        .$confirm('是否确定删除此感想?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        .then(() => {
+          vm
+            .axios(vm.$commonTools.g_restUrl, {
+              method: 'post',
+              params: {
+                i: '8',
+                c: 'entry',
+                p: 'works',
+                do: 'shop',
+                m: 'ewei_shop',
+                ac: 'del_works'
+              },
+              data: vm.$qs.stringify(postData)
+            })
+            .then(function(response) {
+              if (response.data.result.info == '操作成功') {
+                vm.getWorksList()
+              }
+            })
+            .catch(function(error) {
+              console.log(error)
+            })
+        })
+        .catch(() => {
+          vm.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
     }
   }
 }
