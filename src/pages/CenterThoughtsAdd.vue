@@ -140,7 +140,7 @@ export default {
 .outline-wrapper {
   border-radius: 5px;
   background: #ffffff;
-  border-left: 5px solid #2f81b9;
+  /* border-left: 5px solid #2f81b9; */
   margin-bottom: 1vh;
   width: 85%;
   margin: 3vh auto;
