@@ -64,7 +64,7 @@ export default {
       postData.id = id
       console.log(postData.id)
       vm
-        .$confirm('是否确定删除此感想?', '提示', {
+        .$confirm('是否确定删除此作品?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
