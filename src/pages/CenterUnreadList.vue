@@ -272,7 +272,7 @@
 
   .Un_card .title {
     display: inline-block;
-    max-width: 52%;
+    max-width: 37%;
     height: 7.5vh;
     line-height: 7.5vh;
     color: #56b0f0;
@@ -282,7 +282,7 @@
   }
 
   .Un_card_div {
-    width: 37.5%;
+    width: 40%;
     height: 7.5vh;
     line-height: 7.5vh;
   }
