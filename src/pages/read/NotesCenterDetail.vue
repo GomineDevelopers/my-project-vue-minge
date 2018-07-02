@@ -8,7 +8,7 @@
       </div>
       <div class="chapter" v-text="noteDetailData.chapter" ></div>
       <div class="content" v-if="noteDetailData.img != ''"><img :src="noteDetailData.img"/></div>
-      <div class="content" v-text="noteContent"> </div>
+      <div class="content" v-text="noteDetailData.content"> </div>
     </div>
     <div class="NCD_bottomContainer" v-show="noteDetailData.is_private == 0">
       <el-row>
