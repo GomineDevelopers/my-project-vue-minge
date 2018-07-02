@@ -1,5 +1,5 @@
 <template>
-  <div class="center_home_bg ">
+  <div class="center_home_bg  center-picture">
     <div class="cover" v-show="isDeleteMode"></div>
     <div class="center-title">我的图片</div>
     <el-button type="text" class="manage" @click="openDeleteMode" v-show="!isDeleteMode">
@@ -23,8 +23,8 @@
         </div>
       </div>
     </el-checkbox-group>
-    <div class="center-footer over-cover">
-      <div class="center-add-btn " @click="goPictureAdd"></div>
+    <div class="center-footer over-cover" @click="goPictureAdd">
+      <div class="center-add-btn "></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
     </div>
@@ -114,10 +114,10 @@ export default {
           center: true
         })
           .then(() => {
-            
+
       let postData = {}
       postData.ids = vm.checkedPictures
-      
+
         vm
           .axios(vm.$commonTools.g_restUrl, {
             method: 'post',
@@ -140,7 +140,7 @@ export default {
           .catch(function(error) {
             console.log(error)
           })
-       
+
           })
           .catch(() => {
             this.$message({
