@@ -322,6 +322,7 @@
   height: 5vh;
   line-height: 5vh;
 }
+
 .readProgress2 .el-progress {
   float: left;
   width: 40%;
@@ -354,7 +355,7 @@
   padding: 3px 7px;
 }
 
-.my-dialog .el-dialog{
+.my-dialog .el-dialog {
   top: 50%;
   margin-top: -95px !important;
 }
