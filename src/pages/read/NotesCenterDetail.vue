@@ -15,7 +15,7 @@
       <el-row>
         <span class="NCD_bottomContainer-span-icon1"><i
           class="el-icon-view"></i>&nbsp;<span>{{noteDetailData.click}}</span></span>
-        <span class="NCD_bottomContainer-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+        <span class="NCD_bottomContainer-span-icon2" @click="goComment(3)"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
       </el-row>
       <div class="NCD_bottomContainer_commentArea">
         <div class="NCD_bottomContainer_commentAreaDiv1">
@@ -99,6 +99,9 @@
       },
       goNoteEdit() {
         this.$router.push({name: 'AddNote', query: {noteEditId: this.$route.params.noteId}})
+      },
+      goComment(typeId){
+        this.$router.push({name: 'NoteComment', params: {id: this.$route.params.noteId,typeId:typeId}})
       }
     }
   }

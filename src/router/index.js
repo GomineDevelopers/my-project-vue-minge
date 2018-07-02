@@ -66,6 +66,8 @@ import NotesCenter from '@/pages/read/NotesCenter'
 import ShareReadCenter from '@/pages/read/ShareReadCenter'
 //心得笔记-详情
 import NotesCenterDetail from '@/pages/read/NotesCenterDetail'
+//心得笔记-留言
+import NoteComment from '@/pages/read/NoteComment'
 
 //书友会-个人
 import Personal from '@/pages/read/Personal'
@@ -213,7 +215,8 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    }, {
+    },
+    {
       path: '/center/addthoughts',
       name: 'CenterAddThoughts',
       component: CenterThoughtsAdd,
@@ -323,7 +326,8 @@ export default new Router({
           path: 'notesCenterDetail/:noteId',
           component: NotesCenterDetail,
           name: 'NotesCenterDetail'
-        }, {
+        },
+        {
           path: 'bookDetailPublic/:id',
           component: BookDetailPublic,
           name: 'BookDetailPublic'
@@ -379,6 +383,14 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: '/noteComment/:id/:typeId',
+      component: NoteComment,
+      name: 'NoteComment',
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
