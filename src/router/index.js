@@ -370,7 +370,7 @@ export default new Router({
           name: 'AddNote'
         },
         {
-          path: 'noteDetail',
+          path: 'noteDetail/:noteId',
           component: NoteDetail,
           name: 'NoteDetail'
         },

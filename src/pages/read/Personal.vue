@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="router-view-wrapper">
-      <router-view/>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -74,6 +74,9 @@
             this.activeItem = 2;
             this.showAdd = false;
             break;
+          case'NoteDetail':
+            this.activeItem = 2;
+            this.showAdd = false;
         }
       },
       handleClick(flag) {
@@ -108,7 +111,7 @@
     margin-left: -4vh;
     border-radius: 50%;
     box-shadow: 0px 0px 20px 5px #e9e9e9;
-    z-index:10;
+    z-index: 10;
   }
 
   .add-btn-row,
@@ -121,7 +124,7 @@
     left: 50%;
     margin-left: -.3vh;
     border-radius: 100px;
-    z-index:11;
+    z-index: 11;
   }
 
   .add-btn-col {
@@ -134,7 +137,7 @@
     left: 50%;
     margin-left: -24px;
     font-size: 12px;
-    z-index:10;
+    z-index: 10;
   }
 
   .read-center-wrap {
