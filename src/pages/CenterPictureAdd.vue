@@ -32,7 +32,7 @@
                      </div>
             </el-row>
         </div>
-       
+
         <div class="item-wrapper">
             <div class="submit-wrapper">
                 <el-row class="item-content">
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-  
+
 </template>
 
 <script>
@@ -133,7 +133,7 @@ export default {
 <style scoped>
 .addworks-wrap {
   text-align: left;
-  margin: 10vh auto;
+  margin: 3vh auto;
   width: 80%;
   display: flex;
   justify-content: center;
