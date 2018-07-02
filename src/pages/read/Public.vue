@@ -11,9 +11,7 @@
       </div>
     </div>
     <div class="router-view-wrapper">
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -23,7 +21,7 @@
     name: 'public',
     data() {
       return {
-        activeItem:0
+        activeItem: 0
       }
     },
     mounted() {
