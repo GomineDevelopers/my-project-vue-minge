@@ -1,5 +1,5 @@
 <template>
-  <div class="NCD_container">
+  <div class="NCD_container" v-if="noteDetailData">
     <div class="NCD_topContainer">
       <div class="edit " v-if="noteDetailData.is_mynote == 1"><span class="editbutton" @click="goNoteEdit"> <i
         class="el-icon-edit"></i>编辑 </span></div>
@@ -17,42 +17,36 @@
           class="el-icon-view"></i>&nbsp;<span>{{noteDetailData.click}}</span></span>
         <span class="NCD_bottomContainer-span-icon2" @click="goComment(3)"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
       </el-row>
-      <div class="NCD_bottomContainer_commentArea">
-        <div class="NCD_bottomContainer_commentAreaDiv1">
+      <div v-if="noteDetailData.total>0">
+        <div class="NCD_bottomContainer_commentArea">
+          <div class="NCD_bottomContainer_commentAreaDiv" :class="{'NCD_bottomContainer_commentAreaDiv_bt' : index==1}"
+               v-for="(item,index) in noteDetailData.common">
+            <el-row>
+              <el-col :span="3" class="avatar"><img :src="item.avatar"></el-col>
+              <el-col :span="21">
+                <span class="userName">{{item.nickname}}</span>
+                <div class="commentContent">{{item.content}}</div>
+                <el-row>
+                  <el-col :span="20">
+                    <span
+                      class="NCD_bottomContainer_commentArea_span">{{$commonTools.formatHour(item.create_time)}}</span>
+                  </el-col>
+                  <el-col :span="4">
+                    <span class="NCD_bottomContainer_commentArea_span" @click="goComment(4,item.id,item.nickname)"><i
+                      class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
+          </div>
+        </div>
+        <div class="news-detail-more" v-if="noteDetailData.total>2">
           <el-row>
-            <el-col :span="3" class="avatar"><img src="../../../static/image/book-default.png"></el-col>
-            <el-col :span="21">
-              <span class="userName">借东西的人</span>
-              <div class="commentContent">座谈中的内容结合自身实际，进一步激发老百姓脱贫的内生动力。</div>
-              <el-row>
-                <el-col :span="20">
-                  <span class="NCD_bottomContainer_commentArea_span">05-22 13:29</span>
-                </el-col>
-                <el-col :span="4">
-                  <span class="NCD_bottomContainer_commentArea_span"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
-                </el-col>
-              </el-row>
+            <el-col :span="24">
+              <el-button type="primary" plain round @click="goComment(1)">查看更多</el-button>
             </el-col>
           </el-row>
         </div>
-        <div class="NCD_bottomContainer_commentAreaDiv2">
-          <el-row>
-            <el-col :span="3" class="avatar"><img src="../../../static/image/book-default.png"></el-col>
-            <el-col :span="21">
-              <span class="userName">借东西的人</span>
-              <div class="commentContent">座谈中的内容结合自身实际，进一步激发老百姓脱贫的内生动力。</div>
-              <el-row>
-                <el-col :span="20">
-                  <span class="NCD_bottomContainer_commentArea_span">05-22 13:29</span>
-                </el-col>
-                <el-col :span="4">
-                  <span class="NCD_bottomContainer_commentArea_span"><i class="el-icon-edit-outline"></i>&nbsp;回复</span>
-                </el-col>
-              </el-row>
-            </el-col>
-          </el-row>
-        </div>
-
       </div>
     </div>
   </div>
@@ -64,7 +58,6 @@
     data() {
       return {
         noteDetailData: ''
-
       }
     },
     mounted() {
@@ -86,12 +79,12 @@
             do: 'shop',
             m: 'ewei_shop',
             ac: 'detail_experience',
-            id: vm.$route.params.noteId
+            id: vm.$route.params.noteId,
+            type: 1,
           }
         })
           .then(function (response) {
             vm.noteDetailData = response.data.result;
-
           })
           .catch(function (error) {
             console.log(error)
@@ -100,8 +93,19 @@
       goNoteEdit() {
         this.$router.push({name: 'AddNote', query: {noteEditId: this.$route.params.noteId}})
       },
-      goComment(typeId){
-        this.$router.push({name: 'NoteComment', params: {id: this.$route.params.noteId,typeId:typeId}})
+      goComment: function (typeId, id, name) {
+        let vm = this;
+        let tmpId = id || vm.$route.params.noteId
+        if (typeId != 4) {
+          vm.$router.push({name: 'NoteComment', params: {id: tmpId, typeId: typeId}});
+        }
+        else {
+          vm.$router.push({
+            name: 'NoteComment',
+            params: {id: tmpId, typeId: typeId},
+            query: {aId: vm.$route.params.noteId, name: name}
+          });
+        }
       }
     }
   }
@@ -179,13 +183,16 @@
     text-align: left;
   }
 
-  .NCD_bottomContainer_commentAreaDiv1 {
+  .NCD_bottomContainer_commentAreaDiv {
     padding: 10px 0;
   }
 
-  .NCD_bottomContainer_commentAreaDiv2 {
-    padding: 10px 0;
+  .NCD_bottomContainer_commentAreaDiv_bt {
     border-top: 1px solid #cccccc;
+  }
+
+  .news-detail-more {
+    padding: 10px 0 0 0;
   }
 
   .avatar img {
