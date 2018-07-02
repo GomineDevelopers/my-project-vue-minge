@@ -1,23 +1,22 @@
 <template>
   <div class="NCD_container">
     <div class="NCD_topContainer">
-       <div class="edit "><span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span></div> 
-      <div class="title status-private"> <span>《<span class="title" v-text="noteTitle"></span>》</span>
-            <div class="c1" v-show="noteprivate==1"></div>
-            <div class="c3"><i class="iconfont icon-lock"></i></div>
-            </div>
-          
-      <div class="chapter" v-text="noteChapter" ></div>
-      <div class="content" v-if="noteImg!=''"><img :src="noteImg"/></div>
+      <div class="edit " v-if="noteDetailData.is_mynote == 1"><span class="editbutton" @click="goNoteEdit"> <i class="el-icon-edit"></i>编辑 </span></div>
+      <div class="title status-private"> <span>《<span class="title" v-text="noteDetailData.title"></span>》</span>
+        <div class="c1" v-show="noteDetailData.is_private == 1"></div>
+        <div class="c3"><i class="iconfont icon-lock"></i></div>
+      </div>
+      <div class="chapter" v-text="noteDetailData.chapter" ></div>
+      <div class="content" v-if="noteDetailData.img != ''"><img :src="noteDetailData.img"/></div>
       <div class="content" v-text="noteContent"> </div>
     </div>
-    <div class="NCD_bottomContainer" v-show="noteprivate==0">
+    <div class="NCD_bottomContainer" v-show="noteDetailData.is_private == 0">
       <el-row>
-          <span class="NCD_bottomContainer-span-icon1"><i class="el-icon-view"></i>&nbsp;<span>1212</span></span>
+        <span class="NCD_bottomContainer-span-icon1"><i class="el-icon-view"></i>&nbsp;<span>1212</span></span>
         <span class="NCD_bottomContainer-span-icon2"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
       </el-row>
       <div class="NCD_bottomContainer_commentArea">
-        <div class="NCD_bottomContainer_commentAreaDiv1">   
+        <div class="NCD_bottomContainer_commentAreaDiv1">
           <el-row>
             <el-col :span="3" class="avatar"><img src="../../../static/image/book-default.png"></el-col>
             <el-col :span="21">
@@ -62,16 +61,17 @@ export default {
   name: 'notes-center-detail',
   data(){
     return{
-        noteTitle:'',
-        noteImg:'',
-        noteChapter:'',
-        noteContent:'',
-        noteprivate:''
+        noteDetailData:''
 
     }
   },
   mounted(){
     this.getNoteCenterDetailData();
+  },
+  watch: {
+    $route() {
+      this.getNoteCenterDetailData();
+    }
   },
   methods: {
     getNoteCenterDetailData() {
@@ -88,12 +88,8 @@ export default {
           }
         })
         .then(function(response) {
-             vm.noteTitle=response.data.result.title;
-             vm.noteImg=response.data.result.img;
-             vm.noteChapter=response.data.result.chapter;
-             vm.noteContent=response.data.result.content;
-             vm.noteprivate=response.data.result.is_private;
-             
+          vm.noteDetailData = response.data.result;
+
         })
         .catch(function(error) {
           console.log(error)
@@ -109,7 +105,7 @@ export default {
 <style scoped>
 .NCD_container {
   margin: 3vh;
-  
+
 }
 
 .NCD_topContainer {
@@ -117,7 +113,7 @@ export default {
   background-color: white;
   box-shadow: 0px 0px 20px 5px #e9e9e9;
   border-top: 3px solid #419ddc;
-  
+
 }
 
 .title {
@@ -143,8 +139,8 @@ export default {
 .chapter {
   color: #457094;
   padding: 0 3vh 2vh 3vh;
-  word-wrap:break-word; 
-  word-break:break-all; 
+  word-wrap:break-word;
+  word-break:break-all;
 }
 
 .content {
@@ -152,9 +148,9 @@ export default {
   font-size: 0.85rem;
   color: #333333;
   padding: 0 3vh 2vh 3vh;
-  word-wrap:break-word; 
-  word-break:break-all; 
-  
+  word-wrap:break-word;
+  word-break:break-all;
+
 }
 .content img{
   width: 100%;
