@@ -3,19 +3,19 @@
     <div class="card" v-for="(item, index) in notelists" :key="index" @click="goNoteDetail(item.id)">
       <el-row type="flex" justify="space-between">
 
-        <el-col :span="16">
+        <el-col :span="18">
           <div class="bookTitle"><span >《<span v-text="item.title"></span>》</span></div>
           <el-row>
             <el-col :span="16">
               <div class="author" v-text="item.chapter " ></div>
             </el-col>
             <el-col :span="8">
-              <div class="translate"><i class="el-icon-edit-outline"></i> <span></span> <span>条评论</span> </div>
+              <div class="translate"><i class="el-icon-edit-outline"></i>   <span>{{item.total}}条评论</span> </div>
             </el-col>
           </el-row>
           <div class="publish" v-text="item.content "> </div>
-         
         </el-col>
+
         <el-col :span="6" class="reader">
           <div class="reader-container">
             <div class="readerTime" >分享人 &nbsp; <i class=" iconfont icon-aixin"></i></div>
@@ -111,6 +111,7 @@ export default {
   padding: 0.6vh 0;
   color: #5452a0;
   font-size: 0.7rem;
+  text-align: left;
 }
 
 .publish {
