@@ -41,6 +41,8 @@ import CenterPicture from '@/pages/CenterPicture'
 import CenterPictureAdd from '@/pages/CenterPictureAdd'
 //我的视频
 import CenterVideo from '@/pages/CenterVideo'
+//我的视频-添加视频
+import CenterVideoAdd from '@/pages/CenterVideoAdd'
 //注册
 import Register from '@/pages/Register'
 //快速验证
@@ -244,6 +246,14 @@ export default new Router({
       path: '/center/video',
       name: 'CenterVideo',
       component: CenterVideo,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/center/addvideo',
+      name: 'CenterVideoAdd',
+      component: CenterVideoAdd,
       meta: {
         requiresAuth: true
       }
