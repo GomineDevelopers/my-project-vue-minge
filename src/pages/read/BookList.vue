@@ -47,9 +47,10 @@
                 </el-row>
                 <el-row>
                   <div class="progress" v-for="m in item.list" v-if="item.list.length > 1">
-                    <el-progress :percentage="m.percentage" color="#ebb71d"></el-progress>
+                    <el-progress :percentage="m.percentage" color="#ebb71d" v-if="m.deleted!=1"></el-progress>
                     <span v-if="m.is_currentuser">我的进度</span>
-                    <span v-if="!m.is_currentuser"><span v-text="m.realname" class="nickname"></span>的进度</span>
+                    <span v-if="!m.is_currentuser && m.deleted!=1"><span v-text="m.realname" class="nickname"></span>的进度</span>
+                    <span v-if="!m.is_currentuser && m.deleted==1"><span v-text="m.realname" class="nickname"></span>(已删除本书)</span><span v-else></span>
                   </div>
                 </el-row>
               </el-col>

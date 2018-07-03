@@ -39,8 +39,8 @@
             <div class="wrapper2 readProgress2 readProgressText">
               <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
               <span class="spanLeft spanWidth" v-if="index != 0"></span>
-              <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
-              <span class="friendName textInterception" v-text="item.realname"></span>
+              <el-progress :percentage="item.percentage" color="#ebb71d" v-if="item.deleted!=1"></el-progress>
+              <span class="textInterception" :class="{'friendName':item.deleted!=1}">{{item.realname}}<span v-if="item.deleted==1">(已删除本书)</span></span>
             </div>
           </el-row>
         </div>
