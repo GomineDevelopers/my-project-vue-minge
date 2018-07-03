@@ -9,7 +9,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="form.ProposalName" size="medium" clearable></el-input>
+            <el-input v-model.trim="form.ProposalName" size="medium" clearable></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -18,7 +18,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="form.ProposalBackground" size="medium" clearable></el-input>
+            <el-input v-model.trim="form.ProposalBackground" size="medium" clearable></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -27,7 +27,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input type="textarea" :rows="4" v-model="form.ProposalQuestion"></el-input>
+            <el-input type="textarea" :rows="4" v-model.trim="form.ProposalQuestion"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -36,7 +36,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input type="textarea" :rows="4" v-model="form.ProposalAdvice"></el-input>
+            <el-input type="textarea" :rows="4" v-model.trim="form.ProposalAdvice"></el-input>
           </el-col>
         </el-row>
         <el-row class="register-btn">

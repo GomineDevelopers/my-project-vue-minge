@@ -24,7 +24,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24">
-            <el-input v-model="chapterName" placeholder="请输入章节名称"></el-input>
+            <el-input v-model.trim="chapterName" placeholder="请输入章节名称"></el-input>
           </el-col>
         </el-row>
       </div>
@@ -49,7 +49,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24" class="aaa">
-            <el-input v-model="bookNote" placeholder="笔记应不少于15个字" type="textarea" :rows="5"></el-input>
+            <el-input v-model.trim="bookNote" placeholder="笔记应不少于15个字" type="textarea" :rows="5"></el-input>
           </el-col>
         </el-row>
       </div>

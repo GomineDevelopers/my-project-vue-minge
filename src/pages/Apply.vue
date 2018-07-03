@@ -13,7 +13,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="registerName" size="medium" clearable maxlength="15"></el-input>
+            <el-input v-model.trim="registerName" size="medium" clearable maxlength="15"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -36,7 +36,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model="ethnicGroup" size="medium" clearable maxlength="30"></el-input>
+            <el-input v-model.trim="ethnicGroup" size="medium" clearable maxlength="30"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -44,7 +44,7 @@
         </el-row>
         <el-row>
           <el-col :span="24" >
-           <el-input v-model="distmix" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
+           <el-input v-model.trim="distmix" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
           </el-col>
         </el-row>
 
@@ -67,14 +67,14 @@
           <el-col :span="24">
             <el-form :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic">
               <el-form-item size="medium">
-              <el-input type="textarea" v-model="experience" autosize class="input_border"></el-input><i class="el-icon-plus" @click="addDomain"></i>
+              <el-input type="textarea" v-model.trim="experience" autosize class="input_border"></el-input><i class="el-icon-plus" @click="addDomain"></i>
                <div class="form-items"
                v-for="(domain, index) in dynamicValidateForm.domains"
                 :key="domain.key"
                 :prop="'domains.' + index + '.value'"
                 :rules="{required: true, message: '工作经历不能为空', trigger: 'blur'}"
                 >
-                 <el-input type="textarea"  autosize  v-model="domain.value" class="input_border"></el-input>
+                 <el-input type="textarea"  autosize  v-model.trim="domain.value" class="input_border"></el-input>
                  <i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i>
                </div>
               </el-form-item>
