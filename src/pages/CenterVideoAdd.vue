@@ -6,7 +6,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">*</span>视频标题</span>
+                    <span class="register-spanblock text-cut"><span class="register-necessary">*</span>视频标题</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -174,5 +174,10 @@ export default {
 .register-necessary {
   color: #cb1414;
   padding-right: 4px;
+}
+.text-cut {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 </style>

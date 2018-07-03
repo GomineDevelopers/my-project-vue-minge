@@ -5,7 +5,8 @@
       <div class="video-cover" v-for="(item,index) in videoList" :key="item.id">
         <div class="title">视频{{index+1}} <span v-text="item.title"></span></div>
         <div class="middle">
-          <span class="text">来源：<span v-text="item.source"></span> </span>
+          <span class="text">来源：</span>
+          <span class="text-area" v-text="item.source"></span>
           <span class="url">
             <el-button type="info" icon="el-icon-share" size="mini"
                         v-clipboard:copy="item.url"
@@ -115,6 +116,7 @@ export default {
 
 <style scoped>
 .video-cover {
+  width: 100%;
   min-height: 14vh;
   border-radius: 5px;
   background: #ffffff;
@@ -134,7 +136,7 @@ export default {
 }
 
 .video-cover .middle {
-  padding: 0 10px;
+  width: 100%;
   color: #628ba8;
   font-size: 14px;
   text-align: left;
@@ -144,13 +146,23 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
+.middle .text-area {
+  width: 50%;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
 .middle .url {
   float: right;
+  width: 24%;
 }
 
 .middle .text {
   float: left;
+  margin-left: 10px;
+  width: 10%;
 }
 
 .video-cover .bt {
