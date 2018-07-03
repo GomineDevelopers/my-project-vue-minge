@@ -144,9 +144,33 @@ export default {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    this.showGender
+    this.showGender();
+    this.getExitData();
   },
   methods: {
+    getExitData() {
+      let vm = this;
+      vm.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: "8",
+          c: "entry",
+          p: "user",
+          do: "shop",
+          m: "ewei_shop",
+          ac: "get_verification"
+        }
+      })
+        .then(function (response) {
+          if (response.status == 200) {
+            vm.registerName = response.data.result.realname
+            if (response.data.result.birth)
+              vm.registerBirthday = new Date(parseInt(response.data.result.birth) * 1000)
+          }
+        })
+        .catch(function (error) {
+          console.info(error);
+        })
+    },
     hide: function() {
       this.isArea = false
       this.onSelected
