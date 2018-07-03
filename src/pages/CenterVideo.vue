@@ -60,7 +60,6 @@
           });
       },
       onCopy: function (e) {
-        /*alert(e.text)*/
         this.$message({
           message: '复制成功！请去浏览器中打开视频',
           type: 'success'

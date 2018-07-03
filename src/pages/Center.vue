@@ -16,12 +16,12 @@
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
-    <!--<div class="row">-->
-      <!--<div class="title">-->
-        <!--<i class=" iconfont icon-icon"></i>&nbsp;<span class="text">我的积分</span>-->
-        <!--<span class="arrow"> <i class="el-icon-arrow-right"></i> </span>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="row">
+      <div class="title">
+        <i class=" iconfont icon-icon"></i>&nbsp;<span class="text">我的积分</span>
+        <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
+      </div>
+    </div>
     <div class="row">
       <div class="title" @click="goProposal">
         <i class=" iconfont icon-wenzhang2"></i>&nbsp;<span class="text">我的提案</span>

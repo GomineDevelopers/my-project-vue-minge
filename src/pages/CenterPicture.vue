@@ -18,7 +18,7 @@
       <div class="pictureList center-list" ref="pictureList">
         <div class="img-cover" v-for="(item,index) in imgList" :class="{ 'no-mr': (index+1)%3==0 }" :key="item.id"
              :style="coverStyleObject">
-          <img v-gallery :src="item.img" :style="styleObject" @click="false"/>
+          <img v-gallery :src="item.img" :style="styleObject" />
           <div class="title">{{item.title}}</div>
           <el-checkbox v-show="isDeleteMode" class="over-cover" :label="item.id"></el-checkbox>
         </div>
