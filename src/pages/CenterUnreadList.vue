@@ -156,6 +156,14 @@
               vm.dialogVisible = false;
               vm.getUnreadList();
             }
+            else if (response.data.status == '202') {
+              vm.$message({
+                type: 'info',
+                message: '书已被邀请者设为私密，该邀请无效。'
+              });
+              vm.dialogVisible = false;
+              vm.getUnreadList();
+            }
           })
           .catch(function (error) {
             console.info(error)

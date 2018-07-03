@@ -72,8 +72,8 @@
           </el-col>
         </el-row>
       </div>
-      <div class="item-wrapper">
-        <el-row class="item-label">
+      <div class="item-wrapper" v-if="!hasOtherReader">
+        <el-row class="item-label" >
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>私密读书</span>
           </el-col>
         </el-row>
@@ -93,7 +93,7 @@
           <el-col :span="20">
             <el-input v-model="totalPage" type="number" size="small" clearable></el-input>
           </el-col>
-          <el-col :span="4"><label for="">(页)</label></el-col>
+          <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
         <div class="submit-wrapper">
           <el-row class="item-content">
@@ -127,7 +127,8 @@
         totalPage: '',
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
-        bottomText: '添加'
+        bottomText: '添加',
+        hasOtherReader: false
       }
     },
     components: {
@@ -159,6 +160,7 @@
           }
         })
           .then(function (response) {
+
             vm.bookName = response.data.result.title;
             vm.bookPublisher = response.data.result.publisher;
             vm.writer = response.data.result.author;
@@ -169,6 +171,7 @@
             vm.imageUrl = response.data.result.img;
             let q = response.data.result.img.indexOf('images');
             vm.postImgName = response.data.result.img.substring(q);
+            vm.hasOtherReader = response.data.result.list.length > 0 ? true : false;
           })
           .catch(function (error) {
             console.log(error)
@@ -242,7 +245,7 @@
           })
             .then(function (response) {
               if (response.status == '200') {
-                let changeLink="";
+                let changeLink = "";
                 if (vm.$route.params.id) {
 
                   changeLink = {
