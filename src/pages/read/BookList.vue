@@ -349,9 +349,9 @@
     background-color: #e2edf5;
     border-radius: 5px;
     color: #457094;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     padding: 0 5px;
-    width: 60px;
+    width: 14vw;
     height: 1.5rem;
     line-height: 1.5rem;
     text-align: center;
@@ -377,7 +377,7 @@
     color: #8a969f;
     font-size: 0.7rem;
     display: inline-block;
-    width: 10vw;
+    width: 14vw;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;

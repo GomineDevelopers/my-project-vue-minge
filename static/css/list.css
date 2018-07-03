@@ -368,3 +368,9 @@
   top: 50%;
   margin-top: -95px !important;
 }
+
+.el-button--primary.is-plain:focus{
+  color: #409EFF;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
+}
