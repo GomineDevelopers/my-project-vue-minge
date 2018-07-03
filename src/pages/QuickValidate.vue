@@ -3,7 +3,8 @@
     <vue-headful title="快速认证"/>
     <div class="quickValidate-container">
       <el-row>
-        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>真实姓名</span></el-col>
+        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>真实姓名</span>
+        </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -11,7 +12,8 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>入党介绍人</span></el-col>
+        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>入党介绍人</span>
+        </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -19,7 +21,8 @@
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>出生日期</span></el-col>
+        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>出生日期</span>
+        </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
@@ -39,26 +42,54 @@
 <script>
   export default {
     name: "quick-validate",
-    data(){
-      return{
-        quickValName:'',
-        quickValIntroducer:'',
-        quickValBirthday:'',
+    data() {
+      return {
+        quickValName: '',
+        quickValIntroducer: '',
+        quickValBirthday: '',
         pickerOptions1: {
-          disabledDate(time) {return time.getTime() > Date.now();}
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          }
         }
       }
     },
-    methods:{
-      quickValidate:function () {
+    mounted() {
+      this.getExitData();
+    },
+    methods: {
+      getExitData() {
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "get_verification"
+          }
+        })
+          .then(function (response) {
+            if (response.status == 200) {
+              vm.quickValName = response.data.result.realname
+              if (response.data.result.birth)
+                vm.quickValBirthday = new Date(parseInt(response.data.result.birth) * 1000)
+            }
+          })
+          .catch(function (error) {
+            console.info(error);
+          })
+      },
+      quickValidate: function () {
         let vm = this;
         let postData = {};
         postData.realname = vm.quickValName;
         postData.introducer = vm.quickValIntroducer;
         postData.birth = vm.quickValBirthday;
 
-        if(vm.validator()){
-          vm.axios(vm.$commonTools.g_restUrl,{
+        if (vm.validator()) {
+          vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: "8",
@@ -71,8 +102,8 @@
             data: vm.$qs.stringify(postData)
           })
             .then(function (response) {
-              if(response.status == 200){
-                vm.$router.push({ name: 'NoMember' })
+              if (response.status == 200) {
+                vm.$router.push({name: 'NoMember'})
               }
             })
             .catch(function (error) {
@@ -81,21 +112,21 @@
         }
 
       },
-      validator:function () {
+      validator: function () {
         let vm = this;
         let msg = "";
-        if(!vm.quickValName){
+        if (!vm.quickValName) {
           msg = "未填写真实姓名";
-        }else if(!vm.quickValIntroducer){
+        } else if (!vm.quickValIntroducer) {
           msg = "未填写入党介绍人姓名";
-        }else if(!vm.quickValBirthday){
+        } else if (!vm.quickValBirthday) {
           msg = "未选择出生日期";
         }
 
-        if(msg){
+        if (msg) {
           vm.$message.error(msg);
           return false;
-        }else{
+        } else {
           return true;
         }
       }
@@ -110,19 +141,19 @@
     width: 70%;
   }
 
-  .quickVal-spanblock{
+  .quickVal-spanblock {
     display: inline-block;
     text-align: left;
     line-height: 5vh;
     padding-top: 2vh;
   }
 
-  .quickVal-necessary{
+  .quickVal-necessary {
     color: #cb1414;
     padding-right: 4px;
   }
 
-  .quickVal-select{
+  .quickVal-select {
     width: inherit;
   }
 
