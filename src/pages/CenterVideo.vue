@@ -147,7 +147,7 @@ export default {
   white-space: nowrap;
 }
 .middle .text-area {
-  width: 50%;
+  width: 60%;
   float: left;
   overflow: hidden;
   text-overflow: ellipsis;
