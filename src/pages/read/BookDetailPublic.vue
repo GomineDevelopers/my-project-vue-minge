@@ -61,7 +61,16 @@
           }
         })
           .then(function (response) {
-            vm.bookDetailData = response.data.result;
+            if (response.data.status == '200') {
+              vm.bookDetailData = response.data.result;
+            }
+            else if (response.data.status == '201') {
+              vm.bookDetailData = null
+              vm.$message({
+                type: 'error',
+                message: '您没有权限访问'
+              });
+            }
           })
           .catch(function (error) {
             console.log(error)

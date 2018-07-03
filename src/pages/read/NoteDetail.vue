@@ -86,6 +86,7 @@
               vm.noteDetailData = response.data.result;
             }
             else if (response.data.status == '201') {
+              vm.noteDetailData = null;
               vm.$message({
                 type: 'error',
                 message: '您没有权限访问'

@@ -1,49 +1,50 @@
 <template>
   <div class="book_detail_bg">
-    <div class="book_detail">
-        <el-row class="cover">
-          封面：
-          <img :src="bookDetailData.img">
-        </el-row>
-        <el-row>
-          <div class="wrapper title">书名：<span>《</span><span v-text="bookDetailData.title"></span><span>》</span></div>
-        </el-row>
-        <el-row>
-          <div class="wrapper textInterception">作者：<span v-text="bookDetailData.author"></span></div>
-        </el-row>
-        <el-row v-if="bookDetailData.translators != ''">
-          <div class="wrapper textInterception">译者：<span v-text="bookDetailData.translators">猪老八</span></div>
-        </el-row>
-        <el-row>
-          <div class="wrapper">私密读书：
-            <span v-if="bookDetailData.private_book == 0">否</span>
-            <span v-else-if="bookDetailData.private_book == 1">是</span>
-          </div>
-        </el-row>
-        <el-row>
-          <div class="wrapper">总页数：<span v-text="bookDetailData.page_number"></span><span>页</span></div>
-        </el-row>
-        <el-row class="wrapper">
-          已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
-          <el-button size="mini" type="primary" plain @click="updatePages">更新
-          </el-button>
-        </el-row>
-        <el-row>
-          <div class="readProgress">
-            <span class="spanLeft">读书进度：</span>
-            <el-progress :percentage="bookDetailData.percentage" color="#ec8947" :stroke-width="8"></el-progress>
-          </div>
-        </el-row>
-        <div class="readFriendDiv">
-          <el-row v-for="(item,index) in bookDetailData.list" v-if="bookDetailData.list.length != 0" :key="index">
-            <div class="wrapper2 readProgress2 readProgressText">
-              <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
-              <span class="spanLeft spanWidth" v-if="index != 0"></span>
-              <el-progress :percentage="item.percentage" color="#ebb71d" v-if="item.deleted!=1"></el-progress>
-              <span class="textInterception" :class="{'friendName':item.deleted!=1}">{{item.realname}}<span v-if="item.deleted==1">(已删除本书)</span></span>
-            </div>
-          </el-row>
+    <div class="book_detail" v-if="bookDetailData">
+      <el-row class="cover">
+        封面：
+        <img :src="bookDetailData.img">
+      </el-row>
+      <el-row>
+        <div class="wrapper title">书名：<span>《</span><span v-text="bookDetailData.title"></span><span>》</span></div>
+      </el-row>
+      <el-row>
+        <div class="wrapper textInterception">作者：<span v-text="bookDetailData.author"></span></div>
+      </el-row>
+      <el-row v-if="bookDetailData.translators != ''">
+        <div class="wrapper textInterception">译者：<span v-text="bookDetailData.translators">猪老八</span></div>
+      </el-row>
+      <el-row>
+        <div class="wrapper">私密读书：
+          <span v-if="bookDetailData.private_book == 0">否</span>
+          <span v-else-if="bookDetailData.private_book == 1">是</span>
         </div>
+      </el-row>
+      <el-row>
+        <div class="wrapper">总页数：<span v-text="bookDetailData.page_number"></span><span>页</span></div>
+      </el-row>
+      <el-row class="wrapper">
+        已读页数：<span v-text="bookDetailData.page_schedule"></span><span>页</span>
+        <el-button size="mini" type="primary" plain @click="updatePages">更新
+        </el-button>
+      </el-row>
+      <el-row>
+        <div class="readProgress">
+          <span class="spanLeft">读书进度：</span>
+          <el-progress :percentage="bookDetailData.percentage" color="#ec8947" :stroke-width="8"></el-progress>
+        </div>
+      </el-row>
+      <div class="readFriendDiv">
+        <el-row v-for="(item,index) in bookDetailData.list" v-if="bookDetailData.list.length != 0" :key="index">
+          <div class="wrapper2 readProgress2 readProgressText">
+            <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
+            <span class="spanLeft spanWidth" v-if="index != 0"></span>
+            <el-progress :percentage="item.percentage" color="#ebb71d" v-if="item.deleted!=1"></el-progress>
+            <span class="textInterception" :class="{'friendName':item.deleted!=1}">{{item.realname}}<span
+              v-if="item.deleted==1">(已删除本书)</span></span>
+          </div>
+        </el-row>
+      </div>
     </div>
     <div class="iconRight read" @click="askRead(bookDetailData.id,bookDetailData.title)"
          v-if="bookDetailData.my_book == 1 && bookDetailData.private_book == 0">
@@ -59,242 +60,256 @@
 </template>
 
 <script>
-export default {
-  name: 'book-detail',
-  data() {
-    return {
-      bookDetailData: Object
-    }
-  },
-  created() {
-    this.getBookDetailData()
-  },
-  methods: {
-    updatePages() {
-      let vm = this
-      vm
-        .$prompt('输入页数', '更新进度', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          inputPattern: /^[1-9]\d*$/,
-          inputErrorMessage: '只能输入非负整数'
-        })
-        .then(({ value }) => {
-          if (parseInt(value) > parseInt(vm.bookDetailData.page_number)) {
+  export default {
+    name: 'book-detail',
+    data() {
+      return {
+        bookDetailData: ""
+      }
+    },
+    created() {
+      this.getBookDetailData()
+    },
+    watch: {
+      $route() {
+        this.getBookDetailData();
+      }
+    },
+    methods: {
+      updatePages() {
+        let vm = this
+        vm
+          .$prompt('输入页数', '更新进度', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            inputPattern: /^[1-9]\d*$/,
+            inputErrorMessage: '只能输入非负整数'
+          })
+          .then(({value}) => {
+            if (parseInt(value) > parseInt(vm.bookDetailData.page_number)) {
+              vm.$message({
+                type: 'warning',
+                message: '已读页数不能大于总页数'
+              })
+            } else {
+              vm.updateNewPages(value)
+            }
+          })
+          .catch(() => {
             vm.$message({
-              type: 'warning',
-              message: '已读页数不能大于总页数'
+              type: 'info',
+              message: '取消输入'
             })
-          } else {
-            vm.updateNewPages(value)
-          }
-        })
-        .catch(() => {
-          vm.$message({
-            type: 'info',
-            message: '取消输入'
           })
-        })
-    },
-    updateNewPages(value) {
-      let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
-          params: {
-            i: '8',
-            c: 'entry',
-            p: 'bookmates',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'update_number',
-            id: vm.$route.params.id,
-            page_schedule: value
-          }
-        })
-        .then(function(response) {
-          vm.getBookDetailData()
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
-    },
-    getBookDetailData() {
-      let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
-          params: {
-            i: '8',
-            c: 'entry',
-            p: 'bookmates',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'detail_book',
-            showLoading: true,
-            id: vm.$route.params.id
-          }
-        })
-        .then(function(response) {
-          vm.bookDetailData = response.data.result
-        })
-        .catch(function(error) {
-          console.log(error)
-        })
-    },
-    del(id) {
-      let vm = this
-      vm
-        .$confirm('是否确定删除此书?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-        .then(() => {
-          vm
-            .axios(vm.$commonTools.g_restUrl, {
-              params: {
-                i: '8',
-                c: 'entry',
-                p: 'bookmates',
-                do: 'shop',
-                m: 'ewei_shop',
-                ac: 'del_book',
-                id: id
-              }
-            })
-            .then(function(response) {
-              if (response.data.result.info == '操作成功') {
-                vm.$router.replace({ name: 'BookList' })
-              }
-            })
-            .catch(function(error) {
-              console.log(error)
-            })
-        })
-        .catch(() => {
-          vm.$message({
-            type: 'info',
-            message: '已取消删除'
+      },
+      updateNewPages(value) {
+        let vm = this
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: '8',
+              c: 'entry',
+              p: 'bookmates',
+              do: 'shop',
+              m: 'ewei_shop',
+              ac: 'update_number',
+              id: vm.$route.params.id,
+              page_schedule: value
+            }
           })
+          .then(function (response) {
+            vm.getBookDetailData()
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      getBookDetailData() {
+        let vm = this
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: '8',
+              c: 'entry',
+              p: 'bookmates',
+              do: 'shop',
+              m: 'ewei_shop',
+              ac: 'detail_book',
+              showLoading: true,
+              id: vm.$route.params.id
+            }
+          })
+          .then(function (response) {
+            if (response.data.status == '200') {
+              vm.bookDetailData = response.data.result
+            }
+            else if (response.data.status == '201') {
+              vm.bookDetailData = null
+              vm.$message({
+                type: 'error',
+                message: '您没有权限访问'
+              });
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+      },
+      del(id) {
+        let vm = this
+        vm
+          .$confirm('是否确定删除此书?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          })
+          .then(() => {
+            vm
+              .axios(vm.$commonTools.g_restUrl, {
+                params: {
+                  i: '8',
+                  c: 'entry',
+                  p: 'bookmates',
+                  do: 'shop',
+                  m: 'ewei_shop',
+                  ac: 'del_book',
+                  id: id
+                }
+              })
+              .then(function (response) {
+                if (response.data.result.info == '操作成功') {
+                  vm.$router.replace({name: 'BookList'})
+                }
+              })
+              .catch(function (error) {
+                console.log(error)
+              })
+          })
+          .catch(() => {
+            vm.$message({
+              type: 'info',
+              message: '已取消删除'
+            })
+          })
+      },
+      rewrite(id) {
+        this.$router.push({name: 'EditBook', params: {id: id}})
+      },
+      askRead(id, name) {
+        this.$router.push({
+          name: 'AskRead',
+          query: {bookId: id, bookName: name}
         })
-    },
-    rewrite(id) {
-      this.$router.push({ name: 'EditBook', params: { id: id } })
-    },
-    askRead(id, name) {
-      this.$router.push({
-        name: 'AskRead',
-        query: { bookId: id, bookName: name }
-      })
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.book_detail {
-  text-align: left;
-  margin: 12vw 10vw 12vw 12vw;
-  font-size: 14px;
-}
+  .book_detail {
+    text-align: left;
+    margin: 12vw 10vw 12vw 12vw;
+    font-size: 14px;
+  }
 
-.cover {
-  display: flex;
-  align-items: flex-start;
-  padding-bottom: 1vh;
-  max-height: 20vh;
-}
+  .cover {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 1vh;
+    max-height: 20vh;
+  }
 
-.cover img {
-  max-height: 17vh;
-  max-width: 70%;
-  padding: 5px;
-  border: 1px solid #b3b3b3;
-  border-radius: 5px;
-}
+  .cover img {
+    max-height: 17vh;
+    max-width: 70%;
+    padding: 5px;
+    border: 1px solid #b3b3b3;
+    border-radius: 5px;
+  }
 
-.book_detail span {
-  font-weight: bold;
-}
+  .book_detail span {
+    font-weight: bold;
+  }
 
-.book_detail .wrapper {
-  height: 5vh;
-  line-height: 5vh;
-}
+  .book_detail .wrapper {
+    height: 5vh;
+    line-height: 5vh;
+  }
 
-.book_detail .wrapper2 {
-  height: 3vh;
-  line-height: 3vh;
-}
+  .book_detail .wrapper2 {
+    height: 3vh;
+    line-height: 3vh;
+  }
 
-.iconRight {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 50%;
-  right: 30px;
-  color: #409eff;
-  border: 1px solid #409eff;
-}
+  .iconRight {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #ffffff;
+    border-radius: 50%;
+    right: 30px;
+    color: #409eff;
+    border: 1px solid #409eff;
+  }
 
-.iconRight i {
-  font-size: 20px;
-  top: 50%;
-  margin-top: -10px;
-  position: absolute;
-  left: 50%;
-  margin-left: -10px;
-}
+  .iconRight i {
+    font-size: 20px;
+    top: 50%;
+    margin-top: -10px;
+    position: absolute;
+    left: 50%;
+    margin-left: -10px;
+  }
 
-.iconRight .icon-text {
-  position: absolute;
-  top: 42px;
-  font-size: 10px;
-  width: 60px;
-  margin-left: -30px;
-}
+  .iconRight .icon-text {
+    position: absolute;
+    top: 42px;
+    font-size: 10px;
+    width: 60px;
+    margin-left: -30px;
+  }
 
-.read {
-  top: 100px;
-}
+  .read {
+    top: 100px;
+  }
 
-.edit {
-  top: 170px;
-}
+  .edit {
+    top: 170px;
+  }
 
-.delete {
-  top: 240px;
-}
+  .delete {
+    top: 240px;
+  }
 
-.title {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
+  .title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 
-.readProgress .spanLeft {
-  float: left;
-  height: 5vh;
-  line-height: 5vh;
-  font-weight: normal;
-}
+  .readProgress .spanLeft {
+    float: left;
+    height: 5vh;
+    line-height: 5vh;
+    font-weight: normal;
+  }
 
-.readFriendDiv{
-  padding-top: 1vh;
-}
+  .readFriendDiv {
+    padding-top: 1vh;
+  }
 
-.readProgress2 .spanLeft{
-  float: left;
-  height: 3vh;
-  line-height: 3vh;
-  font-weight: normal;
-}
+  .readProgress2 .spanLeft {
+    float: left;
+    height: 3vh;
+    line-height: 3vh;
+    font-weight: normal;
+  }
 
-  .spanWidth{
+  .spanWidth {
     width: 70px;
   }
 
-  .friendName{
+  .friendName {
     display: inline-block;
     width: 24vw;
     font-size: .8rem;
