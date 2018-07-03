@@ -26,13 +26,13 @@
                     </span>
                   </el-col>
                   <el-col :span="24">
-                    <div class="comment-content">{{item.content}}
+                    <div class="comment-content" v-html="item.content">
                     </div>
                     <div class="comment-reply">
                       <div class="comment-reply-container" v-show="item.total>0">
                         <div v-for="subItem in item.list">
                           <span class="comment-reply-userName">{{subItem.realname}}：</span><span
-                          class="comment-reply-content">{{subItem.content}}</span>
+                          class="comment-reply-content" v-html="subItem.content"></span>
                         </div>
                         <div @click="reply(2,item.id,item.realname)" v-show="item.total>2"><span
                           class="comment-reply-message">共有{{item.total}}条回复<i
@@ -88,7 +88,7 @@
                 <el-row>
                   <el-col :span="24"><span class="comment-userName" v-text="item.realname"></span></el-col>
                   <el-col :span="24">
-                    <div class="comment-content">{{item.content}}
+                    <div class="comment-content" v-html="item.content">
                     </div>
                   </el-col>
                   <el-col :span="24">

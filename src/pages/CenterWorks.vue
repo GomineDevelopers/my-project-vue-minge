@@ -9,8 +9,8 @@
           <span class="delete" @click.stop="deleteItem(item.id)"><i class="el-icon-delete"></i>&nbsp;删除</span></div>
       </div>
     </div>
-    <div class="center-footer">
-      <div class="center-add-btn" @click="goAddWorks()"></div>
+    <div class="center-footer" @click="goAddWorks()">
+      <div class="center-add-btn"></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
     </div>

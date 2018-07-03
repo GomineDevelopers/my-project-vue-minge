@@ -1,5 +1,5 @@
 <template>
-  <div class="center_home_bg  center-picture">
+  <div class="center_home_bg ">
     <div class="cover" v-show="isDeleteMode"></div>
     <div class="center-title">我的图片</div>
     <el-button type="text" class="manage" @click="openDeleteMode" v-show="!isDeleteMode">

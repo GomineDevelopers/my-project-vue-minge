@@ -13,8 +13,8 @@
         </div>
       </div>
     </div>
-    <div class="center-footer">
-      <div class="center-add-btn" @click.stop="goAddThoughts()"></div>
+    <div class="center-footer" @click.stop="goAddThoughts()">
+      <div class="center-add-btn" ></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
     </div>
