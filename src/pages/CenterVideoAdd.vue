@@ -6,7 +6,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">1.</span>视频标题</span>
+                    <span class="register-spanblock"><span class="register-necessary">*</span>视频标题</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -18,24 +18,24 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">2.</span>视频链接</span>
+                    <span class="register-spanblock"><span class="register-necessary">*</span>视频链接</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
               <el-col :span="24"  class="aaa">
-                  <el-input v-model.trim="videoUrl" placeholder="请输入视频链接" ></el-input>
+                  <el-input v-model.trim="videoUrl" placeholder="请输入视频链接" type="textarea" :rows="3" ></el-input>
               </el-col>
             </el-row>
         </div>
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">2.</span>视频来源</span>
+                    <span class="register-spanblock"><span class="register-necessary">&nbsp</span>视频来源</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
               <el-col :span="24"  class="aaa">
-                  <el-input v-model.trim="videoSource" placeholder="请输入视频来源" ></el-input>
+                  <el-input v-model.trim="videoSource" placeholder="请输入视频来源"  ></el-input>
               </el-col>
             </el-row>
         </div>
@@ -129,7 +129,7 @@ export default {
   /* border-left: 5px solid #2f81b9; */
   margin-bottom: 1vh;
   width: 85%;
-  margin: 3vh auto;
+  margin: 5vh auto;
   padding: 1vh 0 3vh 0;
 }
 .addworks-wrap {
@@ -170,5 +170,9 @@ export default {
 }
 .outline-wrapper .el-input__inner {
   background-color: #f5fafd;
+}
+.register-necessary {
+  color: #cb1414;
+  padding-right: 4px;
 }
 </style>
