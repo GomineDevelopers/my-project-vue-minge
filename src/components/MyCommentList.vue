@@ -116,7 +116,7 @@
     <div v-if="type == 3" class="reply-content">
       <el-row class="reply-content-border">
         <el-col :span="24">
-          <el-input type="textarea" :rows="20" placeholder="请输入您的留言~" v-model="comment" maxlength="400">
+          <el-input type="textarea" :rows="20" placeholder="请输入您的留言~" v-model.trim="comment" maxlength="400">
           </el-input>
           <span class="note" v-show="comment.length>0">{{comment.length}}/400</span>
         </el-col>
@@ -130,7 +130,7 @@
     <div v-if="type == 4" class="reply-content">
       <el-row class="reply-content-border">
         <el-col :span="24">
-          <el-input type="textarea" :rows="20" :placeholder="placeHolder" v-model="commentReply" maxlength="400">
+          <el-input type="textarea" :rows="20" :placeholder="placeHolder" v-model.trim="commentReply" maxlength="400">
           </el-input>
           <span class="note" v-show="commentReply.length>0">{{commentReply.length}}/400</span>
         </el-col>

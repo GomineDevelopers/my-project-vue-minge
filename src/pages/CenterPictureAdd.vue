@@ -8,7 +8,7 @@
                     <span class="register-spanblock"><span class="register-necessary">1.</span>标题</span>
                 </el-col>
                 <el-col :span="24" class="input" >
-                  <el-input v-model="pictureName" placeholder="请输入图片标题"></el-input>
+                  <el-input v-model.trim="pictureName" placeholder="请输入图片标题"></el-input>
                 </el-col>
             </el-row>
             <el-row class="item-content">
