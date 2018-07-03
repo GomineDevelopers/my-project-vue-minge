@@ -25,7 +25,7 @@
               <div v-if="type == 4" class="Un_card_div">的快速验证申请</div>
               <div v-else-if="type == 2" class="Un_card_div">的提案</div>
               <div v-else-if="type == 3" class="Un_card_div3">
-                <div><span v-text="item.nickname" class="nickname"></span>邀请你一起阅读《<span v-text="item.book_name"></span>》
+                <div><span v-text="item.realname" class="nickname"></span>邀请你一起阅读《<span v-text="item.book_name"></span>》
                 </div>
               </div>
             </div>

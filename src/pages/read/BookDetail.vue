@@ -40,7 +40,7 @@
               <span class="spanLeft" v-if="index == 0">读书伙伴：</span>
               <span class="spanLeft spanWidth" v-if="index != 0"></span>
               <el-progress :percentage="item.percentage" color="#ebb71d"></el-progress>
-              <span class="friendName textInterception" v-text="item.nickname"></span>
+              <span class="friendName textInterception" v-text="item.realname"></span>
             </div>
           </el-row>
         </div>

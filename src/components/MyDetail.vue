@@ -43,7 +43,7 @@
               <el-col :span="21" class="news-detail-bottom-comment">
                 <el-row>
                   <el-col :span="22">
-                    <span class="news-detail-bottom-username" v-text="item.nickname"></span>
+                    <span class="news-detail-bottom-username" v-text="item.realname"></span>
                   </el-col>
                   <el-col :span="2">
                   <span class="news-detail-bottom-span-icon3">
@@ -62,7 +62,7 @@
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
                   <el-col :span="4">
-                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.nickname)"><i
+                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>

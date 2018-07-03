@@ -17,7 +17,7 @@
               <el-col :span="21" class="comment-right">
                 <el-row>
                   <el-col :span="22">
-                    <span class="comment-userName" v-text="item.nickname"></span>
+                    <span class="comment-userName" v-text="item.realname"></span>
                   </el-col>
                   <el-col :span="2">
                     <span class="comment-icon" v-if="commentTypeId==0">
@@ -31,10 +31,10 @@
                     <div class="comment-reply">
                       <div class="comment-reply-container" v-show="item.total>0">
                         <div v-for="subItem in item.list">
-                          <span class="comment-reply-userName">{{subItem.nickname}}：</span><span
+                          <span class="comment-reply-userName">{{subItem.realname}}：</span><span
                           class="comment-reply-content">{{subItem.content}}</span>
                         </div>
-                        <div @click="reply(2,item.id,item.nickname)" v-show="item.total>2"><span
+                        <div @click="reply(2,item.id,item.realname)" v-show="item.total>2"><span
                           class="comment-reply-message">共有{{item.total}}条回复<i
                           class="el-icon-d-arrow-right"></i></span></div>
                       </div>
@@ -46,7 +46,7 @@
                         <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
                       </el-col>
                       <el-col :span="4">
-                    <span class="comment-rep" @click="reply(4,item.id,item.nickname)"><i
+                    <span class="comment-rep" @click="reply(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                       </el-col>
                     </el-row>
@@ -86,7 +86,7 @@
               </el-col>
               <el-col :span="21" class="comment-right">
                 <el-row>
-                  <el-col :span="24"><span class="comment-userName" v-text="item.nickname"></span></el-col>
+                  <el-col :span="24"><span class="comment-userName" v-text="item.realname"></span></el-col>
                   <el-col :span="24">
                     <div class="comment-content">{{item.content}}
                     </div>

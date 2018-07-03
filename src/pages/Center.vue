@@ -88,7 +88,7 @@ export default {
           }
         })
         .then(function(response) {
-          vm.name = response.data.result.nickname
+          vm.name = response.data.result.realname
           vm.imgUrl = response.data.result.avatar
           vm.hasMessage = response.data.result.mg
           vm.totalProposal = response.data.result.proposal

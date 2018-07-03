@@ -24,7 +24,7 @@
             <el-row>
               <el-col :span="3" class="avatar"><img :src="item.avatar"></el-col>
               <el-col :span="21">
-                <span class="userName">{{item.nickname}}</span>
+                <span class="userName">{{item.realname}}</span>
                 <div class="commentContent">{{item.content}}</div>
                 <el-row>
                   <el-col :span="20">
@@ -32,7 +32,7 @@
                       class="NCD_bottomContainer_commentArea_span">{{$commonTools.formatHour(item.create_time)}}</span>
                   </el-col>
                   <el-col :span="4">
-                    <span class="NCD_bottomContainer_commentArea_span" @click="goComment(4,item.id,item.nickname)"><i
+                    <span class="NCD_bottomContainer_commentArea_span" @click="goComment(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
