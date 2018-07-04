@@ -17,8 +17,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="title">
-        <i class=" iconfont icon-icon"></i>&nbsp;<span class="text">我的积分</span>
+      <div class="title" @click="goPoint">
+        <i class=" iconfont icon-icon"></i>&nbsp;
+        <span class="text">我的积分
+          <span class="number"> {{score}}</span>
+        </span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
@@ -67,7 +70,8 @@ export default {
       hasMessage: false,
       totalProposal: 0,
       passProposal: 0,
-      comment: 0
+      comment: 0,
+      score:0
     }
   },
   mounted() {
@@ -93,7 +97,8 @@ export default {
           vm.hasMessage = response.data.result.mg
           vm.totalProposal = response.data.result.proposal
           vm.passProposal = response.data.result.c_proposal
-          vm.comment = response.data.result.common_num
+          vm.comment = response.data.result.common_num;
+          vm.score = response.data.result.score;
         })
         .catch(function(error) {
           console.log(error)
@@ -107,6 +112,9 @@ export default {
     },
     goProposal: function() {
       this.$router.push({ name: 'Proposal' })
+    },
+    goPoint:function () {
+      this.$router.push({name:'CenterPoint'});
     }
   }
 }
@@ -245,4 +253,16 @@ export default {
 .mb {
   margin-bottom: 3px;
 }
+
+.number {
+  background: #f0565a;
+  color: white;
+  line-height: 16px;
+  height: 16px;
+  text-align: center;
+  width: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 10px;
+  }
 </style>

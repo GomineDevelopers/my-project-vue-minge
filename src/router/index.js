@@ -23,6 +23,8 @@ import NoMember from '@/pages/NoMember'
 import NoMemberStatus from '@/pages/NoMemberStatus'
 //我的民革
 import Center from '@/pages/Center'
+//我的民革--积分
+import CenterPoint from '@/pages/CenterPoint'
 //我的民革-个人中心
 import CenterHome from '@/pages/CenterHome'
 //我的留言
@@ -158,6 +160,14 @@ export default new Router({
       path: '/center',
       name: 'Center',
       component: Center,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/center/centerpoint',
+      name: 'CenterPoint',
+      component: CenterPoint,
       meta: {
         requiresAuth: true
       }
