@@ -19,9 +19,8 @@
     <div class="row">
       <div class="title" @click="goPoint">
         <i class=" iconfont icon-icon"></i>&nbsp;
-        <span class="text">我的积分
-          <span class="number"> {{score}}</span>
-        </span>
+        <span class="text">我的积分</span>
+        <span class="number"> {{score}}分</span>
         <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
@@ -255,14 +254,8 @@ export default {
 }
 
 .number {
-  background: #f0565a;
-  color: white;
-  line-height: 16px;
-  height: 16px;
-  text-align: center;
-  width: 16px;
-  border-radius: 50%;
-  display: inline-block;
-  font-size: 10px;
-  }
+  color: #ed7663;
+  font-weight: bold;
+  font-size: 15px;
+}
 </style>

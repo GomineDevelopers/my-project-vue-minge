@@ -8,7 +8,7 @@
         <el-row class="point_card" v-for="(item,index) in centerPointList" :key="index">
           <div class="point_content">
             <el-col :span="15">
-              <span v-text="item.score_type"></span>&nbsp;<span class="el-icon-plus"></span><span class="score" v-text="item.score"></span>分
+              <span v-text="item.score_type"></span>+<span class="score" v-text="item.score"></span>分
             </el-col>
             <el-col :span="9" class="timeDiv">
               <span class="time" v-text="$commonTools.formatDate(item.create_time,true)"></span>
