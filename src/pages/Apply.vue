@@ -180,7 +180,6 @@ export default {
     },
     showGender: function(radioValue) {
       this.genderValue = radioValue
-      console.info(this.genderValue)
     },
     onSelected(data) {
       let vm = this

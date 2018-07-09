@@ -92,6 +92,9 @@ import NoteDetail from '@/pages/read/NoteDetail'
 //邀请读书
 import AskRead from '@/pages/read/AskRead'
 
+//入党申请书
+import ApplicationOne from '@/pages/application/one'
+
 Vue.use(Router)
 
 export default new Router({
@@ -411,6 +414,13 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    },
+    },{
+      path: '/application/one',
+      component: ApplicationOne,
+      name: 'ApplicationOne',
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })

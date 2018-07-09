@@ -145,6 +145,22 @@
   height: 100vh;
 }
 
+.application_bg {
+  background-image: url(../image/application_bg.png);
+  background-size: 100% 100%;
+  position: absolute;
+  width: 100%;
+  height:100vh;
+}
+
+.application_inner_bg {
+  background: url(../image/application_inner.png);
+  background-size: 100% 100%;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
+
 .proposal-cover .loading-layer {
   padding-bottom: 10vh;
 }
