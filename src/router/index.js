@@ -99,6 +99,7 @@ import ApplicationThree from '@/pages/application/three'
 import ApplicationFour from '@/pages/application/four'
 import ApplicationFive from '@/pages/application/five'
 import ApplicationSix from '@/pages/application/six'
+import ApplicationDegree from '@/pages/application/degree'
 
 Vue.use(Router)
 
@@ -458,6 +459,13 @@ export default new Router({
       path: '/application/six',
       component: ApplicationSix,
       name: 'ApplicationSix',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/degree',
+      component: ApplicationDegree,
+      name: 'ApplicationDegree',
       meta: {
         requiresAuth: false
       }

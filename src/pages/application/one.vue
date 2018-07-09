@@ -3,7 +3,7 @@
     <div class="application_header"></div>
     <div class="application_bg">
       <div class="container">
-        <div class="title">入党申请书</div>
+        <div class="title">入党申请表</div>
         <div class="content">
           <el-row><span class="necessary">*</span>姓名</el-row>
           <el-row>
