@@ -145,12 +145,24 @@
   height: 100vh;
 }
 
+.application_header{
+  background-image: url("../image/application_header.png");
+  background-size: 100% 100%;
+  position: absolute;
+  top:0;
+  height: 8vh;
+  width: 100%;
+  overflow-y: hidden;
+}
 .application_bg {
   background-image: url(../image/application_bg.png);
   background-size: 100% 100%;
   position: absolute;
+  top:8vh;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  min-height: 92vh;
+  overflow-y: scroll;
 }
 
 .application_inner_bg {

@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <div class="application_header"></div>
     <div class="application_bg">
       <div class="container">
         <div class="title">入党申请书</div>
@@ -19,12 +21,20 @@
                             class="dateInput inputText" :picker-options="pickerOptions1"></el-date-picker>
           </el-row>
           <el-row><span class="necessary">*</span>籍贯</el-row>
-          <el-row></el-row>
+          <el-row>
+            <v-distpicker hide-area class="inputText"></v-distpicker>
+          </el-row>
           <el-row><span class="necessary">*</span>出生地</el-row>
-          <el-row></el-row>
+          <el-row>
+            <v-distpicker hide-area class="inputText"></v-distpicker>
+          </el-row>
         </div>
+        <el-row>
+          <el-button type="primary" round class="bottom-btn">下一页</el-button>
+        </el-row>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -63,7 +73,7 @@
 
 <style scoped>
   .container{
-    margin: 11vh 17vw;
+    margin: 4vh 17vw 12vh 17vw;
   }
 
   .title{
@@ -86,6 +96,20 @@
   }
 
   .dateInput{
-    width: inherit;
+    width: 100%;
+  }
+
+  .bottom-btn {
+    margin-top: 1vh;
+    width: 50%;
+    padding: 12px 0;
+    letter-spacing: 1px;
+    box-shadow: 0px 0px 20px 5px #e9e9e9;
+  }
+</style>
+
+<style>
+ .content .distpicker-address-wrapper select{
+    width: 48%;
   }
 </style>

@@ -94,6 +94,8 @@ import AskRead from '@/pages/read/AskRead'
 
 //入党申请书
 import ApplicationOne from '@/pages/application/one'
+import ApplicationTwo from '@/pages/application/two'
+import ApplicationThree from '@/pages/application/three'
 
 Vue.use(Router)
 
@@ -418,6 +420,20 @@ export default new Router({
       path: '/application/one',
       component: ApplicationOne,
       name: 'ApplicationOne',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/two',
+      component: ApplicationTwo,
+      name: 'ApplicationTwo',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/three',
+      component: ApplicationThree,
+      name: 'ApplicationThree',
       meta: {
         requiresAuth: false
       }
