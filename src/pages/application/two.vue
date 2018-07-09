@@ -9,6 +9,7 @@
             <el-row><span class="necessary">*</span>身份证号码</el-row>
             <el-row><el-input v-model="IDCard" class="inputText" clearable></el-input></el-row>
             <el-row><span class="necessary">*</span>学历学位</el-row>
+            <el-row class="addDiv"><span class="addSome">+添加教育经历</span></el-row>
             <el-row><el-input v-model="degree" class="inputText" clearable></el-input></el-row>
             <el-row><span class="necessary">*</span>现工作单位</el-row>
             <el-row><el-input v-model="presentWorkingUnit" class="inputText" clearable></el-input></el-row>
@@ -71,5 +72,12 @@
     padding: 12px 0;
     letter-spacing: 1px;
     box-shadow: 0px 0px 20px 5px #e9e9e9;
+  }
+
+  .addDiv{
+    padding: .6vh 0;
+  }
+  .addSome{
+    color: #bfbfbf;
   }
 </style>

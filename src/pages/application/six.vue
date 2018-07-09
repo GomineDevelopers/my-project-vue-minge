@@ -14,7 +14,12 @@
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
                 <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <div v-else><i  class="el-icon-picture"></i></div>
+                <div v-else>
+                  <i  class="el-icon-picture"></i>
+                  <el-row class="description" >
+                    <el-col :span="24">请上传图片</el-col>
+                  </el-row>
+                </div>
               </el-upload>
             </div>
           </el-row>
@@ -89,7 +94,7 @@
   }
   .book-cover {
     width: 100%;
-    height: 28vh;
+    height: 40vh;
     border: 1px solid #ccc;
     background: white;
     border-radius: 1vh;
