@@ -1,11 +1,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 698435 */
-  src: url('//at.alicdn.com/t/font_698435_hrc398wjx9o.eot');
-  src: url('//at.alicdn.com/t/font_698435_hrc398wjx9o.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_698435_hrc398wjx9o.woff') format('woff'),
-  url('//at.alicdn.com/t/font_698435_hrc398wjx9o.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_698435_hrc398wjx9o.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_698435_gd5qfubyr5.eot');
+  src: url('//at.alicdn.com/t/font_698435_gd5qfubyr5.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_698435_gd5qfubyr5.woff') format('woff'),
+  url('//at.alicdn.com/t/font_698435_gd5qfubyr5.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_698435_gd5qfubyr5.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -55,3 +55,4 @@
 .icon-together-read:before { content: "\e6d0"; }
 
 .icon-kuai:before { content: "\e603"; }
+
