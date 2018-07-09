@@ -12,10 +12,8 @@
           <el-row><el-input v-model="homePostcode" class="inputText" clearable></el-input></el-row>
           <el-row><span class="necessary">*</span>通讯地址</el-row>
           <el-row>
-            <el-radio-group v-model="radioValue">
-              <el-radio-button label="工作单位地址"></el-radio-button>
-              <el-radio-button label="家庭地址"></el-radio-button>
-            </el-radio-group>
+            <radio-picker :radioValues="genderValues" :radioValue="genderValue"
+                          @handleRadioValue="showGender"></radio-picker>
           </el-row>
           <el-row><span class="necessary">*</span>手机</el-row>
           <el-row><el-row><el-input v-model="Phone" class="inputText" clearable></el-input></el-row></el-row>
@@ -39,6 +37,8 @@
 </template>
 
 <script>
+  import RadioPicker from '@/components/RadioPicker.vue'
+
     export default {
       name: "three",
       data(){
@@ -53,7 +53,19 @@
           partTime:'',
           speciality:'',
           specialTreatment:'',
-          radioValue: '工作单位地址',
+          genderValues: [{text: '工作单位地址', value: 1}, {text: '家庭地址', value: 0}],
+          genderValue: 1,
+        }
+      },
+      components: {
+        'radio-picker': RadioPicker
+      },
+      mounted: function () {
+        this.showGender();
+      },
+      methods:{
+        showGender(radioValue) {
+          this.genderValue = radioValue;
         }
       }
     }

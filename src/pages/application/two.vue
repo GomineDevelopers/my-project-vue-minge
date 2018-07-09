@@ -78,6 +78,7 @@
     padding: .6vh 0;
   }
   .addSome{
-    color: #bfbfbf;
+    color: #A6A6A6;
+    font-size: .8rem;
   }
 </style>
