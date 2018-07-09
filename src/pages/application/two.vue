@@ -52,12 +52,6 @@
     margin: 4vh 17vw 12vh 17vw;
   }
 
-  .title{
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #185a88;
-  }
-
   .content{
     text-align: left;
     margin-top: 2vh;
@@ -69,10 +63,6 @@
 
   .content .inputText{
     padding: .6vh  0 1vh 0;
-  }
-
-  .dateInput{
-    width: 100%;
   }
 
   .bottom-btn {

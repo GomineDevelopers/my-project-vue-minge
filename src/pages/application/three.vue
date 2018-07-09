@@ -1,13 +1,87 @@
 <template>
-
+  <div>
+    <div class="application_header"></div>
+    <div class="application_bg">
+      <div class="container">
+        <div class="content">
+          <el-row><span class="necessary">*</span>家庭住址</el-row>
+          <el-row><el-input v-model="homeAddress" class="inputText" clearable></el-input></el-row>
+          <el-row><span class="necessary">*</span>家庭电话</el-row>
+          <el-row><el-input v-model="homeTel" class="inputText" clearable></el-input></el-row>
+          <el-row><span class="necessary">*</span>家庭邮编</el-row>
+          <el-row><el-input v-model="homePostcode" class="inputText" clearable></el-input></el-row>
+          <el-row><span class="necessary">*</span>通讯地址</el-row>
+          <el-row>
+            <el-radio-group v-model="radioValue">
+              <el-radio-button label="工作单位地址"></el-radio-button>
+              <el-radio-button label="家庭地址"></el-radio-button>
+            </el-radio-group>
+          </el-row>
+          <el-row><span class="necessary">*</span>手机</el-row>
+          <el-row><el-row><el-input v-model="Phone" class="inputText" clearable></el-input></el-row></el-row>
+          <el-row>电子邮箱</el-row>
+          <el-row><el-input v-model="email" class="inputText" clearable></el-input></el-row>
+          <el-row>人大政协任职</el-row>
+          <el-row><el-input v-model="CPPCC" class="inputText" clearable></el-input></el-row>
+          <el-row>其他主要社会兼职</el-row>
+          <el-row><el-input v-model="partTime" class="inputText" clearable></el-input></el-row>
+          <el-row>专长</el-row>
+          <el-row><el-input v-model="speciality" class="inputText" clearable></el-input></el-row>
+          <el-row>享受何级别特殊待遇</el-row>
+          <el-row><el-input v-model="specialTreatment" class="inputText" clearable></el-input></el-row>
+        </div>
+        <el-row>
+          <el-button type="primary" round class="bottom-btn">下一页</el-button>
+        </el-row>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
     export default {
-        name: "three"
+      name: "three",
+      data(){
+        return{
+          homeAddress:'',
+          homeTel:'',
+          homePostcode:'',
+          postAddress:1,
+          Phone:'',
+          email:'',
+          CPPCC:'',
+          partTime:'',
+          speciality:'',
+          specialTreatment:'',
+          radioValue: '工作单位地址',
+        }
+      }
     }
 </script>
 
 <style scoped>
+  .container{
+    margin: 4vh 17vw 12vh 17vw;
+  }
 
+  .content{
+    text-align: left;
+    margin-top: 2vh;
+  }
+
+  .necessary{
+    color: #cb1414;
+  }
+
+  .content .inputText{
+    padding: .6vh  0 1vh 0;
+  }
+
+  .bottom-btn {
+    margin-top: 1vh;
+    width: 50%;
+    padding: 12px 0;
+    letter-spacing: 1px;
+    box-shadow: 0px 0px 20px 5px #e9e9e9;
+  }
 </style>
