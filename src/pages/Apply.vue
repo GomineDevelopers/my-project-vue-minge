@@ -1,7 +1,7 @@
 <template>
   <div class="quick_validate_bg"  >
     <vue-headful title="我的民革"/>
-   <div class="blanks" v-if="isArea" @click="hide" @touchmove.prevent ></div>
+   <div class="distpicker-blanks" v-if="isArea" @click="hide" @touchmove.prevent ></div>
     <div class="dist-select" v-show="isArea"  >
       <v-distpicker type="mobile"  @selected="onSelected"></v-distpicker>
     </div>
@@ -333,59 +333,5 @@ export default {
   height: auto;
   padding-bottom: 34%;
 }
-.blanks {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
 </style>
-<style>
-.distpicker-address-wrapper select {
-  width: 100%;
-  height: 36px;
-  outline: none;
-  border: none;
-  margin-top: 1vh;
-  color: #bfbfbf;
-}
-.demo-dynamic {
-  width: 100%;
-}
-.demo-dynamic .el-input--medium {
-  width: 90%;
-  margin-top: 1vh;
-}
-.demo-dynamic i {
-  font-size: 18px;
-  font-weight: 900;
-  margin-left: 2px;
-  color: #bfbfbf;
-  opacity: 0.8;
-  vertical-align: middle;
-}
-.dist-select {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
-  z-index: 999;
-}
-.dist-select {
-  background: white;
-}
-.distCommit {
-  background-color: white;
-}
-.input_border .el-textarea__inner {
-  border: none;
-}
-.address-container {
-  height: 40vh;
-  overflow-y: scroll;
-}
-</style>
+
