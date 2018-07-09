@@ -96,6 +96,9 @@ import AskRead from '@/pages/read/AskRead'
 import ApplicationOne from '@/pages/application/one'
 import ApplicationTwo from '@/pages/application/two'
 import ApplicationThree from '@/pages/application/three'
+import ApplicationFour from '@/pages/application/four'
+import ApplicationFive from '@/pages/application/five'
+import ApplicationSix from '@/pages/application/six'
 
 Vue.use(Router)
 
@@ -434,6 +437,27 @@ export default new Router({
       path: '/application/three',
       component: ApplicationThree,
       name: 'ApplicationThree',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/four',
+      component: ApplicationFour,
+      name: 'ApplicationFour',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/five',
+      component: ApplicationFive,
+      name: 'ApplicationFive',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/six',
+      component: ApplicationSix,
+      name: 'ApplicationSix',
       meta: {
         requiresAuth: false
       }
