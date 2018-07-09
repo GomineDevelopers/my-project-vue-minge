@@ -153,6 +153,7 @@
   height: 8vh;
   width: 100%;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 .application_bg {
   background-image: url(../image/application_bg.png);
@@ -162,7 +163,9 @@
   width: 100%;
   height: auto;
   min-height: 92vh;
+  overflow-x: hidden;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .application_inner_bg {
@@ -170,7 +173,10 @@
   background-size: 100% 100%;
   position: absolute;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .proposal-cover .loading-layer {
@@ -511,4 +517,23 @@
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+
+/*一年后的申请表*/
+.content .el-select{
+  width: 100%;
+}
+
+.el-input__inner{
+  height: 32px;
+  line-height: 32px;
+}
+
+.application_btn .el-button.is-round{
+  padding: 11px 36px;
+}
+
+.content .el-textarea__inner{
+  border: 1px solid #ccc;
 }

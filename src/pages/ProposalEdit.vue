@@ -191,10 +191,6 @@ export default {
   text-align: center;
   margin-top: 30px;
 }
-
-.register-select {
-  width: inherit;
-}
 </style>
 
 

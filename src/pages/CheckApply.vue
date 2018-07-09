@@ -78,7 +78,7 @@
     </div>
 
     <div class="quick_validate_bg" v-if="temp == 2">
-      <el-row class="application_header">
+      <el-row class="application_header_apply">
         <el-col :span="24">
           <span class="application_line"></span>
           <span class="application_title">申请书</span>
@@ -257,7 +257,7 @@
   }
 
   /*申请书详情*/
-  .application_header {
+  .application_header_apply {
     padding: 3vh 0;
     height: 50px;
     line-height: 50px;

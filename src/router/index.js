@@ -100,6 +100,11 @@ import ApplicationFour from '@/pages/application/four'
 import ApplicationFive from '@/pages/application/five'
 import ApplicationSix from '@/pages/application/six'
 import ApplicationDegree from '@/pages/application/degree'
+import ApplicationResume from '@/pages/application/resume'
+import ApplicationAward from '@/pages/application/award'
+import ApplicationPartyTeam from '@/pages/application/partyteam'
+import ApplicationFamily from '@/pages/application/family'
+import ApplicationRelationship from '@/pages/application/relationship'
 
 Vue.use(Router)
 
@@ -466,6 +471,41 @@ export default new Router({
       path: '/application/degree',
       component: ApplicationDegree,
       name: 'ApplicationDegree',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/resume',
+      component: ApplicationResume,
+      name: 'ApplicationResume',
+      meta: {
+        requiresAuth: false
+      }
+    }, {
+      path: '/application/award',
+      component: ApplicationAward,
+      name: 'ApplicationAward',
+      meta: {
+        requiresAuth: false
+      }
+    }, {
+      path: '/application/partyteam',
+      component: ApplicationPartyTeam,
+      name: 'ApplicationPartyTeam',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/family',
+      component: ApplicationFamily,
+      name: 'ApplicationFamily',
+      meta: {
+        requiresAuth: false
+      }
+    },{
+      path: '/application/relationship',
+      component: ApplicationRelationship,
+      name: 'ApplicationRelationship',
       meta: {
         requiresAuth: false
       }
