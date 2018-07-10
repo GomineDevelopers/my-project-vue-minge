@@ -29,7 +29,7 @@
           <el-row><el-input v-model="specialTreatment" class="inputText" clearable></el-input></el-row>
         </div>
         <el-row>
-          <el-button type="primary" round class="bottom-btn">下一页</el-button>
+          <el-button type="primary" round class="bottom-btn" @click="nextPage">下一页</el-button>
         </el-row>
       </div>
     </div>
@@ -66,34 +66,14 @@
       methods:{
         showGender(radioValue) {
           this.genderValue = radioValue;
+        },
+        nextPage:function () {
+          this.$router.push({name:'ApplicationFour'});
         }
       }
     }
 </script>
 
 <style scoped>
-  .container{
-    margin: 4vh 17vw 12vh 17vw;
-  }
-
-  .content{
-    text-align: left;
-    margin-top: 2vh;
-  }
-
-  .necessary{
-    color: #cb1414;
-  }
-
-  .content .inputText{
-    padding: .6vh  0 1vh 0;
-  }
-
-  .bottom-btn {
-    margin-top: 1vh;
-    width: 50%;
-    padding: 12px 0;
-    letter-spacing: 1px;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-  }
+  @import '../../../static/css/application.css';
 </style>

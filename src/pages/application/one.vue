@@ -39,7 +39,7 @@
           </el-row>
         </div>
         <el-row>
-          <el-button type="primary" round class="bottom-btn">下一页</el-button>
+          <el-button type="primary" round class="bottom-btn" @click="nextPage">下一页</el-button>
         </el-row>
       </div>
     </div>
@@ -109,45 +109,15 @@
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow:auto')
       },
+      nextPage:function () {
+        this.$router.push({name:'ApplicationTwo'});
+      }
     }
   }
 </script>
 
 <style scoped>
-  .container {
-    margin: 4vh 17vw 12vh 17vw;
-  }
-
-  .title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #185a88;
-  }
-
-  .content {
-    text-align: left;
-    margin-top: 2vh;
-  }
-
-  .necessary {
-    color: #cb1414;
-  }
-
-  .content .inputText {
-    padding: .6vh 0 1vh 0;
-  }
-
-  .dateInput {
-    width: 100%;
-  }
-
-  .bottom-btn {
-    margin-top: 1vh;
-    width: 50%;
-    padding: 12px 0;
-    letter-spacing: 1px;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-  }
+  @import '../../../static/css/application.css';
 </style>
 
 

@@ -23,7 +23,7 @@
             <el-row><el-input v-model="postcode" class="inputText" clearable></el-input></el-row>
           </div>
           <el-row>
-            <el-button type="primary" round class="bottom-btn">下一页</el-button>
+            <el-button type="primary" round class="bottom-btn" @click="nextPage">下一页</el-button>
           </el-row>
         </div>
       </div>
@@ -44,41 +44,15 @@
             workTel:'',
             postcode:''
           }
+      },
+      methods:{
+        nextPage:function () {
+          this.$router.push({name:'ApplicationThree'});
+        }
       }
     }
 </script>
 
 <style scoped>
-  .container{
-    margin: 4vh 17vw 12vh 17vw;
-  }
-
-  .content{
-    text-align: left;
-    margin-top: 2vh;
-  }
-
-  .necessary{
-    color: #cb1414;
-  }
-
-  .content .inputText{
-    padding: .6vh  0 1vh 0;
-  }
-
-  .bottom-btn {
-    margin-top: 1vh;
-    width: 50%;
-    padding: 12px 0;
-    letter-spacing: 1px;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-  }
-
-  .addDiv{
-    padding: .6vh 0;
-  }
-  .addSome{
-    color: #A6A6A6;
-    font-size: .8rem;
-  }
+  @import '../../../static/css/application.css';
 </style>
