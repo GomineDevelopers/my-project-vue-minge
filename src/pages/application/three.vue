@@ -53,7 +53,7 @@
           partTime:'',
           speciality:'',
           specialTreatment:'',
-          genderValues: [{text: '工作单位地址', value: 1}, {text: '家庭地址', value: 0}],
+          genderValues: [{text: '单位地址', value: 1}, {text: '家庭地址', value: 0}],
           genderValue: 1,
         }
       },
