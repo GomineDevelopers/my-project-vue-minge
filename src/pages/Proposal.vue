@@ -6,7 +6,7 @@
         :on-infinite="infinite" class="scroller-container" ref="scroller">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
-        <div style=" margin-top: -44px">
+        <div >
           <div class="row status"
                :class="{'status-wait':item.status == 0  , 'status-uncheck':item.status == 1,'status-success':item.status == 3,'status-refuse':item.status == 4 }"
                v-for="(item,index) in listData">

@@ -6,7 +6,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">1.</span>标题</span>
+                    <span class="register-spanblock"><span >1.</span>标题</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -18,7 +18,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">2.</span>内容</span>
+                    <span class="register-spanblock"><span>2.</span>内容</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -28,7 +28,7 @@
             </el-row>
         </div>
         </div>
-        
+
         </div>
         <div class="addworks-wrap">
         <div class="item-wrapper">
