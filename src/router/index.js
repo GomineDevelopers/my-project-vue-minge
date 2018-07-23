@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+
 //时政要闻
 import News from '@/pages/News'
 //最新发布
@@ -109,11 +109,7 @@ import ApplicationRelationship from '@/pages/application/relationship'
 Vue.use(Router)
 
 export default new Router({
-  routes: [{
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
+  routes: [
     {
       path: '/news',
       name: 'News',
@@ -430,84 +426,84 @@ export default new Router({
       component: ApplicationOne,
       name: 'ApplicationOne',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/two',
       component: ApplicationTwo,
       name: 'ApplicationTwo',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/three',
       component: ApplicationThree,
       name: 'ApplicationThree',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/four',
       component: ApplicationFour,
       name: 'ApplicationFour',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/five',
       component: ApplicationFive,
       name: 'ApplicationFive',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/six',
       component: ApplicationSix,
       name: 'ApplicationSix',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/degree',
       component: ApplicationDegree,
       name: 'ApplicationDegree',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/resume',
       component: ApplicationResume,
       name: 'ApplicationResume',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }, {
       path: '/application/award',
       component: ApplicationAward,
       name: 'ApplicationAward',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }, {
       path: '/application/partyteam',
       component: ApplicationPartyTeam,
       name: 'ApplicationPartyTeam',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/family',
       component: ApplicationFamily,
       name: 'ApplicationFamily',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },{
       path: '/application/relationship',
       component: ApplicationRelationship,
       name: 'ApplicationRelationship',
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     }
   ]

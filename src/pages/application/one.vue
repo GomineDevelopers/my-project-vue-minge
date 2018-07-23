@@ -48,7 +48,7 @@
       <v-distpicker hide-area class="inputText" type="mobile" @selected="setNativePlace"></v-distpicker>
     </div>
     <div v-show="isShowBirthPlace" class="dist-select">
-      <v-distpicker hide-area class="inputText" type="mobile" @selected="setBirthPlace"></v-distpicker>
+      <v-distpicker hide-area class="inputText" type="mobile" @selected="setBirthPlace"></v-distpicker> 
     </div>
   </div>
 </template>
