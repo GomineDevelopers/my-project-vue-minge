@@ -71,3 +71,16 @@
   width: 100%;
   height: 40vh;
 }
+
+/*详细页面*/
+.container2 {
+  margin: 6vh 17vw;
+}
+
+.title2 {
+  font-weight: bold;
+  color: #185a88;
+}
+.application_btn{
+  padding-top: 2vh;
+}

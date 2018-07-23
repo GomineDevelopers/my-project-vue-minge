@@ -7,22 +7,22 @@
         <div class="content">
           <el-row><span class="necessary">*</span>姓名</el-row>
           <el-row>
-            <el-input v-model="realName" class="inputText" clearable></el-input>
+            <el-input v-model="realName" class="inputText" clearable maxlength="15"></el-input>
           </el-row>
           <el-row>曾用名</el-row>
           <el-row>
-            <el-input v-model="usedName" class="inputText" clearable></el-input>
+            <el-input v-model="usedName" class="inputText" clearable maxlength="15"></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>性别</el-row>
           <radio-picker :radioValues="genderValues" :radioValue="genderValue"
                         @handleRadioValue="showGender"></radio-picker>
           <el-row><span class="necessary">*</span>民族</el-row>
           <el-row>
-            <el-input v-model="nation" class="inputText" clearable></el-input>
+            <el-input v-model="nation" class="inputText" clearable maxlength="10"></el-input>
           </el-row>
           <el-row>宗教</el-row>
           <el-row>
-            <el-input v-model="religion" class="inputText" clearable></el-input>
+            <el-input v-model="religion" class="inputText" clearable maxlength="10"></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>出生日期</el-row>
           <el-row>
@@ -92,14 +92,14 @@
         this.isShowNativePlace = true;
       },
       setNativePlace: function (data) {
-        this.nativePlace = data.province.value + ' ' + data.city.value
+        this.nativePlace = data.province.value + ' ' + data.city.value;
         this.hide();
       },
       showBirthPlace: function () {
         this.isShowBirthPlace = true;
       },
       setBirthPlace: function (data) {
-        this.birthPlace = data.province.value + ' ' + data.city.value
+        this.birthPlace = data.province.value + ' ' + data.city.value;
         this.hide();
       },
       hide: function () {
@@ -109,8 +109,44 @@
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow:auto')
       },
+      validator(){
+        let vm = this;
+        let msg = '';
+        if(!vm.realName){
+          msg = "请填写真实姓名";
+        }else if(!vm.nation){
+          msg = "请填写民族";
+        }else if(!vm.birthday){
+          msg = "请填写出生日期";
+        }else if(!vm.nativePlace){
+          msg = "请填写籍贯";
+        }else if(!vm.birthPlace){
+          msg = "请填写出生地";
+        }
+
+        if (msg) {
+          vm.$message.error(msg);
+          return false;
+        } else {
+          return true;
+        }
+      },
       nextPage:function () {
-        this.$router.push({name:'ApplicationTwo'});
+        let vm = this;
+        let temp = {};
+        temp.realName = vm.realName;
+        temp.username = vm.usedName;
+        temp.sex = vm.genderValue;
+        temp.nationality = vm.nation;
+        temp.religion = vm.religion;
+        temp.birth = vm.birthday;
+        temp.birthplace = vm.nativePlace;
+        temp.place = vm.birthPlace;
+        if(vm.validator()){
+          /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
+          document.cookie = JSON.stringify(temp);
+          vm.$router.push({name:'ApplicationTwo'});
+        }
       }
     }
   }

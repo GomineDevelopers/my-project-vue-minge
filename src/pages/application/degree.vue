@@ -1,7 +1,7 @@
 <template>
     <div class="application_inner_bg">
-      <div class="container">
-        <div class="title">学历学位</div>
+      <div class="container2">
+        <div class="title2">学历学位</div>
         <div class="content">
           <el-row><span class="necessary">*</span>教育类型</el-row>
           <el-row>
@@ -41,8 +41,8 @@
           </el-row>
         </div>
         <el-row class="application_btn">
-          <el-button type="primary" round>保存</el-button>
-          <el-button type="primary" round plain>删除</el-button>
+          <el-button type="primary" round @click="save">保存</el-button>
+          <el-button type="primary" round plain @click="del">删除</el-button>
         </el-row>
       </div>
     </div>
@@ -73,40 +73,90 @@
             education:'',
             degree:''
           }
+      },
+      mounted(){
+          if(this.$route.query.index >= 0){
+            this.getExistData();
+          }
+      },
+      methods:{
+        getExistData:function(){
+          let vm = this;
+          let i = this.$route.query.index;
+          /*let exitData = JSON.parse(sessionStorage.getItem("temp"));*/
+          let exitData = JSON.parse(document.cookie);
+          vm.educationType = exitData.education[i].educationType;
+          vm.graduateSchool = exitData.education[i].graduateSchool;
+          vm.major = exitData.education[i].major;
+          vm.enrolmentTime = exitData.education[i].enrolmentTime;
+          vm.education = exitData.education[i].education;
+          vm.degree = exitData.education[i].degree;
+        },
+        save:function () {
+          let postDegreeData = {};
+          let postArr = [];
+          let temp = "";
+          let vm = this;
+          postDegreeData.educationType = vm.educationType;
+          postDegreeData.graduateSchool = vm.graduateSchool;
+          postDegreeData.major = vm.major;
+          postDegreeData.enrolmentTime = vm.enrolmentTime;
+          postDegreeData.graduateTime = vm.graduateTime;
+          postDegreeData.education = vm.education;
+          postDegreeData.degree = vm.degree;
+
+          /*temp = JSON.parse(sessionStorage.getItem("temp"));*/
+          temp = JSON.parse(document.cookie);
+
+          if(temp.education == undefined){//第一次
+            postArr.push(postDegreeData);
+          }else{
+            if(vm.$route.query.index >= 0){//修改
+              temp.education.forEach(function (ele,index,arr) {
+                if(index == vm.$route.query.index){
+                  ele.educationType = vm.educationType;
+                  ele.graduateSchool = vm.graduateSchool;
+                  ele.major = vm.major;
+                  ele.enrolmentTime = vm.enrolmentTime;
+                  ele.graduateTime = vm.graduateTime;
+                  ele.education = vm.education;
+                  ele.degree = vm.degree;
+
+                  postArr.push(ele);
+                }else{
+                  postArr.push(ele);
+                }
+              })
+            }else{//新增
+              postArr = temp.education;
+              postArr.push(postDegreeData);
+            }
+          }
+          temp.education = postArr;
+          /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
+          document.cookie = JSON.stringify(temp);
+
+          vm.$router.push({name:'ApplicationTwo'});
+        },
+        del:function () {
+          let vm = this;
+          /*let temp = JSON.parse(sessionStorage.getItem("temp"));*/
+          let temp = JSON.parse(document.cookie);
+          temp.education.forEach(function (ele,index,arr) {
+            if(index == vm.$route.query.index){
+              arr.splice(index,1);
+              temp.education = arr;
+             /* sessionStorage.setItem("temp",JSON.stringify(temp));*/
+              document.cookie = JSON.stringify(temp);
+            }
+          })
+          vm.$router.push({name:'ApplicationTwo'});
+        }
       }
     }
 </script>
 
 <style scoped>
-  .container {
-    margin: 6vh 17vw;
-  }
-
-  .title {
-    font-weight: bold;
-    color: #185a88;
-  }
-
-  .content {
-    text-align: left;
-    margin-top: 2vh;
-  }
-
-  .necessary {
-    color: #cb1414;
-  }
-
-  .content .inputText {
-    padding: .6vh 0 1vh 0;
-  }
-
-  .dateInput {
-    width: 100%;
-  }
-
-  .application_btn{
-    padding-top: 2vh;
-  }
-
+  @import '../../../static/css/application.css';
 </style>
 

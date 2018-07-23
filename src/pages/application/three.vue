@@ -16,7 +16,7 @@
                           @handleRadioValue="showGender"></radio-picker>
           </el-row>
           <el-row><span class="necessary">*</span>手机</el-row>
-          <el-row><el-row><el-input v-model="Phone" class="inputText" clearable></el-input></el-row></el-row>
+          <el-row><el-row><el-input v-model="phone" class="inputText" clearable></el-input></el-row></el-row>
           <el-row>电子邮箱</el-row>
           <el-row><el-input v-model="email" class="inputText" clearable></el-input></el-row>
           <el-row>人大政协任职</el-row>
@@ -47,7 +47,7 @@
           homeTel:'',
           homePostcode:'',
           postAddress:1,
-          Phone:'',
+          phone:'',
           email:'',
           CPPCC:'',
           partTime:'',
@@ -55,6 +55,7 @@
           specialTreatment:'',
           genderValues: [{text: '单位地址', value: 1}, {text: '家庭地址', value: 0}],
           genderValue: 1,
+          temp:''
         }
       },
       components: {
@@ -68,6 +69,20 @@
           this.genderValue = radioValue;
         },
         nextPage:function () {
+          let vm = this;
+          let temp = {};
+          temp = JSON.parse(sessionStorage.getItem("temp"));
+          temp.family_address = vm.homeAddress;
+          temp.family_phone = vm.homeTel;
+          temp.family_email = vm.homePostcode;
+          temp.mailing_address = vm.genderValue;
+          temp.phone = vm.phone;
+          temp.email = vm.email;
+          temp.people_position = vm.CPPCC;
+          temp.parttime = vm.partTime;
+          temp.expertise = vm.speciality;
+          temp.treatment = vm.specialTreatment;
+          sessionStorage.setItem("temp",JSON.stringify(temp));
           this.$router.push({name:'ApplicationFour'});
         }
       }
