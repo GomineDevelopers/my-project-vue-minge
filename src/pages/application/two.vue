@@ -9,8 +9,10 @@
             <el-row><span class="necessary">*</span>身份证号码</el-row>
             <el-row><el-input v-model="IDCard" class="inputText" clearable></el-input></el-row>
             <el-row><span class="necessary">*</span>学历学位</el-row>
-            <el-row class="addDiv"><span class="addSome">+添加教育经历</span></el-row>
-            <el-row><el-input v-model="degree" class="inputText" clearable></el-input></el-row>
+            <el-row class="addDiv"><div @click="addDegree" class="addSome">+添加教育经历</div></el-row>
+            <el-row v-for="(item,index) in educationShow" :key="index">
+              <el-input class="inputText" v-model="educationShow[index]" clearable readonly @focus="goDetail(index)"></el-input>
+            </el-row>
             <el-row><span class="necessary">*</span>现工作单位</el-row>
             <el-row><el-input v-model="presentWorkingUnit" class="inputText" clearable></el-input></el-row>
             <el-row><span class="necessary">*</span>职务</el-row>
@@ -37,7 +39,7 @@
           return{
             title:'',
             IDCard:'',
-            degree:'',
+            educationShow:[],
             presentWorkingUnit:'',
             job:'',
             unitAddress:'',
@@ -45,9 +47,75 @@
             postcode:''
           }
       },
+      mounted(){
+        let vm = this;
+        console.info(JSON.parse(document.cookie))
+        /*if(JSON.parse(sessionStorage.getItem("temp")).education != undefined){
+          JSON.parse(sessionStorage.getItem("temp")).education.forEach(function (ele,index,arr) {
+            let str = ele.educationType + ',' + ele.graduateSchool;
+            vm.educationShow.push(str);
+          });
+        }*/
+
+        if(JSON.parse(document.cookie).education != undefined){
+          JSON.parse(document.cookie).education.forEach(function (ele,index,arr) {
+            let str = ele.educationType + ',' + ele.graduateSchool;
+            vm.educationShow.push(str);
+          });
+        }
+      },
       methods:{
+        validator(){
+          let vm = this;
+          let msg = '';
+          if(!vm.IDCard){
+            msg = "请填写身份证号码";
+          }else if(vm.educationShow.length == 0){
+            msg = "请填写学历学位";
+          }else if(!vm.presentWorkingUnit){
+            msg = "请填写现工作单位";
+          }else if(!vm.job){
+            msg = "请填写职务";
+          }else if(!vm.unitAddress){
+            msg = "请填写单位地址";
+          }else if(!vm.workTel){
+            msg = "请填写单位电话";
+          }else if(!vm.postcode){
+            msg = "请填写单位邮编";
+          }
+
+          if (msg) {
+            vm.$message.error(msg);
+            return false;
+          } else {
+            return true;
+          }
+        },
         nextPage:function () {
-          this.$router.push({name:'ApplicationThree'});
+          let vm = this;
+          let temp = {};
+          /*temp = JSON.parse(sessionStorage.getItem("temp"));*///上一页的数据
+          temp = JSON.parse(document.cookie);
+          temp.job = vm.title;
+          temp.identity = vm.IDCard;
+          temp.employer = vm.presentWorkingUnit;
+          temp.position = vm.job;
+          temp.unit_address = vm.unitAddress;
+          temp.unit_phone = vm.workTel;
+          temp.unit_email = vm.postcode;
+
+
+          if(vm.validator()){
+            /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
+            document.cookie = JSON.stringify(temp);
+            vm.$router.push({name:'ApplicationThree'});
+          }
+        },
+        addDegree:function () {
+          this.$router.push({name:'ApplicationDegree'});
+        },
+        goDetail:function (index) {
+          this.$router.push({name:'ApplicationDegree',query: { index: index }});
         }
       }
     }
