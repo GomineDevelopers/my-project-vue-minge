@@ -1,6 +1,6 @@
 const commonTools = {};
 
-commonTools.g_restUrl = 'http://192.168.0.5/leather/gomineWechat/app/index.php';
+commonTools.g_restUrl = 'http://icampaign.com.cn/customers/minge/backend/app/index.php';
 
 commonTools.formatDate = function (date, showDetail) {
   var isShow = showDetail || false;
