@@ -97,7 +97,7 @@
         click_count: 0,
         common_list: [],
         common_num: 0,
-        is_member:false
+        is_member:true
       }
     },
     computed: {
@@ -130,8 +130,8 @@
           }
         })
           .then(function (response){
-            if(response.data.result.is_leather == 1){
-              vm.is_member = true;
+            if(response.data.result.is_leather == 0){
+              vm.is_member = false;
             }
           })
           .catch(function (error) {

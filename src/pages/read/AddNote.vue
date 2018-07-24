@@ -118,12 +118,12 @@
       'radio-picker': RadioPicker
     },
     mounted: function () {
-      this.getPersonalBookData()
       if (this.$route.query.noteEditId) {
         this.getExistNoteData();
         this.changeButtonValue = '修改';
       }
       else {
+        this.getPersonalBookData();
         this.setRadioValues(0)
       }
     },
@@ -151,6 +151,7 @@
               vm.bookNote = response.data.result.content;
               vm.radioValue = response.data.result.is_private;
               vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
+              vm.getPersonalBookData();
             }
             else if (response.data.status == '201') {
               vm.$message({
@@ -173,15 +174,15 @@
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg'
         const isPNG = file.type === 'image/png'
-        const isLt5M = file.size / 1024 / 1024 < 5
+        const isLt2M = file.size / 1024 / 1024 < 2
 
         if (!isJPG && !isPNG) {
           this.$message.error('上传图片只能是 JPG 或PNG 格式!')
         }
-        if (!isLt5M) {
-          this.$message.error('上传图片大小不能超过 5MB!')
+        if (!isLt2M) {
+          this.$message.error('上传图片大小不能超过 2MB!')
         }
-        return (isJPG || isPNG) && isLt5M
+        return (isJPG || isPNG) && isLt2M
       },
       getPersonalBookData() {
         let vm = this
