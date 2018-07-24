@@ -156,7 +156,7 @@ export default {
 }
 .middle .url {
   float: right;
-  width: 24%;
+  width: 26%;
 }
 
 .middle .text {
@@ -180,6 +180,7 @@ export default {
 
 .bt .delete {
   float: right;
-  margin-right: 10px;
+  width: 26%;
+  text-align: center;
 }
 </style>
