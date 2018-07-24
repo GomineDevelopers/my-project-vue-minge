@@ -40,7 +40,7 @@ export default {
     this.getNoteListData()
   },
   methods: {
-    goNoteDetail(id){
+    goNoteDetail(id) {
       this.$router.push({ name: 'NoteDetail', params: { noteId: id } })
     },
     getNoteListData() {
@@ -57,7 +57,9 @@ export default {
           }
         })
         .then(function(response) {
-          vm.notelists = response.data.result
+          if (response.status == 200) {
+            vm.notelists = response.data.result
+          }
         })
         .catch(function(error) {
           console.log(error)
@@ -174,8 +176,8 @@ export default {
   padding: 4px 0;
 }
 
-.icon-lock{
-  font-size:12px;
+.icon-lock {
+  font-size: 12px;
 }
 </style>
 
