@@ -44,7 +44,7 @@
         </el-row>
         <el-row>
           <el-col :span="24" >
-           <el-input v-model.trim="distmix" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
+           <el-input v-model.trim="distmix" readonly= "true" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
           </el-col>
         </el-row>
 
