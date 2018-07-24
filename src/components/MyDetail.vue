@@ -27,7 +27,7 @@
         <el-row>
           <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span
             v-text="click_count"></span></span>
-          <span class="news-detail-bottom-span-icon2" @click="goComment(3)"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+          <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
       <div v-if="common_num>0" class="news-detail-margin-bottom">
@@ -46,7 +46,7 @@
                     <span class="news-detail-bottom-username" v-text="item.realname"></span>
                   </el-col>
                   <el-col :span="2">
-                  <span class="news-detail-bottom-span-icon3">
+                  <span class="news-detail-bottom-span-icon3" v-if="is_member">
                     <i class="el-icon-star-on" v-show="item.status" @click="collect(item.id)"></i>
                     <i class="el-icon-star-off" v-show="!item.status" @click="collect(item.id)"></i>
                   </span>
@@ -58,11 +58,11 @@
                   </el-col>
                 </el-row>
                 <el-row>
-                  <el-col :span="20">
+                  <el-col :span="19">
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
-                  <el-col :span="4">
-                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.realname)"><i
+                  <el-col :span="5">
+                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.realname)" v-if="is_member"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
@@ -97,6 +97,7 @@
         click_count: 0,
         common_list: [],
         common_num: 0,
+        is_member:true
       }
     },
     computed: {
@@ -112,9 +113,31 @@
       title: 'updateTitleCss',
     },
     created: function () {
+      this.isMember();
       this.getDetailData();
     },
     methods: {
+      isMember:function(){
+        let vm = this;
+        vm.axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac:'is_leather'
+          }
+        })
+          .then(function (response){
+            if(response.data.result.is_leather == null){
+              vm.is_member = false;
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      },
       updateTitleCss: function () {
         this.$nextTick(function () {
           if (this.isOneRow())

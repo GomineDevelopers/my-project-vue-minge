@@ -6,7 +6,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span >1.</span>标题</span>
+                    <span class="register-spanblock"><span >*</span>标题</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -18,7 +18,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span>2.</span>内容</span>
+                    <span class="register-spanblock"><span>*</span>内容</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -148,9 +148,8 @@ export default {
   border-radius: 5px;
   background: #ffffff;
   border-left: 5px solid #2f81b9;
-  margin-bottom: 1vh;
   width: 85%;
-  margin: 3vh auto;
+  margin: 0 auto;
   padding: 1vh 0 3vh 0;
 }
 .addworks-wrap {
