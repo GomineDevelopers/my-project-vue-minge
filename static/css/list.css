@@ -421,6 +421,10 @@
 .gender-picker .el-radio-button {
   width: 48%;
   position: relative;
+  border-radius: 4px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
 }
 
 .gender-picker .el-radio-button .el-radio-button__inner {
@@ -431,17 +435,6 @@
   color: #409EFF;
   background-color: #ffffff;
   border-color: #409EFF;
-  -webkit-box-shadow: -1px 0 0 0 #409EFF;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-touch-callout: none;
-  -webkit-user-drag: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -ms-touch-action: none;
-  -moz-user-select: -moz-none;
 }
 
 .gender-picker .el-radio-button__orig-radio:checked + .el-radio-button__inner::after {
@@ -553,7 +546,8 @@
   border: 1px solid #ccc;
 }
 
-
-
-
+input,textarea{
+  -webkit-appearance: none !important;
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+}
 

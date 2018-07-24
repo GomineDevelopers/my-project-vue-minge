@@ -90,7 +90,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small" clearable ></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small" clearable @focus="offScroll" @blur="onScroll" ></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
@@ -103,6 +103,7 @@
           </el-row>
         </div>
       </div>
+      <div class="overlayer" @touchmove.prevent  v-show="!isScroll"></div>
     </div>
 </template>
 
@@ -126,7 +127,8 @@
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
         bottomText: '添加',
-        hasOtherReader: false
+        hasOtherReader: false,
+        isScroll:true
       }
     },
     components: {
@@ -141,6 +143,12 @@
       }
     },
     methods: {
+      offScroll: function(){
+       this.isScroll=false
+      },
+      onScroll: function(){
+        this.isScroll=true
+      },
       setRadioValues: function (radioValue) {
         this.radioValue = radioValue;
       },
@@ -268,6 +276,15 @@
 </script>
 
 <style scoped>
+  .overlayer{
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:10;
+  }
+
   .addbook-wrap {
     text-align: left;
     margin: 1vh auto;
