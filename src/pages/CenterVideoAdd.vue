@@ -30,7 +30,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">&nbsp</span>视频来源</span>
+                    <span class="register-spanblock"><span class="register-necessary">&nbsp;</span>视频来源</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -179,5 +179,9 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.register-necessary {
+  color: #cb1414;
+  padding-right: 4px;
 }
 </style>

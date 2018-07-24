@@ -6,7 +6,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span>*</span>标题</span>
+                    <span class="register-spanblock"><span class="register-necessary">*</span>标题</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -18,7 +18,7 @@
         <div class="item-wrapper">
             <el-row class="item-label">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span >*</span>内容</span>
+                    <span class="register-spanblock"><span class="register-necessary" >*</span>内容</span>
                 </el-col>
             </el-row>
             <el-row class="item-content">
@@ -182,6 +182,10 @@ export default {
   letter-spacing: 1px;
   -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
   box-shadow: 0px 0px 20px 5px #e9e9e9;
+}
+.register-necessary {
+  color: #cb1414;
+  padding-right: 4px;
 }
 </style>
 <style>
