@@ -104,9 +104,9 @@
         let status = item.status;
         let vm = this;
         if (vm.$route.params.type == 1) {
-          this.$router.push({name: 'CheckApply', params: {id: id}});
+          this.$router.replace({name: 'CheckApply', params: {id: id}});
         } else if (vm.$route.params.type == 2) {
-          this.$router.push({name: 'CheckProposal', params: {id: id}});
+          this.$router.replace({name: 'CheckProposal', params: {id: id}});
         } else if (vm.$route.params.type == 3 && status == 1) {
           vm.dialogVisible = true;
           vm.inviteId = id;
