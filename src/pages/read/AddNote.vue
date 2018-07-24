@@ -118,12 +118,12 @@
       'radio-picker': RadioPicker
     },
     mounted: function () {
-      this.getPersonalBookData()
       if (this.$route.query.noteEditId) {
         this.getExistNoteData();
         this.changeButtonValue = '修改';
       }
       else {
+        this.getPersonalBookData();
         this.setRadioValues(0)
       }
     },
@@ -151,6 +151,7 @@
               vm.bookNote = response.data.result.content;
               vm.radioValue = response.data.result.is_private;
               vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
+              vm.getPersonalBookData();
             }
             else if (response.data.status == '201') {
               vm.$message({
