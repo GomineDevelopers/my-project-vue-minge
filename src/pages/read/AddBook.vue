@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <vue-headful title="书友会-添加图书"/>
     <div class="addbook-wrap">
+      <vue-headful title="书友会-添加图书"/>
       <div class="item-wrapper">
         <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>封面</span>
@@ -105,7 +104,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -288,7 +286,7 @@
   }
 
   .item-content {
-    margin-top: 1vh;
+    margin: 5px 0;
     display: flex;
     align-items: center;
     text-align: center;
@@ -329,9 +327,8 @@
   }
 
   .submit-wrapper {
-    margin-top: 2vh;
-    height: 2vh;
     width: 100%;
+    display: inline-block;
   }
 
   .bottom-btn {

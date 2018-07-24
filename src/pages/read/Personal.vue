@@ -200,6 +200,12 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
+
+  @media screen and (max-width: 360px) {
+    .tab-item .iconfont {
+      font-size: 14px !important;
+    }
+  }
 </style>
 
 

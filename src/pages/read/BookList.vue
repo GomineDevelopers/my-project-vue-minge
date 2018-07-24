@@ -2,7 +2,6 @@
   <div>
     <el-tabs v-model="activeName" type="card">
       <el-tab-pane label="在读" name="first" class="tabFirst">
-
         <div class="no_book" v-if="isLoadFinish && !showReading">
           <div class="no_bookImg">
             <img src="../../../static/image/no_book.png">
@@ -72,35 +71,6 @@
           </div>
         </div>
         <div class="readBook" v-if="isLoadFinish && showRead">
-          <!--<div class="card" v-for="(item,index) in privateBookData" :key="index"
-               v-if="item.status == 1" @click="goBookDetail(item.id)">
-            <el-row type="flex" justify="space-between" class="contentDiv">
-              <el-col :span="6">
-                <div class="readBookImg">
-                  <img :src="item.img">
-                  <div class="imgBottom"><span class="number" v-text="item.total"></span>篇笔记</div>
-                  <div class="labelDiv" v-if="item.private_book == 1"><i class="iconfont icon-lock labelIcon"></i></div>
-                </div>
-              </el-col>
-              <el-col :span="10" class="middleDiv">
-                <div class="middleDiv2">
-                  <div class="bookTitle" v-text="item.title"></div>
-                  <div class="authorDiv">
-                    <div class="author" v-text="item.author"></div>
-                    <div class="translate" v-if="item.translators != '' ">
-                      <img src="../../../static/image/interpriter-icon.png">
-                      <span v-text="item.translators"></span>
-                    </div>
-                  </div>
-                  <div class="publish" v-text="item.publisher"></div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="time" v-text="$commonTools.formatDate(item.create_time)"></div>
-                <div class="note" @click.stop="writeNote(item.id)"><i class="iconfont icon-write"></i>写笔记</div>
-              </el-col>
-            </el-row>
-          </div>-->
           <div class="card" v-for="(item,index) in privateBookData" :key="index"
                v-if="item.status == 1" @click="goBookDetail(item.id)">
             <el-row class="contentDiv">
@@ -179,6 +149,7 @@
                 else if (val.status == 1) {
                   vm.showRead = true;
                 }
+
                 if (vm.showReading && vm.showRead) return false;
                 let newListData = [];
                 val.list.forEach(function (element,index,arr) {
