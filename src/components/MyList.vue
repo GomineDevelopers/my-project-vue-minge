@@ -26,6 +26,9 @@
     props: {
       listType: Number
     },
+    mounted(){
+      this.getListByCateId();
+    },
     methods: {
       getListByCateId(done) {
         let vm = this;
