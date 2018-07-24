@@ -14,7 +14,7 @@
             <div class="intro">2.请选择您要邀请的读书伙伴</div>
             <el-row>
               <el-col :span="24">
-                <el-select v-model="selectFriends" filterable multiple placeholder="请选择" class="friends" @blur="focusNext">
+                <el-select v-model="selectFriends" filterable multiple placeholder="请选择" class="friends" :modal-append-to-body='false'>
                   <el-option
                     v-for="item in options"
                     :key="item.id"
@@ -61,9 +61,7 @@ export default {
     this.getFriendList()
   },
   methods: {
-    focusNext: function( ) {
-     console.log(1)
-    },
+ 
     setRadioValues: function(radioValue) {
       this.radioValue = radioValue
     },
