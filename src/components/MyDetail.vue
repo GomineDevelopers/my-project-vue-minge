@@ -130,7 +130,7 @@
           }
         })
           .then(function (response){
-            if(response.data.result.is_leather == null){
+            if(response.data.result.is_leather == 0){
               vm.is_member = false;
             }
           })
