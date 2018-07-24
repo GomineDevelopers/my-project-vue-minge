@@ -288,7 +288,7 @@
 
   .imgBottom {
     position: absolute;
-    bottom: 10px;
+    bottom: 6px;
     margin: 0 1vh;
     width: 25%;
     font-size: 0.7rem;
