@@ -91,7 +91,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small" clearable></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small" clearable ></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
@@ -184,13 +184,13 @@
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg'
         const isPNG = file.type === 'image/png'
-        const isLt2M = file.size / 1024 / 1024 < 2
+        const isLt2M = file.size / 1024 / 1024 < 5
 
         if (!isJPG && !isPNG) {
           this.$message.error('上传图片只能是 JPG 或PNG 格式!')
         }
         if (!isLt2M) {
-          this.$message.error('上传图片大小不能超过 2MB!')
+          this.$message.error('上传图片大小不能超过 5MB!')
         }
         return (isJPG || isPNG) && isLt2M
       },
