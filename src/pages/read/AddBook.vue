@@ -104,7 +104,6 @@
           </el-row>
         </div>
       </div>
-      <div class="overlayer" @touchmove.prevent  v-show="!isScroll"></div>
     </div>
   </div>
 </template>
@@ -130,7 +129,7 @@
         radioValue: 0,
         bottomText: '添加',
         hasOtherReader: false,
-        isScroll:true
+
       }
     },
     components: {
@@ -145,12 +144,7 @@
       }
     },
     methods: {
-      offScroll: function(){
-       this.isScroll=false
-      },
-      onScroll: function(){
-        this.isScroll=true
-      },
+
       setRadioValues: function (radioValue) {
         this.radioValue = radioValue;
       },
@@ -278,14 +272,7 @@
 </script>
 
 <style scoped>
-  .overlayer{
-    position:fixed;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    z-index:10;
-  }
+
 
   .addbook-wrap {
     text-align: left;

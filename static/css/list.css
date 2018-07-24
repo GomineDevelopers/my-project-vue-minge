@@ -305,12 +305,12 @@
   line-height: 35px;
 }
 
-.el-tabs--card > .el-tabs__header {
+.el-tabs--card>.el-tabs__header {
   border-bottom: none;
   margin: 0;
 }
 
-.el-tabs--card > .el-tabs__header .el-tabs__item:last-child {
+.el-tabs--card>.el-tabs__header .el-tabs__item:last-child {
   border-bottom: 1px solid #2086ce;
   border-top: 1px solid #2086ce;
   border-right: 1px solid #2086ce;
@@ -321,7 +321,7 @@
   line-height: 35px;
 }
 
-.el-tabs--card > .el-tabs__header .el-tabs__item:first-child {
+.el-tabs--card>.el-tabs__header .el-tabs__item:first-child {
   border-bottom: 1px solid #2086ce;
   border-top: 1px solid #2086ce;
   border-left: 1px solid #2086ce;
@@ -352,7 +352,7 @@
   line-height: 9vh;
 }
 
-.el-tabs--card > .el-tabs__header .el-tabs__nav {
+.el-tabs--card>.el-tabs__header .el-tabs__nav {
   border: none;
 }
 
@@ -410,6 +410,7 @@
 
 .el-radio-button .el-radio-button__inner {
   width: 100%;
+  border: 1px solid #dcdfe6;
 }
 
 .gender-picker .el-radio-group {
@@ -421,23 +422,20 @@
 .gender-picker .el-radio-button {
   width: 48%;
   position: relative;
-  border-radius: 4px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: transparent;
-  box-shadow: none;
 }
 
 .gender-picker .el-radio-button .el-radio-button__inner {
   border-radius: 4px !important;
 }
 
-.gender-picker .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+.gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner {
   color: #409EFF;
   background-color: #ffffff;
   border-color: #409EFF;
+  -webkit-box-shadow: none;
 }
 
-.gender-picker .el-radio-button__orig-radio:checked + .el-radio-button__inner::after {
+.gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner::after {
   content: "";
   position: absolute;
   top: 0;
@@ -448,7 +446,7 @@
   border-left: 30px solid transparent;
 }
 
-.gender-picker .el-radio-button__orig-radio:checked + .el-radio-button__inner::before {
+.gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner::before {
   font-family: "iconfont" !important;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -529,6 +527,7 @@
 }
 
 /*一年后的申请表*/
+
 .content .el-select {
   width: 100%;
 }
@@ -546,8 +545,8 @@
   border: 1px solid #ccc;
 }
 
-input,textarea{
-  -webkit-appearance: none !important;
-  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+input,
+button {
+  -webkit-appearance: none;
+  outline: none
 }
-

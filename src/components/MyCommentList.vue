@@ -474,7 +474,6 @@
     font-size: 10px;
     color: #0064ba;
     display: inline-block;
-    float: left;
   }
 
   .comment-reply-message {
