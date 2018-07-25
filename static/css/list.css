@@ -434,6 +434,9 @@
 .gender-picker .el-radio-button .el-radio-button__inner:active {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-user-modify: read-write-plaintext-only;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-appearance: none;
 }
 
 .gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner {
