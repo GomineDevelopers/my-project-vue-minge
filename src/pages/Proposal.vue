@@ -6,25 +6,25 @@
         :on-infinite="infinite" class="scroller-container" ref="scroller">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
-          <div class="row status"
-               :class="{'status-wait':item.status == 0  , 'status-uncheck':item.status == 1,'status-success':item.status == 3,'status-refuse':item.status == 4 }"
-               v-for="(item,index) in listData">
-            <div class="note" v-text='"提案"+(index+1)'></div>
-            <div class="block">
-              <div class="title" v-text="item.title"></div>
-              <div class="content" v-text="item.content"></div>
-              <div class="btn-row" v-if="item.status == 0">
-                <span class="edit" @click="editProposal(item.id)"><i class="el-icon-edit-outline"></i>修改</span>
-                <span class="delete" @click="del(item.id)"><i class="el-icon-delete"></i>删除</span>
-              </div>
-              <div class="c1"></div>
-              <div class="c2"></div>
-              <div class="c3 status-pass" v-if="item.status == 3">已通过</div>
-              <div class="c3" v-else-if="item.status == 4">被拒绝</div>
-              <div class="c3" v-else-if="item.status == 1">审核中</div>
-              <div class="c3" v-else-if="item.status == 0">待提交</div>
+        <div class="row status"
+             :class="{'status-wait':item.status == 0  , 'status-uncheck':item.status == 1,'status-success':item.status == 3,'status-refuse':item.status == 4 }"
+             v-for="(item,index) in listData">
+          <div class="note" v-text='"提案"+(index+1)'></div>
+          <div class="block">
+            <div class="title" v-text="item.title"></div>
+            <div class="content" v-text="item.content"></div>
+            <div class="btn-row" v-if="item.status == 0">
+              <span class="edit" @click="editProposal(item.id)"><i class="el-icon-edit-outline"></i>修改</span>
+              <span class="delete" @click="del(item.id)"><i class="el-icon-delete"></i>删除</span>
             </div>
+            <div class="c1"></div>
+            <div class="c2"></div>
+            <div class="c3 status-pass" v-if="item.status == 3">已通过</div>
+            <div class="c3" v-else-if="item.status == 4">被拒绝</div>
+            <div class="c3" v-else-if="item.status == 1">审核中</div>
+            <div class="c3" v-else-if="item.status == 0">待提交</div>
           </div>
+        </div>
       </scroller>
     </div>
     <el-button type="primary" round class="bottom-btn" @click="goProposalEdit">填写提案</el-button>
@@ -146,8 +146,7 @@ export default {
 
 <style scoped>
 .scroller-container {
-  /*top: 20px;*/
-  top: -44px !important;
+  top: -25px !important;
   padding-bottom: 44px;
 }
 
@@ -157,8 +156,7 @@ export default {
 }
 
 .proposal-cover .proposal-list {
-  padding-top: 3vh;
-  height: 85vh;
+  height: 88vh;
   position: relative;
   overflow: hidden;
 }
