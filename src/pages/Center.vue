@@ -12,7 +12,7 @@
       </el-col>
       <el-col :span="24">
          <div class="name">
-        {{name}}朱桂峰
+        {{name}}
       </div>
       </el-col>
       </div>
