@@ -148,7 +148,8 @@ export default {
 
 <style scoped>
 .scroller-container {
-  top: 20px;
+  /*top: 20px;*/
+  top: -44px !important;
   padding-bottom: 44px;
 }
 
