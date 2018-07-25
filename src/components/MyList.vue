@@ -2,6 +2,7 @@
   <scroller
     :on-infinite="infinite" class="scroller-container">
     <!-- content goes here -->
+    <div style="height: 44px;"></div>
     <div v-for="item in items" class="row" @click="goDetail(item.id)">
       <div class="image"><img :src="item.thumb"></div>
       <div class="text">
@@ -26,9 +27,9 @@
     props: {
       listType: Number
     },
-    mounted(){
+    /*mounted(){
       this.getListByCateId();
-    },
+    },*/
     methods: {
       getListByCateId(done) {
         let vm = this;

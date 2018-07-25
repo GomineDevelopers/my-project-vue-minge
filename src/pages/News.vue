@@ -5,7 +5,7 @@
     />
     <el-carousel :interval="5000" arrow="never">
       <el-carousel-item v-for="(item,index) in images" :key="index">
-        <img :src="item.thumb">
+        <img :src="item.thumb" @click="goDetail(item.id)">
         <div class="slider-desc"><span v-text="item.title"></span></div>
       </el-carousel-item>
     </el-carousel>
@@ -64,6 +64,9 @@ export default {
         .catch(function(error) {
           console.log(error)
         })
+    },
+    goDetail(id) {
+      this.$router.push({name: 'NewsDetail', params: {id: id}})
     }
   },
   components: {
