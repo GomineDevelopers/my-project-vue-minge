@@ -144,31 +144,34 @@ export default {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    this.showGender();
-    this.getExitData();
+    this.showGender()
+    this.getExitData()
   },
   methods: {
     getExitData() {
-      let vm = this;
-      vm.axios(vm.$commonTools.g_restUrl, {
-        params: {
-          i: "8",
-          c: "entry",
-          p: "user",
-          do: "shop",
-          m: "ewei_shop",
-          ac: "get_verification"
-        }
-      })
-        .then(function (response) {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'user',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'get_verification'
+          }
+        })
+        .then(function(response) {
           if (response.status == 200) {
             vm.registerName = response.data.result.realname
             if (response.data.result.birth)
-              vm.registerBirthday = new Date(parseInt(response.data.result.birth) * 1000)
+              vm.registerBirthday = new Date(
+                parseInt(response.data.result.birth) * 1000
+              )
           }
         })
-        .catch(function (error) {
-          console.info(error);
+        .catch(function(error) {
+          console.info(error)
         })
     },
     hide: function() {
@@ -229,7 +232,6 @@ export default {
     validator: function() {
       let vm = this
       let msg = ''
-      alert(vm.experience)
       if (!vm.registerBirthday && vm.type == 0) {
         msg = '未选择出生日期'
       } else if (!vm.registerName) {
@@ -240,7 +242,7 @@ export default {
         msg = '未填写籍贯'
       } else if (!vm.degreeValue) {
         msg = '未填写学历信息'
-      } else if (vm.experiences[0] == "") {
+      } else if (vm.experiences[0] == '') {
         msg = '未填写经历'
       } else if (!vm.applycation) {
         msg = '未填写申请'
