@@ -71,8 +71,8 @@
                <div class="form-items"
                v-for="(domain, index) in dynamicValidateForm.domains"
                 :key="domain.key"
-                :prop="'domains.' + index + '.value'"
-                :rules="{required: true, message: '工作经历不能为空', trigger: 'blur'}"
+                    :prop="'domains.' + index + '.value'"
+                    :rules="{required: true, message: '工作经历不能为空', trigger: 'blur'}"
                 >
                  <el-input type="textarea"  autosize  v-model.trim="domain.value" class="input_border"></el-input>
                  <i class="el-icon-minus"  @click.prevent="removeDomain(domain)"></i>
@@ -229,6 +229,7 @@ export default {
     validator: function() {
       let vm = this
       let msg = ''
+      alert(vm.experience)
       if (!vm.registerBirthday && vm.type == 0) {
         msg = '未选择出生日期'
       } else if (!vm.registerName) {
@@ -239,7 +240,7 @@ export default {
         msg = '未填写籍贯'
       } else if (!vm.degreeValue) {
         msg = '未填写学历信息'
-      } else if (!vm.experiences) {
+      } else if (vm.experiences[0] == "") {
         msg = '未填写经历'
       } else if (!vm.applycation) {
         msg = '未填写申请'
