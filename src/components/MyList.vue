@@ -82,7 +82,7 @@
 
 <style scoped>
   .scroller-container {
-    top: -44px;
+    top: -44px !important;
     padding-bottom: 44px;
   }
 
