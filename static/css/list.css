@@ -1,3 +1,7 @@
+.el-radio-button:focus:not(.is-focus):not(:active) {
+  border-radius: 4px !important;
+}
+
 .list-container {
   height: 100%;
 }
@@ -426,17 +430,6 @@
 
 .gender-picker .el-radio-button .el-radio-button__inner {
   border-radius: 4px !important;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-appearance: none;
-}
-
-.gender-picker .el-radio-button .el-radio-button__inner:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-user-modify: read-write-plaintext-only;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-appearance: none;
 }
 
 .gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner {
@@ -444,6 +437,12 @@
   background-color: #ffffff;
   border-color: #409EFF;
   -webkit-box-shadow: none;
+}
+
+.gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner:active {
+  color: #409EFF;
+  background-color: #ffffff;
+  border-color: #409EFF;
 }
 
 .gender-picker .el-radio-button__orig-radio:checked+.el-radio-button__inner::after {
