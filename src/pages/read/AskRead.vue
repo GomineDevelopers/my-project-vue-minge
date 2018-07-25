@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="blurInput">
     <el-row>
       <el-col :span="24" class="title"> <div>当前书籍为 <span class="book-name">《{{bookName}}》</span></div></el-col>
       <el-col :span="24">
@@ -14,7 +14,7 @@
             <div class="intro">2.请选择您要邀请的读书伙伴</div>
             <el-row>
               <el-col :span="24">
-                <el-select v-model="selectFriends" filterable multiple placeholder="请选择" class="friends" :modal-append-to-body='false'>
+                <el-select v-model="selectFriends" filterable multiple placeholder="请选择" class="friends" ref="selectInput" :modal-append-to-body='false'>
                   <el-option
                     v-for="item in options"
                     :key="item.id"
@@ -29,7 +29,6 @@
                  <el-button class="bottom-btn"  type="primary" @click="sendAsk" round> 确定</el-button>
               </el-col>
             </el-row>
-
           </div>
       </el-col>
     </el-row>
@@ -61,7 +60,9 @@ export default {
     this.getFriendList()
   },
   methods: {
- 
+    blurInput: function() {
+      this.$refs.selectInput.blur();
+    },
     setRadioValues: function(radioValue) {
       this.radioValue = radioValue
     },
