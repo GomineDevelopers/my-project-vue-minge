@@ -434,6 +434,7 @@ export default {
 
 .comment-right {
   text-align: justify;
+  width: 100%;
 }
 
 .comment-avatar img {
@@ -444,6 +445,9 @@ export default {
 
 .comment-userName {
   font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  display: inline-block;
 }
 
 .comment-icon {
@@ -467,7 +471,6 @@ export default {
 .comment-rep {
   float: right;
 }
-
 .comment-reply-container {
   background: #f0f5f9;
   border: 1px dashed #f0f5f9;

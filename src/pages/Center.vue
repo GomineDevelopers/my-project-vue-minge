@@ -161,6 +161,7 @@ export default {
   }
 }
 .header .name {
+  margin-top: -1vh;
   line-height: 2vh;
   position: relative;
 }
