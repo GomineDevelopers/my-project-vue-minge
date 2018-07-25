@@ -6,7 +6,6 @@
         :on-infinite="infinite" class="scroller-container" ref="scroller">
         <!-- content goes here -->
         <div style="height: 44px;"></div>
-        <div >
           <div class="row status"
                :class="{'status-wait':item.status == 0  , 'status-uncheck':item.status == 1,'status-success':item.status == 3,'status-refuse':item.status == 4 }"
                v-for="(item,index) in listData">
@@ -26,7 +25,6 @@
               <div class="c3" v-else-if="item.status == 0">待提交</div>
             </div>
           </div>
-        </div>
       </scroller>
     </div>
     <el-button type="primary" round class="bottom-btn" @click="goProposalEdit">填写提案</el-button>
