@@ -139,25 +139,29 @@ export default {
 
 .logo {
   background: white;
-  position: absolute;
   top: 2vh;
   width: 80px;
   height: 80px;
+  margin: 2vh auto;
   border-radius: 50%;
-  left: 50%;
-  margin-left: -40px;
 }
-
 .logo img {
   height: 94%;
   border-radius: 50%;
-  margin: 3% auto;
   padding: 0 3%;
 }
-
+@media screen and (max-width: 350px) {
+  .logo {
+    background: white;
+    top: 2vh;
+    width: 60px;
+    height: 60px;
+    margin: 2vh auto;
+    border-radius: 50%;
+  }
+}
 .header .name {
-  padding-top: 15vh;
-  line-height: 4vh;
+  line-height: 2vh;
   position: relative;
 }
 
