@@ -8,15 +8,16 @@
         <div class="comment-container" v-show="commentList.length>0">
           <div v-for="(item,index) in commentList" :class="[index == 0 ? 'comment-list':'comment-list-border']">
             <el-row>
-              <el-col :span="3">
-                <div class="comment-avatar">
-                  <img
-                    :src="item.avatar">
-                </div>
-              </el-col>
               <el-col :span="21" class="comment-right">
                 <el-row>
-                  <el-col :span="22">
+                  <el-row>
+                    <el-col :span="3">
+                      <div class="comment-avatar">
+                        <img
+                          :src="item.avatar">
+                      </div>
+                    </el-col>
+                    <el-col :span="19">
                     <span class="comment-userName" v-text="item.realname"></span>
                   </el-col>
                   <el-col :span="2">
@@ -25,6 +26,7 @@
                       <i class="el-icon-star-off" v-show="!item.status" @click="collect(item.id)"></i>
                     </span>
                   </el-col>
+                  </el-row>
                   <el-col :span="24">
                     <div class="comment-content" v-html="item.content">
                     </div>
@@ -46,7 +48,7 @@
                         <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
                       </el-col>
                       <el-col :span="5">
-                    <span class="comment-reply" @click="reply(4,item.id,item.realname)"><i
+                    <span class="comment-rep" @click="reply(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                       </el-col>
                     </el-row>
@@ -458,11 +460,11 @@ export default {
 }
 
 .comment-time,
-.comment-reply {
+.comment-rep {
   font-size: 12px;
   color: #cccccc;
 }
-.comment-reply {
+.comment-rep {
   float: right;
 }
 
