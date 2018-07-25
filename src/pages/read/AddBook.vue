@@ -91,10 +91,11 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small" clearable @focus="offScroll" @blur="onScroll" ></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small" clearable  ></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
+        <div style="height: 200px"></div>
         <div class="submit-wrapper">
           <el-row class="item-content">
             <el-col :span="24">
