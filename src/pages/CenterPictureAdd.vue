@@ -70,6 +70,7 @@ export default {
   methods: {
     //图片上传
     handleAvatarSuccess(res, file) {
+      this.isLoading=false;
       this.imageUrl = URL.createObjectURL(file.raw)
       this.postImageUrl = res.result.info.filename
     },

@@ -49,6 +49,7 @@
       },
       methods:{
         handleAvatarSuccess(res, file) {
+          this.isLoading=false;
           this.imageUrl = URL.createObjectURL(file.raw);
         },
         beforeAvatarUpload(file) {

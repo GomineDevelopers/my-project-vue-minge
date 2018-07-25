@@ -174,6 +174,7 @@
         this.radioValue = radioValue
       },
       handleAvatarSuccess(res, file) {
+        this.isLoading = false;
         this.imageUrl = URL.createObjectURL(file.raw)
         this.postImgName = res.result.info.filename
       },
