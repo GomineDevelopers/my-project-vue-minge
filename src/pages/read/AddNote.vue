@@ -337,6 +337,7 @@
     border: 1px solid #ccc;
     background: white;
     border-radius: 1vh;
+    color:black;
   }
 
   .avatar-uploader {
@@ -344,7 +345,7 @@
     justify-content: center;
     align-items: center;
     width: inherit;
-    height: inherit;
+    height: 20vh;
   }
 
   .item-content .el-icon-picture {
