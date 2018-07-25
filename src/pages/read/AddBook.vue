@@ -16,8 +16,14 @@
                 :show-file-list="false"
                 :on-success="handleAvatarSuccess"
                 :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <div v-else>
+                <img v-if="imageUrl  && !isLoading" :src="imageUrl" class="avatar">
+                <div v-if="isLoading">
+                  <i class="el-icon-loading"></i>
+                  <el-row class="description">
+                    <el-col :span="24">上传中</el-col>
+                  </el-row>
+                </div>
+                <div v-if="!imageUrl && !isLoading">
                   <i class="el-icon-picture"></i>
                   <el-row class="description">
                     <el-col :span="24">请上传图片</el-col>
@@ -91,7 +97,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small"  clearable  @focus="setScrollHeight"></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small" clearable @focus="setScrollHeight"></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
@@ -128,7 +134,8 @@
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
         bottomText: '添加',
-        hasOtherReader: false
+        hasOtherReader: false,
+        isLoading: false
       }
     },
     components: {
@@ -145,7 +152,7 @@
 
     methods: {
       setScrollHeight: function () {
-        document.getElementsByClassName("router-view-wrapper")[0].scrollTop=999
+        document.getElementsByClassName("router-view-wrapper")[0].scrollTop = 999
       },
       setRadioValues: function (radioValue) {
         this.radioValue = radioValue;
@@ -164,7 +171,6 @@
           }
         })
           .then(function (response) {
-
             vm.bookName = response.data.result.title;
             vm.bookPublisher = response.data.result.publisher;
             vm.writer = response.data.result.author;
@@ -182,21 +188,28 @@
           })
       },
       handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw)
-        this.postImgName = res.result.info.filename
+        this.isLoading = false;
+        this.imageUrl = URL.createObjectURL(file.raw);
+        this.postImgName = res.result.info.filename;
       },
       beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg'
-        const isPNG = file.type === 'image/png'
-        const isLt2M = file.size / 1024 / 1024 < 5
+        this.isLoading = true;
+        const isJPG = file.type === 'image/jpeg';
+        const isPNG = file.type === 'image/png';
+        const isLt5M = file.size / 1024 / 1024 < 5;
 
         if (!isJPG && !isPNG) {
           this.$message.error('上传图片只能是 JPG 或PNG 格式!')
         }
-        if (!isLt2M) {
+
+        if (!isLt5M) {
           this.$message.error('上传图片大小不能超过 5MB!')
         }
-        return (isJPG || isPNG) && isLt2M
+
+        let result = (isJPG || isPNG) && isLt5M;
+        if (!result)
+          this.isLoading = false;
+        return result
       },
       // 添加书籍点击按钮事件
       bookValidate() {

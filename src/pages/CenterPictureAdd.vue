@@ -15,18 +15,24 @@
                 <div class="book-cover">
                     <el-col :span="24">
                         <el-upload
-                            class="avatar-uploader"
-                            :action=postImageUrl
-                            :show-file-list="false"
-                            :on-success="handleAvatarSuccess"
-                            :before-upload="beforeAvatarUpload">
-                            <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                            <div v-else>
-                            <i  class="el-icon-picture"></i>
-                            <el-row class="description" >
-                                <el-col :span="24">请上传图片</el-col>
+                          class="avatar-uploader"
+                          :action=postImageUrl
+                          :show-file-list="false"
+                          :on-success="handleAvatarSuccess"
+                          :before-upload="beforeAvatarUpload">
+                          <img v-if="imageUrl  && !isLoading" :src="imageUrl" class="avatar">
+                          <div v-if="isLoading">
+                            <i class="el-icon-loading"></i>
+                            <el-row class="description">
+                              <el-col :span="24">上传中</el-col>
                             </el-row>
-                            </div>
+                          </div>
+                          <div v-if="!imageUrl && !isLoading">
+                            <i class="el-icon-picture"></i>
+                            <el-row class="description">
+                              <el-col :span="24">请上传图片</el-col>
+                            </el-row>
+                          </div>
                         </el-upload>
                     </el-col>
                      </div>
@@ -56,7 +62,8 @@ export default {
       imageUrl: '',
       postImageUrl:
         this.$commonTools.g_restUrl +
-        '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images'
+        '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images',
+      isLoading:false
     }
   },
 
@@ -67,17 +74,23 @@ export default {
       this.postImageUrl = res.result.info.filename
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isPNG = file.type === 'image/png'
-      const isLt5M = file.size / 1024 / 1024 < 5
+      this.isLoading = true;
+      const isJPG = file.type === 'image/jpeg';
+      const isPNG = file.type === 'image/png';
+      const isLt5M = file.size / 1024 / 1024 < 5;
 
       if (!isJPG && !isPNG) {
         this.$message.error('上传图片只能是 JPG 或PNG 格式!')
       }
+
       if (!isLt5M) {
         this.$message.error('上传图片大小不能超过 5MB!')
       }
-      return (isJPG || isPNG) && isLt5M
+
+      let result = (isJPG || isPNG) && isLt5M;
+      if (!result)
+        this.isLoading = false;
+      return result
     },
     // 添加图片
     pictureValidate() {
