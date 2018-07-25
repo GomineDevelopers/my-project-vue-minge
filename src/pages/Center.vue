@@ -1,14 +1,24 @@
 <template>
   <div class="center_bg ">
     <vue-headful title="我的民革"/>
-    <div class="header">
+    
+    <el-row>
+      <div class="header">
+      <el-col :span="24">
+        
       <div class="logo">
         <img :src="imgUrl"/>
       </div>
-      <div class="name">
-        {{name}}
+      </el-col>
+      <el-col :span="24">
+         <div class="name">
+        {{name}}朱桂峰
       </div>
-    </div>
+      </el-col>
+      </div>
+    </el-row>
+    
+    
     <div class="row">
       <div class="title" @click="goHome">
         <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
@@ -70,7 +80,7 @@ export default {
       totalProposal: 0,
       passProposal: 0,
       comment: 0,
-      score:0
+      score: 0
     }
   },
   mounted() {
@@ -79,7 +89,8 @@ export default {
   methods: {
     getCenterData: function() {
       let vm = this
-      vm.axios(vm.$commonTools.g_restUrl, {
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -96,8 +107,8 @@ export default {
           vm.hasMessage = response.data.result.mg
           vm.totalProposal = response.data.result.proposal
           vm.passProposal = response.data.result.c_proposal
-          vm.comment = response.data.result.common_num;
-          vm.score = response.data.result.score;
+          vm.comment = response.data.result.common_num
+          vm.score = response.data.result.score
         })
         .catch(function(error) {
           console.log(error)
@@ -112,8 +123,8 @@ export default {
     goProposal: function() {
       this.$router.push({ name: 'Proposal' })
     },
-    goPoint:function () {
-      this.$router.push({name:'CenterPoint'});
+    goPoint: function() {
+      this.$router.push({ name: 'CenterPoint' })
     }
   }
 }
@@ -123,7 +134,7 @@ export default {
 .header {
   position: relative;
   width: 100%;
-  height: 19.2%;
+  height: 20vh;
 }
 
 .logo {
