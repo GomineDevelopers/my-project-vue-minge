@@ -73,7 +73,7 @@
         </el-row>
       </div>
       <div class="item-wrapper" v-if="!hasOtherReader">
-        <el-row class="item-label" >
+        <el-row class="item-label">
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>私密读书</span>
           </el-col>
         </el-row>
@@ -91,11 +91,10 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small" clearable  ></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small"  clearable  @focus="setScrollHeight"></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
-        <div style="height: 200px"></div>
         <div class="submit-wrapper">
           <el-row class="item-content">
             <el-col :span="24">
@@ -129,8 +128,7 @@
         checkValues: [{text: '是', value: '1'}, {text: '否', value: '0'}],
         radioValue: 0,
         bottomText: '添加',
-        hasOtherReader: false,
-
+        hasOtherReader: false
       }
     },
     components: {
@@ -144,8 +142,11 @@
         this.setRadioValues(0);
       }
     },
-    methods: {
 
+    methods: {
+      setScrollHeight: function () {
+        document.getElementsByClassName("router-view-wrapper")[0].scrollTop=999
+      },
       setRadioValues: function (radioValue) {
         this.radioValue = radioValue;
       },
@@ -273,15 +274,11 @@
 </script>
 
 <style scoped>
-
-
   .addbook-wrap {
     text-align: left;
-    margin: 1vh auto;
+    margin: auto;
     width: 70%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: block;
   }
 
   .item-wrapper {
@@ -293,9 +290,8 @@
   }
 
   .item-content {
+    position: relative;
     margin-top: 1vh;
-    display: flex;
-    align-items: center;
     text-align: center;
   }
 
