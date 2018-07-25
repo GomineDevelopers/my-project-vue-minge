@@ -107,10 +107,11 @@ export default {
       postData.back = vm.form.ProposalBackground
       postData.suggest = vm.form.ProposalQuestion
       postData.content = vm.form.ProposalAdvice
-      postData.status = typeId;
-      postData.id = vm.$route.params.proposalId;
+      postData.status = typeId
+      postData.id = vm.$route.params.proposalId
       if (vm.proposalValidate()) {
-        vm.axios(vm.$commonTools.g_restUrl, {
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -189,7 +190,7 @@ export default {
 
 .register-btn {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 2vh;
 }
 </style>
 
