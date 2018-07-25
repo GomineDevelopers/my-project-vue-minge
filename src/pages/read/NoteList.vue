@@ -18,7 +18,7 @@
           <el-row class="row-item">
             <el-col :span="12" ><div class="time" v-text="$commonTools.formatDate(item.create_time)"></div></el-col>
              <el-col :span="12">
-                 <div class="translate" v-show="item.is_private==0"><i class="el-icon-edit-outline"></i>{{item.total}}条评论</div>
+                 <div class="translate" v-show="item.is_private==0"><i class="el-icon-edit-outline"></i>&nbsp;{{item.total}}条评论</div>
                  <div class="private-note" v-show="item.is_private==1"><i class="iconfont icon-lock"></i>私人笔记</div>
              </el-col>
           </el-row>
