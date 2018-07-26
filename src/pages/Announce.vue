@@ -1,5 +1,5 @@
 <template>
-  <div class="list-container long-container">
+  <div class="list-container long-container announce-wrapper">
     <vue-headful
       title="最新发布"
     />
@@ -21,25 +21,25 @@
 </template>
 
 <script>
-  import MyList from '@/components/MyList.vue'
+import MyList from '@/components/MyList.vue'
 
-  export default {
-    name: 'Announce',
-    data() {
-      return {
-        activeName: 'first',
-        type: 37
-      }
-    },
-    methods: {
-      handleClick(tab, event) {
-        this.type = event.target.innerText == '最新发布' ? 37 : 38;
-      }
-    },
-    components: {
-      'my-list': MyList
+export default {
+  name: 'Announce',
+  data() {
+    return {
+      activeName: 'first',
+      type: 37
     }
+  },
+  methods: {
+    handleClick(tab, event) {
+      this.type = event.target.innerText == '最新发布' ? 37 : 38
+    }
+  },
+  components: {
+    'my-list': MyList
   }
+}
 </script>
 
 
