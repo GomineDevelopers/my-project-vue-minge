@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .point_container {
-  margin: 12vh 3vh 0 3vh;
+  margin: 12vh 3vh 3vh 3vh;
 }
 
 .point_border_left {
