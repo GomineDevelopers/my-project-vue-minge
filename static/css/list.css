@@ -281,6 +281,17 @@
   height: 92vh;
 }
 
+/* 组织架构 */
+
+.introduction_header-bg {
+  background-image: url("../image/introduction_header-bg.png");
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+  height: 14vh;
+  width: 100%;
+}
+
 /*我的民革下我的4块*/
 
 .center-title {
