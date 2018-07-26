@@ -26,6 +26,7 @@
     },
     mounted() {
       this.updateActiveItem();
+      this.handleClick('first');
     },
     watch: {
       $route() {

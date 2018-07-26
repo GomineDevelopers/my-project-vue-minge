@@ -31,7 +31,7 @@
           <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member&&is_showCommon"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
-      <div v-if="common_num>0" class="news-detail-margin-bottom" v-show="is_showCommon">
+      <div v-if="common_num>0&&is_showCommon" class="news-detail-margin-bottom">
         <div class="news-detail-bottom-commentArea">
           <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
                v-for="(item,index) in common_list" v-if="index<2">
@@ -178,7 +178,8 @@
             vm.click_count = response.data.result.data.click;
             vm.common_list = response.data.result.common;
             vm.common_num = response.data.result.total;
-            if(response.data.result.ccateid == 37 || response.data.result.ccateid == 40 || response.data.result.ccateid == 56 ||response.data.result.ccateid == 59){
+            if(response.data.result.data.ccateid == 37 || response.data.result.data.ccateid == 40 ||
+              response.data.result.data.ccateid == 56 ||response.data.result.data.ccateid == 59){
               vm.is_showCommon = false;
             }
 
