@@ -11,6 +11,8 @@ import Announce from '@/pages/Announce'
 import SocialService from '@/pages/SocialService'
 //统战工作
 import UnitedWork from '@/pages/UnitedWork'
+//参政议政
+import Participate from '@/pages/Participate.vue'
 //友好往来
 import FriendlyContacts from '@/pages/FriendlyContacts'
 //各种详情页面
@@ -145,6 +147,11 @@ export default new Router({
       path: '/friendlycontacts',
       name: 'FriendlyContacts',
       component: FriendlyContacts
+    },
+    {
+      path: '/participate',
+      name: 'Participate',
+      component: Participate
     },
     {
       path: '/newsDetail/:id',
