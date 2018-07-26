@@ -32,9 +32,7 @@ export default {
   name: 'introduction',
   methods: {
     gobaike() {
-      window.open(
-        'https://baike.baidu.com/item/%E4%B8%AD%E5%9B%BD%E5%9B%BD%E6%B0%91%E5%85%9A%E9%9D%A9%E5%91%BD%E5%A7%94%E5%91%98%E4%BC%9A/1691501?fromtitle=%E6%B0%91%E9%9D%A9&fromid=1971533&fr=aladdin'
-      )
+      window.open('http://www.gymg.cn/c5097/index.html')
     }
   }
 }
