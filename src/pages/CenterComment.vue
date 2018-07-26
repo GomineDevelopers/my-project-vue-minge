@@ -8,7 +8,7 @@
             <el-col :span="24"><div class="my-all-comments-mycom"><span>我的留言{{index+1}}</span></div></el-col>
           </el-row>
           <el-row>
-            <el-col :span="24" class="my-all-comments-title"><span v-text="item.title"></span></el-col>
+            <el-col :span="24" class="my-all-comments-title" @click="goDetail(item.a_id)"><span v-text="item.title"></span></el-col>
           </el-row>
           <el-row>
             <el-col :span="24"><div class="my-all-comments-dashborder" v-text="item.content"></div></el-col>
@@ -53,6 +53,9 @@
           .catch(function (error) {
             console.log(error);
           });
+      },
+      goDetail(a_id) {
+        this.$router.push({name: 'NewsDetail', params: {id: a_id}})
       }
     }
   }
