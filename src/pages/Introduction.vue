@@ -14,7 +14,7 @@
     </div>
     </el-col>
   </el-row>
-  </div>  
+  </div>
 </template>
 <script>
 export default {
@@ -32,6 +32,6 @@ export default {
   border-radius: 5px;
   background: #fff;
   margin-bottom: 1vh;
-  box-shadow: 10 10 5px 5px #999;
+  box-shadow: 10px 10px 5px 5px #999;
 }
 </style>
