@@ -51,14 +51,14 @@
       },
       handleClick(flag) {
         if (flag == 'first') {
-          this.$router.push({name: 'BooksCenter'})
+          this.$router.replace({name: 'BooksCenter'})
         }
 
         if (flag == 'second') {
-          this.$router.push({name: 'NotesCenter'})
+          this.$router.replace({name: 'NotesCenter'})
         }
         if (flag == 'third') {
-          this.$router.push({name: 'ShareReadCenter'})
+          this.$router.replace({name: 'ShareReadCenter'})
         }
       },
       gobooklist() {
