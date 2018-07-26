@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 //时政要闻
 import News from '@/pages/News'
+//简介
+import Introduction from '@/pages/Introduction'
 //最新发布
 import Announce from '@/pages/Announce'
 //社会服务
@@ -113,7 +115,12 @@ import ApplicationRelationship from '@/pages/application/relationship'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+
+  routes: [{
+      path: '/intro',
+      name: 'Introduction',
+      component: Introduction
+    },
     {
       path: '/news',
       name: 'News',
@@ -435,56 +442,56 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/one',
       component: ApplicationOne,
       name: 'ApplicationOne',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/two',
       component: ApplicationTwo,
       name: 'ApplicationTwo',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/three',
       component: ApplicationThree,
       name: 'ApplicationThree',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/four',
       component: ApplicationFour,
       name: 'ApplicationFour',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/five',
       component: ApplicationFive,
       name: 'ApplicationFive',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/six',
       component: ApplicationSix,
       name: 'ApplicationSix',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/degree',
       component: ApplicationDegree,
       name: 'ApplicationDegree',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/resume',
       component: ApplicationResume,
       name: 'ApplicationResume',
@@ -505,14 +512,14 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/family',
       component: ApplicationFamily,
       name: 'ApplicationFamily',
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/application/relationship',
       component: ApplicationRelationship,
       name: 'ApplicationRelationship',
