@@ -13,7 +13,7 @@
       <el-tab-pane name="second">
         <span slot="label"> 重要通知</span>
         <keep-alive>
-          <my-list :listType="type" v-if="type==38"></my-list>
+          <my-list :listType="type" v-if="type==59"></my-list>
         </keep-alive>
       </el-tab-pane>
     </el-tabs>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     handleClick(tab, event) {
-      this.type = event.target.innerText == '最新发布' ? 37 : 38
+      this.type = event.target.innerText == '最新发布' ? 37 : 59
     }
   },
   components: {

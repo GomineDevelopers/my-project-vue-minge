@@ -28,10 +28,10 @@
         <el-row>
           <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span
             v-text="click_count"></span></span>
-          <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+          <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member&&is_showCommon"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
-      <div v-if="common_num>0" class="news-detail-margin-bottom">
+      <div v-if="common_num>0" class="news-detail-margin-bottom" v-show="is_showCommon">
         <div class="news-detail-bottom-commentArea">
           <div :class="[index == 0?'':'news-detail-top-comment-border','news-detail-bottom-commentArea-div']"
                v-for="(item,index) in common_list" v-if="index<2">
@@ -98,7 +98,8 @@
         click_count: 0,
         common_list: [],
         common_num: 0,
-        is_member:true
+        is_member:true,
+        is_showCommon:true
       }
     },
     computed: {
@@ -177,6 +178,9 @@
             vm.click_count = response.data.result.data.click;
             vm.common_list = response.data.result.common;
             vm.common_num = response.data.result.total;
+            if(response.data.result.ccateid == 37 || response.data.result.ccateid == 40 || response.data.result.ccateid == 56 ||response.data.result.ccateid == 59){
+              vm.is_showCommon = false;
+            }
 
             vm.common_list.forEach(function (element, index, array) {
               element.create_time = vm.$commonTools.formatHour(element.create_time);
