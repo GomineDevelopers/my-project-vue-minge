@@ -40,7 +40,7 @@
             </el-row>
         </div>
         </div>
-        
+
         </div>
         <div class="addworks-wrap">
         <div class="item-wrapper">
@@ -109,7 +109,7 @@ export default {
           })
           .then(function(response) {
             if (response.status == '200') {
-              vm.$router.push({
+              vm.$router.replace({
                 name: 'CenterVideo'
               })
             }

@@ -101,7 +101,7 @@ export default {
           })
           .then(function(response) {
             if (response.status == '200') {
-              vm.$router.push({
+              vm.$router.replace({
                 name: 'CenterWorks'
               })
             }
