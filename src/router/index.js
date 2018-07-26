@@ -7,6 +7,10 @@ import News from '@/pages/News'
 import Announce from '@/pages/Announce'
 //社会服务
 import SocialService from '@/pages/SocialService'
+//统战工作
+import UnitedWork from '@/pages/UnitedWork'
+//友好往来
+import FriendlyContacts from '@/pages/FriendlyContacts'
 //各种详情页面
 import NewsDetail from '@/pages/NewsDetail'
 //新闻评论页面
@@ -124,6 +128,16 @@ export default new Router({
       path: '/socialService',
       name: 'SocialService',
       component: SocialService
+    },
+    {
+      path: '/unitedWork',
+      name: 'UnitedWork',
+      component: UnitedWork
+    },
+    {
+      path: '/friendlycontacts',
+      name: 'FriendlyContacts',
+      component: FriendlyContacts
     },
     {
       path: '/newsDetail/:id',

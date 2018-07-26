@@ -18,9 +18,6 @@
         type: 39
       }
     },
-    methods: {
-
-    },
     components: {
       'my-card-list': MyCardList
     }

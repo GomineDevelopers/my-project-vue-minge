@@ -4,8 +4,8 @@
       <el-row class="news-detail-top-row">
         <el-col :span="24">
           <div class="news-detail-title" :class="{'news-detail-title-more': !isTitleOneRow }"
-               ref="titleTxtContainer"><span v-text="title"
-                                             ref="titleTxt"></span>
+               ref="titleTxtContainer">
+            <span v-text="title" ref="titleTxt"></span>
           </div>
         </el-col>
       </el-row>
@@ -22,6 +22,7 @@
         </el-col>
       </el-row>
     </div>
+
     <div class="news-detail-bottom">
       <div class="news-detail-bottom-span">
         <el-row>
@@ -57,7 +58,7 @@
                     <div class="news-detail-bottom-content"><span v-text="item.content"></span></div>
                   </el-col>
                 </el-row>
-                <el-row>
+                <el-row >
                   <el-col :span="19">
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
