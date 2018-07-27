@@ -98,7 +98,8 @@ export default {
             do: 'shop',
             m: 'ewei_shop',
             ac: 'get_info',
-            showLoading: true
+            showLoading: true,
+            wxref: 'mp.weixin.qq.customers#wechat_redirect'
           }
         })
         .then(function(response) {
@@ -127,7 +128,6 @@ export default {
       this.$router.push({ name: 'CenterPoint' })
     }
   }
-  
 }
 </script>
 
