@@ -1,6 +1,6 @@
 <template>
-  <div class="center_home_bg ">
-    <div class="center-title">我的感想</div>
+ <div class="center_no_bg">
+    <div class="header-bg-seprated center-title">我的感想</div>
     <div class="feedbackList center-list">
       <div class="video-cover" v-for="(item) in feedbackList" @click="editThought(item.id)" :key="item.id">
         <div class="title">{{item.title}}</div>

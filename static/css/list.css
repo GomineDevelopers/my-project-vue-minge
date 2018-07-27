@@ -292,11 +292,22 @@
   width: 100%;
 }
 
+/* 多个头部背景 */
+
+.header-bg-seprated {
+  background-image: url("../image/header-bg-seprated.png");
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+  height: 9vh;
+  width: 100%;
+}
+
 /*我的民革下我的4块*/
 
 .center-title {
-  height: 10vh;
-  line-height: 10vh;
+  height: 9vh;
+  line-height: 9vh;
   color: white;
   font-size: 2.5vh;
   letter-spacing: 2px;

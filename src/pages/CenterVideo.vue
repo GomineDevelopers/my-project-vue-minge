@@ -1,6 +1,6 @@
 <template>
-  <div class="center_home_bg ">
-    <div class="center-title">我的视频</div>
+  <div class="center_no_bg">
+    <div class="header-bg-seprated center-title">我的视频</div>
     <div class="videoList center-list">
       <div class="video-cover" v-for="(item,index) in videoList" :key="item.id">
         <div class="title">视频{{index+1}} <span v-text="item.title"></span></div>

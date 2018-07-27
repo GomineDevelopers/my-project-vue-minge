@@ -1,6 +1,7 @@
 <template>
-  <div class="center_home_bg">
+  <div class="center_no_bg">
     <vue-headful title="未读列表"/>
+    <div class="header-bg-seprated"></div>
     <div class="Un_container">
       <el-row>
         <el-col :span="24">
@@ -63,275 +64,273 @@
 </template>
 
 <script>
-  export default {
-    name: "CenterUnreadList",
-    data() {
-      return {
-        unreadList: [],
-        type: this.$route.params.type,
-        inviteId: "",
-        dialogVisible: false,
-        quickDialogVisible: false,
-        quickApply: {}
-      }
-    },
-    created() {
-      this.getUnreadList();
-    },
-    methods: {
-      getUnreadList() {
-        let vm = this;
-        vm.axios(vm.$commonTools.g_restUrl, {
+export default {
+  name: 'CenterUnreadList',
+  data() {
+    return {
+      unreadList: [],
+      type: this.$route.params.type,
+      inviteId: '',
+      dialogVisible: false,
+      quickDialogVisible: false,
+      quickApply: {}
+    }
+  },
+  created() {
+    this.getUnreadList()
+  },
+  methods: {
+    getUnreadList() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
-            i: "8",
-            c: "entry",
-            p: "mq",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "mq_list",
-            type: vm.$route.params.type,
+            i: '8',
+            c: 'entry',
+            p: 'mq',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'mq_list',
+            type: vm.$route.params.type
           }
         })
-          .then(function (response) {
-            vm.unreadList = response.data.result;
-          })
-          .catch(function (error) {
-            console.info(error);
-          })
-      },
-      goDetail(item) {
-        let id = item.id;
-        let status = item.status;
-        let vm = this;
-        if (vm.$route.params.type == 1) {
-          this.$router.replace({name: 'CheckApply', params: {id: id}});
-        } else if (vm.$route.params.type == 2) {
-          this.$router.replace({name: 'CheckProposal', params: {id: id}});
-        } else if (vm.$route.params.type == 3 && status == 1) {
-          vm.dialogVisible = true;
-          vm.inviteId = id;
-        }
-        else if (vm.$route.params.type == 4 && status == 1) {
-          let tmpItem = {}
-          tmpItem.name = item.realname;
-          tmpItem.date = vm.$commonTools.formatDate(item.birth);
-          tmpItem.introducer = item.introducer;
-          tmpItem.id = item.id;
-          vm.quickApply = tmpItem;
-          vm.quickDialogVisible = true;
-        }
-      },
-      changeStatus(temp) {
-        let vm = this;
-        let postData = {
-          "id": vm.inviteId,
-          "status": temp
-        };
-        vm.axios(vm.$commonTools.g_restUrl, {
-          method: "post",
-          params: {
-            i: "8",
-            c: "entry",
-            p: "user",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "set_invite",
-          },
-          data:vm.$qs.stringify(postData)
+        .then(function(response) {
+          vm.unreadList = response.data.result
         })
-          .then(function (response) {
-            if (response.data.status == '200') {
-              vm.dialogVisible = false;
-              vm.unreadList.forEach(function (element, index, array) {
-                if (element.id == vm.inviteId) {
-                  element.status = temp
-                }
-              })
-            }
-            else if (response.data.status == '201') {
-              vm.$message({
-                type: 'info',
-                message: '书已被邀请者删除，该邀请无效。'
-              });
-              vm.dialogVisible = false;
-              vm.getUnreadList();
-            }
-            else if (response.data.status == '202') {
-              vm.$message({
-                type: 'info',
-                message: '书已被邀请者设为私密，该邀请无效。'
-              });
-              vm.dialogVisible = false;
-              vm.getUnreadList();
-            }
-          })
-          .catch(function (error) {
-            console.info(error)
-          })
-      },
-      changeQuickStatus(id, status) {
-        let vm = this;
-        let postData = {
-          'id': id,
-          'status': status
-        }
-        vm.axios(vm.$commonTools.g_restUrl, {
+        .catch(function(error) {
+          console.info(error)
+        })
+    },
+    goDetail(item) {
+      let id = item.id
+      let status = item.status
+      let vm = this
+      if (vm.$route.params.type == 1) {
+        this.$router.replace({ name: 'CheckApply', params: { id: id } })
+      } else if (vm.$route.params.type == 2) {
+        this.$router.replace({ name: 'CheckProposal', params: { id: id } })
+      } else if (vm.$route.params.type == 3 && status == 1) {
+        vm.dialogVisible = true
+        vm.inviteId = id
+      } else if (vm.$route.params.type == 4 && status == 1) {
+        let tmpItem = {}
+        tmpItem.name = item.realname
+        tmpItem.date = vm.$commonTools.formatDate(item.birth)
+        tmpItem.introducer = item.introducer
+        tmpItem.id = item.id
+        vm.quickApply = tmpItem
+        vm.quickDialogVisible = true
+      }
+    },
+    changeStatus(temp) {
+      let vm = this
+      let postData = {
+        id: vm.inviteId,
+        status: temp
+      }
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           method: 'post',
           params: {
-            i: "8",
-            c: "entry",
-            p: "user",
-            do: "shop",
-            m: "ewei_shop",
-            ac: "edit_verification",
+            i: '8',
+            c: 'entry',
+            p: 'user',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'set_invite'
           },
           data: vm.$qs.stringify(postData)
         })
-          .then(function (response) {
-            if (response.data.status == '201') {
-              vm.$message({
-                type: 'info',
-                message: '此申请已被处理，请刷新。'
-              });
-            }
-            vm.quickDialogVisible = false;
-            vm.getUnreadList();
-          })
-          .catch(function (error) {
-            console.info(error)
-          })
-      },
+        .then(function(response) {
+          if (response.data.status == '200') {
+            vm.dialogVisible = false
+            vm.unreadList.forEach(function(element, index, array) {
+              if (element.id == vm.inviteId) {
+                element.status = temp
+              }
+            })
+          } else if (response.data.status == '201') {
+            vm.$message({
+              type: 'info',
+              message: '书已被邀请者删除，该邀请无效。'
+            })
+            vm.dialogVisible = false
+            vm.getUnreadList()
+          } else if (response.data.status == '202') {
+            vm.$message({
+              type: 'info',
+              message: '书已被邀请者设为私密，该邀请无效。'
+            })
+            vm.dialogVisible = false
+            vm.getUnreadList()
+          }
+        })
+        .catch(function(error) {
+          console.info(error)
+        })
+    },
+    changeQuickStatus(id, status) {
+      let vm = this
+      let postData = {
+        id: id,
+        status: status
+      }
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          method: 'post',
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'user',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'edit_verification'
+          },
+          data: vm.$qs.stringify(postData)
+        })
+        .then(function(response) {
+          if (response.data.status == '201') {
+            vm.$message({
+              type: 'info',
+              message: '此申请已被处理，请刷新。'
+            })
+          }
+          vm.quickDialogVisible = false
+          vm.getUnreadList()
+        })
+        .catch(function(error) {
+          console.info(error)
+        })
     }
   }
+}
 </script>
 
 <style scoped>
+.center_home_bg {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-  .center_home_bg {
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+.Un_container {
+  margin: 13vh 3vh 0 3vh;
+}
 
-  .Un_container {
-    margin: 12vh 3vh 0 3vh;
-  }
+.Un_border-left {
+  text-align: left;
+  border-left: 3px solid #357baa;
+}
 
-  .Un_border-left {
-    text-align: left;
-    border-left: 3px solid #357baa;
-  }
+.Un_border-left span {
+  display: inline-block;
+  padding-left: 10px;
+}
 
-  .Un_border-left span {
-    display: inline-block;
-    padding-left: 10px;
-  }
+.Un_card {
+  text-align: left;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  position: relative;
+  border-radius: 5px;
+  margin: 0.5rem 0 0.2rem 0;
+}
 
-  .Un_card {
-    text-align: left;
-    background: #ffffff;
-    -webkit-box-shadow: 0px 0px 20px 5px #e9e9e9;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-    position: relative;
-    border-radius: 5px;
-    margin: .5rem 0 .2rem 0;
-  }
+.Un_card .c1 {
+  width: 0;
+  height: 0;
+  border-left: 7.5vh solid transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-  .Un_card .c1 {
-    width: 0;
-    height: 0;
-    border-left: 7.5vh solid transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.Un_card .c2 {
+  width: 0;
+  height: 0;
+  border-top: 3vh solid white;
+  border-left: 3vh solid transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
-  .Un_card .c2 {
-    width: 0;
-    height: 0;
-    border-top: 3vh solid white;
-    border-left: 3vh solid transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+.Un_card .c3 {
+  top: 1vh;
+  right: -1.3vh;
+  color: white;
+  position: absolute;
+  width: 8vh;
+  height: 3.6vh;
+  line-height: 3.6vh;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg) scale(0.9);
+  z-index: 111;
+  font-size: 2vw;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
 
-  .Un_card .c3 {
-    top: 1.0vh;
-    right: -1.3vh;
-    color: white;
-    position: absolute;
-    width: 8vh;
-    height: 3.6vh;
-    line-height: 3.6vh;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg) scale(0.9);
-    z-index: 111;
-    font-size: 2vw;
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
+.Un_card_list {
+  width: 100%;
+  margin: 0 6vw 0 4vw;
+  display: inline-flex;
+}
 
-  .Un_card_list {
-    width: 100%;
-    margin: 0 6vw 0 4vw;
-    display: inline-flex;
-  }
+.Un_card .title {
+  display: inline-block;
+  max-width: 37%;
+  height: 7.5vh;
+  line-height: 7.5vh;
+  color: #56b0f0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  .Un_card .title {
-    display: inline-block;
-    max-width: 37%;
-    height: 7.5vh;
-    line-height: 7.5vh;
-    color: #56b0f0;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+.Un_card_div {
+  width: 40%;
+  height: 7.5vh;
+  line-height: 7.5vh;
+}
 
-  .Un_card_div {
-    width: 40%;
-    height: 7.5vh;
-    line-height: 7.5vh;
-  }
+.Un_card_div3 {
+  display: flex;
+  align-items: center;
+  margin-right: 8vh;
+  padding: 10px 0;
+}
 
-  .Un_card_div3 {
-    display: flex;
-    align-items: center;
-    margin-right: 8vh;
-    padding: 10px 0;
-  }
+.Un_card_div3 .nickname {
+  color: #56b0f0;
+}
 
-  .Un_card_div3 .nickname {
-    color: #56b0f0;
-  }
+.circle {
+  display: inline-flex;
+}
 
-  .circle {
-    display: inline-flex;
-  }
+.circle span {
+  width: 4.1%;
+  height: 7.5vh;
+  line-height: 7.5vh;
+  color: #56b0f0;
+}
 
-  .circle span {
-    width: 4.1%;
-    height: 7.5vh;
-    line-height: 7.5vh;
-    color: #56b0f0;
-  }
+.status-success .c1 {
+  border-top: 7.5vh solid #66c661;
+}
 
-  .status-success .c1 {
-    border-top: 7.5vh solid #66c661;
-  }
+.status-wait .c1 {
+  border-top: 7.5vh solid #d26e7a;
+}
 
-  .status-wait .c1 {
-    border-top: 7.5vh solid #d26e7a;
-  }
+.status-refuse .c1 {
+  border-top: 7.5vh solid #e6a23c;
+}
 
-  .status-refuse .c1 {
-    border-top: 7.5vh solid #E6A23C;
-  }
-
-  .dialog-div {
-    font-size: 16px;
-    margin: .8vh 0;
-  }
-
+.dialog-div {
+  font-size: 16px;
+  margin: 0.8vh 0;
+}
 </style>

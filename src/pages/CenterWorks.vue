@@ -1,6 +1,7 @@
 <template>
-  <div class="center_home_bg ">
-    <div class="center-title">我的作品</div>
+  <div class="center_no_bg">
+    <div class="header-bg-seprated center-title">我的作品</div>
+
     <div class="worksList center-list">
       <div class="works-cover" v-for="(item,index) in worksList" @click="goEdit(item.id)">
         <div class="title">{{item.title}}</div>
