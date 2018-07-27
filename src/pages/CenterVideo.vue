@@ -1,6 +1,7 @@
 <template>
   <div class="center_no_bg">
     <div class="header-bg-seprated center-title">我的视频</div>
+    <div class="content-wrapper">
     <div class="videoList center-list">
       <div class="video-cover" v-for="(item,index) in videoList" :key="item.id">
         <div class="title">视频{{index+1}} <span v-text="item.title"></span></div>
@@ -24,6 +25,7 @@
       <div class="center-add-btn"></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
+    </div>
     </div>
   </div>
 </template>
@@ -115,6 +117,9 @@ export default {
 </script>
 
 <style scoped>
+.content-wrapper {
+  margin-top: 8vh;
+}
 .video-cover {
   width: 100%;
   min-height: 14vh;

@@ -1,6 +1,7 @@
 <template>
   <div class="center_no_bg">
     <div class="header-bg-seprated center-title">我的感想</div>
+    <div class="content-wrapper" >
     <el-button type="text" class="manage" @click="openDeleteMode" v-show="!isDeleteMode">
       <i class="el-icon-edit-outline"></i>批量管理
     </el-button>
@@ -28,6 +29,7 @@
       <div class="center-add-btn "></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
+    </div>
     </div>
   </div>
 </template>
@@ -162,7 +164,9 @@ export default {
 .over-cover {
   z-index: 11;
 }
-
+.content-wrapper {
+  margin-top: 8vh;
+}
 .cover {
   position: absolute;
   left: 0;

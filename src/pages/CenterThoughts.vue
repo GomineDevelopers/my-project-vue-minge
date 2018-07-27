@@ -1,6 +1,7 @@
 <template>
  <div class="center_no_bg">
     <div class="header-bg-seprated center-title">我的感想</div>
+    <div class="content-wrapper">
     <div class="feedbackList center-list">
       <div class="video-cover" v-for="(item) in feedbackList" @click="editThought(item.id)" :key="item.id">
         <div class="title">{{item.title}}</div>
@@ -17,6 +18,7 @@
       <div class="center-add-btn" ></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
+    </div>
     </div>
   </div>
 </template>
@@ -111,6 +113,9 @@ export default {
 </script>
 
 <style scoped>
+.content-wrapper {
+  margin-top: 8vh;
+}
 .video-cover {
   height: 15vh;
   border-radius: 5px;

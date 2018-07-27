@@ -208,7 +208,9 @@
   background-size: 100% 100%;
   position: absolute;
   width: 100%;
-  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-height: 100vh;
 }
 
 .quick_validate_bg {

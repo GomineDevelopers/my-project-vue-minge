@@ -2,6 +2,7 @@
   <div class="center_no_bg">
     <vue-headful title="未读列表"/>
     <div class="header-bg-seprated"></div>
+    <div class="content-wrapper">
     <div class="Un_container">
       <el-row>
         <el-col :span="24">
@@ -59,7 +60,7 @@
         </span>
       </el-dialog>
     </div>
-
+</div>
   </div>
 </template>
 
@@ -207,6 +208,9 @@ export default {
 </script>
 
 <style scoped>
+.content-wrapper {
+  margin-top: 8vh;
+}
 .center_home_bg {
   overflow-x: hidden;
   overflow-y: auto;

@@ -1,7 +1,7 @@
 <template>
   <div class="center_no_bg">
     <div class="header-bg-seprated center-title">我的作品</div>
-
+  <div class="content-wrapper">
     <div class="worksList center-list">
       <div class="works-cover" v-for="(item,index) in worksList" @click="goEdit(item.id)">
         <div class="title">{{item.title}}</div>
@@ -14,6 +14,7 @@
       <div class="center-add-btn"></div>
       <div class="center-add-btn-row"></div>
       <div class="center-add-btn-col"></div>
+    </div>
     </div>
   </div>
 </template>
@@ -105,6 +106,9 @@ export default {
 </script>
 
 <style scoped>
+.content-wrapper {
+  margin-top: 8vh;
+}
 .works-cover {
   height: 11vh;
   border-radius: 5px;
