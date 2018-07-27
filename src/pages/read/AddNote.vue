@@ -285,13 +285,12 @@
             .then(function (response) {
               if (response.status == '200') {
                 let changeLink = "";
-                if (vm.$route.query.noteEditId) {
-
+                if (vm.$route.query.noteEditId) {//笔记详情中进入
                   changeLink = {
                     name: 'NoteDetail',
-                    params: {id: vm.$route.query.noteEditId}
+                    params: {noteId: vm.$route.query.noteEditId}
                   }
-                } else {
+                }else {
                   changeLink = {
                     name: 'NoteList'
                   }
