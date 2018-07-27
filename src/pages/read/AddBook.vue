@@ -274,7 +274,7 @@
                     name: 'BookList'
                   }
                 }
-                vm.$router.push(changeLink)
+                vm.$router.replace(changeLink)
               }
             })
             .catch(function (error) {
