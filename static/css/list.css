@@ -642,3 +642,9 @@ button {
   outline: none;
   transform: translateZ(0);
 }
+
+/* 输入框光标问题解决 */
+
+input {
+  line-height: normal !important;
+}

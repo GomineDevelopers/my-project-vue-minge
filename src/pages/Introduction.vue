@@ -4,14 +4,11 @@
   <div class="introduction_header-bg"></div>
  <div class="content">
   <el-row>
-    <el-col :span="24">
     <div class="intro-wrapper-bg">
       <el-row class="button-wrapper">
         <el-col :span="24"><el-button type="primary" size="large" round @click="gobaike">民革简介</el-button></el-col>
       </el-row>
-     
     </div>
-    </el-col>
   </el-row>
   <el-row>
     <el-col :span="24">
@@ -53,29 +50,23 @@ export default {
   width: 90%;
   margin: 22vh auto;
 }
-.intro-wrapper-bg {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  width: 100%;
-  height: 22vh;
-  background-image: url('../../static/image/intro-wrapper-bg.jpg');
-  background-size: 100% 100%;
-  border-radius: 5px;
-  margin-bottom: 2vh;
-  box-shadow: 0px 0px 5px 5px #99999940;
-}
+.intro-wrapper-bg,
 .intro-constructor-bg {
   display: flex;
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 22vh;
-  background-image: url('../../static/image/intro-constructor-bg.png');
+  height: 28vh;
   background-size: 100% 100%;
   border-radius: 5px;
   margin-bottom: 2vh;
   box-shadow: 0px 0px 5px 5px #99999940;
+}
+.intro-wrapper-bg {
+  background-image: url('../../static/image/intro-wrapper-bg.jpg');
+}
+.intro-constructor-bg {
+  background-image: url('../../static/image/intro-constructor-bg.png');
 }
 .button-wrapper {
   width: 100%;
