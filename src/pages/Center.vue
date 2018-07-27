@@ -98,8 +98,7 @@ export default {
             do: 'shop',
             m: 'ewei_shop',
             ac: 'get_info',
-            showLoading: true,
-            wxref: 'mp.weixin.qq.customers#wechat_redirect'
+            showLoading: true
           }
         })
         .then(function(response) {
