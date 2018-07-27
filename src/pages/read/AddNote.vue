@@ -284,6 +284,26 @@
           })
             .then(function (response) {
               if (response.status == '200') {
+                let changeLink = "";
+                if (vm.$route.query.noteEditId) {
+
+                  changeLink = {
+                    name: 'NoteDetail',
+                    params: {id: vm.$route.query.noteEditId}
+                  }
+                } else {
+                  changeLink = {
+                    name: 'NoteList'
+                  }
+                }
+                vm.$router.replace(changeLink)
+              }
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+            /*.then(function (response) {
+              if (response.status == '200') {
                 vm.$router.replace({
                   name: 'NoteList'
                 })
@@ -291,7 +311,7 @@
             })
             .catch(function (error) {
               console.log(error)
-            })
+            })*/
         }
       }
     }

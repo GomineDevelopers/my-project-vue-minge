@@ -1,6 +1,6 @@
 const commonTools = {};
 
-commonTools.g_restUrl = 'http://icampaign.com.cn/customers/minge/backend/app/index.php';
+commonTools.g_restUrl = 'http://icampaign.com.cn/customers/minge/backend/app/index.php?wxref=mp.weixin.qq.customers#wechat_redirect';
 
 commonTools.formatDate = function (date, showDetail) {
   var isShow = showDetail || false;
