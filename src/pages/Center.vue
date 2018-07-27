@@ -1,11 +1,11 @@
 <template>
   <div class="center_bg ">
     <vue-headful title="我的民革"/>
-    
+
     <el-row>
       <div class="header">
       <el-col :span="24">
-        
+
       <div class="logo">
         <img :src="imgUrl"/>
       </div>
@@ -17,8 +17,8 @@
       </el-col>
       </div>
     </el-row>
-    
-    
+
+
     <div class="row">
       <div class="title" @click="goHome">
         <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
@@ -127,6 +127,7 @@ export default {
       this.$router.push({ name: 'CenterPoint' })
     }
   }
+  
 }
 </script>
 
