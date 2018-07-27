@@ -107,7 +107,7 @@ export default {
 
 <style scoped>
 .content-wrapper {
-  margin-top: 8vh;
+  margin-top: 12vh;
 }
 .works-cover {
   height: 11vh;

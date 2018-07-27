@@ -165,7 +165,7 @@ export default {
   z-index: 11;
 }
 .content-wrapper {
-  margin-top: 8vh;
+  margin-top: 12vh;
 }
 .cover {
   position: absolute;

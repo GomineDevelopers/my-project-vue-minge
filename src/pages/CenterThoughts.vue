@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 .content-wrapper {
-  margin-top: 8vh;
+  margin-top: 12vh;
 }
 .video-cover {
   height: 15vh;

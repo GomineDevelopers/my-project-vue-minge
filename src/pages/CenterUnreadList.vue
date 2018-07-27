@@ -209,7 +209,7 @@ export default {
 
 <style scoped>
 .content-wrapper {
-  margin-top: 8vh;
+  margin-top: 12vh;
 }
 .center_home_bg {
   overflow-x: hidden;
@@ -218,7 +218,7 @@ export default {
 }
 
 .Un_container {
-  margin: 13vh 3vh 0 3vh;
+  margin: 13vh 3vh 3vh 3vh;
 }
 
 .Un_border-left {

@@ -1,6 +1,8 @@
 <template>
-    <div class="center_home_bg">
+    <div class="center_no_bg">
       <vue-headful title="积分列表"/>
+      <div class="header-bg-seprated"></div>
+    <div class="content-wrapper">
       <div class="point_container">
         <el-row>
           <div class="point_border_left"><span>积分详情</span></div>
@@ -16,6 +18,7 @@
           </div>
         </el-row>
       </div>
+    </div>
     </div>
 </template>
 
@@ -58,7 +61,7 @@ export default {
 
 <style scoped>
 .point_container {
-  margin: 12vh 3vh 3vh 3vh;
+  margin: 13vh 3vh 3vh 3vh;
 }
 
 .point_border_left {
