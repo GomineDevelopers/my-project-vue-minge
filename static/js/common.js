@@ -1,6 +1,6 @@
 const commonTools = {};
 
-commonTools.g_restUrl = 'http://icampaign.com.cn/customers/minge/backend/app/index.php';
+commonTools.g_restUrl = 'http://icampaign.com.cn/customers/minge/ming/app/index.php';
 
 commonTools.formatDate = function (date, showDetail) {
   var isShow = showDetail || false;
@@ -29,4 +29,6 @@ commonTools.formatHour = function (date) {
 }
 
 
-export {commonTools}
+export {
+  commonTools
+}
