@@ -1,7 +1,7 @@
 <template>
   <div class="NCD_container" v-if="noteDetailData">
     <div class="NCD_topContainer">
-      <div class="edit " v-if="noteDetailData.is_mynote == 1 && noteDetailData.isbook ==  1"><span class="editbutton" @click="goNoteEdit"> <i
+      <div class="edit " v-if="noteDetailData.is_mynote == 1 && noteDetailData.is_book == 1"><span class="editbutton" @click="goNoteEdit"> <i
         class="el-icon-edit"></i>编辑 </span></div>
       <div class="title status-private"><span>《<span class="title" v-text="noteDetailData.title"></span>》</span>
         <div class="c1" v-show="noteDetailData.is_private == 1"></div>
