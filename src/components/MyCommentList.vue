@@ -21,7 +21,7 @@
                     <span class="comment-userName" v-text="item.realname"></span>
                   </el-col>
                   <el-col :span="2">
-                    <span class="comment-icon" v-if="commentTypeId==0">
+                    <span class="comment-icon" v-if="commentTypeId==0 && is_member">
                       <i class="el-icon-star-on" v-show="item.status" @click="collect(item.id)"></i>
                       <i class="el-icon-star-off" v-show="!item.status" @click="collect(item.id)"></i>
                     </span>
@@ -48,8 +48,8 @@
                         <span class="comment-time">{{$commonTools.formatDate(item.create_time)}}</span>
                       </el-col>
                       <el-col :span="5">
-                    <span class="comment-rep" @click="reply(4,item.id,item.realname)"><i
-                      class="el-icon-edit-outline"></i>&nbsp;回复</span>
+                        <span class="comment-rep" @click="reply(4,item.id,item.realname)" v-if="is_member"><i
+                          class="el-icon-edit-outline"></i>&nbsp;回复</span>
                       </el-col>
                     </el-row>
                   </el-col>
@@ -59,7 +59,7 @@
           </div>
         </div>
       </scroller>
-      <div class="reply-box" @click="reply(3)">
+      <div class="reply-box" @click="reply(3)" v-if="is_member">
         <el-row class="reply-box-row">
           <el-col :span="19">
             <el-input size="small" placeholder="请输入您的留言内容~" clearable></el-input>
@@ -160,16 +160,39 @@ export default {
       comment: '',
       commentReply: '',
       commentTypeId: 0,
-      changeUrlName: ''
+      changeUrlName: '',
+      is_member: false
     }
   },
   watch: {
     $route: 'updateComment'
   },
   created() {
-    this.updateComment()
+    this.updateComment();
+    this.isMember();
   },
   methods: {
+    isMember:function(){
+      let vm = this;
+      vm.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: "8",
+          c: "entry",
+          p: "user",
+          do: "shop",
+          m: "ewei_shop",
+          ac:'is_leather'
+        }
+      })
+        .then(function (response){
+          if(response.data.result.is_leather == 1){
+            vm.is_member = true;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
     infiniteComment(done) {
       let vm = this
       if (!vm.isLast) {
