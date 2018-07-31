@@ -1,6 +1,6 @@
 <template>
   <div class="center_no_bg">
-    <div class="header-bg-seprated center-title">我的感想</div>
+    <div class="header-bg-seprated center-title">我的图片</div>
     <div class="content-wrapper" >
     <el-button type="text" class="manage" @click="openDeleteMode" v-show="!isDeleteMode">
       <i class="el-icon-edit-outline"></i>批量管理

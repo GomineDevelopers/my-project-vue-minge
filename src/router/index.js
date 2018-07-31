@@ -7,6 +7,8 @@ import News from '@/pages/News'
 import Introduction from '@/pages/Introduction'
 //最新发布
 import Announce from '@/pages/Announce'
+//添加会议
+import AddMeeting from '@/pages/AddMeeting'
 //社会服务
 import SocialService from '@/pages/SocialService'
 //统战工作
@@ -132,6 +134,11 @@ export default new Router({
       path: '/announce',
       name: 'Announce',
       component: Announce
+    },
+    {
+      path: '/addmeeting',
+      name: 'AddMeeting',
+      component: AddMeeting
     },
     {
       path: '/socialService',

@@ -584,6 +584,17 @@
   color: #bfbfbf;
 }
 
+.addmeeting-wrap .el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+/* 日期选择器时间 */
+
+.el-time-panel {
+  left: -20px;
+}
+
 .demo-dynamic {
   width: 100%;
 }
