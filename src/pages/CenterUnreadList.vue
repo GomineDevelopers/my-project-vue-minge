@@ -1,6 +1,6 @@
 <template>
   <div class="center_no_bg">
-    <vue-headful title="未读列表"/>
+    <vue-headful :title="titleName"/>
     <div class="header-bg-seprated"></div>
     <div class="content-wrapper">
     <div class="Un_container">
@@ -74,7 +74,8 @@ export default {
       inviteId: '',
       dialogVisible: false,
       quickDialogVisible: false,
-      quickApply: {}
+      quickApply: {},
+      titleName:''
     }
   },
   created() {
@@ -96,7 +97,21 @@ export default {
           }
         })
         .then(function(response) {
-          vm.unreadList = response.data.result
+          switch (vm.$route.params.type) {
+            case 1:
+              vm.titleName = "入党申请";
+              break;
+            case 2:
+              vm.titleName = "提案列表";
+              break;
+            case 3:
+              vm.titleName = "读书邀请";
+              break;
+            case 4:
+              vm.titleName = "快速验证";
+              break;
+          }
+          vm.unreadList = response.data.result;
         })
         .catch(function(error) {
           console.info(error)

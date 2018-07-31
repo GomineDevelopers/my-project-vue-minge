@@ -1,6 +1,6 @@
 <template>
   <div class="center_home_bg ">
-    <vue-headful title="我的民革"/>
+    <vue-headful title="个人中心"/>
     <el-row class="mt-10">
       <el-col :span="20" :offset="2" class="title-cover">
         <span class="title">我的提醒</span>
