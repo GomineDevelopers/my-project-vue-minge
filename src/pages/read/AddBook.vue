@@ -41,7 +41,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24">
-            <el-input v-model.trim="bookName" size="small" clearable></el-input>
+            <el-input v-model.trim="bookName" size="small" maxlength="40" clearable></el-input>
           </el-col>
         </el-row>
       </div>
@@ -52,7 +52,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24">
-            <el-input v-model.trim="bookPublisher" size="small" clearable></el-input>
+            <el-input v-model.trim="bookPublisher" size="small" maxlength="20" clearable></el-input>
           </el-col>
         </el-row>
       </div>
@@ -63,7 +63,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24">
-            <el-input v-model.trim="writer" size="small" clearable></el-input>
+            <el-input v-model.trim="writer" size="small" maxlength="20" clearable></el-input>
           </el-col>
         </el-row>
       </div>
@@ -74,7 +74,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="24">
-            <el-input v-model.trim="translators" size="small" clearable></el-input>
+            <el-input v-model.trim="translators" size="small" maxlength="20" clearable></el-input>
           </el-col>
         </el-row>
       </div>
@@ -97,7 +97,7 @@
         </el-row>
         <el-row class="item-content">
           <el-col :span="20">
-            <el-input v-model.trim="totalPage" type="number" size="small" clearable @focus="setScrollHeight"></el-input>
+            <el-input v-model.trim="totalPage" type="number" size="small" maxlength="8" clearable @focus="setScrollHeight"></el-input>
           </el-col>
           <el-col :span="4"><label>(页)</label></el-col>
         </el-row>
