@@ -23,7 +23,9 @@
               <div class="c3" v-else-if="item.status == 4">已过期</div>
             </div>
             <div class="btn-row">
-              <span class="detail" @click="meetingDetail(item.id)"><i class="el-icon-view"></i>详情</span>
+              <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
+              &nbsp;&nbsp;
+              <a :href="item.address" target="view_window" v-if="item.status == 1">参加会议</a>
             </div>
           </div>
         </div>
@@ -38,8 +40,16 @@
         <el-button type="primary" @click="changeStatus(dialogContent.id,1)">参 加</el-button>
       </span>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 1">
-        <el-button type="primary" @click="changeStatus(dialogContent.id,3)">签到</el-button>
+        <el-button type="primary" @click="changeStatus(dialogContent.id,3)">签 到</el-button>
       </span>
+    </el-dialog>
+
+    <el-dialog title="参会人员" :visible.sync="dialogVisibleMembers" width="90%" :modal-append-to-body='false'>
+      <el-table  :data="detailMemberList" border style="width: 100%;text-align: left" max-height="350">
+        <el-table-column prop="realname" label="姓名"></el-table-column>
+        <el-table-column prop="update_time" label="时间" width="80"></el-table-column>
+        <el-table-column prop="status" label="状态" width="60"></el-table-column>
+      </el-table>
     </el-dialog>
   </div>
 </template>
@@ -53,8 +63,10 @@
           listData: [],
           curPage: 1,
           dialogVisible: false,
+          dialogVisibleMembers:false,
           isManager:false,
-          dialogContent:''
+          dialogContent:'',
+          detailMemberList:[]
         }
       },
       created(){
@@ -107,6 +119,12 @@
               if (response.data.result) {
                 for (var i = 0; i < response.data.result.list.length; i++) {
                   vm.listData.push(response.data.result.list[i]);
+                  vm.listData.forEach(function (ele,index,arr) {
+                    let str = ele.address.substring(0,7);
+                    if(str != 'http://'){
+                      ele.address = 'http://' + ele.address;
+                    }
+                  })
                 }
               }
               if (response.data.result.list && response.data.result.list.length == 10) {
@@ -158,8 +176,46 @@
             })
 
         },
-        meetingDetail:function(){
-          alert('跳转详情页');
+        meetingDetail:function(id){
+          let vm = this;
+          this.axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: '8',
+              c: 'entry',
+              p: 'mq',
+              do: 'shop',
+              m: 'ewei_shop',
+              ac:'meeting_detail',
+              id:id
+            }
+          })
+            .then(function(response) {
+              vm.dialogVisibleMembers = true;
+              response.data.result.forEach(function (ele,value,arr) {
+                if(ele.status == 0){
+                  ele.status = "未处理";
+                }else if(ele.status == 1){
+                  ele.status = "参加";
+                }else if(ele.status == 2){
+                  ele.status = "拒绝";
+                }else if(ele.status == 3){
+                  ele.status = "已签到";
+                }else if(ele.status == 4){
+                  ele.status = "已过期";
+                }
+
+                if(ele.update_time == null || ele.update_time == ''){
+                  ele.update_time = '无';
+                }else{
+                  ele.update_time = vm.$commonTools.formatHour(ele.update_time);
+                }
+              })
+              vm.detailMemberList = response.data.result;
+            })
+            .catch(function(error) {
+              console.log(error)
+            })
+
         },
         addMeeting: function() {
           this.$router.push({ name: 'AddMeeting' })
@@ -192,12 +248,6 @@
   .proposal-cover .proposal-list .row {
     width: 88%;
     margin: auto;
-  }
-
-  .proposal-cover .proposal-list .row .note {
-    text-align: left;
-    color: #687177;
-    font-size: 14px;
   }
 
   .proposal-cover .proposal-list .row .block {
@@ -234,6 +284,7 @@
     font-size: 14px;
     height: 30px;
     line-height: 30px;
+    margin-right: 10px;
   }
 
   .proposal-cover .bottom-btn {

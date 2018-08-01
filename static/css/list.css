@@ -707,3 +707,8 @@ input {
 .news-detail-top-article img {
   max-width: 100% !important;
 }
+
+/*el表格*/
+.el-dialog__body{
+  padding: 10px 20px 30px 20px;
+}
