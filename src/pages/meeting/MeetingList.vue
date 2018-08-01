@@ -31,7 +31,7 @@
     <el-dialog title="会议主题" :visible.sync="dialogVisible" width="80%" :modal-append-to-body='false'>
       <div class="dialog_content">{{dialogContent.theme}}</div>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 0">
-        <el-button @click="changeStatus(dialogContent.id,0)">拒 绝</el-button>
+        <el-button @click="changeStatus(dialogContent.id,2)">拒 绝</el-button>
         <el-button type="primary" @click="changeStatus(dialogContent.id,1)">参 加</el-button>
       </span>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 1">
