@@ -537,14 +537,20 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    },{
+    }, {
       path: '/meeting/addmeeting',
       name: 'AddMeeting',
-      component: AddMeeting
-    },{
+      component: AddMeeting,
+      meta: {
+        requiresAuth: true
+      }
+    }, {
       path: '/meeting/meetinglist',
       name: 'MeetingList',
-      component: MeetingList
+      component: MeetingList,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
