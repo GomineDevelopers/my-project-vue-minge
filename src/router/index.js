@@ -7,8 +7,6 @@ import News from '@/pages/News'
 import Introduction from '@/pages/Introduction'
 //最新发布
 import Announce from '@/pages/Announce'
-//添加会议
-import AddMeeting from '@/pages/AddMeeting'
 //社会服务
 import SocialService from '@/pages/SocialService'
 //统战工作
@@ -116,6 +114,10 @@ import ApplicationPartyTeam from '@/pages/application/partyteam'
 import ApplicationFamily from '@/pages/application/family'
 import ApplicationRelationship from '@/pages/application/relationship'
 
+//会议
+import AddMeeting from '@/pages/meeting/AddMeeting'
+import MeetingList from '@/pages/meeting/MeetingList'
+
 Vue.use(Router)
 
 export default new Router({
@@ -134,11 +136,6 @@ export default new Router({
       path: '/announce',
       name: 'Announce',
       component: Announce
-    },
-    {
-      path: '/addmeeting',
-      name: 'AddMeeting',
-      component: AddMeeting
     },
     {
       path: '/socialService',
@@ -540,6 +537,14 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
+    },{
+      path: '/meeting/addmeeting',
+      name: 'AddMeeting',
+      component: AddMeeting
+    },{
+      path: '/meeting/meetinglist',
+      name: 'MeetingList',
+      component: MeetingList
     }
   ]
 })
