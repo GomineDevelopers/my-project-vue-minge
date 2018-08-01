@@ -218,10 +218,6 @@
   }
 
   .proposal-cover .proposal-list .row .block .content {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
     line-height: 25px;
     padding: 5px 60px 5px 8px;
   }
