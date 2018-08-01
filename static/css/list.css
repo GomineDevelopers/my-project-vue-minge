@@ -672,3 +672,33 @@ button {
 input {
   line-height: normal !important;
 }
+
+/* 发起会议样式 */
+
+.addmeeting-wrap .el-picker-panel {
+  left: 8% !important;
+}
+
+.addmeeting-wrap .outline-wrapper .el-textarea__inner {
+  border: 1px solid #cccccc;
+  background-color: #f5fafd;
+}
+
+.addmeeting-wrap .outline-wrapper .el-input__inner {
+  background-color: #f5fafd;
+}
+
+.addmeeting-wrap .el-textarea__inner {
+  border: 1px solid #cccccc;
+}
+
+/* 添加作品 */
+
+.add-works.outline-wrapper .el-textarea__inner {
+  border: 1px solid #cccccc;
+  background-color: #f5fafd;
+}
+
+.add-works .outline-wrapper .el-input__inner {
+  background-color: #f5fafd;
+}
