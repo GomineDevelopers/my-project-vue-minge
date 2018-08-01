@@ -1,5 +1,5 @@
 <template>
-  <div class="center_home_bg ">
+  <div class="center_home_bg add-works">
     <div class="center-title" v-text="defautTitle">添加感想</div>
     <div class="outline-wrapper">
     <div class="addworks-wrap">
@@ -188,12 +188,4 @@ export default {
   padding-right: 4px;
 }
 </style>
-<style>
-.outline-wrapper .el-textarea__inner {
-  border: 1px solid #cccccc;
-  background-color: #f5fafd;
-}
-.outline-wrapper .el-input__inner {
-  background-color: #f5fafd;
-}
-</style>
+
