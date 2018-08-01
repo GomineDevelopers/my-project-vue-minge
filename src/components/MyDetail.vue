@@ -274,10 +274,6 @@
     padding: 0 5px;
   }
 
-  .news-detail-top-article img {
-    max-width: 100% !important;
-  }
-
   .news-detail-bottom {
     padding: 20px 20px 0 20px;
   }
