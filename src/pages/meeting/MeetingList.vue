@@ -6,10 +6,10 @@
         <div style="height: 44px;"></div>
         <div class="row status"
              :class="{'status-uncheck':item.status == 0  , 'status-join':item.status == 1,'status-refuse':item.status == 2,'status-success':item.status == 3,'status-overdue':item.status == 4 }"
-             @click="goDetail(item)" v-for="(item,index) in listData" :key="index">
+             v-for="(item,index) in listData" :key="index">
           <div class="block">
             <div class="title">会议{{index+1}}</div>
-            <div class="content">
+            <div class="content" @click="goDetail(item)">
               <div class="contentDiv">会议主题：{{item.theme}}</div>
               <div class="contentDiv">时间：{{$commonTools.formatDate(item.date,1)}}</div>
               <div class="contentDiv">地点：{{item.address}}</div>
@@ -21,6 +21,9 @@
               <div class="c3" v-else-if="item.status == 2">拒绝</div>
               <div class="c3" v-else-if="item.status == 3">已签到</div>
               <div class="c3" v-else-if="item.status == 4">已过期</div>
+            </div>
+            <div class="btn-row">
+              <span class="detail" @click="meetingDetail(item.id)"><i class="el-icon-view"></i>详情</span>
             </div>
           </div>
         </div>
@@ -143,10 +146,10 @@
               if(response.data.status == 200){
                 vm.dialogVisible = false;
                 vm.$nextTick(function() {
-                  vm.listData = []
-                  vm.curPage = 1
-                  vm.isLast = false
-                  vm.$refs.scroller.finishInfinite(false)
+                  vm.listData = [];
+                  vm.curPage = 1;
+                  vm.isLast = false;
+                  vm.$refs.scroller.finishInfinite(false);
                 })
               }
             })
@@ -154,6 +157,9 @@
               console.log(error)
             })
 
+        },
+        meetingDetail:function(){
+          alert('跳转详情页');
         },
         addMeeting: function() {
           this.$router.push({ name: 'AddMeeting' })
@@ -180,7 +186,7 @@
   }
 
   .proposal-cover .proposal-full-list {
-    height: 100vh !important;
+    height: 96vh !important;
   }
 
   .proposal-cover .proposal-list .row {
@@ -220,6 +226,14 @@
   .proposal-cover .proposal-list .row .block .content {
     line-height: 25px;
     padding: 5px 60px 5px 8px;
+  }
+
+  .proposal-cover .proposal-list .row .block .btn-row {
+    text-align: right;
+    color: #2192e0;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
   }
 
   .proposal-cover .bottom-btn {
