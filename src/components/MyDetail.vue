@@ -28,7 +28,8 @@
         <el-row>
           <span class="news-detail-bottom-span-icon1"><i class="el-icon-view"></i>&nbsp;<span
             v-text="click_count"></span></span>
-          <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member&&is_showCommon"><i class="el-icon-edit-outline"></i>&nbsp;留言</span>
+          <span class="news-detail-bottom-span-icon2" @click="goComment(3)" v-if="is_member&&is_showCommon"><i
+            class="el-icon-edit-outline"></i>&nbsp;留言</span>
         </el-row>
       </div>
       <div v-if="common_num>0&&is_showCommon" class="news-detail-margin-bottom">
@@ -58,12 +59,13 @@
                     <div class="news-detail-bottom-content"><span v-text="item.content"></span></div>
                   </el-col>
                 </el-row>
-                <el-row >
+                <el-row>
                   <el-col :span="19">
                     <span class="news-detail-bottom-time" v-text="item.create_time"></span>
                   </el-col>
                   <el-col :span="5">
-                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.realname)" v-if="is_member"><i
+                    <span class="news-detail-bottom-time" @click="goComment(4,item.id,item.realname)"
+                          v-if="is_member"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
@@ -98,8 +100,8 @@
         click_count: 0,
         common_list: [],
         common_num: 0,
-        is_member:false,
-        is_showCommon:true
+        is_member: false,
+        is_showCommon: true
       }
     },
     computed: {
@@ -119,7 +121,7 @@
       this.getDetailData();
     },
     methods: {
-      isMember:function(){
+      isMember: function () {
         let vm = this;
         vm.axios(vm.$commonTools.g_restUrl, {
           params: {
@@ -128,11 +130,11 @@
             p: "user",
             do: "shop",
             m: "ewei_shop",
-            ac:'is_leather'
+            ac: 'is_leather'
           }
         })
-          .then(function (response){
-            if(response.data.result.is_leather == 1){
+          .then(function (response) {
+            if (response.data.result.is_leather == 1) {
               vm.is_member = true;
             }
           })
@@ -178,8 +180,8 @@
             vm.click_count = response.data.result.data.click;
             vm.common_list = response.data.result.common;
             vm.common_num = response.data.result.total;
-            if(response.data.result.data.ccateid == 37 || response.data.result.data.ccateid == 40 ||
-              response.data.result.data.ccateid == 56 ||response.data.result.data.ccateid == 59){
+            if (response.data.result.data.ccateid == 37 || response.data.result.data.ccateid == 40 ||
+              response.data.result.data.ccateid == 56 || response.data.result.data.ccateid == 59) {
               vm.is_showCommon = false;
             }
 
@@ -272,6 +274,10 @@
     padding: 0 5px;
   }
 
+  .news-detail-top-article img {
+    max-width: 100% !important;
+  }
+
   .news-detail-bottom {
     padding: 20px 20px 0 20px;
   }
@@ -334,7 +340,7 @@
   .news-detail-bottom-content {
     font-size: 14px;
     padding: 5px 0;
-    word-wrap:break-word;
+    word-wrap: break-word;
     text-align: justify;
   }
 
