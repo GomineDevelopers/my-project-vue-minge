@@ -25,7 +25,7 @@
             <div class="btn-row">
               <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
               &nbsp;&nbsp;
-              <a :href="item.address" target="view_window" v-if="item.status == 1">参加会议</a>
+              <a :href="item.address" target="view_window" v-if="item.status == 1 || item.status == 3">参加会议</a>
             </div>
           </div>
         </div>
@@ -119,12 +119,6 @@
               if (response.data.result) {
                 for (var i = 0; i < response.data.result.list.length; i++) {
                   vm.listData.push(response.data.result.list[i]);
-                  vm.listData.forEach(function (ele,index,arr) {
-                    let str = ele.address.substring(0,7);
-                    if(str != 'http://'){
-                      ele.address = 'http://' + ele.address;
-                    }
-                  })
                 }
               }
               if (response.data.result.list && response.data.result.list.length == 10) {
