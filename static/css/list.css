@@ -702,3 +702,8 @@ input {
 .add-works .outline-wrapper .el-input__inner {
   background-color: #f5fafd;
 }
+
+/*新闻详情里 图片*/
+.news-detail-top-article img {
+  max-width: 100% !important;
+}

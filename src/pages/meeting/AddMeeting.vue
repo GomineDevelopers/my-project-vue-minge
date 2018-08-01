@@ -32,7 +32,7 @@
                         v-model="meetingTime"
                         size="medium"
                         type="datetime"
-                        value-format="yyyy-MM-dd hh:mm"
+                        value-format="yyyy-MM-dd hh:mm:ss"
                         :picker-options="pickerOptions1"
                         placeholder="选择日期时间">
                       </el-date-picker>
@@ -105,7 +105,7 @@ export default {
     worksValidate() {
       let vm = this
       let msg = ''
-      if (vm.selectedGroup == null || vm.selectedGroup == '') {
+      if (vm.selectedGroup === null || vm.selectedGroup === '') {
         msg = '未选择参会人员'
       } else if (!vm.meetingTime) {
         msg = '未选择会议时间'
@@ -242,5 +242,4 @@ export default {
   background-color: #f5fafd;
 }
 </style>
-<style>
-</style>
+
