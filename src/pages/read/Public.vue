@@ -135,7 +135,7 @@ export default {
   position: absolute;
   right: 0vh;
   z-index: 998;
-  top: 79vh;
+  top: 85vh;
 }
 
 .click-button img {

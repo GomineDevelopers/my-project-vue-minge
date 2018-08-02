@@ -168,30 +168,31 @@ export default {
     $route: 'updateComment'
   },
   created() {
-    this.updateComment();
-    this.isMember();
+    this.updateComment()
+    this.isMember()
   },
   methods: {
-    isMember:function(){
-      let vm = this;
-      vm.axios(vm.$commonTools.g_restUrl, {
-        params: {
-          i: "8",
-          c: "entry",
-          p: "user",
-          do: "shop",
-          m: "ewei_shop",
-          ac:'is_leather'
-        }
-      })
-        .then(function (response){
-          if(response.data.result.is_leather == 1){
-            vm.is_member = true;
+    isMember: function() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
+          params: {
+            i: '8',
+            c: 'entry',
+            p: 'user',
+            do: 'shop',
+            m: 'ewei_shop',
+            ac: 'is_leather'
           }
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+        .then(function(response) {
+          if (response.data.result.is_leather == 1) {
+            vm.is_member = true
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
     },
     infiniteComment(done) {
       let vm = this
@@ -489,7 +490,7 @@ export default {
 .comment-time,
 .comment-rep {
   font-size: 12px;
-  color: #cccccc;
+  color: #8a98a5;
 }
 .comment-rep {
   float: right;
