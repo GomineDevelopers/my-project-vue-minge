@@ -9,7 +9,7 @@
       </div>
       <div class="chapter" v-text="noteDetailData.chapter"></div>
       <div class="content" v-if="noteDetailData.img != ''"><img :src="noteDetailData.img"/></div>
-      <div class="content" v-text="noteDetailData.content"></div>
+      <div class="text-content" v-text="noteDetailData.content"></div>
     </div>
     <div class="NCD_bottomContainer" v-show="noteDetailData.is_private == 0">
       <el-row>
@@ -27,12 +27,12 @@
                 <span class="userName">{{item.realname}}</span>
                 <div class="commentContent">{{item.content}}</div>
                 <el-row>
-                  <el-col :span="20">
+                  <el-col :span="19">
                     <span
                       class="NCD_bottomContainer_commentArea_span">{{$commonTools.formatHour(item.create_time)}}</span>
                   </el-col>
-                  <el-col :span="4">
-                    <span class="NCD_bottomContainer_commentArea_span" @click="goComment(4,item.id,item.realname)"><i
+                  <el-col :span="5">
+                    <span class="NCD_bottomContainer_commentArea_span last-span-style " @click="goComment(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
@@ -53,23 +53,24 @@
 </template>
 
 <script>
-  export default {
-    name: 'note-detail',
-    data() {
-      return {
-        noteDetailData: ''
-      }
-    },
-    mounted() {
-      this.getNoteCenterDetailData();
-    },
-    watch: {
-      "$route": "getNoteCenterDetailData"
-    },
-    methods: {
-      getNoteCenterDetailData() {
-        let vm = this
-        vm.axios(vm.$commonTools.g_restUrl, {
+export default {
+  name: 'note-detail',
+  data() {
+    return {
+      noteDetailData: ''
+    }
+  },
+  mounted() {
+    this.getNoteCenterDetailData()
+  },
+  watch: {
+    $route: 'getNoteCenterDetailData'
+  },
+  methods: {
+    getNoteCenterDetailData() {
+      let vm = this
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -78,191 +79,202 @@
             m: 'ewei_shop',
             ac: 'detail_experience',
             id: vm.$route.params.noteId,
-            type: 1,
+            type: 1
           }
         })
-          .then(function (response) {
-            if (response.data.status == '200') {
-              vm.noteDetailData = response.data.result;
-            }
-            else if (response.data.status == '201') {
-              vm.noteDetailData = null;
-              vm.$message({
-                type: 'error',
-                message: '您没有权限访问'
-              });
-            }
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-      },
-      goNoteEdit() {
-        this.$router.push({name: 'AddNote', query: {noteEditId: this.$route.params.noteId}})
-      },
-      goComment: function (typeId, id, name) {
-        let vm = this;
-        let tmpId = id || vm.$route.params.noteId
-        if (typeId != 4) {
-          vm.$router.push({name: 'NoteComment', params: {id: tmpId, typeId: typeId}});
-        }
-        else {
-          vm.$router.push({
-            name: 'NoteComment',
-            params: {id: tmpId, typeId: typeId},
-            query: {aId: vm.$route.params.noteId, name: name}
-          });
-        }
+        .then(function(response) {
+          if (response.data.status == '200') {
+            vm.noteDetailData = response.data.result
+          } else if (response.data.status == '201') {
+            vm.noteDetailData = null
+            vm.$message({
+              type: 'error',
+              message: '您没有权限访问'
+            })
+          }
+        })
+        .catch(function(error) {
+          console.log(error)
+        })
+    },
+    goNoteEdit() {
+      this.$router.push({
+        name: 'AddNote',
+        query: { noteEditId: this.$route.params.noteId }
+      })
+    },
+    goComment: function(typeId, id, name) {
+      let vm = this
+      let tmpId = id || vm.$route.params.noteId
+      if (typeId != 4) {
+        vm.$router.push({
+          name: 'NoteComment',
+          params: { id: tmpId, typeId: typeId }
+        })
+      } else {
+        vm.$router.push({
+          name: 'NoteComment',
+          params: { id: tmpId, typeId: typeId },
+          query: { aId: vm.$route.params.noteId, name: name }
+        })
       }
     }
   }
+}
 </script>
 
 <style scoped>
-  .NCD_container {
-    margin: 3vh;
+.NCD_container {
+  margin: 3vh;
+}
 
-  }
+.NCD_topContainer {
+  position: relative;
+  background-color: white;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+  border-top: 3px solid #419ddc;
+}
 
-  .NCD_topContainer {
-    position: relative;
-    background-color: white;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-    border-top: 3px solid #419ddc;
+.title {
+  color: #457094;
+  line-height: 1.6rem;
+  margin-top: 2vh;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
 
-  }
+.edit {
+  font-size: 0.7rem;
+  height: 1rem;
+}
 
-  .title {
-    color: #457094;
-    line-height: 1.6rem;
-    margin-top: 2vh;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
+.edit .editbutton {
+  position: absolute;
+  font-size: 0.85rem;
+  right: 1vh;
+  top: 1vh;
+  padding: 3px 6px;
+  background-color: #3a87d6;
+  border-radius: 3px;
+  color: white;
+}
 
-  .edit {
-    font-size: 0.7rem;
-    height: 1rem;
-  }
+.chapter {
+  color: #457094;
+  padding: 0 3vh 2vh 3vh;
+  word-wrap: break-word;
+  word-break: break-all;
+}
 
-  .edit .editbutton {
-    position: absolute;
-    font-size: 0.85rem;
-    right: 1vh;
-    top: 1vh;
-    padding: 3px 6px;
-    background-color: #3a87d6;
-    border-radius: 3px;
-    color: white;
-  }
+.content {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #333333;
+  padding: 0 3vh 2vh 3vh;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.text-content {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #333333;
+  padding: 2vh;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.content img {
+  max-width: 100%;
+  border: 1px solid #f5f7fa;
+  border-radius: 5px;
+}
 
-  .chapter {
-    color: #457094;
-    padding: 0 3vh 2vh 3vh;
-    word-wrap: break-word;
-    word-break: break-all;
-  }
+.NCD_bottomContainer {
+  margin-top: 3vh;
+}
 
-  .content {
-    text-align: left;
-    font-size: 0.85rem;
-    color: #333333;
-    padding: 0 3vh 2vh 3vh;
-    word-wrap: break-word;
-    word-break: break-all;
+.NCD_bottomContainer_commentArea {
+  clear: both;
+  border: 1px dashed #cccccc;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
+  background: #ffffff;
+}
 
-  }
+.NCD_bottomContainer_commentAreaDiv {
+  padding: 10px 0;
+}
 
-  .content img {
-    max-width: 100%;
-    border: 1px solid #f5f7fa;
-    border-radius: 5px;
-  }
+.NCD_bottomContainer_commentAreaDiv_bt {
+  border-top: 1px solid #cccccc;
+}
 
-  .NCD_bottomContainer {
-    margin-top: 3vh;
-  }
+.news-detail-more {
+  padding: 10px 0 0 0;
+}
 
-  .NCD_bottomContainer_commentArea {
-    clear: both;
-    border: 1px dashed #cccccc;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: left;
-    background: #ffffff;
-  }
+.avatar img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+}
 
-  .NCD_bottomContainer_commentAreaDiv {
-    padding: 10px 0;
-  }
+.userName {
+  font-size: 12px;
+}
 
-  .NCD_bottomContainer_commentAreaDiv_bt {
-    border-top: 1px solid #cccccc;
-  }
+.commentContent {
+  font-size: 14px;
+  padding: 5px 0;
+}
 
-  .news-detail-more {
-    padding: 10px 0 0 0;
-  }
+.NCD_bottomContainer-span-icon1 {
+  float: left;
+  padding-bottom: 10px;
+  color: #999999;
+  font-size: 14px;
+}
 
-  .avatar img {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-  }
+.NCD_bottomContainer-span-icon2 {
+  float: right;
+  padding-bottom: 10px;
+  color: #0064ba;
+  font-size: 14px;
+}
 
-  .userName {
-    font-size: 12px;
-  }
+.NCD_bottomContainer_commentArea_span {
+  font-size: 12px;
+  color: #8a98a5;
+}
+.last-span-style {
+  float: right;
+}
 
-  .commentContent {
-    font-size: 14px;
-    padding: 5px 0;
-  }
+.title .c1 {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  position: absolute;
+  top: -6px;
+  left: -3px;
+  transform: rotate(-90deg) scale(0.9);
+}
 
-  .NCD_bottomContainer-span-icon1 {
-    float: left;
-    padding-bottom: 10px;
-    color: #999999;
-    font-size: 14px;
-  }
+.title .c3 {
+  top: 0px;
+  left: 4px;
+  color: white;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  z-index: 111;
+  font-size: 2vw;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
 
-  .NCD_bottomContainer-span-icon2 {
-    float: right;
-    padding-bottom: 10px;
-    color: #0064ba;
-    font-size: 14px;
-  }
-
-  .NCD_bottomContainer_commentArea_span {
-    font-size: 12px;
-    color: #cccccc;
-  }
-
-  .title .c1 {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    position: absolute;
-    top: -6px;
-    left: -3px;
-    transform: rotate(-90deg) scale(0.9);
-  }
-
-  .title .c3 {
-    top: 0px;
-    left: 4px;
-    color: white;
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    z-index: 111;
-    font-size: 2vw;
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
-
-  .status-private .c1 {
-    border-top: 50px solid #e6a23c;
-  }
+.status-private .c1 {
+  border-top: 50px solid #e6a23c;
+}
 </style>

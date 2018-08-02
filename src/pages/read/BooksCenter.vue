@@ -84,13 +84,16 @@ export default {
 
 .card .bookImg {
   margin: 1vh;
-  box-shadow: 0px 0px 20px 5px #e9e9e9;
-  border-radius: 5px;
 }
 
 .card .bookImg img {
   width: 100%;
   max-height: 15vh;
+  border: 1px solid #ccc;
+  margin: 1vh;
+  border-radius: 5%;
+  padding: 4%;
+  box-shadow: 0 0 20px 5px #e9e9e9;
 }
 
 .book-container {

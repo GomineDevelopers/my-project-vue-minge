@@ -30,8 +30,8 @@
       <div class="title" @click="goPoint">
         <i class=" iconfont icon-icon"></i>&nbsp;
         <span class="text">我的积分</span>
-        <span class="number"> {{score}}分</span>
-        <span class="arrow"> <i class="el-icon-arrow-right"></i> </span>
+        
+        <span class="arrow"><span class="number">{{score}}分</span> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
     <div class="row">
@@ -174,8 +174,8 @@ export default {
   background: white;
   padding: 5px 30px;
   text-align: left;
-  height: 4vh;
-  line-height: 4vh;
+  height: 5vh;
+  line-height: 5vh;
 }
 
 .title .text {
@@ -246,7 +246,7 @@ export default {
   z-index: 1000;
   right: 0%;
   margin-right: -12px;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .icon-icon-yxj-user {
