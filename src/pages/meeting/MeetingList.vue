@@ -169,8 +169,8 @@
                   vm.$refs.scroller.finishInfinite(false);
                 })
               }else if(response.data.status == 0){
-                vm.dialogVisible = true;
-                vm.$message({showClose: true,message: '该条消息已过期',type: 'error'});
+                vm.dialogVisible = false;
+                vm.$message({showClose: true,message: '该条消息已过期，请刷新页面重试',type: 'error'});
               }
             })
             .catch(function(error) {
