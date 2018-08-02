@@ -129,7 +129,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 12px;
-    margin-top: .6vh;
+    margin-top: 1vh;
     color: #999999;
   }
 </style>

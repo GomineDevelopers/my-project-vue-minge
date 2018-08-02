@@ -136,6 +136,8 @@
     color: #457094;
     line-height: 1.6rem;
     margin-top: 2vh;
+    font-size: 1.1rem;
+    font-weight: bold;
   }
 
   .edit {
@@ -172,8 +174,7 @@
   }
 
   .content img {
-    width: 100%;
-    height: 20vh;
+    max-width: 100%;
     border: 1px solid #f5f7fa;
     border-radius: 5px;
   }

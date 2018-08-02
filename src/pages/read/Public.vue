@@ -101,6 +101,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 14px
   }
 
   .tab-wrapper .tab-item {
@@ -129,11 +130,11 @@
   }
 
   .click-button {
-    width: 20vh;
+    width: 15vh;
     position: absolute;
     right: 0vh;
     z-index: 998;
-    top: 70vh;
+    top: 79vh;
   }
 
   .click-button img {

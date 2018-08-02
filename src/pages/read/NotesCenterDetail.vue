@@ -235,7 +235,7 @@
 
   .NCD_bottomContainer_commentArea_span {
     font-size: 12px;
-    color: #cccccc;
+    color: #8a98a5;
   }
 
   .title .c1 {
