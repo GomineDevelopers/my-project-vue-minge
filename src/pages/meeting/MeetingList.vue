@@ -25,7 +25,7 @@
             <div class="btn-row">
               <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
               &nbsp;&nbsp;
-              <a :href="item.address" target="view_window" v-if="item.status == 1 || item.status == 3">参加会议</a>
+              <a :href="item.address" target="view_window" v-if="(item.status == 1 || item.status == 3) && item.isUrl">参加会议</a>
             </div>
           </div>
         </div>
@@ -118,6 +118,11 @@
             .then(function(response) {
               if (response.data.result) {
                 for (var i = 0; i < response.data.result.list.length; i++) {
+                  if(response.data.result.list[i].address.substring(0,8) == 'https://' || response.data.result.list[i].address.substring(0,7) == 'http://'){
+                    response.data.result.list[i].isUrl = true;
+                  }else{
+                    response.data.result.list[i].isUrl = false;
+                  }
                   vm.listData.push(response.data.result.list[i]);
                 }
               }
