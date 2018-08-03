@@ -704,11 +704,13 @@ input {
 }
 
 /*新闻详情里 图片*/
+
 .news-detail-top-article img {
   max-width: 100% !important;
 }
 
 /*el表格*/
-.el-dialog__body{
+
+.el-dialog__body {
   padding: 10px 20px 30px 20px;
 }

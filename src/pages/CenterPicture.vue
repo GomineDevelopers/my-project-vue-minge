@@ -1,5 +1,5 @@
 <template>
-  <div class="center_no_bg">
+  <div class="center_no_bg center_home_bg">
     <div class="header-bg-seprated center-title">我的图片</div>
     <div class="content-wrapper" >
     <el-button type="text" class="manage" @click="openDeleteMode" v-show="!isDeleteMode">
@@ -12,6 +12,7 @@
     <el-button type="text" class="delete over-cover" v-show="isDeleteMode" @click="deletePicture">
       <i class="el-icon-delete"></i>删除
     </el-button>
+    &nbsp;&nbsp;
     <el-button type="text" class="manage over-cover" @click="closeDeleteMode" v-show="isDeleteMode">退出
     </el-button>
     <el-checkbox-group v-model="checkedPictures" @change="handleCheckedPicturesChange">
@@ -165,7 +166,7 @@ export default {
   z-index: 11;
 }
 .content-wrapper {
-  margin-top: 12vh;
+  margin-top: 14vh;
 }
 .cover {
   position: absolute;
