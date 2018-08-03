@@ -545,7 +545,7 @@ export default new Router({
         requiresAuth: true
       }
     }, {
-      path: 'meetinglist',
+      path: '/meetinglist',
       name: 'MeetingList',
       component: MeetingList,
       meta: {
