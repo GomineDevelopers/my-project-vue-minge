@@ -162,6 +162,11 @@ export default {
 </script>
 
 <style scoped>
+.center_no_bg {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 100vh !important;
+}
 .over-cover {
   z-index: 11;
 }
