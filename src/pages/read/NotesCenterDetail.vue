@@ -9,7 +9,7 @@
       </div>
       <div class="chapter" v-text="noteDetailData.chapter"></div>
       <div class="content" v-if="noteDetailData.img != ''"><img :src="noteDetailData.img"/></div>
-      <div class="content" v-text="noteDetailData.content"></div>
+      <div class="text-content" v-text="noteDetailData.content"></div>
     </div>
     <div class="NCD_bottomContainer" v-show="noteDetailData.is_private == 0">
       <el-row>
@@ -27,12 +27,12 @@
                 <span class="userName">{{item.realname}}</span>
                 <div class="commentContent">{{item.content}}</div>
                 <el-row>
-                  <el-col :span="20">
+                  <el-col :span="19">
                     <span
                       class="NCD_bottomContainer_commentArea_span">{{$commonTools.formatHour(item.create_time)}}</span>
                   </el-col>
-                  <el-col :span="4">
-                    <span class="NCD_bottomContainer_commentArea_span" @click="goComment(4,item.id,item.realname)"><i
+                  <el-col :span="5">
+                    <span class="NCD_bottomContainer_commentArea_span last-span-style" @click="goComment(4,item.id,item.realname)"><i
                       class="el-icon-edit-outline"></i>&nbsp;回复</span>
                   </el-col>
                 </el-row>
@@ -246,7 +246,9 @@ export default {
   font-size: 12px;
   color: #8a98a5;
 }
-
+.last-span-style {
+  float: right;
+}
 .title .c1 {
   width: 0;
   height: 0;
