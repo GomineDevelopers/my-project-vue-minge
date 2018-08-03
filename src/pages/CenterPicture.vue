@@ -12,7 +12,7 @@
     <el-button type="text" class="delete over-cover" v-show="isDeleteMode" @click="deletePicture">
       <i class="el-icon-delete"></i>删除
     </el-button>
-    &nbsp;&nbsp;
+   
     <el-button type="text" class="manage over-cover" @click="closeDeleteMode" v-show="isDeleteMode">退出
     </el-button>
     <el-checkbox-group v-model="checkedPictures" @change="handleCheckedPicturesChange">
@@ -166,7 +166,7 @@ export default {
   z-index: 11;
 }
 .content-wrapper {
-  margin-top: 14vh;
+  margin-top: 9vh;
 }
 .cover {
   position: absolute;
@@ -217,7 +217,7 @@ export default {
 .delete {
   position: absolute;
   top: 8vh;
-  right: 13%;
+  right: 16%;
 }
 
 .select-all {
