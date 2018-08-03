@@ -166,7 +166,7 @@ export default {
   z-index: 11;
 }
 .content-wrapper {
-  margin-top: 9vh;
+  margin-top: 8vh;
 }
 .cover {
   position: absolute;
@@ -197,6 +197,7 @@ export default {
 
 .img-cover .title {
   font-size: 14px;
+  margin-top: 1vh;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
