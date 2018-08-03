@@ -7,15 +7,7 @@
         <div class="tab-item" @click="handleClick('second')" :class="{active:activeItem==2}"><span>心得笔记</span></div>
         <div class="tab-item" @click="handleClick('third')" :class="{active:activeItem==3}"><span>约伴读书</span></div>
       </div>
-      <div class="click-button" 
-      @click="gobooklist" 
-      @mousedown="down" 
-      @touchstart="down"
-      @mousemove="move" 
-      @touchmove="move"
-      @mouseup="end"
-      @touchend="end"
-      id="moveDiv"><img src="../../../static/image/my-book-icon.png" alt="" srcset="">
+      <div class="click-button"  @click="gobooklist" ><img src="../../../static/image/my-book-icon.png" alt="" srcset="">
       </div>
     </div>
     <div class="router-view-wrapper">
@@ -29,18 +21,7 @@ export default {
   name: 'public',
   data() {
     return {
-      activeItem: 0,
-      flags: false,
-      position: {
-        x: 0,
-        y: 0
-      },
-      nx: '',
-      ny: '',
-      dx: '',
-      dy: '',
-      xPum: '',
-      yPum: ''
+      activeItem: 0
     }
   },
   mounted() {
@@ -82,70 +63,6 @@ export default {
     },
     gobooklist() {
       this.$router.push({ name: 'BookList' })
-    },
-    // 实现移动端拖拽
-    down() {
-      this.flags = true
-      var touch
-      if (event.touches) {
-        touch = event.touches[0]
-      } else {
-        touch = event
-      }
-      this.position.x = touch.clientX
-      this.position.y = touch.clientY
-      this.dx = moveDiv.offsetLeft
-      this.dy = moveDiv.offsetTop
-      console.log(touch.clientX, touch.clientY)
-    },
-    move() {
-      if (this.flags) {
-        var touch
-        if (event.touches) {
-          touch = event.touches[0]
-        } else {
-          touch = event
-        }
-        this.nx = touch.clientX - this.position.x
-        this.ny = touch.clientY - this.position.y
-        this.xPum = this.dx + this.nx
-        this.yPum = this.dy + this.ny
-        console.log(
-          document.documentElement.clientWidth,
-          document.documentElement.clientHeight
-        )
-        if (
-          this.xPum > -15 &&
-          this.xPum < document.documentElement.clientWidth - 80
-        ) {
-          moveDiv.style.left = this.xPum + 'px'
-          if (
-            this.yPum > 0 &&
-            this.yPum < document.documentElement.clientHeight - 80
-          ) {
-            moveDiv.style.top = this.yPum + 'px'
-          }
-        }
-
-        //阻止页面的滑动默认事件
-        document.addEventListener(
-          'touchstart',
-          function(event) {
-            // 判断默认行为是否可以被禁用
-            if (event.cancelable) {
-              // 判断默认行为是否已经被禁用
-              if (!event.defaultPrevented) {
-                event.preventDefault()
-              }
-            }
-          },
-          false
-        )
-      }
-    },
-    //鼠标释放时候的函数
-    end() {
-      this.flags = false
     }
   }
 }
@@ -216,16 +133,13 @@ export default {
 .click-button {
   width: 15vh;
   position: absolute;
-  right: 0vh;
+  right: 16vw;
   z-index: 998;
   top: 85vh;
 }
 
 .click-button img {
   width: 14vh;
-}
-* {
-  touch-action: none;
 }
 </style>
 
