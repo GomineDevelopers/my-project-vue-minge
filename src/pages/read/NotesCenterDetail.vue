@@ -141,6 +141,7 @@ export default {
   color: #457094;
   line-height: 1.6rem;
   margin-top: 2vh;
+  font-weight: bold;
 }
 
 .edit {
@@ -167,7 +168,7 @@ export default {
 }
 
 .content {
-  text-align: left;
+  text-align: center;
   font-size: 0.85rem;
   color: #333333;
   padding: 0 3vh 2vh 3vh;
