@@ -69,6 +69,7 @@ export default {
 
 .no-container img {
   width: 100%;
+  height: 100%;
   border-radius: 5px;
   margin-top: 1.5vh;
   box-shadow: 0px 0px 20px 5px #e9e9e9;
