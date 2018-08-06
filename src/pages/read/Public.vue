@@ -83,6 +83,7 @@ export default {
 
 .active span {
   color: #fff;
+  font-weight: bold;
 }
 
 .active ::before {
@@ -109,7 +110,6 @@ export default {
   line-height: 6vh;
   width: 33%;
   color: #c6daec;
-  font-weight: bold;
   font-size: 14px;
   justify-content: center;
 }

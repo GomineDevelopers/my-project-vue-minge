@@ -141,6 +141,7 @@ export default {
   color: #457094;
   line-height: 1.6rem;
   margin-top: 2vh;
+  font-size: 1.2rem;
   font-weight: bold;
 }
 

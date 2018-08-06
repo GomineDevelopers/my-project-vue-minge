@@ -44,145 +44,144 @@
 </template>
 
 <script>
-  export default {
-    name: "member-status",
-    data() {
-      return {
-        statusId: this.$route.params.statusId
-      }
-    },
-    watch: {
-      $route() {
-        this.statusId = this.$route.params.statusId
-      }
+export default {
+  name: 'member-status',
+  data() {
+    return {
+      statusId: this.$route.params.statusId
+    }
+  },
+  watch: {
+    $route() {
+      this.statusId = this.$route.params.statusId
     }
   }
+}
 </script>
 
 <style scoped>
-  .no-container {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-  }
+.no-container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  .no-container img {
-    width: 100%;
-    height: 20vh;
-    border-radius: 5px;
-    margin-top: 1.5vh;
-    box-shadow: 0px 0px 20px 5px #e9e9e9;
-  }
+.no-container img {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 1.5vh;
+  box-shadow: 0px 0px 20px 5px #e9e9e9;
+}
 
-  .no-container .text {
-    margin: 1vh auto;
-    text-align: justify;
-  }
+.no-container .text {
+  margin: 1vh auto;
+  text-align: justify;
+}
 
-  .icon {
-    font-size: 33px;
-    transform: rotate(90deg);
-    color: #a2b2bd;
-    margin: auto;
-  }
+.icon {
+  font-size: 33px;
+  transform: rotate(90deg);
+  color: #a2b2bd;
+  margin: auto;
+}
 
-  .step-cover {
-    position: relative;
-    border: 1px dashed #a2b2bd;
-    border-radius: 10px;
-    height: 16vh;
-    width: 100%;
-    margin-top: 2vh;
-  }
+.step-cover {
+  position: relative;
+  border: 1px dashed #a2b2bd;
+  border-radius: 10px;
+  height: 16vh;
+  width: 100%;
+  margin-top: 2vh;
+}
 
-  .step-cover .dot {
-    position: absolute;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    top: 50%;
-    margin-top: -8px;
-    margin-left: -8px;
-    z-index: 1;
-  }
+.step-cover .dot {
+  position: absolute;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  margin-top: -8px;
+  margin-left: -8px;
+  z-index: 1;
+}
 
-  .step-cover .active-dot {
-    margin-top: -11px;
-    margin-left: -11px;
-    width: 20px;
-    height: 20px;
-    background: white;
-    border: 1px solid #5ab7f5;
-  }
+.step-cover .active-dot {
+  margin-top: -11px;
+  margin-left: -11px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 1px solid #5ab7f5;
+}
 
-  .step-cover .dot1 {
-    left: 15%;
-  }
+.step-cover .dot1 {
+  left: 15%;
+}
 
-  .step-cover .dot2 {
-    left: 50%;
-  }
+.step-cover .dot2 {
+  left: 50%;
+}
 
-  .step-cover .dot3 {
-    left: 85%;
-  }
+.step-cover .dot3 {
+  left: 85%;
+}
 
-  .step-cover .line {
-    position: absolute;
-    width: 35%;
-    height: 6px;
-    top: 50%;
-    margin-top: -3px;
-  }
+.step-cover .line {
+  position: absolute;
+  width: 35%;
+  height: 6px;
+  top: 50%;
+  margin-top: -3px;
+}
 
-  .step-cover .line1 {
-    left: 15%;
-  }
+.step-cover .line1 {
+  left: 15%;
+}
 
-  .step-cover .line2 {
-    left: 50%;
-  }
+.step-cover .line2 {
+  left: 50%;
+}
 
-  .blue {
-    background: #5ab7f5;
-  }
+.blue {
+  background: #5ab7f5;
+}
 
-  .grey {
-    background: #d8d8d8;
-  }
+.grey {
+  background: #d8d8d8;
+}
 
-  .step-cover .top-text {
-    color: #628ba8;
-    font-size: 12px;
-    position: absolute;
-    top: 28%;
-  }
+.step-cover .top-text {
+  color: #628ba8;
+  font-size: 12px;
+  position: absolute;
+  top: 28%;
+}
 
-  .t1 {
-    left: 27%;
-  }
+.t1 {
+  left: 27%;
+}
 
-  .t2 {
-    left: 63%;
-  }
+.t2 {
+  left: 63%;
+}
 
-  .step-cover .bottom-text {
-    font-size: 12px;
-    position: absolute;
-    top: 65%;
-    margin-left: -24px;
-  }
+.step-cover .bottom-text {
+  font-size: 12px;
+  position: absolute;
+  top: 65%;
+  margin-left: -24px;
+}
 
-  .b1 {
-    left: 15%;
-  }
+.b1 {
+  left: 15%;
+}
 
-  .b2 {
-    left: 50%;
-  }
+.b2 {
+  left: 50%;
+}
 
-  .b3 {
-    left: 85%;
-  }
+.b3 {
+  left: 85%;
+}
 </style>
