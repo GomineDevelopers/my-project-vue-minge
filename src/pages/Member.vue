@@ -3,8 +3,8 @@
     <vue-headful title="党员风采"/>
     <div class="memberBg memberContainer" v-for="item in listData">
       <el-row class="memberRow">
-        <el-col :span="7" class="avatar"><img :src="item.thumb"></el-col>
-        <el-col :span="17">
+        <el-col :span="9" class="avatar"><img :src="item.thumb"></el-col>
+        <el-col :span="15">
           <div class="memberName" v-text="item.name"></div>
           <div class="memberDescription" v-html="item.description"></div>
         </el-col>
@@ -68,7 +68,7 @@
   .avatar{
     height: inherit;
     background-size: 100% 100%;
-    width: 80px;
+    width: 90px;
   }
 
   .avatar img {

@@ -1,9 +1,8 @@
 <template>
-  <div class="center_bg ">
+  <div class="center_bg-base ">
     <vue-headful title="我的民革"/>
-
+<div class="header header-bg-center">
     <el-row>
-      <div class="header">
       <el-col :span="24">
 
       <div class="logo">
@@ -15,10 +14,9 @@
         {{name}}
       </div>
       </el-col>
-      </div>
     </el-row>
-
-
+  </div>
+<div class="center_no_bg">
     <div class="row">
       <div class="title" @click="goHome">
         <i class=" iconfont icon-icon-yxj-user"></i>&nbsp;<span class="text">个人中心<span class="red-point"
@@ -66,6 +64,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -131,6 +130,12 @@ export default {
 </script>
 
 <style scoped>
+.center_bg-base {
+  background-size: 100% 100%;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+}
 .header {
   position: relative;
   width: 100%;
@@ -138,7 +143,6 @@ export default {
 }
 
 .logo {
-  background: white;
   top: 2vh;
   width: 80px;
   height: 80px;
@@ -152,7 +156,6 @@ export default {
 }
 @media screen and (max-width: 350px) {
   .logo {
-    background: white;
     top: 2vh;
     width: 60px;
     height: 60px;
@@ -161,13 +164,13 @@ export default {
   }
 }
 .header .name {
-  margin-top: -1vh;
-  line-height: 2vh;
+  line-height: 3vh;
   position: relative;
+  padding-bottom: 2vh;
 }
 
 .row {
-  padding-top: 0.8vh;
+  padding-top: 1.2vh;
 }
 
 .row .title {
