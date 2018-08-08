@@ -35,6 +35,7 @@
                         value-format="yyyy-MM-dd HH:mm:ss"
                         :picker-options="pickerOptions1"
                         placeholder="选择日期时间"
+                        align="center"
                         default-time="09:00:00">
                       </el-date-picker>
                     </el-col>
