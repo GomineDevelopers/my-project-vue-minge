@@ -1,35 +1,34 @@
 <template>
   <div class="center_home_bg add-works">
-    <div class="center-title" v-text="defautTitle">添加感想</div>
+    <div class="center-title" v-text="defautTitle"></div>
     <div class="outline-wrapper">
-    <div class="addworks-wrap">
-        <div class="item-wrapper">
-            <el-row class="item-label">
+      <div class="addworks-wrap">
+          <div class="item-wrapper">
+              <el-row class="item-label">
+                  <el-col :span="24">
+                      <span class="register-spanblock"><span class="register-necessary">*</span>标题</span>
+                  </el-col>
+              </el-row>
+              <el-row class="item-content">
+                  <el-col :span="24">
+                      <el-input v-model.trim="thoughtsTitle" placeholder="请输入感想标题"></el-input>
+                  </el-col>
+              </el-row>
+          </div>
+          <div class="item-wrapper">
+              <el-row class="item-label">
+                  <el-col :span="24">
+                      <span class="register-spanblock"><span class="register-necessary" >*</span>内容</span>
+                  </el-col>
+              </el-row>
+              <el-row class="item-content">
                 <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary">*</span>标题</span>
+                    <el-input v-model.trim="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
                 </el-col>
-            </el-row>
-            <el-row class="item-content">
-                    <el-col :span="24">
-                        <el-input v-model.trim="thoughtsTitle" placeholder="请输入感想标题"></el-input>
-                    </el-col>
-            </el-row>
+              </el-row>
+          </div>
         </div>
-        <div class="item-wrapper">
-            <el-row class="item-label">
-                <el-col :span="24">
-                    <span class="register-spanblock"><span class="register-necessary" >*</span>内容</span>
-                </el-col>
-            </el-row>
-            <el-row class="item-content">
-              <el-col :span="24"  class="aaa">
-                  <el-input v-model.trim="thoughtsContent" placeholder="请输入感想内容" type="textarea" :rows="14"></el-input>
-              </el-col>
-            </el-row>
-        </div>
-        </div>
-
-        </div>
+      </div>
         <div class="addworks-wrap">
         <div class="item-wrapper">
         <div class="submit-wrapper">

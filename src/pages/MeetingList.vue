@@ -23,6 +23,7 @@
               <div class="c3" v-else-if="item.status == 4">已过期</div>
             </div>
             <div class="btn-row">
+              <span @click="addSummary(item.id)" v-if="item.is_sponsor == 1">添加会议纪要</span>
               <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
               &nbsp;&nbsp;
               <a :href="item.address" target="view_window" v-if="(item.status == 1 || item.status == 3) && item.isUrl">参加会议</a>
@@ -36,7 +37,8 @@
     <el-dialog title="会议主题" :visible.sync="dialogVisible" width="80%" :modal-append-to-body='false'>
       <div class="dialog_content">{{dialogContent.theme}}</div>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 0">
-        <el-button @click="changeStatus(dialogContent.id,2)">拒 绝</el-button>
+        <!--<el-button @click="changeStatus(dialogContent.id,2)">拒 绝</el-button>-->
+        <el-button @click="refuse(dialogContent.id,2)">拒 绝</el-button>
         <el-button type="primary" @click="changeStatus(dialogContent.id,1)">参 加</el-button>
       </span>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 1">
@@ -154,8 +156,26 @@ export default {
         vm.dialogContent = item
       }
     },
-    changeStatus: function(id, status) {
-      let vm = this
+    refuse:function(id,status){
+      let vm = this;
+      vm.dialogVisible = false;
+      vm.$prompt('请输入拒绝的理由', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        vm.changeStatus(id,status,value);
+      }).catch(() => {
+        vm.$message({
+          type: 'info',
+          message: '已取消输入'
+        });
+      });
+    },
+    changeStatus: function(id, status,content) {
+      let vm = this;
+      if(content == undefined || content == null){
+        content = "";
+      }
       this.axios(vm.$commonTools.g_restUrl, {
         params: {
           i: '8',
@@ -165,7 +185,8 @@ export default {
           m: 'ewei_shop',
           ac: 'meeting_check',
           id: id,
-          status: status
+          status: status,
+          content:content
         }
       })
         .then(function(response) {
@@ -238,7 +259,10 @@ export default {
         })
     },
     addMeeting: function() {
-      this.$router.push({ name: 'AddMeeting' })
+      this.$router.push({ name: 'AddMeeting' });
+    },
+    addSummary:function (id) {
+      this.$router.push({ name: 'MeetingSummary',query: { meetingId: id}})
     }
   }
 }
