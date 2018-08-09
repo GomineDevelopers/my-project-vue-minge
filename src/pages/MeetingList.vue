@@ -23,7 +23,8 @@
               <div class="c3" v-else-if="item.status == 4">已过期</div>
             </div>
             <div class="btn-row">
-              <span @click="addSummary(item.id)" v-if="item.is_sponsor == 1">添加会议纪要</span>
+              <span @click="addSummary(item.id)" v-if="item.is_summary == 0 && item.status != 4">添加会议纪要</span>
+              <span @click="goSummary(item.id)" v-if="item.is_summary == 1">查看会议纪要</span>
               <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
               &nbsp;&nbsp;
               <a :href="item.address" target="view_window" v-if="(item.status == 1 || item.status == 3) && item.isUrl">参加会议</a>
@@ -262,7 +263,10 @@ export default {
       this.$router.push({ name: 'AddMeeting' });
     },
     addSummary:function (id) {
-      this.$router.push({ name: 'MeetingSummary',query: { meetingId: id}})
+      this.$router.push({ name: 'AddSummary',query: { meetingId: id}});
+    },
+    goSummary:function (id) {
+      this.$router.push({ name: 'SummaryDetail',query: { meetingId: id}})
     }
   }
 }

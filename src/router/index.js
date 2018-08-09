@@ -116,8 +116,9 @@ import ApplicationRelationship from '@/pages/application/relationship'
 
 //会议
 import AddMeeting from '@/pages/meeting/AddMeeting'
-import MeetingSummary from '@/pages/meeting/MeetingSummary'
+import AddSummary from '@/pages/meeting/AddSummary'
 import MeetingList from '@/pages/MeetingList'
+import SummaryDetail from '@/pages/meeting/SummaryDetail'
 
 Vue.use(Router)
 
@@ -553,9 +554,16 @@ export default new Router({
         requiresAuth: true
       }
     }, {
-      path: '/meetinglist/meetingsummary',
-      name: 'MeetingSummary',
-      component: MeetingSummary,
+      path: '/meetinglist/addsummary',
+      name: 'AddSummary',
+      component: AddSummary,
+      meta: {
+        requiresAuth: true
+      }
+    }, {
+      path: '/meetinglist/summarydetail',
+      name: 'SummaryDetail',
+      component: SummaryDetail,
       meta: {
         requiresAuth: true
       }

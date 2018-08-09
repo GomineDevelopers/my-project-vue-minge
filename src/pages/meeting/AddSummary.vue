@@ -40,7 +40,7 @@
 
 <script>
     export default {
-      name: "MeetingSummary",
+      name: "AddSummary",
       data(){
         return{
           summaryTitle:'',
@@ -54,7 +54,7 @@
           postData.id = this.$route.query.meetingId;
           postData.title = vm.summaryTitle;
           postData.content = vm.summaryContent;
-          this.axios(vm.$commonTools.g_restUrl, {
+          vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
