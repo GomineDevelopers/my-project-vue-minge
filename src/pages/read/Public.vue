@@ -4,10 +4,14 @@
     <div class="read-center-wrap">
       <div class="tab-wrapper">
         <div class="tab-item" @click="handleClick('first')" :class="{active:activeItem==1}"><span>图书中心</span></div>
-        <div class="tab-item" @click="handleClick('second')" :class="{active:activeItem==2}"><span>心得笔记</span></div>
+        <div class="tab-item" @click="handleClick('second')" :class="{active:activeItem==2}"><span>闲话评书</span></div>
         <div class="tab-item" @click="handleClick('third')" :class="{active:activeItem==3}"><span>约伴读书</span></div>
       </div>
-      <div class="click-button"  @click="gobooklist" ><img src="../../../static/image/my-book-icon.png" alt="" srcset="">
+      <div class="click-button"  @click="gobooklist" > 
+        <el-row>
+          <el-col :span="24"> <img src="../../../static/image/my-book-icon.png" alt="" srcset=""></el-col>
+          <el-col :span="24" class="mybook"> <span>我的图书</span></el-col>
+      </el-row>
       </div>
     </div>
     <div class="router-view-wrapper">
@@ -131,15 +135,25 @@ export default {
 }
 
 .click-button {
-  width: 15vh;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   position: absolute;
-  right: 16vw;
+  right: 0vw;
   z-index: 998;
-  top: 85vh;
+  top: 89vh;
+  background-color: rgba(0, 133, 208, 0.6);
 }
-
+.click-button .el-row {
+  margin-top: 5px;
+}
 .click-button img {
-  width: 14vh;
+  width: 20px;
+  margin-top: 5%;
+}
+.click-button .mybook {
+  font-size: 10px;
+  color: white;
 }
 </style>
 
