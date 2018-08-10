@@ -6,7 +6,6 @@
       <v-distpicker type="mobile"  @selected="onSelected"></v-distpicker>
     </div>
     <div class="register-container">
-      <el-row>
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>姓名</span>
           </el-col>
@@ -27,8 +26,13 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-date-picker v-model="registerBirthday" type="date" size="large" placeholder="请选择"
-                              class="register-select" :picker-options="pickerOptions1"></el-date-picker>
+              <el-date-picker v-model="registerBirthday" 
+              type="date"
+              size="large" 
+              align="center" 
+              placeholder="请选择"
+              class="register-select" 
+              :picker-options="pickerOptions1"></el-date-picker>
             </el-col>
           </el-row>
           <el-row>
@@ -100,7 +104,6 @@
             <el-button type="primary" round class="bottom-btn" @click="register">注册</el-button>
           </el-col>
         </el-row>
-      </el-row>
     </div>
   </div>
 </template>
@@ -302,13 +305,18 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.addOverflow {
-  overflow: hidden;
-}
 .register-container {
   text-align: left;
-  margin: 3vh auto;
   width: 70%;
+  overflow-y: visible;
+  margin: 0 auto;
+  padding: 3vh;
+  margin-bottom: 40vh;
+  height: 90vh;
+}
+.register-container.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100% !important;
 }
 .register-spanblock {
   display: inline-block;
@@ -331,10 +339,6 @@ export default {
 }
 .register-select {
   width: inherit;
-}
-.quick_validate_bg {
-  height: auto;
-  padding-bottom: 34%;
 }
 </style>
 

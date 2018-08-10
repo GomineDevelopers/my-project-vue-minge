@@ -219,6 +219,8 @@
   position: absolute;
   width: 100%;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .application_header {
@@ -591,6 +593,11 @@
 }
 
 .addmeeting-wrap .el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+.el-date-editor .el-input,
 .el-date-editor.el-input__inner {
   width: 100%;
 }
