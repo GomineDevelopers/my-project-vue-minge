@@ -1,5 +1,5 @@
 <template>
-  <div class="user center_no_bg">
+  <div class="user center_no_bg" @touchmove.prevent>
     <vue-headful title="书友会"/>
     <div class="read-center-wrap">
       <div class="tab-wrapper">
@@ -15,7 +15,11 @@
       @touchmove="move"
       @mouseup="end"
       @touchend="end"
-      id="moveDiv"><img src="../../../static/image/my-book-icon.png" alt="" srcset="">
+      id="moveDiv"> 
+      <el-row>
+          <el-col :span="24"> <img src="../../../static/image/my-book-icon.png" alt="" srcset=""></el-col>
+          <el-col :span="24" class="mybook"> <span>我的图书</span></el-col>
+      </el-row>
       </div>
     </div>
     <div class="router-view-wrapper">
@@ -46,6 +50,8 @@ export default {
   mounted() {
     this.updateActiveItem()
     this.handleClick('first')
+    /*去掉iphone手机滑动默认行为*/
+    this.handletouchmove()
   },
   watch: {
     $route() {
@@ -53,6 +59,11 @@ export default {
     }
   },
   methods: {
+    handletouchmove() {
+      this.document.body.on('touchmove', function(event) {
+        event.preventDefault()
+      })
+    },
     updateActiveItem: function() {
       switch (this.$route.name) {
         case 'BookDetailPublic':
@@ -199,16 +210,29 @@ export default {
 }
 
 .click-button {
-  width: 15vh;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   position: absolute;
-  right: 0vh;
+  right: 16vw;
+  right: 0vw;
   z-index: 998;
   top: 85vh;
-  background-color: #3a88d5;
+  top: 89vh;
+  background-color: rgba(0, 133, 208, 0.8);
 }
 
+.click-button .el-row {
+  margin-top: 5px;
+}
 .click-button img {
   width: 14vh;
+  width: 20px;
+  margin-top: 5%;
+}
+.click-button .mybook {
+  font-size: 10px;
+  color: white;
 }
 </style>
 
