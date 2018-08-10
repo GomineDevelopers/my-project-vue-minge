@@ -1,5 +1,5 @@
 <template>
-  <div class="user center_no_bg" @touchmove.prevent>
+  <div class="user center_no_bg" >
     <vue-headful title="书友会"/>
     <div class="read-center-wrap">
       <div class="tab-wrapper">
@@ -50,8 +50,6 @@ export default {
   mounted() {
     this.updateActiveItem()
     this.handleClick('first')
-    /*去掉iphone手机滑动默认行为*/
-    this.handletouchmove()
   },
   watch: {
     $route() {
@@ -59,11 +57,6 @@ export default {
     }
   },
   methods: {
-    handletouchmove() {
-      this.document.body.on('touchmove', function(event) {
-        event.preventDefault()
-      })
-    },
     updateActiveItem: function() {
       switch (this.$route.name) {
         case 'BookDetailPublic':
@@ -107,7 +100,6 @@ export default {
       this.position.y = touch.clientY
       this.dx = moveDiv.offsetLeft
       this.dy = moveDiv.offsetTop
-      console.log(touch.clientX, touch.clientY)
     },
     move() {
       if (this.flags) {
@@ -219,7 +211,8 @@ export default {
   z-index: 998;
   top: 85vh;
   top: 89vh;
-  background-color: rgba(0, 133, 208, 0.8);
+  background-color: #36c6d3;
+  opacity: 0.85;
 }
 
 .click-button .el-row {
