@@ -48,7 +48,7 @@
       <v-distpicker hide-area class="inputText" type="mobile" @selected="setNativePlace"></v-distpicker>
     </div>
     <div v-show="isShowBirthPlace" class="dist-select">
-      <v-distpicker hide-area class="inputText" type="mobile" @selected="setBirthPlace"></v-distpicker> 
+      <v-distpicker hide-area class="inputText" type="mobile" @selected="setBirthPlace"></v-distpicker>
     </div>
   </div>
 </template>
@@ -143,8 +143,7 @@
         temp.birthplace = vm.nativePlace;
         temp.place = vm.birthPlace;
         if(vm.validator()){
-          /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
-          document.cookie = JSON.stringify(temp);
+          vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
           vm.$router.push({name:'ApplicationTwo'});
         }
       }

@@ -11,7 +11,7 @@
           <el-input v-model.trim="quickValName" size="medium" clearable maxlength="15"></el-input>
         </el-col>
       </el-row>
-      <el-row>
+      <!--<el-row>
         <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>入党介绍人</span>
         </el-col>
       </el-row>
@@ -19,7 +19,7 @@
         <el-col :span="24">
           <el-input v-model.trim="quickValIntroducer" size="medium" clearable maxlength="15"></el-input>
         </el-col>
-      </el-row>
+      </el-row>-->
       <el-row>
         <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>出生日期</span>
         </el-col>
@@ -28,6 +28,24 @@
         <el-col :span="24">
           <el-date-picker v-model="quickValBirthday" type="date" size="large" placeholder="请选择"
                           class="quickVal-select" :picker-options="pickerOptions1"></el-date-picker>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>手机号1</span>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-input v-model.trim="mobile1" size="medium" clearable maxlength="11"></el-input>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24"><span class="quickVal-spanblock">手机号2</span>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-input v-model.trim="mobile2" size="medium" clearable maxlength="11"></el-input>
         </el-col>
       </el-row>
       <el-row class="quickVal-btn">
@@ -45,13 +63,15 @@
     data() {
       return {
         quickValName: '',
-        quickValIntroducer: '',
+        /*quickValIntroducer: '',*/
         quickValBirthday: '',
         pickerOptions1: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           }
-        }
+        },
+        mobile1:'',
+        mobile2:''
       }
     },
     mounted() {
@@ -85,8 +105,10 @@
         let vm = this;
         let postData = {};
         postData.realname = vm.quickValName;
-        postData.introducer = vm.quickValIntroducer;
+        /*postData.introducer = vm.quickValIntroducer;*/
         postData.birth = vm.quickValBirthday;
+        postData.phone_one = vm.mobile1;
+        postData.phone_two = vm.mobile2;
 
         if (vm.validator()) {
           vm.axios(vm.$commonTools.g_restUrl, {
@@ -115,12 +137,19 @@
       validator: function () {
         let vm = this;
         let msg = "";
+        let regP = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/;
         if (!vm.quickValName) {
           msg = "未填写真实姓名";
-        } else if (!vm.quickValIntroducer) {
+        }/* else if (!vm.quickValIntroducer) {
           msg = "未填写入党介绍人姓名";
-        } else if (!vm.quickValBirthday) {
+        }*/ else if (!vm.quickValBirthday) {
           msg = "未选择出生日期";
+        }else if(!vm.mobile1){
+          msg = '未填写第一个手机号码'
+        }else if(vm.mobile1 && !regP.test(vm.mobile1)){
+          msg = '第一个手机号格式不正确'
+        }else if(vm.mobile2 && !regP.test(vm.mobile2)){
+          msg = '第二个手机号格式不正确'
         }
 
         if (msg) {

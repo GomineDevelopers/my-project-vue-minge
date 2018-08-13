@@ -1,6 +1,6 @@
 <template>
   <div class="quick_validate_bg"  >
-    <vue-headful title="我的民革"/>
+    <vue-headful title="入党申请"/>
    <div class="distpicker-blanks" v-if="isArea" @click="hide" @touchmove.prevent ></div>
     <div class="dist-select" v-show="isArea"  >
       <v-distpicker type="mobile"  @selected="onSelected"></v-distpicker>
@@ -19,19 +19,23 @@
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>性别</span>
           </el-col>
         </el-row>
-        <radio-picker  :radioValues="genderValues" :radioValue="genderValue" @handleRadioValue="showGender" ></radio-picker>
+        <el-row>
+          <el-col :span="24">
+            <radio-picker  :radioValues="checkValues" :radioValue="radioValue" @handleRadioValue="showGender" ></radio-picker>
+          </el-col>
+        </el-row>
           <el-row>
             <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>出生日期</span>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-date-picker v-model="registerBirthday" 
+              <el-date-picker v-model="registerBirthday"
               type="date"
-              size="large" 
-              align="center" 
+              size="large"
+              align="center"
               placeholder="请选择"
-              class="register-select" 
+              class="register-select"
               :picker-options="pickerOptions1"></el-date-picker>
             </el-col>
           </el-row>
@@ -61,13 +65,12 @@
               <el-option v-for="item in degreeOptions" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-col>
-
         </el-row>
 
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>工作经历</span></el-col>
         </el-row>
-        <el-row>
+        <!--<el-row>
           <el-col :span="24">
             <el-form :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic">
               <el-form-item size="medium">
@@ -84,6 +87,12 @@
               </el-form-item>
             </el-form>
           </el-col>
+        </el-row>-->
+        <el-row>
+          <el-col :span="24"><div @click="addExperience" class="experience">+添加工作经历</div></el-col>
+        </el-row>
+        <el-row v-for="(item,index) in WorkExperiences" :key="index">
+          <el-input class="inputText" v-model="WorkExperiences[index]" clearable readonly @focus="goDetail(index)"></el-input>
         </el-row>
         <el-row>
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>申请书</span></el-col>
@@ -101,7 +110,7 @@
         </el-row>
         <el-row class="register-btn">
           <el-col>
-            <el-button type="primary" round class="bottom-btn" @click="register">注册</el-button>
+            <el-button type="primary" round class="bottom-btn" @click="register">提交</el-button>
           </el-col>
         </el-row>
     </div>
@@ -119,19 +128,14 @@ export default {
           return time.getTime() > Date.now()
         }
       },
-      genderValues: [{ text: '女', value: 1 }, { text: '男', value: 0 }],
-      genderValue: 0,
+      checkValues: [{ text: '女', value: 1 }, { text: '男', value: 0 }],
+      radioValue: 0,
       degreeOptions: [
         { value: '本科', label: '本科' },
         { value: '硕士', label: '硕士' },
         { value: '博士', label: '博士' }
       ],
-      dynamicValidateForm: {
-        domains: []
-      },
       degreeValue: '',
-      experience: '',
-      experiences: '',
       registerName: '',
       registerBirthday: '',
       isArea: false,
@@ -140,21 +144,42 @@ export default {
       area: '',
       distmix: '',
       ethnicGroup: '',
-      applycation: ''
+      applycation: '',
+      WorkExperiences:[]
     }
   },
   components: {
     'radio-picker': RadioPicker
   },
   mounted: function() {
-    this.showGender()
-    this.getExitData()
+    let vm = this;
+    vm.showGender();
+    vm.getExitData();
+    if(vm.$commonTools.getCookie("cookieData")){
+      let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+      if(cookieData.works !=undefined){
+        cookieData.works.forEach(function (ele,index,arr) {
+          let str = ele.company_name + ',' + ele.position+','+ ele.start_time+','+ ele.end_time+','+ ele.address;
+          vm.WorkExperiences.push(str);
+        })
+      }
+    }
   },
   methods: {
     getExitData() {
-      let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      let vm = this;
+      if(vm.$commonTools.getCookie("cookieData")){
+        let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+        vm.registerName = cookieData.realname;
+        vm.registerBirthday = cookieData.birth;
+        vm.ethnicGroup = cookieData.ethnicgroup;
+        vm.distmix = cookieData.origin;
+        vm.degreeValue = cookieData.education;
+        vm.applycation = cookieData.application;
+        vm.radioValue = cookieData.sex;
+        vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
+      }
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -185,7 +210,7 @@ export default {
         .setAttribute('style', 'overflow:auto')
     },
     showGender: function(radioValue) {
-      this.genderValue = radioValue
+      this.radioValue = radioValue
     },
     onSelected(data) {
       let vm = this
@@ -204,38 +229,10 @@ export default {
         .getElementsByTagName('body')[0]
         .setAttribute('style', 'overflow:hidden')
     },
-
-    removeDomain(item) {
-      var index = this.dynamicValidateForm.domains.indexOf(item)
-      if (index !== -1) {
-        this.dynamicValidateForm.domains.splice(index, 1)
-      }
-    },
-    addDomain() {
-      let hasEmpty = false
-      this.dynamicValidateForm.domains.forEach(function(item, index) {
-        if (!item.value) {
-          hasEmpty = true
-          return false
-        }
-      })
-
-      if (!this.experience || hasEmpty) {
-        this.$message({
-          message: '未填写上一条信息',
-          type: 'warning'
-        })
-      } else {
-        this.dynamicValidateForm.domains.push({
-          value: '',
-          key: Date.now()
-        })
-      }
-    },
     validator: function() {
-      let vm = this
-      let msg = ''
-      if (!vm.registerBirthday && vm.type == 0) {
+      let vm = this;
+      let msg = '';
+      if (!vm.registerBirthday) {
         msg = '未选择出生日期'
       } else if (!vm.registerName) {
         msg = '未填写真实姓名'
@@ -245,8 +242,8 @@ export default {
         msg = '未填写籍贯'
       } else if (!vm.degreeValue) {
         msg = '未填写学历信息'
-      } else if (vm.experiences[0] == '') {
-        msg = '未填写经历'
+      }else if (vm.WorkExperiences.length == 0) {
+        msg = '未填写工作经历'
       } else if (!vm.applycation) {
         msg = '未填写申请'
       }
@@ -261,24 +258,24 @@ export default {
     register: function() {
       let vm = this
       let postData = {}
-      vm.experiences = []
-      vm.experiences.push(vm.experience)
-      vm.dynamicValidateForm.domains.forEach(function(item, index) {
+      /*vm.experiences = []
+      vm.experiences.push(vm.experience)*/
+      /*vm.dynamicValidateForm.domains.forEach(function(item, index) {
         vm.experiences.push(item.value)
-      })
+      })*/
 
-      postData.realname = vm.registerName
-      postData.sex = vm.genderValue
-      postData.birth = vm.registerBirthday
-      postData.ethnicgroup = vm.ethnicGroup
-      postData.origin = vm.distmix
-      postData.education = vm.degreeValue
-      postData.experience = vm.experiences
-      postData.application = vm.applycation
+      postData.realname = vm.registerName;
+      postData.sex = vm.radioValue;
+      postData.birth = vm.registerBirthday;
+      postData.ethnicgroup = vm.ethnicGroup;
+      postData.origin = vm.distmix;
+      postData.education = vm.degreeValue;
+      postData.experience = vm.WorkExperiences;
+      postData.application = vm.applycation;
+
 
       if (vm.validator()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -299,6 +296,30 @@ export default {
             console.log(error)
           })
       }
+    },
+    setApplyCookies:function(){
+      let vm = this;
+      let postData = {};
+      if(vm.$commonTools.getCookie("cookieData")){
+        postData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+      }
+
+      postData.realname = vm.registerName;
+      postData.sex = vm.radioValue;
+      postData.birth = vm.registerBirthday;
+      postData.ethnicgroup = vm.ethnicGroup;
+      postData.origin = vm.distmix;
+      postData.education = vm.degreeValue;
+      postData.application = vm.applycation;
+
+      vm.$commonTools.setCookie("cookieData",JSON.stringify(postData),1);
+    },
+    addExperience:function () {
+      this.setApplyCookies();
+      this.$router.replace({name:'ApplyWorkExp'});
+    },
+    goDetail(index){
+      this.$router.push({name:'ApplyWorkExp',query: { index: index }});
     }
   }
 }
@@ -339,6 +360,11 @@ export default {
 }
 .register-select {
   width: inherit;
+}
+
+.experience{
+  color: #a6a6a6;
+  font-size: .8rem;
 }
 </style>
 

@@ -83,8 +83,7 @@
         getExistData:function(){
           let vm = this;
           let i = this.$route.query.index;
-          /*let exitData = JSON.parse(sessionStorage.getItem("temp"));*/
-          let exitData = JSON.parse(document.cookie);
+          let exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
           vm.educationType = exitData.education[i].educationType;
           vm.graduateSchool = exitData.education[i].graduateSchool;
           vm.major = exitData.education[i].major;
@@ -105,8 +104,7 @@
           postDegreeData.education = vm.education;
           postDegreeData.degree = vm.degree;
 
-          /*temp = JSON.parse(sessionStorage.getItem("temp"));*/
-          temp = JSON.parse(document.cookie);
+          temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
 
           if(temp.education == undefined){//第一次
             postArr.push(postDegreeData);
@@ -133,24 +131,21 @@
             }
           }
           temp.education = postArr;
-          /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
-          document.cookie = JSON.stringify(temp);
+          vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
 
-          vm.$router.push({name:'ApplicationTwo'});
+          vm.$router.replace({name:'ApplicationTwo'});
         },
         del:function () {
           let vm = this;
-          /*let temp = JSON.parse(sessionStorage.getItem("temp"));*/
-          let temp = JSON.parse(document.cookie);
+          let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
           temp.education.forEach(function (ele,index,arr) {
             if(index == vm.$route.query.index){
               arr.splice(index,1);
               temp.education = arr;
-             /* sessionStorage.setItem("temp",JSON.stringify(temp));*/
-              document.cookie = JSON.stringify(temp);
+              vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
             }
           })
-          vm.$router.push({name:'ApplicationTwo'});
+          vm.$router.replace({name:'ApplicationTwo'});
         }
       }
     }

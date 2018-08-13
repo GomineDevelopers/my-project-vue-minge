@@ -23,7 +23,7 @@
               <div class="c3" v-else-if="item.status == 4">已过期</div>
             </div>
             <div class="btn-row">
-              <span @click="addSummary(item.id)" v-if="item.is_summary == 0 && item.status != 4">添加会议纪要</span>
+              <span @click="addSummary(item.id)" v-if="item.is_summary == 1 && item.status != 4">添加会议纪要</span>
               <span @click="goSummary(item.id)" v-if="item.is_summary == 1">查看会议纪要</span>
               <span @click="meetingDetail(item.id)" v-if="item.is_sponsor == 1">详情</span>
               &nbsp;&nbsp;
@@ -38,7 +38,6 @@
     <el-dialog title="会议主题" :visible.sync="dialogVisible" width="80%" :modal-append-to-body='false'>
       <div class="dialog_content">{{dialogContent.theme}}</div>
       <span slot="footer" class="dialog-footer" v-if="dialogContent.status == 0">
-        <!--<el-button @click="changeStatus(dialogContent.id,2)">拒 绝</el-button>-->
         <el-button @click="refuse(dialogContent.id,2)">拒 绝</el-button>
         <el-button type="primary" @click="changeStatus(dialogContent.id,1)">参 加</el-button>
       </span>
@@ -51,7 +50,7 @@
       <el-table  :data="detailMemberList" border style="width: 100%;text-align: left" max-height="350">
         <el-table-column prop="realname" label="姓名"></el-table-column>
         <el-table-column prop="update_time" label="时间" width="80"></el-table-column>
-        <el-table-column prop="status" label="状态" width="60"></el-table-column>
+        <el-table-column prop="status" label="状态" width="100"></el-table-column>
       </el-table>
     </el-dialog>
   </div>
@@ -240,7 +239,7 @@ export default {
             } else if (ele.status == 1) {
               ele.status = '参加'
             } else if (ele.status == 2) {
-              ele.status = '拒绝'
+              ele.status = '拒绝'+"("+ele.content+")"
             } else if (ele.status == 3) {
               ele.status = '已签到'
             } else if (ele.status == 4) {

@@ -49,16 +49,10 @@
       },
       mounted(){
         let vm = this;
-        console.info(JSON.parse(document.cookie))
-        /*if(JSON.parse(sessionStorage.getItem("temp")).education != undefined){
-          JSON.parse(sessionStorage.getItem("temp")).education.forEach(function (ele,index,arr) {
-            let str = ele.educationType + ',' + ele.graduateSchool;
-            vm.educationShow.push(str);
-          });
-        }*/
+        let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
 
-        if(JSON.parse(document.cookie).education != undefined){
-          JSON.parse(document.cookie).education.forEach(function (ele,index,arr) {
+        if(cookieData.education != undefined){
+          cookieData.education.forEach(function (ele,index,arr) {
             let str = ele.educationType + ',' + ele.graduateSchool;
             vm.educationShow.push(str);
           });
@@ -94,8 +88,7 @@
         nextPage:function () {
           let vm = this;
           let temp = {};
-          /*temp = JSON.parse(sessionStorage.getItem("temp"));*///上一页的数据
-          temp = JSON.parse(document.cookie);
+          temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
           temp.job = vm.title;
           temp.identity = vm.IDCard;
           temp.employer = vm.presentWorkingUnit;
@@ -106,13 +99,12 @@
 
 
           if(vm.validator()){
-            /*sessionStorage.setItem("temp",JSON.stringify(temp));*/
-            document.cookie = JSON.stringify(temp);
+            vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
             vm.$router.push({name:'ApplicationThree'});
           }
         },
         addDegree:function () {
-          this.$router.push({name:'ApplicationDegree'});
+          this.$router.replace({name:'ApplicationDegree'});
         },
         goDetail:function (index) {
           this.$router.push({name:'ApplicationDegree',query: { index: index }});

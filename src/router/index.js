@@ -59,6 +59,8 @@ import Register from '@/pages/Register'
 import QuickValidate from '@/pages/QuickValidate'
 //入党申请
 import Apply from '@/pages/Apply'
+//入党申请---工作经历
+import ApplyWorkExp from '@/pages/ApplyWorkExp.vue'
 //入党申请的审核
 import CheckApply from '@/pages/CheckApply'
 //读书邀请的审核
@@ -364,6 +366,13 @@ export default new Router({
       path: '/apply',
       name: 'Apply',
       component: Apply,
+      meta: {
+        requiresNoAuth: true
+      }
+    },{
+      path: '/applyworkexp',
+      name: 'ApplyWorkExp',
+      component: ApplyWorkExp,
       meta: {
         requiresNoAuth: true
       }
