@@ -178,8 +178,8 @@ export default {
         vm.applycation = cookieData.application;
         vm.radioValue = cookieData.sex;
         vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
-      }
-      vm.axios(vm.$commonTools.g_restUrl, {
+      }else{
+        vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -189,18 +189,19 @@ export default {
             ac: 'get_verification'
           }
         })
-        .then(function(response) {
-          if (response.status == 200) {
-            vm.registerName = response.data.result.realname
-            if (response.data.result.birth)
-              vm.registerBirthday = new Date(
-                parseInt(response.data.result.birth) * 1000
-              )
-          }
-        })
-        .catch(function(error) {
-          console.info(error)
-        })
+          .then(function(response) {
+            if (response.status == 200) {
+              vm.registerName = response.data.result.realname;
+              if (response.data.result.birth)
+                vm.registerBirthday = new Date(
+                  parseInt(response.data.result.birth) * 1000
+                )
+            }
+          })
+          .catch(function(error) {
+            console.info(error)
+          })
+      }
     },
     hide: function() {
       this.isArea = false
@@ -334,10 +335,6 @@ export default {
   padding: 3vh;
   margin-bottom: 40vh;
   height: 90vh;
-}
-.register-container.el-date-editor.el-input,
-.el-date-editor.el-input__inner {
-  width: 100% !important;
 }
 .register-spanblock {
   display: inline-block;

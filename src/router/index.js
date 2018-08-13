@@ -374,7 +374,7 @@ export default new Router({
       name: 'ApplyWorkExp',
       component: ApplyWorkExp,
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: false
       }
     },
     {

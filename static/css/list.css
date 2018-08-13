@@ -653,11 +653,16 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.quickValidate-container .el-date-editor.el-input, .el-date-editor.el-input__inner{
+.register-container .el-date-editor.el-input,
+.register-container .el-date-editor.el-input__inner{
   width: 100%;
 }
 
 /*一年后的申请表*/
+.content .el-date-editor.el-input,
+.content .el-date-editor.el-input__inner{
+  width: 100%;
+}
 
 .content .el-select {
   width: 100%;
