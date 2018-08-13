@@ -330,11 +330,10 @@ export default {
 .register-container {
   text-align: left;
   width: 70%;
-  overflow-y: visible;
+  overflow-y: auto;
   margin: 0 auto;
   padding: 3vh;
-  margin-bottom: 40vh;
-  height: 90vh;
+  height: 70vh;
 }
 .register-spanblock {
   display: inline-block;
