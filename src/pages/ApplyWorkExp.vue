@@ -167,13 +167,15 @@
       del(){
         let vm = this;
         let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-        temp.works.forEach(function (ele,index,arr) {
-          if(index == vm.$route.query.index){
-            arr.splice(index,1);
-            temp.works = arr;
-            vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
-          }
-        })
+        if(temp.works != undefined){
+          temp.works.forEach(function (ele,index,arr) {
+            if(index == vm.$route.query.index){
+              arr.splice(index,1);
+              temp.works = arr;
+              vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
+            }
+          })
+        }
         vm.$router.replace({name:'Apply'});
       }
     }
