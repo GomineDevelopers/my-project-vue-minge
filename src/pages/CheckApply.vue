@@ -87,12 +87,27 @@
       </el-row>
       <el-row>
         <el-col :span="24">
+          <div class="application_ch" >尊敬的领导：</div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
           <div class="application_content" v-html="application.application"></div>
+        </el-col>
+      </el-row>
+      <el-row class="application_bottomTime" >
+        <el-col :span="24">
+          <span>2018年8月13日</span>
+        </el-col>
+      </el-row>
+      <el-row class="application_bottomName">
+        <el-col :span="24">
+          申请人：<span>王五</span>
         </el-col>
       </el-row>
       <el-row class="application_button">
         <el-col :span="24">
-          <el-button type="primary" size="medium" @click="changeDiv(1)">返回</el-button>
+          <el-button type="primary" size="small" @click="changeDiv(1)">返回</el-button>
         </el-col>
       </el-row>
     </div>
@@ -278,13 +293,31 @@
     line-height: inherit;
   }
 
-  .application_content {
-    margin: 0px 10%;
-    padding: 0 1.5rem;
+  .application_ch{
+    margin: 0px 12vw;
     text-align: left;
+    font-size: 14px;
+  }
+
+  .application_content {
+    margin: 0px 10vw;
     height: 66vh;
     overflow-x: hidden;
     overflow-y: auto;
+    font-size: 14px;
+  }
+  .application_bottomTime{
+    position: fixed;
+    right:15vw;
+    bottom: 26vh;
+    font-size: 14px;
+  }
+
+  .application_bottomName{
+    position: fixed;
+    bottom: 23vh;
+    right:15vw;
+    font-size: 14px;
   }
 
   .application_button {
