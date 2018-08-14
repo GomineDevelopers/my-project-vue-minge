@@ -325,8 +325,9 @@ export default {
       postData.origin = vm.distmix;
       postData.education = vm.degreeValue;
       postData.application = vm.applycation;
-
+alert(JSON.stringify(postData));
       vm.$commonTools.setCookie("cookieData", JSON.stringify(postData), 1);
+      alert("good");
     },
     addExperience: function() {
       this.setApplyCookies();
