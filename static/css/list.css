@@ -654,13 +654,14 @@
 }
 
 .register-container .el-date-editor.el-input,
-.register-container .el-date-editor.el-input__inner{
+.register-container .el-date-editor.el-input__inner {
   width: 100%;
 }
 
 /*一年后的申请表*/
+
 .content .el-date-editor.el-input,
-.content .el-date-editor.el-input__inner{
+.content .el-date-editor.el-input__inner {
   width: 100%;
 }
 
@@ -734,4 +735,10 @@ input {
 
 .el-dialog__body {
   padding: 10px 20px 30px 20px;
+}
+
+/* 申请页面去掉边框 */
+
+.inputText .el-textarea__inner {
+  border: none;
 }

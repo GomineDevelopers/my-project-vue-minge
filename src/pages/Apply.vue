@@ -52,7 +52,7 @@
         </el-row>
         <el-row>
           <el-col :span="24" >
-           <el-input v-model.trim="distmix" readonly= "true" size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
+           <el-input v-model.trim="distmix" readonly size="medium" clearable maxlength="30" @focus="showArea" ></el-input>
           </el-col>
         </el-row>
 
@@ -98,15 +98,7 @@
           <el-col :span="24"><span class="register-spanblock"><span class="register-necessary">*</span>申请书</span></el-col>
         </el-row>
         <el-row>
-          <el-col :span="24">
-            <el-input class="input_border"
-              type="textarea"
-              v-model.trim="applycation"
-              :rows="4"
-              placeholder="请输入内容"
-               >
-           </el-input>
-          </el-col>
+          <el-input class="inputText " type="textarea" :rows="6" v-model="applycation" readonly @focus="addApplication"></el-input>
         </el-row>
         <el-row class="register-btn">
           <el-col>
@@ -118,57 +110,72 @@
 </template>
 
 <script>
-import RadioPicker from '@/components/RadioPicker.vue'
+import RadioPicker from "@/components/RadioPicker.vue";
 export default {
-  name: 'apply',
+  name: "apply",
   data() {
     return {
       pickerOptions1: {
         disabledDate(time) {
-          return time.getTime() > Date.now()
+          return time.getTime() > Date.now();
         }
       },
-      checkValues: [{ text: '女', value: 1 }, { text: '男', value: 0 }],
+      checkValues: [{ text: "女", value: 1 }, { text: "男", value: 0 }],
       radioValue: 0,
       degreeOptions: [
-        { value: '本科', label: '本科' },
-        { value: '硕士', label: '硕士' },
-        { value: '博士', label: '博士' }
+        { value: "本科", label: "本科" },
+        { value: "硕士", label: "硕士" },
+        { value: "博士", label: "博士" }
       ],
-      degreeValue: '',
-      registerName: '',
-      registerBirthday: '',
+      degreeValue: "",
+      registerName: "",
+      registerBirthday: "",
       isArea: false,
-      province: '',
-      city: '',
-      area: '',
-      distmix: '',
-      ethnicGroup: '',
-      applycation: '',
-      WorkExperiences:[]
-    }
+      province: "",
+      city: "",
+      area: "",
+      distmix: "",
+      ethnicGroup: "",
+      applycation: "",
+      WorkExperiences: []
+    };
   },
   components: {
-    'radio-picker': RadioPicker
+    "radio-picker": RadioPicker
   },
   mounted: function() {
     let vm = this;
     vm.showGender();
     vm.getExitData();
-    if(vm.$commonTools.getCookie("cookieData")){
+    if (vm.$commonTools.getCookie("cookieData")) {
       let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-      if(cookieData.works !=undefined){
-        cookieData.works.forEach(function (ele,index,arr) {
-          let str = ele.company_name + ',' + ele.position+','+ ele.start_time+','+ ele.end_time+','+ ele.address;
+      if (cookieData.works != undefined) {
+        cookieData.works.forEach(function(ele, index, arr) {
+          let str =
+            ele.company_name +
+            "," +
+            ele.position +
+            "," +
+            ele.start_time +
+            "," +
+            ele.end_time +
+            "," +
+            ele.address;
           vm.WorkExperiences.push(str);
-        })
+        });
+      }
+      if (cookieData.applicationFullText.MessageTo != undefined) {
+        let temp = cookieData.applicationFullText;
+        vm.applycation = temp.applycation;
+      } else {
+        vm.applycation = "";
       }
     }
   },
   methods: {
     getExitData() {
       let vm = this;
-      if(vm.$commonTools.getCookie("cookieData")){
+      if (vm.$commonTools.getCookie("cookieData")) {
         let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
         vm.registerName = cookieData.realname;
         vm.registerBirthday = cookieData.birth;
@@ -178,87 +185,88 @@ export default {
         vm.applycation = cookieData.application;
         vm.radioValue = cookieData.sex;
         vm.$children[5].$children[0].$children[0].defaultValue = vm.radioValue;
-      }else{
-        vm.axios(vm.$commonTools.g_restUrl, {
-          params: {
-            i: '8',
-            c: 'entry',
-            p: 'user',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'get_verification'
-          }
-        })
+      } else {
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: "8",
+              c: "entry",
+              p: "user",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "get_verification"
+            }
+          })
           .then(function(response) {
             if (response.status == 200) {
               vm.registerName = response.data.result.realname;
               if (response.data.result.birth)
                 vm.registerBirthday = new Date(
                   parseInt(response.data.result.birth) * 1000
-                )
+                );
             }
           })
           .catch(function(error) {
-            console.info(error)
-          })
+            console.info(error);
+          });
       }
     },
     hide: function() {
-      this.isArea = false
-      this.onSelected
+      this.isArea = false;
+      this.onSelected;
       document
-        .getElementsByTagName('body')[0]
-        .setAttribute('style', 'overflow:auto')
+        .getElementsByTagName("body")[0]
+        .setAttribute("style", "overflow:auto");
     },
     showGender: function(radioValue) {
-      this.radioValue = radioValue
+      this.radioValue = radioValue;
     },
     onSelected(data) {
-      let vm = this
-      vm.province = data.province.value
-      vm.city = data.city.value
-      vm.area = data.area.value
-      vm.distmix = vm.province + ' ' + vm.city + ' ' + vm.area
+      let vm = this;
+      vm.province = data.province.value;
+      vm.city = data.city.value;
+      vm.area = data.area.value;
+      vm.distmix = vm.province + " " + vm.city + " " + vm.area;
       document
-        .getElementsByTagName('body')[0]
-        .setAttribute('style', 'overflow:auto')
-      vm.isArea = false
+        .getElementsByTagName("body")[0]
+        .setAttribute("style", "overflow:auto");
+      vm.isArea = false;
     },
     showArea: function() {
-      this.isArea = true
+      this.isArea = true;
       document
-        .getElementsByTagName('body')[0]
-        .setAttribute('style', 'overflow:hidden')
+        .getElementsByTagName("body")[0]
+        .setAttribute("style", "overflow:hidden");
     },
     validator: function() {
       let vm = this;
-      let msg = '';
+      let msg = "";
       if (!vm.registerBirthday) {
-        msg = '未选择出生日期'
+        msg = "未选择出生日期";
       } else if (!vm.registerName) {
-        msg = '未填写真实姓名'
+        msg = "未填写真实姓名";
       } else if (!vm.ethnicGroup) {
-        msg = '未填写民族'
+        msg = "未填写民族";
       } else if (!vm.distmix) {
-        msg = '未填写籍贯'
+        msg = "未填写籍贯";
       } else if (!vm.degreeValue) {
-        msg = '未填写学历信息'
-      }else if (vm.WorkExperiences.length == 0) {
-        msg = '未填写工作经历'
+        msg = "未填写学历信息";
+      } else if (vm.WorkExperiences.length == 0) {
+        msg = "未填写工作经历";
       } else if (!vm.applycation) {
-        msg = '未填写申请'
+        msg = "未填写申请";
       }
 
       if (msg) {
-        vm.$message.error(msg)
-        return false
+        vm.$message.error(msg);
+        return false;
       } else {
-        return true
+        return true;
       }
     },
     register: function() {
-      let vm = this
-      let postData = {}
+      let vm = this;
+      let postData = {};
       /*vm.experiences = []
       vm.experiences.push(vm.experience)*/
       /*vm.dynamicValidateForm.domains.forEach(function(item, index) {
@@ -274,34 +282,34 @@ export default {
       postData.experience = vm.WorkExperiences;
       postData.application = vm.applycation;
 
-
       if (vm.validator()) {
-        vm.axios(vm.$commonTools.g_restUrl, {
-            method: 'post',
+        vm
+          .axios(vm.$commonTools.g_restUrl, {
+            method: "post",
             params: {
-              i: '8',
-              c: 'entry',
-              p: 'user',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'add_party'
+              i: "8",
+              c: "entry",
+              p: "user",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "add_party"
             },
             data: vm.$qs.stringify(postData)
           })
           .then(function(response) {
             if (response.status == 200) {
-              vm.$router.push({ name: 'NoMember' })
+              vm.$router.push({ name: "NoMember" });
             }
           })
           .catch(function(error) {
-            console.log(error)
-          })
+            console.log(error);
+          });
       }
     },
-    setApplyCookies:function(){
+    setApplyCookies: function() {
       let vm = this;
       let postData = {};
-      if(vm.$commonTools.getCookie("cookieData")){
+      if (vm.$commonTools.getCookie("cookieData")) {
         postData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
       }
 
@@ -313,17 +321,21 @@ export default {
       postData.education = vm.degreeValue;
       postData.application = vm.applycation;
 
-      vm.$commonTools.setCookie("cookieData",JSON.stringify(postData),1);
+      vm.$commonTools.setCookie("cookieData", JSON.stringify(postData), 1);
     },
-    addExperience:function () {
+    addExperience: function() {
       this.setApplyCookies();
-      this.$router.replace({name:'ApplyWorkExp'});
+      this.$router.replace({ name: "ApplyWorkExp" });
     },
-    goDetail(index){
-      this.$router.push({name:'ApplyWorkExp',query: { index: index }});
+    addApplication: function() {
+      this.setApplyCookies();
+      this.$router.replace({ name: "ApplyWithApplication" });
+    },
+    goDetail(index) {
+      this.$router.push({ name: "ApplyWorkExp", query: { index: index } });
     }
   }
-}
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -358,9 +370,10 @@ export default {
   width: inherit;
 }
 
-.experience{
+.experience {
+  padding: 0 0 1vh 0;
   color: #a6a6a6;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 </style>
 
