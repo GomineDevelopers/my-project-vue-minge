@@ -289,8 +289,7 @@ export default {
       postData.application_date = vm.applycationTime;
 
       if (vm.validator()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: "post",
             params: {
               i: "8",
@@ -320,7 +319,7 @@ export default {
       }
 
       postData.realname = vm.registerName;
-      postData.sex = vm.radioValue;
+      postData.sex = vm.$children[5].$children[0].$children[0].defaultValue;
       postData.birth = vm.registerBirthday;
       postData.ethnicgroup = vm.ethnicGroup;
       postData.origin = vm.distmix;
