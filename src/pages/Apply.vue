@@ -136,7 +136,9 @@ export default {
       area: "",
       distmix: "",
       ethnicGroup: "",
+      applycationTitle: "",
       applycation: "",
+      applycationTime: "",
       WorkExperiences: []
     };
   },
@@ -164,9 +166,11 @@ export default {
           vm.WorkExperiences.push(str);
         });
       }
-      if (cookieData.applicationFullText.MessageTo != undefined) {
+      if (cookieData.applicationFullText != undefined) {
         let temp = cookieData.applicationFullText;
         vm.applycation = temp.applycation;
+        vm.applycationTitle = temp.MessageTo;
+        vm.applycationTime = temp.applyTime;
       } else {
         vm.applycation = "";
       }
@@ -280,7 +284,9 @@ export default {
       postData.origin = vm.distmix;
       postData.education = vm.degreeValue;
       postData.experience = vm.WorkExperiences;
+      postData.title = vm.applycationTitle;
       postData.application = vm.applycation;
+      postData.application_date = vm.applycationTime;
 
       if (vm.validator()) {
         vm

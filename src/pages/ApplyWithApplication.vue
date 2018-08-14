@@ -64,7 +64,10 @@ export default {
   },
   mounted: function() {
     let exitData = JSON.parse(this.$commonTools.getCookie("cookieData"));
-    if (exitData.applicationFullText.applycation != undefined) {
+    if (
+      exitData.applicationFullText != undefined &&
+      exitData.applicationFullText != {}
+    ) {
       this.defaultTitle = "修改申请书";
       this.getExistWorkData();
     }
@@ -119,6 +122,8 @@ export default {
 </script>
 <style scoped>
 .container2 {
+  height: 70vh;
+  overflow: auto;
   margin: 6vh 17vw;
 }
 .title2 {
@@ -138,12 +143,5 @@ export default {
 }
 .necessary {
   color: #cb1414;
-}
-.note {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: #999999;
-  font-size: 12px;
 }
 </style>
