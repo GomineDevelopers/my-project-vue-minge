@@ -119,7 +119,7 @@ export default {
     validator: function() {
       let vm = this
       let msg = ''
-      let regP = /^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/
+      let regP = /^((13[0-9])|(15[^4])|(166)|(17[0-8])|(18[0-9])|(19[8-9])|(147,145))\d{8}$/
       let regE = /\w@\w*\.\w/
 
       if (!vm.selected) {

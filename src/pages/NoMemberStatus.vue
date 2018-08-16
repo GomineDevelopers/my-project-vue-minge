@@ -35,10 +35,11 @@
         <span class="bottom-text b2">审核通过</span>
         <span class="bottom-text b3">考核通过</span>
       </div>
+      <div class="step-cover2">距离考核结束还有<span class="days" v-text="days"></span>天</div>
     </div>
     <div class="no-container" v-if="statusId==3">
       <img src="../../static/image/shenhe.png"/>
-      <span class="text">您好，您的党员快速验证申请正在审核中，请您耐心等待。</span>
+      <span class="text">您好，您的党员快速验证申请正在审核中，请您耐心等待1-3个工作日。</span>
     </div>
   </div>
 </template>
@@ -48,12 +49,41 @@ export default {
   name: 'member-status',
   data() {
     return {
-      statusId: this.$route.params.statusId
+      statusId: this.$route.params.statusId,
+      days:'?'
+    }
+  },
+  mounted(){
+    if(this.statusId == 2){
+      this.countDown();
     }
   },
   watch: {
     $route() {
-      this.statusId = this.$route.params.statusId
+      this.statusId = this.$route.params.statusId;
+    }
+  },
+  methods:{
+    countDown(){
+      let vm = this;
+      vm.axios(vm.$commonTools.g_restUrl, {
+        params: {
+          i: "8",
+          c: "entry",
+          p: "user",
+          do: "shop",
+          m: "ewei_shop",
+          ac: "countdown"
+        }
+      })
+        .then(function (response) {
+          if (response.status == 1) {
+            vm.days = response.data.result.data;
+          }
+        })
+        .catch(function (error) {
+          console.info(error);
+        });
     }
   }
 }
@@ -185,4 +215,21 @@ export default {
 .b3 {
   left: 85%;
 }
+
+.step-cover2 {
+  position: relative;
+  border: 1px dashed #a2b2bd;
+  border-radius: 10px;
+  height: 6vh;
+  line-height: 6vh;
+  width: 100%;
+  margin-top: 14vh;
+  font-size: 14px;
+}
+
+.days{
+  color: red;
+  font-size: 1.5rem;
+}
+
 </style>

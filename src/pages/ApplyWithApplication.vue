@@ -15,7 +15,7 @@
           <el-col :span="24">
             <el-input class="input_border"
               type="textarea"
-              v-model.trim="applycation"
+              v-model="applycation"
               :rows="20"
               placeholder="请输入内容"
                >
@@ -28,7 +28,7 @@
           </el-row>
           <el-row>
             <el-col :span="24">
-              <el-date-picker v-model="applyTime" 
+              <el-date-picker v-model="applyTime"
               type="date"
               size="large"
               align="center"
@@ -37,7 +37,7 @@
               :picker-options="pickerOptions1"></el-date-picker>
             </el-col>
           </el-row>
-          
+
         </div>
         <el-row class="application_btn">
           <el-button type="primary" round @click="save">保存</el-button>
@@ -64,10 +64,7 @@ export default {
   },
   mounted: function() {
     let exitData = JSON.parse(this.$commonTools.getCookie("cookieData"));
-    if (
-      exitData.applicationFullText != undefined &&
-      exitData.applicationFullText != {}
-    ) {
+    if (exitData.applycation != "") {
       this.defaultTitle = "修改申请书";
       this.getExistWorkData();
     }
@@ -76,9 +73,9 @@ export default {
     getExistWorkData() {
       let vm = this;
       let exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-      vm.MessageTo = exitData.applicationFullText.MessageTo;
-      vm.applycation = exitData.applicationFullText.applycation;
-      vm.applyTime = exitData.applicationFullText.applyTime;
+      vm.MessageTo = decodeURI(exitData.MessageTo);
+      vm.applycation = decodeURI(exitData.applycation);
+      vm.applyTime = exitData.applyTime;
     },
     applycationValidate() {
       let vm = this;
@@ -100,21 +97,17 @@ export default {
     save() {
       var vm = this;
       let postData = {};
-      postData.MessageTo = vm.MessageTo;
-      postData.applycation = vm.applycation;
-      postData.applyTime = vm.applyTime;
       let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
       if (vm.applycationValidate()) {
-        temp.applicationFullText = postData;
+        temp.MessageTo = encodeURI(vm.MessageTo);
+        temp.applycation = encodeURI(vm.applycation);
+        temp.applyTime = vm.applyTime;
         vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
         vm.$router.replace({ name: "Apply" });
       }
     },
     delData() {
       let vm = this;
-      let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-      temp.applicationFullText = {};
-      vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
       vm.$router.replace({ name: "Apply" });
     }
   }

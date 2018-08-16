@@ -3,67 +3,67 @@
     <div class="container2">
       <div class="title2" v-text="defaultTitle"></div>
       <div class="content">
-          <el-row>
-            <el-col :span="24"><span class="necessary" >*</span>公司名称</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-input v-model.trim="companyName" placeholder="请输入工作公司名称" class="inputText"></el-input>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24"><span class="necessary">*</span>担任职务</el-col>
-          </el-row>
-          <el-row >
-            <el-col :span="24">
-              <el-input v-model.trim="job" placeholder="请输入担任的职务" class="inputText"></el-input>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24"><span class="necessary">*</span>起始时间</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-date-picker v-model="worktimeStart"
-                              type="month"
-                              size="large"
-                              align="center"
-                              placeholder="请选择"
-                              format="yyyy 年 MM 月"
-                              value-format="yyyy-MM"
-                              class="dateInput inputText"
-                              :picker-options="pickerOptions1"></el-date-picker>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24"><span class="necessary">*</span>结束时间</el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-date-picker v-model="worktimeEnd"
-                              type="month"
-                              size="large"
-                              align="center"
-                              placeholder="请选择"
-                              format="yyyy 年 MM 月"
-                              value-format="yyyy-MM"
-                              class="dateInput inputText"
-                              :picker-options="pickerOptions1" ></el-date-picker>
-            </el-col>
-          </el-row>
-            <el-row>
-              <el-col :span="24"><span class="necessary">*</span>工作地点</el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
-                <el-input v-model.trim="workPlace" placeholder="请输入工作地点" class="inputText"></el-input>
-              </el-col>
-            </el-row>
-        </div>
-        <el-row class="application_btn">
-          <el-button type="primary" round @click="save">保存</el-button>
-          <el-button type="primary" round plain @click="del">删除</el-button>
+        <el-row>
+          <el-col :span="24"><span class="necessary">*</span>公司名称</el-col>
         </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-input v-model.trim="companyName" placeholder="请输入工作公司名称" class="inputText"></el-input>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24"><span class="necessary">*</span>担任职务</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-input v-model.trim="job" placeholder="请输入担任的职务" class="inputText"></el-input>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24"><span class="necessary">*</span>起始时间</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-date-picker v-model="worktimeStart"
+                            type="month"
+                            size="large"
+                            align="center"
+                            placeholder="请选择"
+                            format="yyyy 年 MM 月"
+                            value-format="yyyy-MM"
+                            class="dateInput inputText"
+                            :picker-options="pickerOptions1"></el-date-picker>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24"><span class="necessary">*</span>结束时间</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-date-picker v-model="worktimeEnd"
+                            type="month"
+                            size="large"
+                            align="center"
+                            placeholder="请选择"
+                            format="yyyy 年 MM 月"
+                            value-format="yyyy-MM"
+                            class="dateInput inputText"
+                            :picker-options="pickerOptions1"></el-date-picker>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24"><span class="necessary">*</span>工作地点</el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-input v-model.trim="workPlace" placeholder="请输入工作地点" class="inputText"></el-input>
+          </el-col>
+        </el-row>
+      </div>
+      <el-row class="application_btn">
+        <el-button type="primary" round @click="save">保存</el-button>
+        <el-button type="primary" round plain @click="del">删除</el-button>
+      </el-row>
     </div>
   </div>
 </template>
@@ -86,8 +86,8 @@
         }
       }
     },
-    mounted: function() {
-      if(this.$route.query.index >= 0){
+    mounted: function () {
+      if (this.$route.query.index >= 0) {
         this.defaultTitle = '修改工作经历';
         this.getExistWorkData();
       }
@@ -118,65 +118,65 @@
         let vm = this;
         let i = this.$route.query.index;
         let exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-        vm.companyName = exitData.works[i].company_name;
-        vm.job = exitData.works[i].position;
+        vm.companyName = decodeURI(exitData.works[i].company_name);
+        vm.job = decodeURI(exitData.works[i].position);
         vm.worktimeStart = exitData.works[i].start_time;
         vm.worktimeEnd = exitData.works[i].end_time;
-        vm.workPlace = exitData.works[i].address;
+        vm.workPlace = decodeURI(exitData.works[i].address);
       },
-      save(){
+      save() {
         let vm = this;
-        let postData = {};
-        let postArr = [];
-        postData.company_name = vm.companyName;
-        postData.position = vm.job;
-        postData.start_time = vm.worktimeStart;
-        postData.end_time = vm.worktimeEnd;
-        postData.address = vm.workPlace;
-        let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+        if (vm.worksValidate()) {
+          let temp = "";
+          let postData = {};
+          let postArr = [];
+          let isAdd = true;
+          postData.company_name = encodeURI(vm.companyName);
+          postData.position = encodeURI(vm.job);
+          postData.start_time = vm.worktimeStart;
+          postData.end_time = vm.worktimeEnd;
+          postData.address = encodeURI(vm.workPlace);
 
-        if(vm.worksValidate()){
-          if(temp.works == undefined){//第一次新增
-            postArr.push(postData);
-          }else{//非第一次（修改）
-            if(vm.$route.query.index >= 0){
-              temp.works.forEach(function (ele,index,arr) {
-                if(index == vm.$route.query.index){
-                  ele.company_name = vm.companyName;
-                  ele.position = vm.job;
-                  ele.start_time = vm.worktimeStart;
-                  ele.end_time = vm.worktimeEnd;
-                  ele.address = vm.workPlace;
-
-                  postArr.push(ele);
-                }else{
+          if (vm.$commonTools.getCookie("cookieData")) {
+            temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+            if (temp.works && temp.works.length > 0) {
+              temp.works.forEach(function (ele, index, arr) {
+                if (index == vm.$route.query.index) {
+                  postArr.push(postData);
+                  isAdd=false;
+                } else {
                   postArr.push(ele);
                 }
               })
-            }else{//非第一次（新增）
-              postArr = temp.works;
+            }
+
+            if (isAdd) {
               postArr.push(postData);
             }
-          }
-          temp.works = postArr;
-          vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
 
-          vm.$router.replace({name:'Apply'});
+            temp.works = postArr;
+            vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
+            vm.$router.replace({name: 'Apply'});
+          }
+          else {
+            vm.$message.error("有错误")
+          }
+
         }
       },
-      del(){
+      del() {
         let vm = this;
         let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-        if(temp.works != undefined){
-          temp.works.forEach(function (ele,index,arr) {
-            if(index == vm.$route.query.index){
-              arr.splice(index,1);
+        if (temp.works != undefined) {
+          temp.works.forEach(function (ele, index, arr) {
+            if (index == vm.$route.query.index) {
+              arr.splice(index, 1);
               temp.works = arr;
-              vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
+              vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
             }
           })
         }
-        vm.$router.replace({name:'Apply'});
+        vm.$router.replace({name: 'Apply'});
       }
     }
   }
