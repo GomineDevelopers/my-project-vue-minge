@@ -41,6 +41,27 @@
       <img src="../../static/image/shenhe.png"/>
       <span class="text">您好，您的党员快速验证申请正在审核中，请您耐心等待1-3个工作日。</span>
     </div>
+    <div class="no-container" v-if="statusId==4">
+      <img src="../../static/image/kaohe2.png"/>
+      <span class="text">您好，您的党员一年考核期已通过，请填写入党申请表。</span>
+      <i class="el-icon-d-arrow-right icon"></i>
+      <div class="step-cover">
+        <span class="dot active-dot3 dot3"></span>
+        <span class="dot dot1 blue"></span>
+        <span class="dot dot2 blue"></span>
+        <span class="dot dot3 blue"></span>
+        <span class="line line1 blue"></span>
+        <span class="line line2 blue"></span>
+        <span class="top-text t1">审核期</span>
+        <span class="top-text t2">考核期</span>
+        <span class="bottom-text b1">提交申请</span>
+        <span class="bottom-text b2">审核通过</span>
+        <span class="bottom-text b3">考核通过</span>
+      </div>
+      <div class="step-cover3">
+        <el-button type="primary" icon="el-icon-tickets" @click="goApply">请填写入党申请表</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,13 +98,16 @@ export default {
         }
       })
         .then(function (response) {
-          if (response.status == 1) {
+          if (response.data.status == 1) {
             vm.days = response.data.result.data;
           }
         })
         .catch(function (error) {
           console.info(error);
         });
+    },
+    goApply(){
+      this.$router.push({name:'ApplicationOne'});
     }
   }
 }
@@ -138,6 +162,15 @@ export default {
 }
 
 .step-cover .active-dot {
+  margin-top: -11px;
+  margin-left: -11px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 1px solid #5ab7f5;
+}
+
+.step-cover .active-dot3 {
   margin-top: -11px;
   margin-left: -11px;
   width: 20px;
@@ -231,5 +264,13 @@ export default {
   color: red;
   font-size: 1.5rem;
 }
+
+.step-cover3 {
+  position: relative;
+  width: 100%;
+  margin-top: 14vh;
+  font-size: 14px;
+}
+
 
 </style>
