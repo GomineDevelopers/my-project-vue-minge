@@ -99,6 +99,7 @@
                   message: '申请提交成功！',
                   type: 'success'
                 });
+                WeixinJSBridge.call('closeWindow');
               }else{
                 vm.$message.error("错误")
               }
