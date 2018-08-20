@@ -128,33 +128,5 @@
 </script>
 
 <style scoped>
-  .container {
-    margin: 6vh 17vw;
-  }
-
-  .title {
-    font-weight: bold;
-    color: #185a88;
-  }
-
-  .content {
-    text-align: left;
-    margin-top: 2vh;
-  }
-
-  .necessary {
-    color: #cb1414;
-  }
-
-  .content .inputText {
-    padding: .6vh 0 1vh 0;
-  }
-
-  .dateInput {
-    width: 100%;
-  }
-
-  .application_btn{
-    padding-top: 2vh;
-  }
+  @import '../../../static/css/application_detail.css';
 </style>

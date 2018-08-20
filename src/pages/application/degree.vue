@@ -1,7 +1,7 @@
 <template>
     <div class="application_inner_bg">
-      <div class="container2">
-        <div class="title2">学历学位</div>
+      <div class="container">
+        <div class="title">学历学位</div>
         <div class="content">
           <el-row><span class="necessary">*</span>教育类型</el-row>
           <el-row>
@@ -174,6 +174,6 @@
 </script>
 
 <style scoped>
-  @import '../../../static/css/application.css';
+  @import '../../../static/css/application_detail.css';
 </style>
 
