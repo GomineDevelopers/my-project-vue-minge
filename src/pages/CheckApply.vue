@@ -302,7 +302,7 @@
 
   .application_content {
     margin: 0px 12vw;
-    height: 66vh;
+    height: 54vh;
     overflow-x: hidden;
     overflow-y: auto;
     font-size: 14px;
