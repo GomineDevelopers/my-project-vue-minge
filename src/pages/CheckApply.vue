@@ -139,6 +139,7 @@
             m: "ewei_shop",
             ac: "list_party",
             id: vm.$route.params.id,
+            type:vm.$route.params.type,
             showLoading: true
           }
         })

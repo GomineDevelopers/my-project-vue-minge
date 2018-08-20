@@ -18,7 +18,7 @@
         <el-col :span="24">
           <div class="Un_card"
                :class="[item.status == 3 ? 'status-success' :[item.status == 1 ? 'status-wait':'status-refuse'] ]"
-               @click="goDetail(item)">
+               @click="goDetail(item,item.type)">
             <div class="Un_card_list">
               <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
               <div v-text="item.title" class="title" v-if="type != 3"></div>
@@ -117,13 +117,15 @@ export default {
           console.info(error)
         })
     },
-    goDetail(item) {
+    goDetail(item,type) {
       let id = item.id
       let status = item.status
       let vm = this
-      if (vm.$route.params.type == 1) {
-        this.$router.push({ name: 'CheckApply', params: { id: id } })
-      } else if (vm.$route.params.type == 2) {
+      if (vm.$route.params.type == 1 && type == 1) {
+        this.$router.push({ name: 'CheckApply', params: {type:type, id: id } })
+      } else if (vm.$route.params.type == 1 && type == 2) {
+          this.$router.push({ name: 'ApplycationList', params: {type:type, id: id } })
+      }else if (vm.$route.params.type == 2) {
         this.$router.push({ name: 'CheckProposal', params: { id: id } })
       } else if (vm.$route.params.type == 3 && status == 1) {
         vm.dialogVisible = true

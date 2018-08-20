@@ -60,11 +60,12 @@ import QuickValidate from '@/pages/QuickValidate'
 //入党申请
 import Apply from '@/pages/Apply'
 //入党申请---工作经历
-import ApplyWorkExp from '@/pages/ApplyWorkExp.vue'
+import ApplyWorkExp from '@/pages/ApplyWorkExp'
 //入党申请---申请书正文
-import ApplyWithApplication from '@/pages/ApplyWithApplication.vue'
+import ApplyWithApplication from '@/pages/ApplyWithApplication'
 //入党申请的审核
 import CheckApply from '@/pages/CheckApply'
+import ApplycationList from '@/pages/application/applycationList'
 //读书邀请的审核
 import CheckRead from '@/pages/CheckRead'
 //提案的审核
@@ -317,9 +318,16 @@ export default new Router({
       }
     },
     {
-      path: '/center/checkApply/:id',
+      path: '/center/checkApply/:type/:id',
       name: 'CheckApply',
       component: CheckApply,
+      meta: {
+        requiresAuth: true
+      }
+    },{
+      path: '/application/applycationList/:type/:id',
+      name: 'ApplycationList',
+      component: ApplycationList,
       meta: {
         requiresAuth: true
       }
