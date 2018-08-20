@@ -7,26 +7,28 @@
         <div class="content">
           <el-row><span class="necessary">*</span>姓名</el-row>
           <el-row>
-            <el-input v-model="realName" class="inputText" clearable maxlength="15"></el-input>
+            <el-input v-model.trim="realName" class="inputText" clearable maxlength="15"></el-input>
           </el-row>
           <el-row>曾用名</el-row>
           <el-row>
-            <el-input v-model="usedName" class="inputText" clearable maxlength="15"></el-input>
+            <el-input v-model.trim="usedName" class="inputText" clearable maxlength="15"></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>性别</el-row>
-          <radio-picker :radioValues="genderValues" :radioValue="genderValue"
-                        @handleRadioValue="showGender"></radio-picker>
+          <el-row>
+            <radio-picker :radioValues="checkValues" :radioValue="radioValue"
+                          @handleRadioValue="showGender"></radio-picker>
+          </el-row>
           <el-row><span class="necessary">*</span>民族</el-row>
           <el-row>
-            <el-input v-model="nation" class="inputText" clearable maxlength="10"></el-input>
+            <el-input v-model.trim="nation" class="inputText" clearable maxlength="10"></el-input>
           </el-row>
           <el-row>宗教</el-row>
           <el-row>
-            <el-input v-model="religion" class="inputText" clearable maxlength="10"></el-input>
+            <el-input v-model.trim="religion" class="inputText" clearable maxlength="10"></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>出生日期</el-row>
           <el-row>
-            <el-date-picker v-model="birthday" type="date" size="large" placeholder="请选择"
+            <el-date-picker v-model="birthday" type="date" size="large" placeholder="请选择" :editable="false"
                             class="dateInput inputText" :picker-options="pickerOptions1"></el-date-picker>
           </el-row>
           <el-row><span class="necessary">*</span>籍贯</el-row>
@@ -62,8 +64,8 @@
       return {
         realName: '',
         usedName: '',
-        genderValues: [{text: '女', value: 1}, {text: '男', value: 0}],
-        genderValue: 0,
+        checkValues: [{text: "女", value: 1}, {text: "男", value: 0}],
+        radioValue: 0,
         nation: '',
         religion: '',
         birthday: '',
@@ -82,11 +84,13 @@
       'radio-picker': RadioPicker
     },
     mounted: function () {
-      this.showGender();
+      let vm = this;
+      vm.showGender();
+      vm.getExitData();
     },
     methods: {
-      showGender(radioValue) {
-        this.genderValue = radioValue;
+      showGender: function (radioValue) {
+        this.radioValue = radioValue;
       },
       showNativePlace: function () {
         this.isShowNativePlace = true;
@@ -131,20 +135,43 @@
           return true;
         }
       },
-      nextPage:function () {
+      setCookies(){
         let vm = this;
         let temp = {};
-        temp.realName = vm.realName;
-        temp.username = vm.usedName;
-        temp.sex = vm.genderValue;
-        temp.nationality = vm.nation;
-        temp.religion = vm.religion;
+        if(vm.$commonTools.getCookie("cookieData")){
+          temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+        }
+        temp.realname = encodeURI(vm.realName);
+        temp.username = encodeURI(vm.usedName);
+        temp.sex = vm.$children[5].$children[0].defaultValue;
+        temp.nationality = encodeURI(vm.nation);
+        temp.religion = encodeURI(vm.religion);
         temp.birth = vm.birthday;
-        temp.birthplace = vm.nativePlace;
-        temp.place = vm.birthPlace;
+        temp.birthplace = encodeURI(vm.nativePlace);
+        temp.place = encodeURI(vm.birthPlace);
+
+        vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
+      },
+      nextPage:function () {
+        let vm = this;
         if(vm.validator()){
-          vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
+          vm.setCookies();
           vm.$router.push({name:'ApplicationTwo'});
+        }
+      },
+      getExitData:function () {
+        let vm = this;
+        if (vm.$commonTools.getCookie("cookieData")){
+          let exitData = JSON.parse(decodeURI(vm.$commonTools.getCookie("cookieData")));
+          vm.realName = exitData.realname;
+          vm.usedName = exitData.username;
+          vm.radioValue = exitData.sex;
+          vm.$children[5].$children[0].defaultValue = vm.radioValue;
+          vm.nation = exitData.nationality;
+          vm.religion = exitData.religion;
+          vm.birthday = exitData.birth;
+          vm.nativePlace = exitData.birthplace;
+          vm.birthPlace = exitData.place;
         }
       }
     }

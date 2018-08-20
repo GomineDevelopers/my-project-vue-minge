@@ -41,7 +41,7 @@
       <img src="../../static/image/shenhe.png"/>
       <span class="text">您好，您的党员快速验证申请正在审核中，请您耐心等待1-3个工作日。</span>
     </div>
-    <div class="no-container" v-if="statusId==4">
+    <div class="no-container" v-if="statusId==5">
       <img src="../../static/image/kaohe2.png"/>
       <span class="text">您好，您的党员一年考核期已通过，请填写入党申请表。</span>
       <i class="el-icon-d-arrow-right icon"></i>

@@ -322,6 +322,7 @@
         postData.applycation = encodeURI(vm.applycation);
         postData.applycationTime = vm.applycationTime;
 
+
         vm.$commonTools.setCookie("cookieData", JSON.stringify(postData), 1);
       },
       addExperience: function () {

@@ -31,7 +31,7 @@
           </el-row>
         </div>
         <el-row>
-          <el-button type="primary" round class="bottom-btn">提交</el-button>
+          <el-button type="primary" round class="bottom-btn" @click="submitForm">提交</el-button>
         </el-row>
       </div>
     </div>
@@ -44,13 +44,18 @@
       data() {
         return {
           imageUrl: '',
-          isloading:false
+          postImageUrl:
+          this.$commonTools.g_restUrl +
+          '?i=8&c=entry&p=images&do=shop&m=ewei_shop&ac=add_images',
+          postImgName: '',
+          isLoading:false
         }
       },
       methods:{
         handleAvatarSuccess(res, file) {
-          this.isLoading=false;
+          this.isLoading = false;
           this.imageUrl = URL.createObjectURL(file.raw);
+          this.postImgName = res.result.info.filename;
         },
         beforeAvatarUpload(file) {
           this.isLoading = true;
@@ -70,6 +75,37 @@
           if (!result)
             this.isLoading = false;
           return result
+        },
+        submitForm(){
+          let vm = this;
+          let submitData = JSON.parse(decodeURI(vm.$commonTools.getCookie("cookieData")));
+          submitData.img = vm.postImgName;
+          vm.axios(vm.$commonTools.g_restUrl, {
+              method: 'post',
+              params: {
+                i: '8',
+                c: 'entry',
+                p: 'user',
+                do: 'shop',
+                m: 'ewei_shop',
+                ac: 'add_joinparty',
+                showLoading: true
+              },
+              data: vm.$qs.stringify(submitData)
+            })
+            .then(function(response) {
+              if(response.status == 200){
+                vm.$message({
+                  message: '申请提交成功！',
+                  type: 'success'
+                });
+              }else{
+                vm.$message.error("错误")
+              }
+            })
+            .catch(function(error) {
+              console.log(error)
+            })
         }
       }
     }

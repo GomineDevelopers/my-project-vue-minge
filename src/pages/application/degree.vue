@@ -6,37 +6,37 @@
           <el-row><span class="necessary">*</span>教育类型</el-row>
           <el-row>
             <el-select v-model="educationType" placeholder="请选择" class="inputText">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              <el-option v-for="item in educationTypes1" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-row>
           <el-row>毕业院校</el-row>
           <el-row>
-            <el-input v-model="graduateSchool" class="inputText" clearable></el-input>
+            <el-input v-model.trim="graduateSchool" class="inputText" clearable></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>专业</el-row>
           <el-row>
-            <el-input v-model="major" class="inputText" clearable></el-input>
+            <el-input v-model.trim="major" class="inputText" clearable></el-input>
           </el-row>
           <el-row><span class="necessary">*</span>入学时间</el-row>
           <el-row>
-            <el-date-picker v-model="enrolmentTime" type="date" size="large" placeholder="请选择"
-                            class="dateInput inputText" :picker-options="pickerOptions1"></el-date-picker>
+            <el-date-picker v-model="enrolmentTime" type="date" size="large" placeholder="请选择" :editable="false"
+                            class="dateInput inputText" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
           </el-row>
           <el-row><span class="necessary">*</span>毕业时间</el-row>
           <el-row>
-            <el-date-picker v-model="graduateTime" type="date" size="large" placeholder="请选择"
-                            class="dateInput inputText" :picker-options="pickerOptions1"></el-date-picker>
+            <el-date-picker v-model="graduateTime" type="date" size="large" placeholder="请选择" :editable="false"
+                            class="dateInput inputText" :picker-options="pickerOptions1" value-format="yyyy-MM-dd"></el-date-picker>
           </el-row>
           <el-row><span class="necessary">*</span>学历</el-row>
           <el-row>
             <el-select v-model="education" placeholder="请选择" class="inputText">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              <el-option v-for="item in educationTypes2" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-row>
           <el-row><span class="necessary">*</span>学位</el-row>
           <el-row>
             <el-select v-model="degree" placeholder="请选择" class="inputText">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+              <el-option v-for="item in degreeTypes" :key="item.value" :label="item.label" :value="item.value"></el-option>
             </el-select>
           </el-row>
         </div>
@@ -53,13 +53,11 @@
         name: "degree",
       data(){
           return{
-            options:[{
-              value: '选项1',
-              label: '黄金糕'
-            }, {
-              value: '选项2',
-              label: '双皮奶'
-            }],
+            educationTypes1:[{value: '全日制教育',label: '全日制教育'},
+                    {value: '在职教育',label: '在职教育'}],
+            educationTypes2:[{value: '大专',label: '大专'},{value: '本科',label: '本科'},
+                    {value: '硕士研究生',label: '硕士研究生'},{value: '博士研究生',label: '博士研究生'}],
+            degreeTypes:[{value: '学士',label: '学士'},{value: '硕士',label: '硕士'},{value: '博士',label: '博士'}],
             educationType:'',
             graduateSchool:'',
             major:'',
@@ -83,69 +81,93 @@
         getExistData:function(){
           let vm = this;
           let i = this.$route.query.index;
-          let exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-          vm.educationType = exitData.education[i].educationType;
-          vm.graduateSchool = exitData.education[i].graduateSchool;
-          vm.major = exitData.education[i].major;
-          vm.enrolmentTime = exitData.education[i].enrolmentTime;
+          let exitData = JSON.parse(decodeURI(vm.$commonTools.getCookie("cookieData")));
+          vm.educationType = exitData.education[i].education_type;
+          vm.graduateSchool = exitData.education[i].school;
+          vm.major = exitData.education[i].profession;
+          vm.enrolmentTime = exitData.education[i].admission_time;
+          vm.graduateTime = exitData.education[i].graduation_time;
           vm.education = exitData.education[i].education;
           vm.degree = exitData.education[i].degree;
         },
-        save:function () {
-          let postDegreeData = {};
-          let postArr = [];
-          let temp = "";
+        degreeValidate(){
           let vm = this;
-          postDegreeData.educationType = vm.educationType;
-          postDegreeData.graduateSchool = vm.graduateSchool;
-          postDegreeData.major = vm.major;
-          postDegreeData.enrolmentTime = vm.enrolmentTime;
-          postDegreeData.graduateTime = vm.graduateTime;
-          postDegreeData.education = vm.education;
-          postDegreeData.degree = vm.degree;
-
-          temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-
-          if(temp.education == undefined){//第一次
-            postArr.push(postDegreeData);
-          }else{
-            if(vm.$route.query.index >= 0){//修改
-              temp.education.forEach(function (ele,index,arr) {
-                if(index == vm.$route.query.index){
-                  ele.educationType = vm.educationType;
-                  ele.graduateSchool = vm.graduateSchool;
-                  ele.major = vm.major;
-                  ele.enrolmentTime = vm.enrolmentTime;
-                  ele.graduateTime = vm.graduateTime;
-                  ele.education = vm.education;
-                  ele.degree = vm.degree;
-
-                  postArr.push(ele);
-                }else{
-                  postArr.push(ele);
-                }
-              })
-            }else{//新增
-              postArr = temp.education;
-              postArr.push(postDegreeData);
-            }
+          let msg = '';
+          if (!vm.educationType) {
+            msg = '未填写教育类型';
+          } else if (!vm.major) {
+            msg = '未填写专业';
+          } else if (!vm.enrolmentTime) {
+            msg = '未选择入学时间';
+          } else if (!vm.graduateTime) {
+            msg = '未选择毕业时间';
+          } else if (!vm.education) {
+            msg = '未填写学历';
+          }else if (!vm.degree) {
+            msg = '未填写学位';
           }
-          temp.education = postArr;
-          vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
-
-          vm.$router.replace({name:'ApplicationTwo'});
+          if (msg) {
+            vm.$message.error(msg)
+            return false
+          } else {
+            return true
+          }
         },
-        del:function () {
+        save() {
+          let vm = this;
+          if (vm.degreeValidate()) {
+            let temp = "";
+            let postDegreeData = {};
+            let postArr = [];
+            let isAdd = true;
+            postDegreeData.education_type = encodeURI(vm.educationType);
+            postDegreeData.school = encodeURI(vm.graduateSchool);
+            postDegreeData.profession = encodeURI(vm.major);
+            postDegreeData.admission_time = vm.enrolmentTime;
+            postDegreeData.graduation_time = vm.graduateTime;
+            postDegreeData.education = encodeURI(vm.education);
+            postDegreeData.degree = encodeURI(vm.degree);
+
+            if (vm.$commonTools.getCookie("cookieData")) {
+              temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+              if (temp.education && temp.education.length > 0) {
+                temp.education.forEach(function (ele, index, arr) {
+                  if (index == vm.$route.query.index) {
+                    postArr.push(postDegreeData);
+                    isAdd=false;
+                  } else {
+                    postArr.push(ele);
+                  }
+                })
+              }
+
+              if (isAdd) {
+                postArr.push(postDegreeData);
+              }
+
+              temp.education = postArr;
+              vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
+              vm.$router.replace({name: 'ApplicationTwo'});
+            }
+            else {
+              vm.$message.error("有错误")
+            }
+
+          }
+        },
+        del() {
           let vm = this;
           let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
-          temp.education.forEach(function (ele,index,arr) {
-            if(index == vm.$route.query.index){
-              arr.splice(index,1);
-              temp.education = arr;
-              vm.$commonTools.setCookie("cookieData",JSON.stringify(temp),1);
-            }
-          })
-          vm.$router.replace({name:'ApplicationTwo'});
+          if (temp.education != undefined) {
+            temp.education.forEach(function (ele, index, arr) {
+              if (index == vm.$route.query.index) {
+                arr.splice(index, 1);
+                temp.education = arr;
+                vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
+              }
+            })
+          }
+          vm.$router.replace({name: 'ApplicationTwo'});
         }
       }
     }
