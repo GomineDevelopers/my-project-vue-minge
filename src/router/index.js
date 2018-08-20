@@ -485,87 +485,51 @@ export default new Router({
     }, {
       path: '/application/one',
       component: ApplicationOne,
-      name: 'ApplicationOne',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationOne'
     }, {
       path: '/application/two',
       component: ApplicationTwo,
-      name: 'ApplicationTwo',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationTwo'
     }, {
       path: '/application/three',
       component: ApplicationThree,
-      name: 'ApplicationThree',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationThree'
     }, {
       path: '/application/four',
       component: ApplicationFour,
-      name: 'ApplicationFour',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationFour'
     }, {
       path: '/application/five',
       component: ApplicationFive,
-      name: 'ApplicationFive',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationFive'
     }, {
       path: '/application/six',
       component: ApplicationSix,
-      name: 'ApplicationSix',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationSix'
     }, {
       path: '/application/degree',
       component: ApplicationDegree,
-      name: 'ApplicationDegree',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationDegree'
     }, {
       path: '/application/resume',
       component: ApplicationResume,
-      name: 'ApplicationResume',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationResume'
     }, {
       path: '/application/award',
       component: ApplicationAward,
-      name: 'ApplicationAward',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationAward'
     }, {
       path: '/application/partyteam',
       component: ApplicationPartyTeam,
-      name: 'ApplicationPartyTeam',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationPartyTeam'
     }, {
       path: '/application/family',
       component: ApplicationFamily,
-      name: 'ApplicationFamily',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationFamily'
     }, {
       path: '/application/relationship',
       component: ApplicationRelationship,
-      name: 'ApplicationRelationship',
-      meta: {
-        requiresAuth: true
-      }
+      name: 'ApplicationRelationship'
     }, {
       path: '/meeting/addmeeting',
       name: 'AddMeeting',

@@ -80,6 +80,7 @@
           let vm = this;
           let submitData = JSON.parse(decodeURI(vm.$commonTools.getCookie("cookieData")));
           submitData.img = vm.postImgName;
+          console.info(submitData)
           vm.axios(vm.$commonTools.g_restUrl, {
               method: 'post',
               params: {
