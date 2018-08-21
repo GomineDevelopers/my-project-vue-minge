@@ -24,6 +24,7 @@
       :visible.sync="dialogVisible"
       width="100%"
       top="0px"
+      :modal-append-to-body='false'
       >
       <img  src="../../static/image/partyStructure.png" width="100%" alt="" srcset="">
   </el-dialog>
@@ -89,5 +90,6 @@ export default {
 }
 .el-dialog__wrapper {
   height: 100vh;
+  overflow-x: hidden;
 }
 </style>
