@@ -12,27 +12,37 @@
   </el-row>
   <el-row>
     <el-col :span="24">
-    <div class="intro-constructor-bg " >
-      <el-row  class="button-wrapper">
-        <el-col :span="24"><el-button type="primary" size="large" round >组织架构</el-button></el-col>
-      </el-row>
-       
-    </div>
+      <div class="intro-constructor-bg " >
+        <el-row  class="button-wrapper">
+          <el-col :span="24"><el-button  @click="dialogVisible = true" type="primary" size="large" round >组织架构</el-button></el-col>
+        </el-row> 
+      </div>
     </el-col>
   </el-row>
   </div>
+    <el-dialog
+      :visible.sync="dialogVisible"
+      width="100%"
+      top="0px"
+      >
+      <img  src="../../static/image/partyStructure.png" width="100%" alt="" srcset="">
+  </el-dialog>
   </div>
-  
 </template>
 <script>
 export default {
-  name: 'introduction',
+  name: "introduction",
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
   methods: {
     gobaike() {
-      window.open('http://www.gymg.cn/c5097/index.html')
+      window.open("http://www.gymg.cn/c5097/index.html");
     }
   }
-}
+};
 </script>
 <style scoped>
 .intro-wrapper {
@@ -63,10 +73,10 @@ export default {
   box-shadow: 0px 0px 5px 5px #99999940;
 }
 .intro-wrapper-bg {
-  background-image: url('../../static/image/intro-wrapper-bg.jpg');
+  background-image: url("../../static/image/intro-wrapper-bg.jpg");
 }
 .intro-constructor-bg {
-  background-image: url('../../static/image/intro-constructor-bg.png');
+  background-image: url("../../static/image/intro-constructor-bg.png");
 }
 .button-wrapper {
   width: 100%;
@@ -76,5 +86,8 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   background-color: #2192e0;
+}
+.el-dialog__wrapper {
+  height: 100vh;
 }
 </style>
