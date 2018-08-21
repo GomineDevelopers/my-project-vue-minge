@@ -6,7 +6,7 @@
       <!-- content goes here -->
       <div style="height: 44px;"></div>
 
-      <div v-for="item in items" class="row" @click="goDetail(item.id)">
+      <div v-for="item in items" class="row" :key="item.index" @click="goDetail(item.id)">
         <div class="title">{{item.title}}</div>
         <div class="image"><img :src="item.thumb"></div>
         <div class="readMore" @click="goDetail(item.id)">查看详情>></div>
@@ -17,24 +17,24 @@
 
 <script>
 export default {
-  name: 'FriendlyContacts',
+  name: "FriendlyContacts",
   data() {
     return {
       items: [],
       curPage: 1,
       isLast: false
-    }
+    };
   },
   methods: {
     getListByCateId(done) {
-      let vm = this
+      let vm = this;
       this.axios(vm.$commonTools.g_restUrl, {
         params: {
-          i: '8',
-          c: 'entry',
-          p: 'article',
-          do: 'shop',
-          m: 'ewei_shop',
+          i: "8",
+          c: "entry",
+          p: "article",
+          do: "shop",
+          m: "ewei_shop",
           ccate: 55, //分类
           page: vm.curPage
         }
@@ -42,7 +42,7 @@ export default {
         .then(function(response) {
           if (response.data.result.list) {
             for (var i = 1; i <= response.data.result.list.length; i++) {
-              vm.items.push(response.data.result.list[i - 1])
+              vm.items.push(response.data.result.list[i - 1]);
             }
           }
 
@@ -50,30 +50,30 @@ export default {
             response.data.result.list &&
             response.data.result.list.length == 10
           ) {
-            vm.isLast = false
-            vm.curPage++
+            vm.isLast = false;
+            vm.curPage++;
           } else {
-            vm.isLast = true
+            vm.isLast = true;
           }
-          done()
+          done();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     infinite(done) {
-      let vm = this
+      let vm = this;
       if (!vm.isLast) {
-        vm.getListByCateId(done)
+        vm.getListByCateId(done);
       } else {
-        done(true)
+        done(true);
       }
     },
     goDetail(id) {
-      this.$router.push({ name: 'NewsDetail', params: { id: id } })
+      this.$router.push({ name: "NewsDetail", params: { id: id } });
     }
   }
-}
+};
 </script>
 
 <style scoped>

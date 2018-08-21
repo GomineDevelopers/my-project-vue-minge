@@ -65,7 +65,7 @@ import ApplyWorkExp from '@/pages/ApplyWorkExp'
 import ApplyWithApplication from '@/pages/ApplyWithApplication'
 //入党申请的审核
 import CheckApply from '@/pages/CheckApply'
-import ApplycationList from '@/pages/application/applycationList'
+import ApplicationList from '@/pages/application/applicationList'
 //读书邀请的审核
 import CheckRead from '@/pages/CheckRead'
 //提案的审核
@@ -324,10 +324,10 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    },{
-      path: '/application/applycationList/:type/:id',
-      name: 'ApplycationList',
-      component: ApplycationList,
+    }, {
+      path: '/application/applicationList/:type/:id',
+      name: 'ApplicationList',
+      component: ApplicationList,
       meta: {
         requiresAuth: true
       }
@@ -379,7 +379,7 @@ export default new Router({
       meta: {
         requiresNoAuth: true
       }
-    },{
+    }, {
       path: '/applyworkexp',
       name: 'ApplyWorkExp',
       component: ApplyWorkExp,

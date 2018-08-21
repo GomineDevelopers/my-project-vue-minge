@@ -183,7 +183,7 @@
 </template>
 <script>
 export default {
-  name: "applycationList",
+  name: "applicationList",
   data() {
     return {
       realname: "",
@@ -220,8 +220,8 @@ export default {
       family_member: "",
       social_relationship: "",
       img: "",
-      status:'',
-      grade:''
+      status: "",
+      grade: ""
     };
   },
   mounted: function() {
@@ -231,7 +231,8 @@ export default {
   methods: {
     getApplicationData() {
       let vm = this;
-      vm.axios(vm.$commonTools.g_restUrl, {
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: "8",
             c: "entry",
@@ -244,105 +245,114 @@ export default {
           }
         })
         .then(function(response) {
-            let tmp = "暂无";
-            if(response.data.status == 200){
-              vm.realname = response.data.result.realname || tmp;
-              vm.username = response.data.result.username || tmp;
-              vm.sex = response.data.result.sex || tmp;
-              vm.nationality = response.data.result.nationality || tmp;
-              vm.religion = response.data.result.religion || tmp;
-              vm.birth = response.data.result.birth || tmp;
-              vm.birthplace = response.data.result.birthplace || tmp;
-              vm.place = response.data.result.place || tmp;
-              vm.job = response.data.result.job || tmp;
-              vm.identity = response.data.result.identity || tmp;
-              vm.education = response.data.result.education || tmp;
-              vm.employer = response.data.result.employer || tmp;
-              vm.position = response.data.result.position || tmp;
-              vm.unit_address = response.data.result.unit_address || tmp;
-              vm.unit_phone = response.data.result.unit_phone || tmp;
-              vm.unit_email = response.data.result.unit_email || tmp;
-              vm.family_address = response.data.result.family_address || tmp;
-              vm.family_phone = response.data.result.family_phone || tmp;
-              vm.family_code = response.data.result.family_code || tmp;
-              vm.mailing_address = response.data.result.mailing_address || tmp;
-              vm.phone = response.data.result.phone || tmp;
-              vm.email = response.data.result.email || tmp;
-              vm.people_position = response.data.result.people_position || tmp;
-              vm.parttime = response.data.result.parttime || tmp;
-              vm.expertise = response.data.result.expertise || tmp;
-              vm.treatment = response.data.result.treatment || tmp;
-              vm.resume = response.data.result.resume || tmp;
-              vm.award = response.data.result.award || tmp;
-              vm.dispose = response.data.result.dispose || tmp;
-              vm.cancel = response.data.result.cancel || tmp;
-              vm.partisan = response.data.result.partisan || tmp;
-              vm.family_member = response.data.result.family_member;
-              vm.social_relationship = response.data.result.social_relationship || tmp;
-              vm.img = response.data.result.img || tmp;
-              vm.status = response.data.result.status;
-            }
+          let tmp = "暂无";
+          if (response.data.status == 200) {
+            vm.realname = response.data.result.realname || tmp;
+            vm.username = response.data.result.username || tmp;
+            vm.sex = response.data.result.sex || tmp;
+            vm.nationality = response.data.result.nationality || tmp;
+            vm.religion = response.data.result.religion || tmp;
+            vm.birth = response.data.result.birth || tmp;
+            vm.birthplace = response.data.result.birthplace || tmp;
+            vm.place = response.data.result.place || tmp;
+            vm.job = response.data.result.job || tmp;
+            vm.identity = response.data.result.identity || tmp;
+            vm.education = response.data.result.education || tmp;
+            vm.employer = response.data.result.employer || tmp;
+            vm.position = response.data.result.position || tmp;
+            vm.unit_address = response.data.result.unit_address || tmp;
+            vm.unit_phone = response.data.result.unit_phone || tmp;
+            vm.unit_email = response.data.result.unit_email || tmp;
+            vm.family_address = response.data.result.family_address || tmp;
+            vm.family_phone = response.data.result.family_phone || tmp;
+            vm.family_code = response.data.result.family_code || tmp;
+            vm.mailing_address = response.data.result.mailing_address || tmp;
+            vm.phone = response.data.result.phone || tmp;
+            vm.email = response.data.result.email || tmp;
+            vm.people_position = response.data.result.people_position || tmp;
+            vm.parttime = response.data.result.parttime || tmp;
+            vm.expertise = response.data.result.expertise || tmp;
+            vm.treatment = response.data.result.treatment || tmp;
+            vm.resume = response.data.result.resume || tmp;
+            vm.award = response.data.result.award || tmp;
+            vm.dispose = response.data.result.dispose || tmp;
+            vm.cancel = response.data.result.cancel || tmp;
+            vm.partisan = response.data.result.partisan || tmp;
+            vm.family_member = response.data.result.family_member;
+            vm.social_relationship =
+              response.data.result.social_relationship || tmp;
+            vm.img = response.data.result.img || tmp;
+            vm.status = response.data.result.status;
+          }
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    changeStatus(temp){
+    changeStatus(temp) {
       let vm = this;
-      vm.$prompt('请输入意见（选填）', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消'
-      }).then(({ value }) => {
-        let postData = {};
-        postData.id = vm.$route.params.id;
-        postData.status = temp;
-        postData.content = value;
-        vm.axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
+      vm
+        .$prompt("请输入意见（选填）", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消"
+        })
+        .then(({ value }) => {
+          let postData = {};
+          postData.id = vm.$route.params.id;
+          postData.status = temp;
+          postData.content = value;
+          vm
+            .axios(vm.$commonTools.g_restUrl, {
+              method: "post",
+              params: {
+                i: "8",
+                c: "entry",
+                p: "user",
+                do: "shop",
+                m: "ewei_shop",
+                ac: "edit_joinparty"
+              },
+              data: vm.$qs.stringify(postData)
+            })
+            .then(function(response) {
+              if (response.status == "200") {
+                vm.$router.replace({
+                  name: "CenterUnreadList",
+                  params: { type: 1 }
+                });
+              }
+            })
+            .catch(function(error) {
+              console.info(error);
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "取消输入"
+          });
+        });
+    },
+    getCenterData: function() {
+      let vm = this;
+      vm
+        .axios(vm.$commonTools.g_restUrl, {
           params: {
             i: "8",
             c: "entry",
             p: "user",
             do: "shop",
             m: "ewei_shop",
-            ac: "edit_joinparty"
-          },
-          data: vm.$qs.stringify(postData)
-        })
-          .then(function (response) {
-            if (response.status == '200') {
-              vm.$router.replace({name: 'CenterUnreadList', params: {type: 1}});
-            }
-          })
-          .catch(function (error) {
-            console.info(error);
-          })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '取消输入'
-        });
-      });
-    },
-    getCenterData: function () {
-      let vm = this
-      vm.axios(vm.$commonTools.g_restUrl, {
-          params: {
-            i: '8',
-            c: 'entry',
-            p: 'user',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'get_remind',
+            ac: "get_remind",
             showLoading: true
           }
         })
-        .then(function (response) {
-          vm.grade = response.data.result.grade
+        .then(function(response) {
+          vm.grade = response.data.result.grade;
         })
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

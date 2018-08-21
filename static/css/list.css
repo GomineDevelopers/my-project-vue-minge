@@ -537,6 +537,7 @@
   color: #409EFF;
   background-color: #ffffff;
   border-color: #409EFF;
+  box-shadow: none;
   -webkit-box-shadow: none;
 }
 

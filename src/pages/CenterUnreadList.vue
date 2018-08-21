@@ -66,33 +66,33 @@
 
 <script>
 export default {
-  name: 'CenterUnreadList',
+  name: "CenterUnreadList",
   data() {
     return {
       unreadList: [],
       type: this.$route.params.type,
-      inviteId: '',
+      inviteId: "",
       dialogVisible: false,
       quickDialogVisible: false,
       quickApply: {},
-      titleName:''
-    }
+      titleName: ""
+    };
   },
   created() {
-    this.getUnreadList()
+    this.getUnreadList();
   },
   methods: {
     getUnreadList() {
-      let vm = this
+      let vm = this;
       vm
         .axios(vm.$commonTools.g_restUrl, {
           params: {
-            i: '8',
-            c: 'entry',
-            p: 'mq',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'mq_list',
+            i: "8",
+            c: "entry",
+            p: "mq",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "mq_list",
             type: vm.$route.params.type
           }
         })
@@ -114,114 +114,120 @@ export default {
           vm.unreadList = response.data.result;
         })
         .catch(function(error) {
-          console.info(error)
-        })
+          console.info(error);
+        });
     },
-    goDetail(item,type) {
-      let id = item.id
-      let status = item.status
-      let vm = this
+    goDetail(item, type) {
+      let id = item.id;
+      let status = item.status;
+      let vm = this;
       if (vm.$route.params.type == 1 && type == 1) {
-        this.$router.push({ name: 'CheckApply', params: {type:type, id: id } })
+        this.$router.push({
+          name: "CheckApply",
+          params: { type: type, id: id }
+        });
       } else if (vm.$route.params.type == 1 && type == 2) {
-          this.$router.push({ name: 'ApplycationList', params: {type:type, id: id } })
-      }else if (vm.$route.params.type == 2) {
-        this.$router.push({ name: 'CheckProposal', params: { id: id } })
+        this.$router.push({
+          name: "ApplicationList",
+          params: { type: type, id: id }
+        });
+      } else if (vm.$route.params.type == 2) {
+        this.$router.push({ name: "CheckProposal", params: { id: id } });
       } else if (vm.$route.params.type == 3 && status == 1) {
-        vm.dialogVisible = true
-        vm.inviteId = id
+        vm.dialogVisible = true;
+        vm.inviteId = id;
       } else if (vm.$route.params.type == 4 && status == 1) {
-        let tmpItem = {}
-        tmpItem.name = item.realname
-        tmpItem.date = vm.$commonTools.formatDate(item.birth)
-        tmpItem.introducer = item.introducer
-        tmpItem.id = item.id
-        vm.quickApply = tmpItem
-        vm.quickDialogVisible = true
+        let tmpItem = {};
+        tmpItem.name = item.realname;
+        tmpItem.date = vm.$commonTools.formatDate(item.birth);
+        tmpItem.introducer = item.introducer;
+        tmpItem.id = item.id;
+        vm.quickApply = tmpItem;
+        vm.quickDialogVisible = true;
       }
     },
     changeStatus(temp) {
-      let vm = this
+      let vm = this;
       let postData = {
         id: vm.inviteId,
         status: temp
-      }
+      };
       vm
         .axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
+          method: "post",
           params: {
-            i: '8',
-            c: 'entry',
-            p: 'user',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'set_invite'
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "set_invite"
           },
           data: vm.$qs.stringify(postData)
         })
         .then(function(response) {
-          if (response.data.status == '200') {
-            vm.dialogVisible = false
+          if (response.data.status == "200") {
+            vm.dialogVisible = false;
             vm.unreadList.forEach(function(element, index, array) {
               if (element.id == vm.inviteId) {
-                element.status = temp
+                element.status = temp;
               }
-            })
-          } else if (response.data.status == '201') {
+            });
+          } else if (response.data.status == "201") {
             vm.$message({
-              type: 'info',
-              message: '书已被邀请者删除，该邀请无效。'
-            })
-            vm.dialogVisible = false
-            vm.getUnreadList()
-          } else if (response.data.status == '202') {
+              type: "info",
+              message: "书已被邀请者删除，该邀请无效。"
+            });
+            vm.dialogVisible = false;
+            vm.getUnreadList();
+          } else if (response.data.status == "202") {
             vm.$message({
-              type: 'info',
-              message: '书已被邀请者设为私密，该邀请无效。'
-            })
-            vm.dialogVisible = false
-            vm.getUnreadList()
+              type: "info",
+              message: "书已被邀请者设为私密，该邀请无效。"
+            });
+            vm.dialogVisible = false;
+            vm.getUnreadList();
           }
         })
         .catch(function(error) {
-          console.info(error)
-        })
+          console.info(error);
+        });
     },
     changeQuickStatus(id, status) {
-      let vm = this
+      let vm = this;
       let postData = {
         id: id,
         status: status
-      }
+      };
       vm
         .axios(vm.$commonTools.g_restUrl, {
-          method: 'post',
+          method: "post",
           params: {
-            i: '8',
-            c: 'entry',
-            p: 'user',
-            do: 'shop',
-            m: 'ewei_shop',
-            ac: 'edit_verification'
+            i: "8",
+            c: "entry",
+            p: "user",
+            do: "shop",
+            m: "ewei_shop",
+            ac: "edit_verification"
           },
           data: vm.$qs.stringify(postData)
         })
         .then(function(response) {
-          if (response.data.status == '201') {
+          if (response.data.status == "201") {
             vm.$message({
-              type: 'info',
-              message: '此申请已被处理，请刷新。'
-            })
+              type: "info",
+              message: "此申请已被处理，请刷新。"
+            });
           }
-          vm.quickDialogVisible = false
-          vm.getUnreadList()
+          vm.quickDialogVisible = false;
+          vm.getUnreadList();
         })
         .catch(function(error) {
-          console.info(error)
-        })
+          console.info(error);
+        });
     }
   }
-}
+};
 </script>
 
 <style scoped>
