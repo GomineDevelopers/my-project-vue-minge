@@ -165,7 +165,7 @@
         </el-row>
         <el-row class="item-content">
             <el-col :span="24"> <span> 申请书：</span></el-col>
-            <el-col :span="24"><div class="imgsize" ><img :src="img" ></div></el-col>
+            <el-col :span="24"><div class="imgsize" ><img v-gallery :src="img" ></div></el-col>
         </el-row>
         <el-row class="newApplication_button">
           <el-col :span="24" v-if="status == 1 && grade == 0">

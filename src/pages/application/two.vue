@@ -54,7 +54,7 @@
           let cookieData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
           if(cookieData.education != undefined){
             cookieData.education.forEach(function (ele,index,arr) {
-              let str = ele.education_type + ',' + ele.school+ ',' + ele.profession+ ','
+              let str = ele.education_type + ',' + ele.profession+ ','
                       + ele.admission_time+ ',' + ele.graduation_time+ ',' + ele.education+','+ele.degree;
               vm.educationShow.push(decodeURI(str));
             });
