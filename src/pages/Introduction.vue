@@ -6,7 +6,7 @@
   <el-row>
     <div class="intro-wrapper-bg">
       <el-row class="button-wrapper">
-        <el-col :span="24"><el-button type="primary" size="large" round @click="gobaike">民革简介</el-button></el-col>
+        <el-col :span="24"><el-button type="primary" size="large" round @click="godetail">民革简介</el-button></el-col>
       </el-row>
     </div>
   </el-row>
@@ -15,7 +15,7 @@
       <div class="intro-constructor-bg " >
         <el-row  class="button-wrapper">
           <el-col :span="24"><el-button  @click="dialogVisible = true" type="primary" size="large" round >组织架构</el-button></el-col>
-        </el-row> 
+        </el-row>
       </div>
     </el-col>
   </el-row>
@@ -39,8 +39,8 @@ export default {
     };
   },
   methods: {
-    gobaike() {
-      window.open("http://www.gymg.cn/c5097/index.html");
+    godetail() {
+      this.$router.push({name: "IntroDetail"});
     }
   }
 };

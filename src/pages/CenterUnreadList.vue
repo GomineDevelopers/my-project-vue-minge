@@ -53,7 +53,8 @@
       <el-dialog title="是否通过快速验证" :visible.sync="quickDialogVisible" :center="true" width="80%" class="my-dialog" :modal-append-to-body='false'>
         <div class="dialog-div">申请人: {{quickApply.name}}</div>
         <div class="dialog-div">生日: {{quickApply.date}}</div>
-        <div class="dialog-div">介绍人:{{quickApply.introducer}}</div>
+        <div class="dialog-div">手机号1:{{quickApply.phone_one}}</div>
+        <div class="dialog-div" v-if="quickApply.phone_two">手机号2:{{quickApply.phone_two}}</div>
         <span slot="footer" class="dialog-footer">
           <el-button @click="changeQuickStatus(quickApply.id ,4)">拒绝</el-button>
           <el-button type="primary" @click="changeQuickStatus(quickApply.id ,3)">通过</el-button>
@@ -84,8 +85,7 @@ export default {
   methods: {
     getUnreadList() {
       let vm = this;
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: "8",
             c: "entry",
@@ -140,7 +140,8 @@ export default {
         let tmpItem = {};
         tmpItem.name = item.realname;
         tmpItem.date = vm.$commonTools.formatDate(item.birth);
-        tmpItem.introducer = item.introducer;
+        tmpItem.phone_one = item.phone_one;
+        tmpItem.phone_two = item.phone_two;
         tmpItem.id = item.id;
         vm.quickApply = tmpItem;
         vm.quickDialogVisible = true;
@@ -152,8 +153,7 @@ export default {
         id: vm.inviteId,
         status: temp
       };
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           method: "post",
           params: {
             i: "8",
@@ -199,8 +199,7 @@ export default {
         id: id,
         status: status
       };
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           method: "post",
           params: {
             i: "8",

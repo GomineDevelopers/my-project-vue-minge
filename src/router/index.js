@@ -3,8 +3,10 @@ import Router from 'vue-router'
 
 //时政要闻
 import News from '@/pages/News'
-//简介
+//联系我们
 import Introduction from '@/pages/Introduction'
+//民革简介
+import IntroDetail from '@/pages/IntroDetail'
 //最新发布
 import Announce from '@/pages/Announce'
 //社会服务
@@ -133,6 +135,11 @@ export default new Router({
       path: '/intro',
       name: 'Introduction',
       component: Introduction
+    },
+    {
+    path: '/introdetail',
+    name: 'IntroDetail',
+    component: IntroDetail
     },
     {
       path: '/news',
