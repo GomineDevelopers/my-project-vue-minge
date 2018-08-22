@@ -743,3 +743,8 @@ input {
 .inputText .el-textarea__inner {
   border: none;
 }
+
+.intro-wrapper .el-dialog__wrapper {
+  height: 100vh;
+  overflow-x: hidden;
+}
