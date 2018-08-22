@@ -88,8 +88,5 @@ export default {
   font-weight: bold;
   background-color: #2192e0;
 }
-.el-dialog__wrapper {
-  height: 100vh;
-  overflow-x: hidden;
-}
+
 </style>
