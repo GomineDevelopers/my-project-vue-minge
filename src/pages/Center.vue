@@ -28,7 +28,7 @@
       <div class="title" @click="goPoint">
         <i class=" iconfont icon-icon"></i>&nbsp;
         <span class="text">我的积分</span>
-        
+
         <span class="arrow"><span class="number">{{score}}分</span> <i class="el-icon-arrow-right"></i> </span>
       </div>
     </div>
@@ -139,7 +139,7 @@ export default {
 .header {
   position: relative;
   width: 100%;
-  height: 20vh;
+  height: 21vh;
 }
 
 .logo {
@@ -164,9 +164,9 @@ export default {
   }
 }
 .header .name {
-  line-height: 3vh;
+  line-height: 2vh;
   position: relative;
-  padding-bottom: 2vh;
+  /*padding-bottom: 2vh;*/
 }
 
 .row {

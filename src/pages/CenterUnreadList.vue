@@ -230,17 +230,8 @@ export default {
 </script>
 
 <style scoped>
-.content-wrapper {
-  margin-top: 12vh;
-}
-.center_home_bg {
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
 .Un_container {
-  margin: 13vh 3vh 3vh 3vh;
+  margin: 9vh 3vh 3vh 3vh;
 }
 
 .Un_border-left {
