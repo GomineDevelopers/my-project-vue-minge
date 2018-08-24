@@ -49,7 +49,7 @@
     <el-dialog title="参会人员" :visible.sync="dialogVisibleMembers" width="90%" :modal-append-to-body='false'>
       <el-table  :data="detailMemberList" border style="width: 100%;text-align: left" max-height="350">
         <el-table-column prop="realname" label="姓名"></el-table-column>
-        <el-table-column prop="update_time" label="时间" width="80"></el-table-column>
+        <el-table-column prop="update_time" label="时间" width="90"></el-table-column>
         <el-table-column prop="status" label="状态" width="100"></el-table-column>
       </el-table>
     </el-dialog>
@@ -121,12 +121,8 @@ export default {
         .then(function(response) {
           if (response.data.result) {
             for (var i = 0; i < response.data.result.list.length; i++) {
-              if (
-                response.data.result.list[i].address.substring(0, 8) ==
-                  'https://' ||
-                response.data.result.list[i].address.substring(0, 7) ==
-                  'http://'
-              ) {
+              if (response.data.result.list[i].address.substring(0, 8) == 'https://' ||
+                  response.data.result.list[i].address.substring(0, 7) == 'http://') {
                 response.data.result.list[i].isUrl = true
               } else {
                 response.data.result.list[i].isUrl = false
@@ -134,10 +130,7 @@ export default {
               vm.listData.push(response.data.result.list[i])
             }
           }
-          if (
-            response.data.result.list &&
-            response.data.result.list.length == 10
-          ) {
+          if (response.data.result.list &&response.data.result.list.length == 10) {
             vm.isLast = false
             vm.curPage++
           } else {
@@ -159,7 +152,7 @@ export default {
     refuse:function(id,status){
       let vm = this;
       vm.dialogVisible = false;
-      vm.$prompt('请输入拒绝的理由', '提示', {
+      vm.$prompt('请输入不参会原因', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(({ value }) => {
@@ -249,7 +242,7 @@ export default {
             if (ele.update_time == null || ele.update_time == '') {
               ele.update_time = '无'
             } else {
-              ele.update_time = vm.$commonTools.formatHour(ele.update_time)
+              ele.update_time = vm.$commonTools.formatHour(ele.update_time);
             }
           })
           vm.detailMemberList = response.data.result
