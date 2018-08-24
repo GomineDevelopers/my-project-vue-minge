@@ -2,32 +2,27 @@
 <div class="intro-wrapper">
    <vue-headful title="联系我们"/>
   <div class="introduction_header-bg"></div>
- <div class="content">
-  <el-row>
-    <div class="intro-wrapper-bg">
-      <el-row class="button-wrapper">
-        <el-col :span="24"><el-button type="primary" size="large" round @click="godetail">民革简介</el-button></el-col>
-      </el-row>
-    </div>
-  </el-row>
-  <el-row>
-    <el-col :span="24">
-      <div class="intro-constructor-bg " >
-        <el-row  class="button-wrapper">
-          <el-col :span="24"><el-button  @click="dialogVisible = true" type="primary" size="large" round >组织架构</el-button></el-col>
+   <div class="content">
+    <el-row>
+      <div class="intro-wrapper-bg">
+        <el-row class="button-wrapper">
+          <el-col :span="24"><el-button type="primary" size="large" round @click="godetail">民革简介</el-button></el-col>
         </el-row>
       </div>
-    </el-col>
-  </el-row>
-  </div>
-    <el-dialog
-      :visible.sync="dialogVisible"
-      width="100%"
-      top="0px"
-      :modal-append-to-body='false'
-      >
-      <img  src="../../static/image/partyStructure.png" width="100%" alt="" srcset="">
-  </el-dialog>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <div class="intro-constructor-bg " >
+          <el-row  class="button-wrapper">
+            <el-col :span="24"><el-button  @click="clickStructure" type="primary" size="large" round >
+              组织架构
+              <img src="../../static/image/partyStructure.png" width="100%" alt="组织架构的图片" v-gallery v-show="false" ref="hiddenImg">
+            </el-button></el-col>
+          </el-row>
+        </div>
+      </el-col>
+    </el-row>
+    </div>
   </div>
 </template>
 <script>
@@ -41,6 +36,10 @@ export default {
   methods: {
     godetail() {
       this.$router.push({name: "IntroDetail"});
+    },
+    clickStructure(){
+      debugger
+      this.$refs.hiddenImg.click();
     }
   }
 };
@@ -88,5 +87,7 @@ export default {
   font-weight: bold;
   background-color: #2192e0;
 }
-
+.notice{
+  font-size: .5rem;
+}
 </style>
