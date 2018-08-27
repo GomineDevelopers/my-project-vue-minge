@@ -24,10 +24,10 @@
         <el-col :span="24"><span class="quickVal-spanblock"><span class="quickVal-necessary">*</span>出生日期</span>
         </el-col>
       </el-row>
-      <el-row>
+      <el-row class="quickVal-select">
         <el-col :span="24">
           <el-date-picker v-model="quickValBirthday" type="date" size="large" placeholder="请选择"
-                          class="quickVal-select" :picker-options="pickerOptions1"></el-date-picker>
+                          :picker-options="pickerOptions1"></el-date-picker>
         </el-col>
       </el-row>
       <el-row>
@@ -180,10 +180,6 @@
   .quickVal-necessary {
     color: #cb1414;
     padding-right: 4px;
-  }
-
-  .quickVal-select {
-    width: inherit;
   }
 
   .quickVal-btn {

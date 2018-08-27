@@ -503,9 +503,13 @@
 }
 
 .my-dialog .el-dialog {
+  position: absolute;
   top: 50%;
-  margin-top: -95px !important;
+  left: 10%;
+  margin-top: -120px !important;
+  text-align: left;
 }
+
 
 .el-button--primary.is-plain:focus {
   color: #409EFF;
@@ -747,4 +751,9 @@ input {
 .intro-wrapper .el-dialog__wrapper {
   height: 100vh;
   overflow-x: hidden;
+}
+
+.quickVal-select .el-date-editor.el-input,
+.quickVal-select .el-date-editor.el-input__inner {
+  width: 100%;
 }
