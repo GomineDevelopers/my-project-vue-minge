@@ -25,11 +25,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="title" @click="goPoint">
+      <div class="title">
         <i class=" iconfont icon-icon"></i>&nbsp;
         <span class="text">我的积分</span>
 
-        <span class="arrow"><span class="number">{{score}}分</span> <i class="el-icon-arrow-right"></i> </span>
+        <!--<span class="arrow"><span class="number">{{score}}分</span> <i class="el-icon-arrow-right"></i> </span>-->
+        <span class="arrow"><span class="number">{{score}}分</span></span>
       </div>
     </div>
     <div class="row">
