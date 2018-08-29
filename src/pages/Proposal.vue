@@ -12,7 +12,7 @@
           <div class="note" v-text='"提案"+(index+1)'></div>
           <div class="block">
             <div class="title" v-text="item.title"></div>
-            <div class="content" v-text="item.content"></div>
+            <div class="content" v-text="item.back"></div>
             <div class="btn-row" v-if="item.status == 0">
               <span class="edit" @click="editProposal(item.id)"><i class="el-icon-edit-outline"></i>修改</span>
               <span class="delete" @click="del(item.id)"><i class="el-icon-delete"></i>删除</span>
@@ -33,39 +33,39 @@
 
 <script>
 export default {
-  name: 'proposal',
+  name: "proposal",
   data() {
     return {
       isLast: false,
       listData: [],
       curPage: 1
-    }
+    };
   },
   methods: {
     infinite: function(done) {
-      let vm = this
+      let vm = this;
       if (!vm.isLast) {
-        vm.getListData(done)
+        vm.getListData(done);
       } else {
-        done(true)
+        done(true);
       }
     },
     getListData: function(done) {
-      let vm = this
+      let vm = this;
       this.axios(vm.$commonTools.g_restUrl, {
         params: {
-          i: '8',
-          c: 'entry',
-          p: 'proposal',
-          do: 'shop',
-          m: 'ewei_shop',
+          i: "8",
+          c: "entry",
+          p: "proposal",
+          do: "shop",
+          m: "ewei_shop",
           page: vm.curPage
         }
       })
         .then(function(response) {
           if (response.data.result.data) {
             for (var i = 0; i < response.data.result.data.length; i++) {
-              vm.listData.push(response.data.result.data[i])
+              vm.listData.push(response.data.result.data[i]);
             }
           }
 
@@ -73,75 +73,75 @@ export default {
             response.data.result.data &&
             response.data.result.data.length == 10
           ) {
-            vm.isLast = false
-            vm.curPage++
+            vm.isLast = false;
+            vm.curPage++;
           } else {
-            vm.isLast = true
+            vm.isLast = true;
           }
-          done()
+          done();
         })
         .catch(function(error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     },
     del: function(id) {
-      let vm = this
+      let vm = this;
       vm
-        .$confirm('是否要删除该提案?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
+        .$confirm("是否要删除该提案?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
         })
         .then(() => {
           this.axios(vm.$commonTools.g_restUrl, {
             params: {
-              i: '8',
-              c: 'entry',
-              p: 'proposal',
-              do: 'shop',
-              m: 'ewei_shop',
-              ac: 'del',
+              i: "8",
+              c: "entry",
+              p: "proposal",
+              do: "shop",
+              m: "ewei_shop",
+              ac: "del",
               id: id
             }
           })
             .then(function(response) {
-              if (response.data.status == '200') {
+              if (response.data.status == "200") {
                 vm.$message({
-                  type: 'success',
-                  message: '删除成功!'
-                })
+                  type: "success",
+                  message: "删除成功!"
+                });
                 vm.$nextTick(function() {
-                  vm.listData = []
-                  vm.curPage = 1
-                  vm.isLast = false
-                  vm.$refs.scroller.finishInfinite(false)
-                })
-              } else if (response.data.status == '403') {
+                  vm.listData = [];
+                  vm.curPage = 1;
+                  vm.isLast = false;
+                  vm.$refs.scroller.finishInfinite(false);
+                });
+              } else if (response.data.status == "403") {
                 vm.$message({
-                  type: 'success',
-                  message: '删除失败，请重试!'
-                })
+                  type: "success",
+                  message: "删除失败，请重试!"
+                });
               }
             })
             .catch(function(error) {
-              console.info(error)
-            })
+              console.info(error);
+            });
         })
         .catch(() => {
           vm.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     goProposalEdit: function() {
-      this.$router.push({ name: 'ProposalEdit' })
+      this.$router.push({ name: "ProposalEdit" });
     },
     editProposal: function(id) {
-      this.$router.push({ name: 'ProposalEdit', params: { proposalId: id } })
+      this.$router.push({ name: "ProposalEdit", params: { proposalId: id } });
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -277,7 +277,7 @@ export default {
 }
 
 .status-refuse .c1 {
-  border-top: 60px solid #E6A23C;
+  border-top: 60px solid #e6a23c;
 }
 </style>
 
