@@ -164,6 +164,8 @@ export default {
   text-align: left;
   margin: 5vh auto;
   width: 70%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .register-spanblock {

@@ -119,8 +119,11 @@
 
 <style scoped>
   .check-proposal-wrap {
-    margin: 10%;
+    margin: 5vh;
     text-align: left;
+    height: 87vh;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .check-proposal-wrap .proposal-card {

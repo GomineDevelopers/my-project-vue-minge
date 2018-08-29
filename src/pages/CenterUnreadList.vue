@@ -21,8 +21,8 @@
                  @click="goDetail(item,item.type)">
               <div class="Un_card_list">
                 <div class="circle"><span>●&nbsp;&nbsp;&nbsp;</span></div>
-                <div v-text="item.title" class="title" v-if="type != 3"></div>
-                <div v-text="item.realname" class="title" v-if="type == 4"></div>
+                <div v-text="item.title" class="title" v-if="type == 1"></div>
+                <div v-text="item.realname" class="title" v-if="type == 2 || type == 4"></div>
                 <div v-if="type == 1" class="Un_card_div">的入党申请</div>
                 <div v-if="type == 4" class="Un_card_div">的快速验证申请</div>
                 <div v-else-if="type == 2" class="Un_card_div">的提案</div>
