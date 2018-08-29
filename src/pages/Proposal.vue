@@ -196,12 +196,14 @@ export default {
 }
 
 .proposal-cover .proposal-list .row .block .content {
+  padding: 6px 10px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  overflow: hidden;
+  max-height: 40px;
   line-height: 25px;
-  padding: 5px 60px 5px 8px;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .proposal-cover .proposal-list .row .block .btn-row {
