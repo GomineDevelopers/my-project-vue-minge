@@ -27,7 +27,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input type="textarea" :rows="4" v-model.trim="form.ProposalQuestion"></el-input>
+            <el-input type="textarea" :rows="4" v-model.trim="form.ProposalProblem"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -63,7 +63,7 @@ export default {
       form: {
         ProposalName: "",
         ProposalBackground: "",
-        ProposalQuestion: "",
+        ProposalProblem: "",
         ProposalAdvice: "",
         proposalId: ""
       }
@@ -92,7 +92,7 @@ export default {
           if (response.status == "200") {
             vm.form.ProposalName = response.data.result.data.title;
             vm.form.ProposalBackground = response.data.result.data.back;
-            vm.form.ProposalQuestion = response.data.result.data.problem;
+            vm.form.ProposalProblem = response.data.result.data.problem;
             vm.form.ProposalAdvice = response.data.result.data.advice;
           }
         })
@@ -105,8 +105,8 @@ export default {
       let postData = {};
       postData.title = vm.form.ProposalName;
       postData.back = vm.form.ProposalBackground;
-      postData.suggest = vm.form.ProposalQuestion;
-      postData.content = vm.form.ProposalAdvice;
+      postData.problem = vm.form.ProposalProblem;
+      postData.advice = vm.form.ProposalAdvice;
       postData.status = typeId;
       postData.id = vm.$route.params.proposalId;
       if (vm.proposalValidate()) {
@@ -143,7 +143,7 @@ export default {
         msg = "未填写提案名称";
       } else if (!vm.form.ProposalBackground) {
         msg = "未填写提案背景";
-      } else if (!vm.form.ProposalQuestion) {
+      } else if (!vm.form.ProposalProblem) {
         msg = "未填写提案背景";
       } else if (!vm.form.ProposalAdvice) {
         msg = "未填写提案背景";
