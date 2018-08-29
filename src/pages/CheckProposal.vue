@@ -16,7 +16,7 @@
         </el-row>
         <el-row class="proposal-card">
           <el-col :span="24" class="proposal-title">问题</el-col>
-          <el-col :span="24" class="proposal-content" v-text="proposalContent">
+          <el-col :span="24" class="proposal-content" v-text="proposalProblem">
 
           </el-col>
         </el-row>
@@ -48,7 +48,7 @@
     data() {
       return {
         proposalTitle: '',
-        proposalContent: '',
+        proposalProblem: '',
         proposalBackground: '',
         proposalSuggests: '',
         status: ''
@@ -74,9 +74,9 @@
           .then(function (response) {
             if (response.data.status == "200") {
               vm.proposalTitle = response.data.result.data.title
-              vm.proposalContent = response.data.result.data.suggest
+              vm.proposalProblem = response.data.result.data.problem
               vm.proposalBackground = response.data.result.data.back
-              vm.proposalSuggests = response.data.result.data.content
+              vm.proposalSuggests = response.data.result.data.advice
               vm.status = response.data.result.data.status
             }
             else if (response.data.status == "201") {

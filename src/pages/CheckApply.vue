@@ -87,7 +87,7 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <div class="application_ch" >尊敬的领导：</div>
+          <div class="application_ch" ><span v-text="application.title"></span>：</div>
         </el-col>
       </el-row>
       <el-row>
@@ -97,12 +97,12 @@
       </el-row>
       <el-row class="application_bottomTime" >
         <el-col :span="24">
-          <span>2018年8月13日</span>
+          <span v-text="$commonTools.formatDate(application.application_date)"></span>
         </el-col>
       </el-row>
       <el-row class="application_bottomName">
         <el-col :span="24">
-          申请人：<span>王五</span>
+          申请人：<span v-text="application.realname"></span>
         </el-col>
       </el-row>
       <el-row class="application_button">
