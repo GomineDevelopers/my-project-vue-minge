@@ -12,7 +12,11 @@
       <el-row class="news-detail-top-row">
         <el-col :span="24">
           <div class="news-detail-subtitle">
-            <span class="news-detail-subtitle-span" v-text="source_c"></span><span v-text="article_time_c"></span>
+            <!--<span class="news-detail-subtitle-span" v-text="source_c"></span><span v-text="article_time_c"></span>-->
+            <el-row>
+              <el-col :span="12"><div class="sourceDiv" v-text="source_c"></div></el-col>
+              <el-col :span="12"><div v-text="article_time_c"></div></el-col>
+            </el-row>
           </div>
         </el-col>
       </el-row>
@@ -110,7 +114,7 @@ export default {
         : ''
     },
     source_c: function() {
-      return this.source ? '来源：' + this.source : ''
+      return this.source ? '来源：' + this.source : '来源：未知'
     }
   },
   watch: {
@@ -124,8 +128,7 @@ export default {
   methods: {
     isMember: function() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -161,8 +164,7 @@ export default {
     },
     getDetailData: function() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -203,8 +205,7 @@ export default {
     },
     collect: function(commentId) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -272,11 +273,17 @@ export default {
 
 .news-detail-subtitle {
   color: #999999;
-  font-size: 14px;
+  font-size: 12px;
 }
 
-.news-detail-subtitle-span {
+/*.news-detail-subtitle-span {
   margin-right: 20px;
+}*/
+
+.sourceDiv{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .news-detail-top-article {
@@ -296,6 +303,7 @@ export default {
   height: 20px;
   line-height: 20px;
 }
+
 
 .news-detail-bottom-span-icon1 {
   float: left;

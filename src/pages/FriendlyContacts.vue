@@ -93,8 +93,8 @@ export default {
 
 .row .title {
   width: 100%;
-  max-height: 6vh;
-  line-height: 3vh;
+  max-height: 8vh;
+  line-height: 4vh;
   overflow: hidden;
 }
 
