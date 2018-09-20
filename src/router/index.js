@@ -27,6 +27,7 @@ import Proposal from '@/pages/Proposal'
 import ProposalEdit from '@/pages/ProposalEdit'
 //党员风采
 import Member from '@/pages/Member'
+import MemberDetail from '@/pages/MemberDetail'
 //我的民革-不是会员
 import NoMember from '@/pages/NoMember'
 //我的民革-不是会员的不同状态
@@ -195,6 +196,11 @@ export default new Router({
       path: '/member',
       name: 'Member',
       component: Member
+    },
+    {
+      path: '/memberdetail/:id',
+      name: 'MemberDetail',
+      component: MemberDetail
     },
     {
       path: '/noMember',

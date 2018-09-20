@@ -1,100 +1,118 @@
 <template>
-  <div class="memberCover">
+  <div class="list-container full-container">
     <vue-headful title="党员风采"/>
-    <div class="memberBg memberContainer" v-for="item in listData">
-      <el-row class="memberRow">
-        <el-col :span="9" class="avatar"><img :src="item.thumb"></el-col>
-        <el-col :span="15">
-          <div class="memberName" v-text="item.name"></div>
-          <div class="memberDescription" v-html="item.description"></div>
-        </el-col>
-      </el-row>
-    </div>
+    <scroller
+      :on-infinite="infinite" class="scroller-container" >
+      <!-- content goes here -->
+      <div style="height: 44px;"></div>
+
+      <div v-for="item in items" class="row" :key="item.index" @click="goDetail(item.id)">
+        <div class="title">{{item.title}}</div>
+        <div class="image"><img :src="item.thumb"></div>
+        <div class="readMore" @click="goDetail(item.id)">查看详情>></div>
+      </div>
+    </scroller>
   </div>
 </template>
 
 <script>
     export default {
-        name: "member",
-        data(){
-          return{
-            listData:[]
-          }
-        },
-        created() {
-          this.getMemberList();
-        },
-        methods:{
-          getMemberList:function () {
-            let vm = this;
-            this.axios(vm.$commonTools.g_restUrl,{
-              params:{
-                i: "8",
-                c: "entry",
-                p: "information",
-                do: "shop",
-                m: "ewei_shop"
-              }
-            })
-              .then(function (response) {
-                if(response.data.result.data){
-                  for(var i = 0 ; i < response.data.result.data.length ; i++){
-                    vm.listData.push(response.data.result.data[i]);
-                  }
+        name: "Member",
+      data() {
+        return {
+          items: [],
+          curPage: 1,
+          isLast: false
+        };
+      },
+      methods: {
+        getListByCateId(done) {
+          let vm = this;
+          this.axios(vm.$commonTools.g_restUrl, {
+            params: {
+              i: "8",
+              c: "entry",
+              p: "article",
+              do: "shop",
+              m: "ewei_shop",
+              ccate: 61, //分类
+              page: vm.curPage
+            }
+          })
+            .then(function(response) {
+              if (response.data.result.list) {
+                for (var i = 1; i <= response.data.result.list.length; i++) {
+                  vm.items.push(response.data.result.list[i - 1]);
                 }
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+              }
+
+              if (
+                response.data.result.list &&
+                response.data.result.list.length == 10
+              ) {
+                vm.isLast = false;
+                vm.curPage++;
+              } else {
+                vm.isLast = true;
+              }
+              done();
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+        },
+        infinite(done) {
+          let vm = this;
+          if (!vm.isLast) {
+            vm.getListByCateId(done);
+          } else {
+            done(true);
           }
+        },
+        goDetail(id) {
+          this.$router.push({ name: "NewsDetail", params: { id: id } });
         }
+      }
     }
 </script>
 
 <style scoped>
-  .memberCover{
-    margin: 20px;
+  .scroller-container {
+    top: -44px !important;
+    padding-bottom: 44px;
+    background: #ebebeb;
   }
 
-  .memberContainer{
-    margin-bottom: 10px;
-    height: 100px;
+  .row {
+    padding: 5% 3vh;
+    border-bottom: 1px solid #d3dce6;
+    background: white;
+    text-align: justify;
+    margin-bottom: 1.5vh;
   }
 
-  .memberRow{
-    height: inherit;
-  }
-
-  .avatar{
-    height: inherit;
-    background-size: 100% 100%;
-    width: 90px;
-  }
-
-  .avatar img {
-    width: inherit;
-    height: inherit;
-    border-radius: 10px 0 0 10px;
-  }
-
-  .memberName{
-    font-size: 18px;
-    color: #1264b4;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .row .title {
+    width: 100%;
+    max-height: 8vh;
+    line-height: 4vh;
     overflow: hidden;
-    padding: 15px 5px 5px 10px;
   }
 
-  .memberDescription{
-    text-align: left;
-    font-size: 14px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    line-height: 20px;
-    padding: 0px 5px 5px 10px;
+  .row .image {
+    margin-top: 0.6vh;
+    height: 20vh;
+    width: 100%;
+  }
+
+  .row .image img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .readMore {
+    text-align: right;
+    margin-top: 10px;
+    color: #cccccc;
+    font-size: 12px;
   }
 </style>

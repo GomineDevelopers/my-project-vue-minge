@@ -335,8 +335,7 @@ export default {
     },
     getCenterData: function() {
       let vm = this;
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: "8",
             c: "entry",

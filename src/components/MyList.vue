@@ -89,7 +89,7 @@ export default {
 
 .row {
   margin: 0 2%;
-  padding: 0.9vh 0;
+  padding: 2vh 0;
   height: 12vh;
   border-bottom: 1px solid #d3dce6;
 }
