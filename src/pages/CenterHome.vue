@@ -70,7 +70,7 @@
       </div>
     </el-row>
     <el-row class="mt-1-5">
-      <div @click="goVideo">
+      <div>
         <el-col :span="9" :offset="2" class="document-cover d3">
           <i class="iconfont icon-shipin-tianchong note"/>
           <span class="text"><i class="iconfont icon-yuandian dot"/> 视频</span>
@@ -287,7 +287,7 @@
   }
 
   .d3 .iconfont {
-    color: #8395ea;
+    color: #cccccc;
   }
 
   .d4 .iconfont {
