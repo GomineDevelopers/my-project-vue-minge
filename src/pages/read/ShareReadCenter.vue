@@ -10,7 +10,8 @@
       </el-row>
       <el-row>
         <div class="bottomDiv">
-          <span><i class="iconfont icon-together-read"></i> &nbsp;{{item.date}}</span>
+          <span class="share-read-center-span-icon1"><i class="iconfont icon-together-read"></i> &nbsp;{{item.date}}</span>
+          <span class="share-read-center-span-icon2" @click="goDetail(item.id)"><i class="el-icon-edit-outline"></i>留言</span>
         </div>
       </el-row>
     </div>
@@ -50,7 +51,8 @@
                 "act": messageArray[1],
                 "accept": messageArray[2].substring(0, messageArray[2].length - 1),
                 "book": messageArray[3],
-                "date": vm.$commonTools.formatDate(response.data.result[i].create_time)
+                "date": vm.$commonTools.formatDate(response.data.result[i].create_time),
+                "id":response.data.result[i].id
               }
               vm.shareReadList.push(messageObject);
             }
@@ -59,6 +61,9 @@
             console.log(error)
           })
       },
+      goDetail(id){
+        this.$router.push({ name: 'ShareReadDetail', params: { id: id } });
+      }
     }
   }
 </script>
@@ -88,9 +93,14 @@
   }
 
   .bottomDiv span {
-    padding-left: 5px;
-    color: #8a969f;
     font-size: 14px;
   }
 
+  .share-read-center-span-icon1{
+    float: left;
+    color: #8a969f;
+  }
+  .share-read-center-span-icon2{
+    color: #0064ba;
+  }
 </style>

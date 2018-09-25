@@ -174,8 +174,7 @@ export default {
   methods: {
     isMember: function() {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -215,7 +214,10 @@ export default {
       if (vm.$route.name == 'NoteComment') {
         vm.commentTypeId = 1
         vm.changeUrlName = 'NoteComment'
-      } else {
+      } else if(vm.$route.name == 'ShareReadComment') {
+        vm.commentTypeId = 2
+        vm.changeUrlName = 'ShareReadComment'
+      }else{
         vm.commentTypeId = 0
         vm.changeUrlName = 'NewsComment'
       }
@@ -230,8 +232,7 @@ export default {
     },
     getCommentData(done) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -267,8 +268,7 @@ export default {
     },
     getReplyData(done) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',
@@ -316,8 +316,7 @@ export default {
           showClose: true
         })
       } else {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -356,8 +355,7 @@ export default {
           showClose: true
         })
       } else {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: 'post',
             params: {
               i: '8',
@@ -406,8 +404,7 @@ export default {
     },
     collect: function(commentId) {
       let vm = this
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           params: {
             i: '8',
             c: 'entry',

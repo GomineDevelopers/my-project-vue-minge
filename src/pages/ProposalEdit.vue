@@ -9,7 +9,12 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model.trim="form.ProposalName" size="medium" clearable></el-input>
+            <el-input type="textarea" :rows="3" v-model.trim="form.ProposalName" maxlength="40"></el-input>
+            <div class="count">
+              <span v-text="form.ProposalName.length"></span>
+              <span>/</span>
+              <span>40</span>
+            </div>
           </el-col>
         </el-row>
         <el-row>
@@ -18,7 +23,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input v-model.trim="form.ProposalBackground" size="medium" clearable></el-input>
+            <el-input type="textarea" :rows="6" v-model.trim="form.ProposalBackground"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -27,7 +32,7 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-input type="textarea" :rows="4" v-model.trim="form.ProposalProblem"></el-input>
+            <el-input type="textarea" :rows="6" v-model.trim="form.ProposalProblem"></el-input>
           </el-col>
         </el-row>
         <el-row>
@@ -75,8 +80,7 @@ export default {
   methods: {
     editProposal() {
       let vm = this;
-      vm
-        .axios(vm.$commonTools.g_restUrl, {
+      vm.axios(vm.$commonTools.g_restUrl, {
           method: "post",
           params: {
             i: "8",
@@ -89,11 +93,12 @@ export default {
           }
         })
         .then(function(response) {
-          if (response.status == "200") {
+          if (response.data.result.data) {
             vm.form.ProposalName = response.data.result.data.title;
             vm.form.ProposalBackground = response.data.result.data.back;
             vm.form.ProposalProblem = response.data.result.data.problem;
             vm.form.ProposalAdvice = response.data.result.data.advice;
+
           }
         })
         .catch(function(error) {
@@ -110,8 +115,7 @@ export default {
       postData.status = typeId;
       postData.id = vm.$route.params.proposalId;
       if (vm.proposalValidate()) {
-        vm
-          .axios(vm.$commonTools.g_restUrl, {
+        vm.axios(vm.$commonTools.g_restUrl, {
             method: "post",
             params: {
               i: "8",
@@ -164,6 +168,7 @@ export default {
   text-align: left;
   margin: 5vh auto;
   width: 70%;
+  height: 87vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -193,6 +198,16 @@ export default {
 .register-btn {
   text-align: center;
   margin-top: 2vh;
+}
+
+.count {
+  width: 60px;
+  position: absolute;
+  text-align: right;
+  color: #b2b2b2;
+  right: 5vw;
+  bottom: 6px;
+  font-size: 12px;
 }
 </style>
 

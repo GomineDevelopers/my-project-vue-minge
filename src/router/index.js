@@ -84,6 +84,8 @@ import BooksCenter from '@/pages/read/BooksCenter'
 import NotesCenter from '@/pages/read/NotesCenter'
 //约伴读书
 import ShareReadCenter from '@/pages/read/ShareReadCenter'
+import ShareReadDetail from '@/pages/read/ShareReadDetail'
+import ShareReadComment from '@/pages/read/ShareReadComment'
 //心得笔记-详情
 import NotesCenterDetail from '@/pages/read/NotesCenterDetail'
 //心得笔记-留言
@@ -427,6 +429,11 @@ export default new Router({
           name: 'ShareReadCenter'
         },
         {
+          path: 'shareReadDetail/:id',
+          component: ShareReadDetail,
+          name: 'ShareReadDetail'
+        },
+        {
           path: 'notesCenterDetail/:noteId',
           component: NotesCenterDetail,
           name: 'NotesCenterDetail'
@@ -495,7 +502,16 @@ export default new Router({
       meta: {
         requiresAuth: true
       }
-    }, {
+    },
+    {
+      path: '/shareReadComment/:id/:typeId',
+      component: ShareReadComment,
+      name: 'ShareReadComment',
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/application/one',
       component: ApplicationOne,
       name: 'ApplicationOne'

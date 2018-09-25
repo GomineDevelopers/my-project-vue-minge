@@ -35,8 +35,10 @@
               <div class="c1"></div>
               <div class="c2"></div>
               <div class="c3" v-if="item.status == 1">未处理</div>
-              <div class="c3" v-if="item.status == 3">通过</div>
-              <div class="c3" v-if="item.status == 4">未通过</div>
+              <div class="c3" v-if="item.status == 3 && type != 2">通过</div>
+              <div class="c3" v-if="item.status == 3 && type == 2">已接受</div>
+              <div class="c3" v-if="item.status == 4 && type != 2">未通过</div>
+              <div class="c3" v-if="item.status == 4 && type == 2">未接受</div>
             </div>
           </el-col>
         </el-row>
