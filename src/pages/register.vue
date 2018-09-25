@@ -218,3 +218,9 @@ export default {
 }
 </style>
 
+<style>
+  .el-scrollbar__bar{
+    opacity: 1 !important;
+  }
+</style>
+
