@@ -32,11 +32,11 @@
                         v-model="meetingTime"
                         size="medium"
                         type="datetime"
-                        value-format="yyyy-MM-dd HH:mm"
+                        format="yyyy-MM-dd HH:mm"
                         :picker-options="pickerOptions1"
                         placeholder="选择日期时间"
                         align="center"
-                        default-time="09:00">
+                        default-time="09:00:00">
                       </el-date-picker>
                     </el-col>
             </el-row>
