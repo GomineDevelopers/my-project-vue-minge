@@ -32,7 +32,6 @@
                         v-model="meetingTime"
                         size="medium"
                         type="datetime"
-                        format="yyyy-MM-dd HH:mm"
                         value-format="yyyy-MM-dd HH:mm"
                         :picker-options="pickerOptions1"
                         placeholder="选择日期时间"
