@@ -28,12 +28,12 @@
         </el-row>
         <el-row>
           <el-col :span="24" class="proposal-button-wrap" v-if="status == 1">
-            <el-button type="primary" size="medium" @click="changeStatus(3)">通过</el-button>
-            <el-button class="color-button" type="" plain size="medium" @click="changeStatus(4)">拒绝</el-button>
+            <el-button type="primary" size="medium" @click="changeStatus(3)">接受</el-button>
+            <el-button class="color-button" type="" plain size="medium" @click="changeStatus(4)">不接受</el-button>
           </el-col>
           <el-col :span="24" class="proposal-button-wrap">
-            <el-tag type="success" size="medium" v-if="status == 3">已通过</el-tag>
-            <el-tag type="warning" size="medium" v-if="status == 4">已拒绝</el-tag>
+            <el-tag type="success" size="medium" v-if="status == 3">已接受</el-tag>
+            <el-tag type="warning" size="medium" v-if="status == 4">未接受</el-tag>
           </el-col>
         </el-row>
       </el-col>

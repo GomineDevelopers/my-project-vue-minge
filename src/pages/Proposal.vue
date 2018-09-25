@@ -19,8 +19,8 @@
             </div>
             <div class="c1"></div>
             <div class="c2"></div>
-            <div class="c3 status-pass" v-if="item.status == 3">已通过</div>
-            <div class="c3" v-else-if="item.status == 4">被拒绝</div>
+            <div class="c3 status-pass" v-if="item.status == 3">已接受</div>
+            <div class="c3" v-else-if="item.status == 4">未接受</div>
             <div class="c3" v-else-if="item.status == 1">审核中</div>
             <div class="c3" v-else-if="item.status == 0">待提交</div>
           </div>
