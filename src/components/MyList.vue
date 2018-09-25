@@ -116,7 +116,7 @@ export default {
 
 .row .title {
   width: 100%;
-  height: 8vh;
+  height: 7vh;
   line-height: 3.5vh;
   overflow: hidden;
   font-size: 0.9rem;

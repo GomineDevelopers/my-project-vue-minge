@@ -88,8 +88,7 @@ export default {
         { value: '中国致公党', label: '中国致公党' },
         { value: '九三学社', label: '九三学社' },
         { value: '台湾民主自治同盟', label: '台湾民主自治同盟' },
-        { value: '无党派人士', label: '无党派人士' },
-        { value: '其他', label: '其他' }
+        { value: '无党派人士', label: '无党派人士' }
       ],
       pickerOptions1: {
         disabledDate(time) {
