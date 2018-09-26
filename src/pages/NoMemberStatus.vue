@@ -20,7 +20,7 @@
     </div>
     <div class="no-container" v-if="statusId==2">
       <img src="../../static/image/kaohe.png"/>
-      <span class="text">您好，您的党员申请初审已通过，现处于一年考核期。</span>
+      <span class="text">您好，您的党员申请初审已通过，现处于一年考核期,请与您的入党介绍人保持联系。</span>
       <i class="el-icon-d-arrow-right icon"></i>
       <div class="step-cover">
         <span class="dot active-dot dot2 "></span>

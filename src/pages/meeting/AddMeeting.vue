@@ -12,7 +12,7 @@
             </el-row>
             <el-row class="item-content">
           <el-col :span="24">
-            <el-select v-model="selectedGroup" placeholder="请选择分组" size="medium" class="book-select">
+            <el-select v-model="selectedGroup" placeholder="请选择分组" size="medium" multiple class="book-select">
               <el-option v-for="item in groups"  :label="item.name"
                          :value="item.id" :key="item.id"></el-option>
             </el-select>
@@ -97,7 +97,7 @@ export default {
 			},
 			meetingLocation: '',
 			groups: [],
-			groupName: '',
+			groupName: [],
 		};
 	},
 	mounted: function() {
@@ -126,17 +126,19 @@ export default {
 
 		addWorks() {
 			let vm = this;
-			let postData = {};
+      let postData = {};
 			postData.theme = vm.meetingContent;
 			postData.date = vm.meetingTime;
 			postData.address = vm.meetingLocation;
-			vm.groups.forEach(function(element, index, array) {
-				if (vm.selectedGroup == element.id) {
-					vm.groupName = element.name;
-				}
-			});
-			postData.group_name = vm.groupName;
-			postData.groupid = vm.selectedGroup;
+			// vm.groups.forEach(function(element, index, array) {
+
+      //     if (vm.selectedGroup == element.id) {
+			// 		vm.groupName.push(element.name);
+			// 	}
+
+			// });
+      // postData.group_name = vm.groupName;
+      postData.groupid = vm.selectedGroup;
 
 			if (vm.worksValidate()) {
 				vm.axios(vm.$commonTools.g_restUrl, {

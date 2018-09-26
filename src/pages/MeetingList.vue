@@ -202,7 +202,7 @@ export default {
             vm.dialogVisible = false
             vm.$message({
               showClose: true,
-              message: '还未到签到时间，请于开会前半小时内确认',
+              message: '还未到签到时间，请于开会前5分钟至开会后10分钟之内签到',
               type: 'error'
             })
           }
