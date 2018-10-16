@@ -79,7 +79,7 @@
       <div @click="goFeedback">
         <el-col :span="9" :offset="1" class="document-cover d4">
           <i class="iconfont icon-jilu note"/>
-          <span class="text"><i class="iconfont icon-yuandian dot"/> 感想</span>
+          <span class="text"><i class="iconfont icon-yuandian dot"/> 工作总结</span>
         </el-col>
       </div>
     </el-row>

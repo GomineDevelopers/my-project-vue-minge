@@ -50,12 +50,12 @@ export default {
       thoughtsTitle: '',
       thoughtsContent: '',
       type: '2',
-      defautTitle: '添加感想'
+      defautTitle: '添加总结'
     }
   },
   mounted: function() {
     if (this.$route.params.thoughtId) {
-      this.defautTitle = '修改感想'
+      this.defautTitle = '修改总结'
       this.getExistedThoughtData()
     }
   },
@@ -64,9 +64,9 @@ export default {
       let vm = this
       let msg = ''
       if (!vm.thoughtsTitle) {
-        msg = '未填写感想标题'
+        msg = '未填写总结标题'
       } else if (!vm.thoughtsContent) {
-        msg = '未填写感想内容'
+        msg = '未填写总结内容'
       }
       if (msg) {
         vm.$message.error(msg)
