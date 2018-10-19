@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="center_home_bg" v-show="!isShowPDF">
+    <div class="center_home_bg" v-show="!isShowPDF1 && !isShowPDF2">
       <vue-headful title="个人中心"/>
       <el-row class="mt-10">
         <el-col :span="20" :offset="2" class="title-cover">
@@ -99,15 +99,18 @@
         </el-col>
       </el-row>
     </div>
-    <div class="pdf-cover" v-show="isShowPDF">
-      <el-button icon="el-icon-close" circle type="primary" class="close" @click="closePDF"></el-button>
-      <pdf v-if="fileId==1"
+    <div class="pdf-cover" v-show="isShowPDF1">
+      <el-button icon="el-icon-close" circle type="primary" class="close" @click="closePDF(1)"></el-button>
+      <pdf keep-alive
            v-for="i in numPages1"
            :key="i"
            :src="pdfSrc1"
            :page="i"
       ></pdf>
-      <pdf v-if="fileId==2"
+    </div>
+    <div class="pdf-cover" v-show="isShowPDF2">
+      <el-button icon="el-icon-close" circle type="primary" class="close" @click="closePDF(2)"></el-button>
+      <pdf keep-alive
            v-for="i in numPages2"
            :key="i"
            :src="pdfSrc2"
@@ -129,42 +132,43 @@
         proposalNum: 0,
         inviteNum: 0,
         grade: 1,
-        pdfSrc1: null,
-        pdfSrc2: null,
+        pdfSrc1: pdf.createLoadingTask('./static/introduce.pdf'),
+        pdfSrc2: pdf.createLoadingTask('./static/zoom.pdf'),
         numPages1: undefined,
         numPages2: undefined,
-        isShowPDF: false,
-        fileId: 0
+        isShowPDF1: false,
+        isShowPDF2: false,
       }
     },
     components: {
       pdf
     },
     mounted() {
-      this.getCenterHomeData()
+      let self = this;
+      self.getCenterHomeData()
+
     },
     methods: {
       showPDF: function (fileId) {
-        this.isShowPDF = true;
         if (fileId == 1) {
-          this.pdfSrc2=null;
-          this.fileId = 1;
-          this.pdfSrc1 =  pdf.createLoadingTask("./static/introduce.pdf");
+
           this.pdfSrc1.then(pdf => {
             this.numPages1 = pdf.numPages;
           });
+          this.isShowPDF1 = true
         }
-        else if (fileId == 2) {
-          this.pdfSrc1=null;
-          this.fileId = 2;
-          this.pdfSrc2 = pdf.createLoadingTask("./static/zoom.pdf");
+        else {
           this.pdfSrc2.then(pdf => {
             this.numPages2 = pdf.numPages;
           });
+          this.isShowPDF2 = true
         }
       },
-      closePDF: function () {
-        this.isShowPDF = false;
+      closePDF: function (fileId) {
+        if (fileId == 1)
+          this.isShowPDF1 = false;
+        else
+          this.isShowPDF2 = false;
       },
       getCenterHomeData: function () {
         let vm = this
