@@ -1,106 +1,117 @@
 <template>
-  <div class="center_home_bg ">
-    <vue-headful title="个人中心"/>
-    <el-row class="mt-10">
-      <el-col :span="20" :offset="2" class="title-cover">
-        <span class="title">我的提醒</span>
-      </el-col>
-    </el-row>
-    <el-row class="mt-5">
-      <div @click="goUnreadList(1)" v-if="grade==0">
-        <el-col :span="20" :offset="2" class="message-cover">
-          <span class="dot"></span><span class="message">新的入党申请</span>
-          <span class="number" v-show="partyNum>0 && partyNum<10"> {{partyNum}}</span>
-          <span class="number more-number" v-show=" partyNum>10"> ...</span>
-          <i class="iconfont icon-dang"/>
-          <span class="c1"></span>
+  <div>
+    <div class="center_home_bg" v-show="!isShowPDF">
+      <vue-headful title="个人中心"/>
+      <el-row class="mt-10">
+        <el-col :span="20" :offset="2" class="title-cover">
+          <span class="title">我的提醒</span>
         </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5" v-if="grade==0">
-      <div @click="goUnreadList(4)">
-        <el-col :span="20" :offset="2" class="message-cover">
-          <span class="dot"></span><span class="message">新的快速验证申请</span>
-          <span class="number" v-show="quickNum>0 && quickNum<10"> {{quickNum}}</span>
-          <span class="number more-number" v-show=" quickNum>10"> ...</span>
-          <i class="iconfont icon-kuai"/>
-          <span class="c1"></span>
+      </el-row>
+      <el-row class="mt-5">
+        <div @click="goUnreadList(1)" v-if="grade==0">
+          <el-col :span="20" :offset="2" class="message-cover">
+            <span class="dot"></span><span class="message">新的入党申请</span>
+            <span class="number" v-show="partyNum>0 && partyNum<10"> {{partyNum}}</span>
+            <span class="number more-number" v-show=" partyNum>10"> ...</span>
+            <i class="iconfont icon-dang"/>
+            <span class="c1"></span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5" v-if="grade==0">
+        <div @click="goUnreadList(4)">
+          <el-col :span="20" :offset="2" class="message-cover">
+            <span class="dot"></span><span class="message">新的快速验证申请</span>
+            <span class="number" v-show="quickNum>0 && quickNum<10"> {{quickNum}}</span>
+            <span class="number more-number" v-show=" quickNum>10"> ...</span>
+            <i class="iconfont icon-kuai"/>
+            <span class="c1"></span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5" v-if="grade==0">
+        <div @click="goUnreadList(2)">
+          <el-col :span="20" :offset="2" class="message-cover">
+            <span class="dot"></span><span class="message">新的提案</span>
+            <span class="number" v-show="proposalNum>0 && proposalNum<10"> {{proposalNum}}</span>
+            <span class="number more-number" v-show=" proposalNum>10"> ...</span>
+            <i class="iconfont icon-tianguanli"/>
+            <span class="c1"></span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5">
+        <div @click="goUnreadList(3)">
+          <el-col :span="20" :offset="2" class="message-cover">
+            <span class="dot"></span><span class="message">新的读书邀请</span>
+            <span class="number" v-show="inviteNum>0 && inviteNum<10"> {{inviteNum}}</span>
+            <span class="number more-number" v-show=" inviteNum>10"> ...</span>
+            <i class="iconfont icon-dushu"/>
+            <span class="c1"></span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5">
+        <el-col :span="20" :offset="2" class="title-cover">
+          <span class="title">我的文档</span>
         </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5" v-if="grade==0">
-      <div @click="goUnreadList(2)">
-        <el-col :span="20" :offset="2" class="message-cover">
-          <span class="dot"></span><span class="message">新的提案</span>
-          <span class="number" v-show="proposalNum>0 && proposalNum<10"> {{proposalNum}}</span>
-          <span class="number more-number" v-show=" proposalNum>10"> ...</span>
-          <i class="iconfont icon-tianguanli"/>
-          <span class="c1"></span>
+      </el-row>
+      <el-row class="mt-5">
+        <div @click="goWorks">
+          <el-col :span="9" :offset="2" class="document-cover d1">
+            <i class="iconfont icon-zuopinji note"/>
+            <span class="text"><i class="iconfont icon-yuandian dot"/> 作品</span>
+          </el-col>
+        </div>
+        <div @click="goPicture">
+          <el-col :span="9" :offset="1" class="document-cover d2">
+            <i class="iconfont icon-tupian note"/>
+            <span class="text"><i class="iconfont icon-yuandian dot"/> 图片</span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5">
+        <div>
+          <el-col :span="9" :offset="2" class="document-cover d3">
+            <i class="iconfont icon-shipin-tianchong note"/>
+            <span class="text"><i class="iconfont icon-yuandian dot"/> 视频</span>
+          </el-col>
+        </div>
+        <div @click="goFeedback">
+          <el-col :span="9" :offset="1" class="document-cover d4">
+            <i class="iconfont icon-jilu note"/>
+            <span class="text"><i class="iconfont icon-yuandian dot"/> 工作总结</span>
+          </el-col>
+        </div>
+      </el-row>
+      <el-row class="mt-1-5">
+        <el-col :span="20" :offset="2" class="title-cover">
+          <span class="title">平台说明</span>
         </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5">
-      <div @click="goUnreadList(3)">
-        <el-col :span="20" :offset="2" class="message-cover">
-          <span class="dot"></span><span class="message">新的读书邀请</span>
-          <span class="number" v-show="inviteNum>0 && inviteNum<10"> {{inviteNum}}</span>
-          <span class="number more-number" v-show=" inviteNum>10"> ...</span>
-          <i class="iconfont icon-dushu"/>
-          <span class="c1"></span>
+      </el-row>
+      <el-row class="mt-1-5"></el-row>
+      <el-row class="mt-2">
+        <el-col :span="6" :offset="2">
+          <el-button type="text" @click="showPDF(1)">操作手册</el-button>
         </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5">
-      <el-col :span="20" :offset="2" class="title-cover">
-        <span class="title">我的文档</span>
-      </el-col>
-    </el-row>
-    <el-row class="mt-5">
-      <div @click="goWorks">
-        <el-col :span="9" :offset="2" class="document-cover d1">
-          <i class="iconfont icon-zuopinji note"/>
-          <span class="text"><i class="iconfont icon-yuandian dot"/> 作品</span>
+        <el-col :span="6">
+          <el-button type="text" @click="showPDF(2)">zoom教程</el-button>
         </el-col>
-      </div>
-      <div @click="goPicture">
-        <el-col :span="9" :offset="1" class="document-cover d2">
-          <i class="iconfont icon-tupian note"/>
-          <span class="text"><i class="iconfont icon-yuandian dot"/> 图片</span>
-        </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5">
-      <div>
-        <el-col :span="9" :offset="2" class="document-cover d3">
-          <i class="iconfont icon-shipin-tianchong note"/>
-          <span class="text"><i class="iconfont icon-yuandian dot"/> 视频</span>
-        </el-col>
-      </div>
-      <div @click="goFeedback">
-        <el-col :span="9" :offset="1" class="document-cover d4">
-          <i class="iconfont icon-jilu note"/>
-          <span class="text"><i class="iconfont icon-yuandian dot"/> 工作总结</span>
-        </el-col>
-      </div>
-    </el-row>
-    <el-row class="mt-1-5">
-      <el-col :span="20" :offset="2" class="title-cover">
-        <span class="title">平台说明</span>
-      </el-col>
-    </el-row>
-    <el-row class="mt-1-5"></el-row>
-    <el-row class="mt-2">
-      <el-col :span="6" :offset="2">
-        <el-button type="text" @click="showPDF">操作手册</el-button>
-      </el-col>
-    </el-row>
-    <div class="pdf-cover" v-show="isShow">
+      </el-row>
+    </div>
+    <div class="pdf-cover" v-show="isShowPDF">
       <el-button icon="el-icon-close" circle type="primary" class="close" @click="closePDF"></el-button>
-      <pdf
-        v-for="i in numPages"
-        :key="i"
-        :src="pdfSrc"
-        :page="i"
+      <pdf v-if="fileId==1"
+           v-for="i in numPages1"
+           :key="i"
+           :src="pdfSrc1"
+           :page="i"
+      ></pdf>
+      <pdf v-if="fileId==2"
+           v-for="i in numPages2"
+           :key="i"
+           :src="pdfSrc2"
+           :page="i"
       ></pdf>
     </div>
   </div>
@@ -118,9 +129,12 @@
         proposalNum: 0,
         inviteNum: 0,
         grade: 1,
-        pdfSrc:null,
-        numPages: undefined,
-        isShow: false
+        pdfSrc1: null,
+        pdfSrc2: null,
+        numPages1: undefined,
+        numPages2: undefined,
+        isShowPDF: false,
+        fileId: 0
       }
     },
     components: {
@@ -130,17 +144,27 @@
       this.getCenterHomeData()
     },
     methods: {
-      showPDF: function () {
-        this.isShow = true;
-        if(this.pdfSrc==null) {
-          this.pdfSrc= pdf.createLoadingTask("./static/introduce.pdf")
-          this.pdfSrc.then(pdf => {
-            this.numPages = pdf.numPages;
+      showPDF: function (fileId) {
+        this.isShowPDF = true;
+        if (fileId == 1) {
+          this.pdfSrc2=null;
+          this.fileId = 1;
+          this.pdfSrc1 =  pdf.createLoadingTask("./static/introduce.pdf");
+          this.pdfSrc1.then(pdf => {
+            this.numPages1 = pdf.numPages;
+          });
+        }
+        else if (fileId == 2) {
+          this.pdfSrc1=null;
+          this.fileId = 2;
+          this.pdfSrc2 = pdf.createLoadingTask("./static/zoom.pdf");
+          this.pdfSrc2.then(pdf => {
+            this.numPages2 = pdf.numPages;
           });
         }
       },
       closePDF: function () {
-        this.isShow = false;
+        this.isShowPDF = false;
       },
       getCenterHomeData: function () {
         let vm = this
@@ -351,8 +375,11 @@
     position: absolute;
     left: 0;
     top: 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 2;
+    height: 100vh;
+    width: 100%;
   }
 
   .close {
