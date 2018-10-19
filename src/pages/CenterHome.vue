@@ -7,8 +7,8 @@
       </el-col>
     </el-row>
     <el-row class="mt-5">
-      <div @click="goUnreadList(1)">
-        <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
+      <div @click="goUnreadList(1)" v-if="grade==0">
+        <el-col :span="20" :offset="2" class="message-cover">
           <span class="dot"></span><span class="message">新的入党申请</span>
           <span class="number" v-show="partyNum>0 && partyNum<10"> {{partyNum}}</span>
           <span class="number more-number" v-show=" partyNum>10"> ...</span>
@@ -17,9 +17,9 @@
         </el-col>
       </div>
     </el-row>
-    <el-row class="mt-1-5">
+    <el-row class="mt-1-5" v-if="grade==0">
       <div @click="goUnreadList(4)">
-        <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
+        <el-col :span="20" :offset="2" class="message-cover">
           <span class="dot"></span><span class="message">新的快速验证申请</span>
           <span class="number" v-show="quickNum>0 && quickNum<10"> {{quickNum}}</span>
           <span class="number more-number" v-show=" quickNum>10"> ...</span>
@@ -28,9 +28,9 @@
         </el-col>
       </div>
     </el-row>
-    <el-row class="mt-1-5">
+    <el-row class="mt-1-5" v-if="grade==0">
       <div @click="goUnreadList(2)">
-        <el-col :span="20" :offset="2" class="message-cover" v-if="grade==0">
+        <el-col :span="20" :offset="2" class="message-cover">
           <span class="dot"></span><span class="message">新的提案</span>
           <span class="number" v-show="proposalNum>0 && proposalNum<10"> {{proposalNum}}</span>
           <span class="number more-number" v-show=" proposalNum>10"> ...</span>
@@ -83,10 +83,32 @@
         </el-col>
       </div>
     </el-row>
+    <el-row class="mt-1-5">
+      <el-col :span="20" :offset="2" class="title-cover">
+        <span class="title">平台说明</span>
+      </el-col>
+    </el-row>
+    <el-row class="mt-1-5"></el-row>
+    <el-row class="mt-2">
+      <el-col :span="6" :offset="2">
+        <el-button type="text" @click="showPDF">操作手册</el-button>
+      </el-col>
+    </el-row>
+    <div class="pdf-cover" v-show="isShow">
+      <el-button icon="el-icon-close" circle type="primary" class="close" @click="closePDF"></el-button>
+      <pdf
+        v-for="i in numPages"
+        :key="i"
+        :src="pdfSrc"
+        :page="i"
+      ></pdf>
+    </div>
   </div>
 </template>
 
 <script>
+  import pdf from 'vue-pdf'
+
   export default {
     name: 'center-home',
     data() {
@@ -95,13 +117,31 @@
         quickNum: 0,
         proposalNum: 0,
         inviteNum: 0,
-        grade: 1
+        grade: 1,
+        pdfSrc:null,
+        numPages: undefined,
+        isShow: false
       }
+    },
+    components: {
+      pdf
     },
     mounted() {
       this.getCenterHomeData()
     },
     methods: {
+      showPDF: function () {
+        this.isShow = true;
+        if(this.pdfSrc==null) {
+          this.pdfSrc= pdf.createLoadingTask("./static/introduce.pdf")
+          this.pdfSrc.then(pdf => {
+            this.numPages = pdf.numPages;
+          });
+        }
+      },
+      closePDF: function () {
+        this.isShow = false;
+      },
       getCenterHomeData: function () {
         let vm = this
         vm
@@ -167,6 +207,10 @@
 
   .mt-1-5 {
     margin-top: 1.5vh;
+  }
+
+  .mt-2 {
+    margin-top: 2vh;
   }
 
   .document-cover {
@@ -301,5 +345,22 @@
 
   .el-col {
     text-align: left;
+  }
+
+  .pdf-cover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .close {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
   }
 </style>
