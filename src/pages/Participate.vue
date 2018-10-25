@@ -53,7 +53,7 @@
               p: 'article',
               do: 'shop',
               m: 'ewei_shop',
-              ccate: 56,
+              ccate: 57,
               bannd: 1
             }
           })
