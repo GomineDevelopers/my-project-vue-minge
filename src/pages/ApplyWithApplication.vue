@@ -64,7 +64,8 @@ export default {
   },
   mounted: function() {
     let exitData = JSON.parse(this.$commonTools.getCookie("cookieData"));
-    if (exitData.applycation != "") {
+    let exitApply= this.$commonTools.getLocalData("cookieData");
+    if (exitApply != "") {
       this.defaultTitle = "修改申请书";
       this.getExistWorkData();
     }
@@ -72,10 +73,13 @@ export default {
   methods: {
     getExistWorkData() {
       let vm = this;
-      let exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+      if(JSON.parse(vm.$commonTools.getCookie("cookieData"))){
+        var exitData = JSON.parse(vm.$commonTools.getCookie("cookieData"));
+      }
+      let exitApply= vm.$commonTools.getLocalData("cookieData");
       vm.MessageTo = decodeURI(exitData.MessageTo);
-      vm.applycation = decodeURI(exitData.applycation);
-      vm.applyTime = exitData.applyTime;
+      vm.applycation = decodeURI(exitApply);
+      vm.applyTime = decodeURI(exitData.applyTime);
     },
     applycationValidate() {
       let vm = this;
@@ -100,9 +104,10 @@ export default {
       let temp = JSON.parse(vm.$commonTools.getCookie("cookieData"));
       if (vm.applycationValidate()) {
         temp.MessageTo = encodeURI(vm.MessageTo);
-        temp.applycation = encodeURI(vm.applycation);
+        // temp.applycation = encodeURI(vm.applycation);
         temp.applyTime = vm.applyTime;
         vm.$commonTools.setCookie("cookieData", JSON.stringify(temp), 1);
+        vm.$commonTools.setLocalData("cookieData", encodeURI(vm.applycation));
         vm.$router.replace({ name: "Apply" });
       }
     },

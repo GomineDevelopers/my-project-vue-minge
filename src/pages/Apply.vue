@@ -168,10 +168,11 @@
             vm.WorkExperiences.push(decodeURI(str));
           });
         }
-        if (cookieData.applycation == undefined) {
+        let localdata=vm.$commonTools.getLocalData("cookieData")
+        if (localdata == undefined) {
           vm.applycation = "";
         } else {
-          vm.applycation = decodeURI(cookieData.applycation);
+          vm.applycation = decodeURI(localdata);
           vm.applycationTitle = decodeURI(cookieData.MessageTo);
           vm.applycationTime = cookieData.applyTime;
         }
@@ -321,9 +322,8 @@
         postData.applycationTitle = encodeURI(vm.applycationTitle);
         postData.applycation = encodeURI(vm.applycation);
         postData.applycationTime = vm.applycationTime;
-
-
         vm.$commonTools.setCookie("cookieData", JSON.stringify(postData), 1);
+        console.log(postData)
       },
       addExperience: function () {
         this.setApplyCookies();

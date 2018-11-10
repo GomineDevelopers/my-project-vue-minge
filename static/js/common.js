@@ -44,7 +44,12 @@ commonTools.getCookie=function(name){
   }
   return '';
 }
-
+commonTools.setLocalData=function(key,value){
+  window.localStorage.setItem(key,value); 
+}
+commonTools.getLocalData=function(key){
+  return window.localStorage.getItem(key) || '';
+}
 export {
   commonTools
 }
